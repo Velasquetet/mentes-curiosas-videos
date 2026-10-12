@@ -4,7 +4,10 @@ VOICE = "es-ES-XimenaNeural"
 async def gen(txt_path):
     p = pathlib.Path(txt_path); text = p.read_text(encoding="utf-8").strip()
     out = p.with_suffix(".mp3"); words = []
-    com = edge_tts.Communicate(text, VOICE, boundary="WordBoundary")
+    try:
+        com = edge_tts.Communicate(text, VOICE, boundary="WordBoundary")
+    except TypeError:
+        com = edge_tts.Communicate(text, VOICE)
     with open(out, "wb") as f:
         async for ch in com.stream():
             if ch["type"] == "audio": f.write(ch["data"])
