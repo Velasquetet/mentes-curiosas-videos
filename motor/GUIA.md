@@ -40,4 +40,4 @@ Muestrario completo: `motor/newsgal.js` (vídeo `catalogo_noticias.mp4`).
 | Ciencia/salud/tec | `rocket`, `orbit`, `virus`, `medical`, `chip` |
 | Transporte/alertas | `vehicle` (plane/ship/train/car), `siren`, `alert`, `arrows` |
 
-Regla: si un vídeo necesita un recurso que no existe, se crea y **se añade a la biblioteca** para el futuro.
+Regla (indicación del usuario): **no escatimar en recursos nuevos**. En cada noticia y cada vídeo diario se crean siempre que sea posible recursos nuevos hechos a medida (objetos, lugares, animales, gráficos, escenas) y **se añaden a la biblioteca** (`news.js` o `fauna.js`/`land.js`) con su entrada en el catálogo, para que la galería crezca con cada vídeo.
