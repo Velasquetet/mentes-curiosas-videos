@@ -1,0 +1,14 @@
+{
+  "name": "mentes-curiosas-motor",
+  "private": true,
+  "description": "Motor de vídeo de Mentes curiosas",
+  "dependencies": {
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2",
+    "es-atlas": "^0.6.0",
+    "i18n-iso-countries": "^7.14.0"
+  }
+}

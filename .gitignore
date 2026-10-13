@@ -1,0 +1,5 @@
+node_modules/
+motor/node_modules/
+**/frames/
+**/render.html
+*.wav

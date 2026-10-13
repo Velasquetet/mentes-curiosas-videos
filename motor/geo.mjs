@@ -1,0 +1,38 @@
+import fs from 'fs';
+import {feature, merge} from 'topojson-client';
+import {geoMercator, geoPath, geoConicConformal} from 'd3-geo';
+const w50=JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-50m.json'));
+const countries=feature(w50,w50.objects.countries);
+const pick=n=>countries.features.filter(f=>n.includes(f.properties.name));
+const ib=pick(['Spain','Portugal','France','Morocco','Andorra']);
+const es=JSON.parse(fs.readFileSync('node_modules/es-atlas/es/autonomous_regions.json'));
+const prov=JSON.parse(fs.readFileSync('node_modules/es-atlas/es/provinces.json'));
+console.error(Object.keys(es.objects), Object.keys(prov.objects));
+const ar=feature(es,es.objects.autonomous_regions);
+const pv=feature(prov,prov.objects.provinces);
+console.error(ar.features.map(f=>f.properties.name).join('|'));
+console.error(pv.features.slice(0,60).map(f=>f.properties.name).join('|'));
+const FP=[-4.765,37.115];
+// Panel 1: Iberia map, fit Spain+Portugal into 430x370 box
+const spain=pick(['Spain']), port=pick(['Portugal']);
+const iberia={type:'FeatureCollection',features:[...spain,...port]};
+const proj1=geoMercator().fitExtent([[0,0],[430,360]],{type:'FeatureCollection',features:spain.map(f=>({...f,geometry:{...f.geometry,coordinates:f.geometry.coordinates.filter(p=>{const c=p[0][0];return c[0]>-10&&c[1]>35.5;})}}))});
+const p1=geoPath(proj1).digits(1);
+const out={};
+out.spain=p1({type:'FeatureCollection',features:spain});
+out.portugal=p1({type:'FeatureCollection',features:port});
+out.france=p1({type:'FeatureCollection',features:pick(['France'])});
+out.morocco=p1({type:'FeatureCollection',features:pick(['Morocco'])});
+out.fp1=proj1(FP).map(v=>+v.toFixed(1));
+const andal=ar.features.filter(f=>/Andaluc/.test(f.properties.name));
+out.andal1=p1({type:'FeatureCollection',features:andal});
+// Panel 2: Andalucia zoom 440x300
+const proj2=geoMercator().fitExtent([[0,0],[440,300]],{type:'FeatureCollection',features:andal});
+const p2=geoPath(proj2).digits(1);
+out.andal2=p2({type:'FeatureCollection',features:andal});
+const prA=pv.features.filter(f=>['Málaga','Sevilla','Cádiz','Córdoba','Granada','Almería','Jaén','Huelva'].includes(f.properties.name));
+out.provs2=prA.map(f=>({n:f.properties.name,d:p2(f),c:p2.centroid(f).map(v=>+v.toFixed(1))}));
+out.fp2=proj2(FP).map(v=>+v.toFixed(1));
+out.malaga2=proj2([-4.42,36.72]).map(v=>+v.toFixed(1));
+fs.writeFileSync('geo.json',JSON.stringify(out));
+console.error('sizes',out.spain.length,out.andal2.length,out.provs2.map(p=>p.n+':'+p.d.length).join(','),out.fp1,out.fp2);
