@@ -7,7 +7,7 @@ os.makedirs(f'{V}/{out}',exist_ok=True)
 with sync_playwright() as pw:
     br=pw.chromium.launch(); p=br.new_page(viewport={'width':540,'height':960},device_scale_factor=float(os.environ.get('DPR','2')))
     p.goto('file://'+V+'/'+os.environ.get('PAGE','render.html')); p.wait_for_timeout(800); p.evaluate("document.fonts.ready")
-    dur=p.evaluate("DUR"); n=int(round(dur*FPS)); i0=int(round(a*FPS)); i1=n if b is None else min(n,int(round(b*FPS)))
+    dur=p.evaluate("DUR"); n=int(round(dur*FPS)); i0=int(round(a*FPS)); i1=n if b is None else int(round(b*FPS))
     t0=time.time();c=0
     for i in range(i0,i1):
         if (i-i0)%N!=K: continue
