@@ -1,1 +1,13 @@
-{"publicados":[{"fecha":"2026-10-13","tema":"Por qué los flamencos son rosas","video":"videos/2026-10-13_flamencos.mp4","buffer_post":"6acd4da35562ebe80f6cc894"}]}
+{
+ "publicados": [
+  {
+   "fecha": "2026-10-13",
+   "tema": "Por qué los flamencos son rosas",
+   "video": "videos/2026-10-13_flamencos.mp4",
+   "buffer_post": "6acd4da35562ebe80f6cc894",
+   "sale": "2026-10-13",
+   "tipo": "diario",
+   "estado": "publicado"
+  }
+ ]
+}

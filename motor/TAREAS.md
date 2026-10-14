@@ -30,7 +30,16 @@ Seguir `motor/GUIA.md` → «Flujo de un vídeo» (escenas en `scenes.js`, `buil
    - **Nunca** marcar contenido generado por IA (`isAiGenerated` falso / sin etiqueta de IA).
    - Texto: gancho con pregunta + 1 emoji + llamada a comentar; 6–9 hashtags (siempre `#mentescuriosas`, `#curiosidades` o `#noticias`); en noticias, fuentes al final («Fuentes: …»).
    - El plan gratuito admite 10 posts en cola: no dejar posts acumulados.
-3. Registrar en `ideas/publicados.json` (fecha, tipo diario/noticia, tema, video, buffer_post) y, si era un tema de `ideas/temas.json`, quitarlo de la cola. Commit + push.
+3. Registrar en `ideas/publicados.json` y, si era un tema de `ideas/temas.json`, quitarlo de la cola. Commit + push.
+   Formato de cada entrada: `{"fecha": "<día en que se hizo>", "sale": "<día en que se publica>", "tipo": "diario"|"noticia", "estado": "programado"|"publicado", "tema": "…", "video": "videos/….mp4", "buffer_post": "<id>"}`.
+
+## 3b · Vídeo diario: horario y recuperación
+- El vídeo diario se produce **la noche anterior** (tarea de las 23:12) y se **programa** en Buffer para el día siguiente a las 18:30 (hora de Madrid, con el desfase UTC correcto de `get_account`). Se registra con `"estado": "programado"` y `"sale": "<mañana>"`.
+- **Recuperación** (si se agotó el uso de Claude o algo falló): toda tarea, al empezar, mira si existe en `ideas/publicados.json` una entrada `tipo: "diario"` con `sale` = **hoy**. Si no existe y aún no son las 21:00:
+  1. Primero se hace lo urgente de esa tarea (una noticia que cumpla los criterios va antes).
+  2. Después se produce el vídeo diario de hoy y se publica en cuanto esté listo (o a las 18:30 si aún es antes).
+- La tarea nocturna, además del de mañana, comprueba también el de hoy: si hoy no salió ninguno, el de mañana se programa igual (no se acumulan dos el mismo día).
+- Antes de producir un diario, comprobar siempre en `publicados.json` y en Buffer (`list_posts` del canal) que no haya otro ya programado para ese día, para no duplicar.
 
 ## 4 · Si algo falla
 - No publicar un vídeo con fallos visibles. Mejor no publicar que publicar mal.
