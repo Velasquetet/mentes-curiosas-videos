@@ -3,7 +3,7 @@ Lee tts/<nombre>.txt y crea tts/<nombre>.wav + tts/<nombre>.words.json (tiempo d
 La clave se lee del secreto AZURE_SPEECH_KEY (nunca se escribe en el repositorio)."""
 import os, sys, json, pathlib
 import azure.cognitiveservices.speech as sdk
-KEY = os.environ["AZURE_SPEECH_KEY"]; REGION = os.environ.get("AZURE_SPEECH_REGION") or "westeurope"
+KEY = os.environ["AZURE_SPEECH_KEY"]; REGION = os.environ.get("AZURE_SPEECH_REGION") or "swedencentral"
 VOICE = "es-ES-XimenaNeural"
 def gen(txt_path):
     p = pathlib.Path(txt_path); text = p.read_text(encoding="utf-8").strip()
