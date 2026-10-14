@@ -3,3 +3,4 @@ motor/node_modules/
 **/frames/
 **/render.html
 *.wav
+!tts/*.wav
