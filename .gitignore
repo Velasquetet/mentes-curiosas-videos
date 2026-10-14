@@ -4,3 +4,7 @@ motor/node_modules/
 **/render.html
 *.wav
 !tts/*.wav
+__pycache__/
+videos/*/*.png
+videos/*/*.log
+videos/*/final.mp4

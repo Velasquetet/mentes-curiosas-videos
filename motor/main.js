@@ -1,5 +1,5 @@
 /* ===== MOTOR: personajes, titulares, subtítulos, transiciones, render ===== */
-const DUR=61.6;
+var DUR=61.6; // cada scenes.js puede fijar su duración: DUR=…; window.DUR=DUR;
 const WORDS=window.WORDS; // [{s,e,txt,w:[[t,word],...]}]
 
 /* ---------- personajes (rig propio) ---------- */
@@ -10,7 +10,7 @@ function walkAt(t,keys){if(t<=keys[0][0])return {x:keys[0][1],mv:0,dir:0};
 function emoAt(sched,t){let cur=sched[0];for(const s of sched)if(t>=s[0])cur=s;return cur;}
 /* actor(k,{t0,t1,path:[[t,x]],y,s,emo:[[t,i,v,off]],face,look,prop,mod,pop,exit},t) */
 function actor(k,o,t){
-  if(t<(o.t0??-1)||t>(o.t1??99))return '';
+  if(t<(o.t0??-1)||t>(o.t1??Infinity))return '';
   const lt=t-(o.t0??0),w=walkAt(t,o.path),em=emoAt(o.emo,t),p=P0(k),e=EMO[em[1]],L=e.L[em[2]];
   e.f[em[2]](p,(((t-em[0])+(em[3]||0))*PERS[k].tempo)%L,k);stylize(k,p,t);
   if(w.mv>0){const ph=t*13;p.ty-=Math.abs(Math.sin(ph))*11*w.mv;p.legL=-7*Math.max(0,Math.sin(ph))*w.mv;p.legR=-7*Math.max(0,-Math.sin(ph))*w.mv;p.rot+=5*Math.sin(ph)*w.mv;p.arms.l=[12+30*Math.sin(ph)*w.mv,10];p.arms.r=[12-30*Math.sin(ph)*w.mv,10];}

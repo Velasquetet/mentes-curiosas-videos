@@ -126,7 +126,7 @@ NX.trend=(o={},lt)=>{const up=(o.dir||'up')==='up',p=EZ.back(sg(lt,0,.5)),c=up?'
 let WORLD=null;const WALIAS={'eeuu':'Estados Unidos','ee. uu.':'Estados Unidos','usa':'Estados Unidos','corea del sur':'República de Corea','corea del norte':'República Popular Democrática de Corea','siria':'República Árabe Siria','laos':'República Democrática Popular de Lao','rd congo':'Congo (República Democrática del)','irak':'Iraq','vaticano':'Santa Sede','holanda':'Países Bajos','chequia':'República Checa','birmania':'Myanmar'};
 function wFind(n){if(!WORLD)WORLD=window.WORLDJ;const k=(WALIAS[n.toLowerCase()]||n).toLowerCase();return WORLD.c.find(c=>c.n.toLowerCase()===k||(c.en||'').toLowerCase()===k);}
 function wProj(lon,lat){if(!WORLD)WORLD=window.WORLDJ;const l=lon*Math.PI/180,p=lat*Math.PI/180,p2=p*p,p4=p2*p2;const x=l*(.8707-.131979*p2+p4*(-.013791+p4*(.003971*p2-.001529*p4))),y=p*(1.007226+p2*(.015085+p4*(-.044475+.028874*p2-.005916*p4)));return [WORLD.t[0]+WORLD.k*x,WORLD.t[1]-WORLD.k*y];}
-/* Mapa mundial · o:{focus:'España', highlight:['Francia',…], pins:[[lon,lat,'texto']], arcs:[[[lon,lat],[lon,lat]]], zoom:auto, w,h}
+/* Mapa mundial · o:{over:(proj,k,lt)=>svg extra, focus:'España', highlight:['Francia',…], pins:[[lon,lat,'texto']], arcs:[[[lon,lat],[lon,lat]]], zoom:auto, w,h}
    Se dibuja en una ventana w×h centrada en (0,0); hace zoom desde el mundo entero al país enfocado. */
 NX.map=(o={},lt)=>{if(!WORLD)WORLD=window.WORLDJ;const w=o.w||500,h=o.h||420;const f=o.focus?wFind(o.focus):null;
   let cx=500,cy=260,k0=w/1000*.98,k1=k0;if(f){const [x0,y0,x1,y1]=f.b;cx=(x0+x1)/2;cy=(y0+y1)/2;k1=Math.min(o.zoom||99,.55*Math.min(w/Math.max(8,x1-x0),h/Math.max(8,y1-y0)));}
@@ -136,6 +136,7 @@ NX.map=(o={},lt)=>{if(!WORLD)WORLD=window.WORLDJ;const w=o.w||500,h=o.h||420;con
   let m=Rc(-200,-200,1400,920,o.sea||'#bcd3f0');
   WORLD.c.forEach(c=>{const on=hl.has(c.n);m+=P(c.d,`fill:${on?mixc('#fbfbfb','#ff8fab',hq):'#fbfbfb'};stroke:${K.ink};stroke-width:${f2(1.1/k)};stroke-linejoin:round`);});
   (o.arcs||[]).forEach(([a,b],i)=>{const [x1,y1]=wProj(a[0],a[1]),[x2,y2]=wProj(b[0],b[1]),mxp=(x1+x2)/2,myp=(y1+y2)/2-Math.hypot(x2-x1,y2-y1)*.3;m+=DR(`M${f1(x1)} ${f1(y1)} Q${f1(mxp)} ${f1(myp)} ${f1(x2)} ${f1(y2)}`,ST(K.red,3/k,`stroke-dasharray:${f2(8/k)} ${f2(6/k)}`),EZ.io(sg(lt,1.4+i*.3,2.4+i*.3)));});
+  if(o.over)m+=o.over(wProj,k,lt); /* capa extra en coordenadas del mapa (lagos, rutas a medida…) */
   let pins='';(o.pins||[]).forEach(([lon,lat,lab],i)=>{const [px,py]=wProj(lon,lat),sx=(px-mx)*k,sy=(py-my)*k,a=1.3+i*.25,q=sg(lt,a,a+.35);if(q<=0)return;
     pins+=G(sx,sy,1,0,_pulse(lt-a,14,K.red,2,1.3)+G(0,-(1-EZ.out(q))*60,1,0,pinS(K.red),cl(q*4)))+(lab?G(sx,sy-58,1,0,pill(lab,{sz:12,w:700}),_ao(lt,a+.3,.3)):'');});
   return clipG(G(0,0,k,0,G(-mx,-my,1,0,m))+pins,Rc(-w/2,-h/2,w,h,'#000',16))+Rc(-w/2,-h/2,w,h,'none',16,OL(2.4));};
@@ -333,5 +334,41 @@ const NX_CATALOG=[
  ['vehicle · Barco / tren / coche',(lt)=>G(0,-120,.8,0,NX.vehicle({type:'ship',dur:4},lt))+G(0,40,.7,0,NX.vehicle({type:'train',dir:-1,dur:3.5},lt))+G(0,170,.8,0,NX.vehicle({type:'car',dur:2.6},lt))],
  ['siren · Sirena',(lt)=>NX.siren({},lt)],
  ['alert · Alerta',(lt)=>NX.alert({label:'AVISO ROJO'},lt)],
- ['arrows · Desplazamientos',(lt)=>NX.arrows({},lt)]
+ ['arrows · Desplazamientos',(lt)=>NX.arrows({},lt)],
+ ['sturgeon · Esturión',(lt)=>NX.sturgeon({},lt)],
+ ['shark · Tiburón de Groenlandia',(lt)=>NX.shark({},lt)],
+ ['rings · Anillos (aleta)',(lt)=>NX.rings({crowd:lt>1.6?sg(lt,1.6,2.4):0},lt)],
+ ['rings · Anillos (árbol)',(lt)=>NX.rings({tree:true},lt)],
+ ['tag · Chip de marcaje',(lt)=>NX.tag({},lt)],
+ ['growth · Curva medida + estimada',(lt)=>NX.growth({label:'medido',target:'~435 años',xl:'edad',yl:'tamaño'},lt)],
+ ['medal · Récord',(lt)=>NX.medal({sub:'agua dulce'},lt)],
+ ['sauropod · Dinosaurio (paisaje)',(lt)=>G(-30,80,1,0,sauropodS({T:lt}))],
+ ['boat · Barca de investigación',(lt)=>boatS({T:lt})]
 ];
+
+/* ---------------- G · NATURALEZA Y CIENCIA (añadidos 14/10/2026) ---------------- */
+/* Esturión nadando · o:{amp,hl} */
+NX.sturgeon=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,sturgeon({T:lt,amp:o.amp??5,hl:o.hl||0}));
+/* Tiburón de Groenlandia · o:{} */
+NX.shark=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,sharkG({T:lt}));
+/* Anillos de crecimiento (aleta o tronco) · o:{n,crowd,tree} */
+NX.rings=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,o.tree?stumpS({n:o.n||9,p:sg(lt,.3,1.6)}):finRingsS({n:o.n||14,p:sg(lt,.3,1.8),crowd:o.crowd||0}));
+/* Chip de marcaje con número · o:{} */
+NX.tag=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,tagChipS(lt));
+/* Curva de crecimiento: tramo medido (sólido) + extrapolación (discontinua) hasta un objetivo · o:{w,h,cut (0-1),label,target,xl,yl} */
+NX.growth=(o={},lt)=>{const w=o.w||380,h=o.h||240,cut=o.cut??.35,f=u=>1-Math.pow(1-u,2.2);let s='';
+  s+=DR(`M${-w/2} ${h/2} L${w/2} ${h/2}`,ST(K.ink,2.6),_ao(lt,0,.4))+DR(`M${-w/2} ${h/2} L${-w/2} ${-h/2}`,ST(K.ink,2.6),_ao(lt,0,.4));
+  const pt=u=>[-w/2+u*w,h/2-f(u)*h*.9];let d1='',d2='';
+  for(let i=0;i<=30;i++){const u=i/30*cut,[x,y]=pt(u);d1+=(i?' L':'M')+f1(x)+' '+f1(y);}
+  for(let i=0;i<=40;i++){const u=cut+i/40*(1-cut),[x,y]=pt(u);d2+=(i?' L':'M')+f1(x)+' '+f1(y);}
+  s+=DR(d1,ST('url(#gRP)',5),EZ.io(sg(lt,.3,1.1)));
+  const q2=EZ.io(sg(lt,1.2,2.4));if(q2>0)s+=clipG(P(d2,ST(K.ink,3,'stroke-dasharray:8 8')),Rc(pt(cut)[0]-4,-h,(w*(1-cut)+10)*q2,h*2,'#000'));
+  for(let i=0;i<6;i++){const u=cut*(i+.5)/6,[x,y]=pt(u);s+=G(x,y+(hs(i)-.5)*12,_ap(lt,.4+i*.08,.25),0,Ci(0,0,5,'#fff',OL(2)));}
+  const [tx,ty]=pt(1);if(lt>2.3)s+=G(tx,ty,_ap(lt,2.3,.3),0,Ci(0,0,10,'url(#gRP)',OL(2.4,'#fff'))+_pulse(lt-2.3,16,K.pink,2,1.2));
+  if(o.target&&lt>2.4)s+=G(tx-20,ty-34,1,0,pill(o.target,{sz:13,w:700,fill:'url(#gRP)'}),_ao(lt,2.45,.3));
+  if(o.label)s+=G(pt(cut*.5)[0]+30,pt(cut*.5)[1]-44,1,0,pill(o.label,{sz:12,w:600}),_ao(lt,.9,.3));
+  if(o.xl)s+=G(w/2-4,h/2+22,1,0,Tn(0,0,o.xl,12,700,{a:'end',fill:'#555'}),_ao(lt,.3,.3));
+  if(o.yl)s+=G(-w/2-8,-h/2-10,1,0,Tn(0,0,o.yl,12,700,{a:'start',fill:'#555'}),_ao(lt,.3,.3));
+  return s;};
+/* Medalla de récord · o:{txt,sub} */
+NX.medal=(o={},lt)=>G(0,0,_ap(lt,0,.45),0,medalS(o,lt));

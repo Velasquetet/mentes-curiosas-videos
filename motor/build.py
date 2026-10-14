@@ -2,7 +2,7 @@
 Uso:  python3 build.py <carpeta_del_video>
 La carpeta debe contener: scenes.js (escenas + titulares) y words.json (tiempos de la voz).
 Genera <carpeta>/render.html, que renderp.py convierte en fotogramas."""
-import json, sys, os
+import json, sys, os, re
 M=os.path.dirname(os.path.abspath(__file__))
 rd=lambda p: open(p, encoding='utf-8').read()
 FONTS='''
@@ -18,9 +18,23 @@ html,body{margin:0;padding:0;background:#000}
 .pre{position:absolute;left:-999px;top:0;font-family:IS}.pre i{font-style:italic}.pre b{font-family:IN;font-weight:700}
 '''
 EASE="const E={clamp:(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),back:p=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)},cubic:p=>1-Math.pow(1-p,3),quart:p=>1-Math.pow(1-p,4),inOut:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,bounce:p=>{const n=7.5625,d=2.75;if(p<1/d)return n*p*p;if(p<2/d)return n*(p-=1.5/d)*p+.75;if(p<2.5/d)return n*(p-=2.25/d)*p+.9375;return n*(p-=2.625/d)*p+.984375;}};"
+def to_segments(raw):
+    """Acepta el formato de Azure [{t,d,w}] (lista plana) y lo agrupa en frases
+    [{s,e,txt,w:[[t,palabra],...]}], que es lo que usan subtítulos y titulares."""
+    data=json.loads(raw)
+    if not data or 'w' in data[0] and isinstance(data[0]['w'],list): return raw
+    segs=[];cur=[]
+    for i,o in enumerate(data):
+        cur.append(o)
+        nxt=data[i+1] if i+1<len(data) else None
+        end=re.search(r'[.?!…]$',o['w']) or nxt is None or (nxt['t']-(o['t']+o['d'])>0.6)
+        if end:
+            segs.append({'s':round(cur[0]['t'],3),'e':round(cur[-1]['t']+cur[-1]['d'],3),'txt':' '.join(c['w'] for c in cur),'w':[[round(c['t'],3),c['w']] for c in cur]})
+            cur=[]
+    return json.dumps(segs,ensure_ascii=False)
 def build(folder, scene_file='scenes.js', out='render.html', dur=None):
     folder=os.path.abspath(folder)
-    words=rd(os.path.join(folder,'words.json')) if os.path.exists(os.path.join(folder,'words.json')) else '[]'
+    words=to_segments(rd(os.path.join(folder,'words.json'))) if os.path.exists(os.path.join(folder,'words.json')) else '[]'
     js="const INK='var(--tinta)';"+EASE+"\n"
     for f in ['rig.js','emo.js','pers.js','charstyle.js']: js+=rd(os.path.join(M,f))+"\n"
     js+="window.WORDS="+words+";\nwindow.GEOJ="+rd(os.path.join(M,'geo.json'))+";\nwindow.WORLDJ="+rd(os.path.join(M,'world.json'))+";\n"
