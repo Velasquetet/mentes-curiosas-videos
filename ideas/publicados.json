@@ -8,6 +8,15 @@
    "sale": "2026-10-13",
    "tipo": "diario",
    "estado": "publicado"
+  },
+  {
+   "fecha": "2026-10-14",
+   "sale": "2026-10-14",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El esturión de lago: el pez que podría vivir más de 400 años",
+   "video": "videos/2026-10-14_esturion.mp4",
+   "buffer_post": "6acfc2282397c8676abbe2a5"
   }
  ]
 }
