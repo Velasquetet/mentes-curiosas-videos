@@ -26,6 +26,15 @@
    "tema": "El T. rex tenía labios (y otras cosas que hemos corregido)",
    "video": "videos/2026-10-15_trex.mp4",
    "buffer_post": "6ad106cb5738dc2c7b0e81ab"
+  },
+  {
+   "fecha": "2026-10-15",
+   "sale": "2026-10-16",
+   "tipo": "diario",
+   "estado": "programado",
+   "tema": "Los reptiles hacen mucho más ruido del que crees",
+   "video": "videos/2026-10-16_reptiles.mp4",
+   "buffer_post": "6ad1530e4ed7d375a433ef00"
   }
  ]
 }
