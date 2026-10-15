@@ -372,3 +372,26 @@ NX.growth=(o={},lt)=>{const w=o.w||380,h=o.h||240,cut=o.cut??.35,f=u=>1-Math.pow
   return s;};
 /* Medalla de récord · o:{txt,sub} */
 NX.medal=(o={},lt)=>G(0,0,_ap(lt,0,.45),0,medalS(o,lt));
+
+/* ---------------- H · DINOSAURIOS (añadidos 15/10/2026) ---------------- */
+/* Tiranosaurio · o:{lips 0..1, open 0..1, walk 0..1, hlArm, feathers} */
+NX.trex=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,trexS(Object.assign({T:lt},o)));
+/* Cocodrilo (dientes al aire) · o:{open} */
+NX.croc=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,crocS(Object.assign({T:lt},o)));
+/* Diente con esmalte (sano o dañado) · o:{wear} */
+NX.tooth=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,toothS({wear:o.wear||0,shine:.6+.4*Math.sin(lt*3)}));
+/* Piel con escamas · o:{} */
+NX.scales=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,scalesS(o));
+NX_CATALOG.push(
+ ['trex · Tiranosaurio (con labios)',(lt)=>G(-20,140,.75,0,NX.trex({lips:1,walk:.6},lt))],
+ ['trex · Tiranosaurio «de película»',(lt)=>G(-20,140,.75,0,NX.trex({lips:0,open:.4+.4*Math.sin(lt*3)},lt))],
+ ['croc · Cocodrilo',(lt)=>NX.croc({open:sg(lt,.6,1.2)*.6},lt)],
+ ['tooth · Diente (esmalte)',(lt)=>G(-80,0,1,0,NX.tooth({},lt))+G(80,0,1,0,NX.tooth({wear:1},lt))],
+ ['scales · Piel con escamas',(lt)=>NX.scales({},lt)]);
+/* Dragón de Komodo · o:{walk} */
+NX.komodo=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,komodoS(Object.assign({T:lt},o)));
+/* Fotograma de cine con un T. rex «de película» · o:{} */
+NX.cine=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,cineS(G(-20,110,.55,0,trexS({T:lt,lips:0,open:.5+.4*Math.sin(lt*4)}))));
+NX_CATALOG.push(
+ ['komodo · Dragón de Komodo',(lt)=>NX.komodo({walk:1},lt)],
+ ['cine · Fotograma de película',(lt)=>NX.cine({},lt)]);

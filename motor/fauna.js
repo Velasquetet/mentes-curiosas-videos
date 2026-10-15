@@ -256,3 +256,73 @@ function boatS(o={}){const T=o.T||0,b=Math.sin(T*1.8)*2;
 function medalS(o={},lt=9){const sp=Math.sin(lt*2)*6;return P('M-22 -40 L-40 -110 L-10 -110 L6 -50Z','fill:#ec2f72')+P('M22 -40 L40 -110 L10 -110 L-6 -50Z','fill:#2a37d7')+
   G(0,0,1,sp,Ci(0,0,58,'url(#gSUN)',OL(3))+Ci(0,0,44,'none',ST('#fff4c4',3,'opacity:.8'))+Tn(0,10,o.txt||'Nº 1',30,800,{fill:'#fff',x:'paint-order:stroke;stroke:#141212;stroke-width:3px'}))+
   (o.sub?G(0,88,1,0,pill(o.sub,{sz:13,w:700,fill:'url(#gRP)'})):'');}
+
+/* ===== añadidos 15/10/2026 · el T. rex con labios ===== */
+/* Tiranosaurio de perfil (mira a la derecha, pies en y=0) · o={T,c,belly,lips 0..1,open 0..1,walk 0..1,hlArm 0..1,feathers 0..1,blink}
+   lips=0 → dientes al aire (versión «de película»); lips=1 → labios de escamas que tapan los dientes */
+function trexS(o={}){const T=o.T||0,c=o.c||'#3f9b4f',cd=o.cd||'#2b7a3e',bl=o.belly||'#c9e8b0',L=cl(o.lips??1),op=cl(o.open||0),wk=o.walk||0;
+  const ph=T*6,sw=wk*Math.sin(ph),bob=wk*Math.abs(Math.sin(ph))*-4+Math.sin(T*2)*1.5,tail=Math.sin(T*1.6)*5;
+  const leg=(x,y,a,col)=>G(x,y,1,a,El(0,10,40,52,col,OL(2.2))+P('M-8 50 L4 118 L14 150',ST(K.ink,32))+P('M-8 50 L4 118 L14 150',ST(col,27))+P('M2 150 L52 152 L52 160 L-6 160Z',`fill:${col};${OL(2)}`)+P('M52 152 l10 4 l-10 4 M40 151 l9 4 l-9 4',ST(K.ink,2)));
+  let s=G(-10,-160,1,-sw*16,leg(0,0,0,cd));
+  // cuerpo + cola
+  s+=G(0,bob,1,0,
+    P(`M-280 ${f1(-168+tail)} Q-170 -192 -60 -214 Q20 -244 92 -224 Q118 -216 130 -200 L130 -158 Q104 -138 72 -126 Q20 -96 -40 -108 Q-130 -128 -280 ${f1(-160+tail)}Z`,`fill:${c};${OL(2.4)}`)+
+    P('M-40 -110 Q20 -100 70 -128 Q100 -140 126 -160 L118 -150 Q80 -120 30 -112 Q-10 -106 -40 -110Z',`fill:${bl}`)+
+    [...Array(9)].map((_,i)=>P(`M${-230+i*36} ${-182+i*-3.2+(i>5?(i-5)*-5:0)} l8 -7 l8 7`,ST(cd,2))).join('')+
+    (o.feathers?[...Array(14)].map((_,i)=>P(`M${-200+i*22} ${-196-(i>8?(i-8)*4:0)} q4 -12 ${8} -2`,ST('#e9d27a',2.2,`opacity:${f2(o.feathers)}`))).join(''):''));
+  // brazo diminuto (2 dedos)
+  const ar=Math.sin(T*3)*6,ha=o.hlArm||0;
+  s+=G(104,-142+bob,1+ha*.25,ar,(ha>0?Ci(14,10,26*ha,'none',`stroke:${K.pink};stroke-width:3`):'')+P('M0 0 Q12 6 16 14',ST(K.ink,8))+P('M0 0 Q12 6 16 14',ST(c,5))+P('M16 14 l9 -1 M16 14 l7 6',ST(K.ink,2.4)));
+  s+=G(30,-160,1,sw*16,leg(0,0,0,c));
+  // cabeza
+  const hx=118,hy=-210+bob,ja=op*24;
+  let hd='';
+  const teethU=[...Array(8)].map((_,i)=>P(`M${34+i*11} 0 l4 ${10} l4 -10Z`,'fill:#fff;'+OL(1.2))).join('');
+  const teethL=[...Array(7)].map((_,i)=>P(`M${40+i*11} 0 l4 -9 l4 9Z`,'fill:#fff;'+OL(1.2))).join('');
+  // mandíbula inferior (gira en 10,2)
+  hd+=G(10,2,1,ja,G(-10,-2,1,0,(L<1?G(0,0,1,0,teethL,1-L):'')+P('M8 0 L122 0 Q120 14 96 20 L24 24 Q6 20 8 0Z',`fill:${c};${OL(2.2)}`)+P('M24 10 L110 8',ST(bl,4))+
+     (L>0?P(`M30 ${f1(1-9*L)} L118 ${f1(1-8*L)} L120 2 L30 3Z`,`fill:${c};opacity:${f2(L)}`):'')));
+  if(op>0)hd+=P(`M14 0 L120 0 L${f1(120-op*6)} ${f1(op*34)} Z`,`fill:#7a1f2b`);
+  hd+=(L<1?G(0,0,1,0,teethU,1-L):'');
+  // cráneo
+  hd+=P('M2 -32 Q44 -50 98 -40 Q124 -34 126 -12 L126 2 L4 6 Q-8 -12 2 -32Z',`fill:${c};${OL(2.4)}`);
+  if(L>0){hd+=P(`M30 -2 L126 -2 L126 ${f1(2+10*L)} Q78 ${f1(2+13*L)} 30 ${f1(2+8*L)}Z`,`fill:${c};opacity:${f2(L)}`)+DR(`M30 ${f1(2+8*L)} Q78 ${f1(2+13*L)} 126 ${f1(2+10*L)}`,ST(K.ink,2),L)+
+    [...Array(7)].map((_,i)=>Ci(40+i*12,2+9*L,1.6,cd,`opacity:${f2(L)}`)).join('');}
+  const bk=o.blink?1:((T*.7)%3<.1?1:0);
+  hd+=P('M66 -38 Q80 -46 94 -38',ST(K.ink,3))+(bk?P('M72 -28 l14 0',ST(K.ink,2.4)):Ci(80,-28,5.5,'#fff3a0',OL(1.6))+El(81,-28,1.6,4.2,K.ink))+Ci(116,-30,2.2,K.ink);
+  s+=G(hx-8,hy+6,1.4,Math.sin(T*1.3)*2,G(0,-4,1,0,hd));
+  return s;}
+/* cabeza de cocodrilo con los dientes siempre al aire · o={T,open} */
+function crocS(o={}){const T=o.T||0,op=cl(o.open||0),c='#5f8f3a',cd='#46702a';let s='';
+  const tu=[...Array(11)].map((_,i)=>P(`M${-100+i*20} 0 l5 ${11+(i%3==1?4:0)} l5 ${-11-(i%3==1?4:0)}Z`,'fill:#fffbe8;'+OL(1.2))).join('');
+  s+=G(-110,2,1,op*14,G(110,-2,1,0,P('M-112 0 L120 0 Q124 18 100 22 L-100 26 Q-118 18 -112 0Z',`fill:${c};${OL(2.2)}`)+[...Array(10)].map((_,i)=>P(`M${-92+i*20} 0 l5 -10 l5 10Z`,'fill:#fffbe8;'+OL(1.2))).join('')));
+  s+=P('M-120 -40 Q-90 -62 -40 -50 L110 -30 Q132 -24 128 0 L-118 4 Q-130 -20 -120 -40Z',`fill:${c};${OL(2.4)}`)+tu;
+  for(let i=0;i<6;i++)s+=P(`M${-70+i*28} -44 l8 -6 l8 6`,ST(cd,2));
+  s+=El(-74,-52,14,10,c,OL(2))+Ci(-72,-54,5,'#ffd84a',OL(1.4))+El(-72,-54,1.5,4,K.ink)+Ci(116,-26,3,K.ink);
+  return G(0,Math.sin(T*2)*2,1,0,s);}
+/* diente de terópodo con esmalte · o={wear 0..1 (daño), shine} */
+function toothS(o={}){const w=cl(o.wear||0);let s=P('M-34 -70 Q-40 10 0 80 Q40 10 34 -70Z','fill:#fffaf0;'+OL(2.6))+P('M-26 -60 Q-28 10 0 66',ST('#e9e1cd',6));
+  s+=P('M34 -60 l6 8 l-6 6 l6 8 l-6 6 l6 8 l-6 6',ST(K.ink,1.6))+Rc(-38,-84,76,18,'#e2c9a6',5,OL(2));
+  if(w>0)s+=G(0,0,1,0,P('M-10 20 l14 10 l-6 12 l12 8 M8 -20 l-10 14 l8 6',ST('#8a6a40',2.4))+P('M-6 70 L0 80 L8 66Z','fill:#c6c6c6'),w);
+  if(o.shine)s+=P('M-14 -40 Q-16 -10 -8 16',ST('#fff',4,`opacity:${f2(o.shine)}`));
+  return s;}
+/* parche de piel con escamas (lupa) · o={n} */
+function scalesS(o={}){const r=o.r||70;let s=Ci(0,0,r,'#7bbf6a',OL(2.4));let sc='';
+  for(let y=-r;y<=r;y+=14)for(let x=-r;x<=r;x+=16){const xx=x+((y/14)%2?8:0);sc+=El(xx,y,7,6,'#5f9e4f','stroke:#3d7a35;stroke-width:1.4');}
+  return s+clipG(sc,`<circle cx="0" cy="0" r="${r-2}"/>`)+Ci(0,0,r,'none',OL(2.4));}
+/* dragón de Komodo de perfil (mira a la derecha, patas en y=0) · o={T,walk,lips} */
+function komodoS(o={}){const T=o.T||0,wk=o.walk||0,ph=T*7,c='#8a7a5a',cd='#6b5d43',sw=Math.sin(ph)*wk;
+  const leg=(x,a,col)=>G(x,-30,1,a,P('M0 0 Q-6 18 -10 30 L8 30',ST(K.ink,13))+P('M0 0 Q-6 18 -10 30 L8 30',ST(col,9))+P('M8 30 l6 -2 M8 30 l6 3',ST(K.ink,2)));
+  let s=leg(-60,sw*20,cd)+leg(70,-sw*20,cd);
+  s+=P(`M-230 ${f1(-20+Math.sin(T*2)*6)} Q-150 -36 -80 -50 Q0 -66 90 -52 Q120 -50 130 -46 L132 -26 Q90 -18 30 -16 Q-60 -14 -120 -24 Q-180 -22 -230 ${f1(-16+Math.sin(T*2)*6)}Z`,`fill:${c};${OL(2.2)}`);
+  for(let i=0;i<8;i++)s+=Ci(-100+i*26,-40+(i%2)*6,3,cd);
+  const fk=Math.sin(T*9)>.3?1:0;
+  s+=G(126,-44,1,0,P('M0 -6 Q30 -18 66 -6 Q74 0 66 8 L2 12Z',`fill:${c};${OL(2.2)}`)+P('M10 6 Q38 10 66 6',ST(cd,2.4))+Ci(26,-6,3.6,'#ffd84a',OL(1.2))+Ci(26,-6,1.4,K.ink)+
+    (fk?P('M68 4 l18 0 l6 -4 M86 4 l6 4',ST('#e2475a',2.2)):''));
+  s+=leg(-40,-sw*20,c)+leg(90,sw*20,c);
+  return G(0,0,1,0,s);}
+/* fotograma de película (marco con perforaciones) · contenido dentro (w,h) */
+function cineS(inner,w=360,h=240,T=0){let s=Rc(-w/2-26,-h/2-14,w+52,h+28,K.ink,10);
+  for(let i=0;i<9;i++){const y=-h/2+6+i*(h-12)/8;s+=Rc(-w/2-19,y-5,10,10,'#e8e8e8',2)+Rc(w/2+9,y-5,10,10,'#e8e8e8',2);}
+  s+=clipG(Rc(-w/2,-h/2,w,h,'#f2c14e')+inner,`<rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="4"/>`);
+  return s;}
