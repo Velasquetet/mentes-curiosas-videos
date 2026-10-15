@@ -395,3 +395,29 @@ NX.cine=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,cineS(G(-20,110,.55,0,trexS({T:lt,lips:0
 NX_CATALOG.push(
  ['komodo · Dragón de Komodo',(lt)=>NX.komodo({walk:1},lt)],
  ['cine · Fotograma de película',(lt)=>NX.cine({},lt)]);
+/* ===== 16/10 · reptiles que hacen ruido ===== */
+NX.turtle=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,turtleS(Object.assign({T:lt},o))+(o.talk?soundA(150,-60,lt,{n:3}):''));
+NX.gecko=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,geckoS(Object.assign({T:lt},o)));
+NX.gharial=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,G(-30,0,.8,0,gharialS(Object.assign({T:lt},o))));
+NX.lizard=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,lizardS(Object.assign({T:lt},o)));
+NX.mic=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,micS({rec:sg(lt,.4,.6)*(Math.floor(lt*2)%2?1:.35)}));
+NX.osc=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,oscS(Object.assign({T:lt,label:'● SONIDO'},o)));
+NX.sound=(o={},lt)=>soundA(0,0,lt,o);
+NX.lobefish=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,lobeFishS({T:lt}));
+NX.pot=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,potS());
+NX.idcard=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,idCardS(G(-75,50,.32,0,crocS({T:lt,c:'#3d4a36',cd:'#2a3326'})),o.name,o.sub));
+NX.speaker=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,speakerS({T:lt})+soundA(60,-10,lt,{n:4,spd:2.4}));
+NX.stopwatch=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,stopwatchS({txt:o.txt,p:EZ.out(sg(lt,.3,1.2))*(o.p??.1)}));
+NX_CATALOG.push(
+ ['turtle · Tortuga (que habla)',(lt)=>G(0,60,1.3,0,NX.turtle({open:.5+.5*Math.sin(lt*6),talk:1},lt))],
+ ['gecko · Geco tokay',(lt)=>G(30,60,1.3,0,NX.gecko({open:Math.max(0,Math.sin(lt*3))},lt))],
+ ['gharial · Gavial con ghara',(lt)=>G(0,40,1,0,NX.gharial({ghara:1},lt))],
+ ['lizard · Lagartija',(lt)=>G(40,40,1.5,0,NX.lizard({walk:1},lt))],
+ ['mic · Micrófono (REC)',(lt)=>NX.mic({},lt)],
+ ['osc · Forma de onda',(lt)=>NX.osc({},lt)],
+ ['sound · Ondas de sonido',(lt)=>NX.sound({n:4,r0:20,gap:16},lt)],
+ ['lobefish · Pez de aletas lobuladas',(lt)=>NX.lobefish({},lt)],
+ ['pot · Olla de barro',(lt)=>NX.pot({},lt)],
+ ['idcard · Carné de identidad',(lt)=>NX.idcard({},lt)],
+ ['speaker · Altavoz con ruido',(lt)=>NX.speaker({},lt)],
+ ['stopwatch · Cronómetro',(lt)=>NX.stopwatch({txt:'0,03 s'},lt)]);

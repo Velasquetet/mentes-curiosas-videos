@@ -293,7 +293,7 @@ function trexS(o={}){const T=o.T||0,c=o.c||'#3f9b4f',cd=o.cd||'#2b7a3e',bl=o.bel
   s+=G(hx-8,hy+6,1.4,Math.sin(T*1.3)*2,G(0,-4,1,0,hd));
   return s;}
 /* cabeza de cocodrilo con los dientes siempre al aire · o={T,open} */
-function crocS(o={}){const T=o.T||0,op=cl(o.open||0),c='#5f8f3a',cd='#46702a';let s='';
+function crocS(o={}){const T=o.T||0,op=cl(o.open||0),c=o.c||'#5f8f3a',cd=o.cd||'#46702a';let s='';
   const tu=[...Array(11)].map((_,i)=>P(`M${-100+i*20} 0 l5 ${11+(i%3==1?4:0)} l5 ${-11-(i%3==1?4:0)}Z`,'fill:#fffbe8;'+OL(1.2))).join('');
   s+=G(-110,2,1,op*14,G(110,-2,1,0,P('M-112 0 L120 0 Q124 18 100 22 L-100 26 Q-118 18 -112 0Z',`fill:${c};${OL(2.2)}`)+[...Array(10)].map((_,i)=>P(`M${-92+i*20} 0 l5 -10 l5 10Z`,'fill:#fffbe8;'+OL(1.2))).join('')));
   s+=P('M-120 -40 Q-90 -62 -40 -50 L110 -30 Q132 -24 128 0 L-118 4 Q-130 -20 -120 -40Z',`fill:${c};${OL(2.4)}`)+tu;
@@ -326,3 +326,103 @@ function cineS(inner,w=360,h=240,T=0){let s=Rc(-w/2-26,-h/2-14,w+52,h+28,K.ink,1
   for(let i=0;i<9;i++){const y=-h/2+6+i*(h-12)/8;s+=Rc(-w/2-19,y-5,10,10,'#e8e8e8',2)+Rc(w/2+9,y-5,10,10,'#e8e8e8',2);}
   s+=clipG(Rc(-w/2,-h/2,w,h,'#f2c14e')+inner,`<rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="4"/>`);
   return s;}
+/* ===== Recursos 16/10 · reptiles que hacen ruido ===== */
+/* ondas de sonido «)))» animadas · o={dir 1|-1, n, c, r0, gap, w, spd, ang} */
+function soundA(x,y,T,o={}){const n=o.n||3,dir=o.dir||1,c=o.c||K.ink,r0=o.r0||14,gap=o.gap||12,ang=o.ang||38,spd=o.spd||1.6;let s='';
+  for(let i=0;i<n;i++){const q=((T*spd)+i/n)%1,r=r0+q*gap*n,a=ang*Math.PI/180,op=Math.sin(Math.PI*q);
+    const x1=Math.cos(a)*r*dir,y1=-Math.sin(a)*r,y2=Math.sin(a)*r;
+    s+=P(`M${f1(x1)} ${f1(y1)} A${f1(r)} ${f1(r)} 0 0 ${dir>0?1:0} ${f1(x1)} ${f1(y2)}`,ST(c,o.w||3.2,`opacity:${f2(op*(o.o??1))}`));}
+  return G(x,y,1,0,s);}
+/* tortuga de perfil (mira a la derecha, patas en y=0) · o={T,walk,head 0..1,open 0..1,c,cd,skin} */
+function turtleS(o={}){const T=o.T||0,wk=o.walk||0,ph=T*5,sw=Math.sin(ph)*wk,hd=cl(o.head??1),op=cl(o.open||0);
+  const c=o.c||'#6b8f3a',cd=o.cd||'#4f6e28',sk=o.skin||'#9cbf6a',skd=o.skind||'#7a9c4c';
+  const leg=(x,a,col)=>G(x,-12,1,a,P('M-12 -6 Q-15 8 -12 12 Q0 16 14 12 Q16 4 12 -6Z',`fill:${col};${OL(2)}`)+P('M-6 12 l-1 2 M0 13 l0 2 M6 12 l1 2',ST(K.ink,2)));
+  let s=leg(-46,sw*14,skd)+leg(42,-sw*14,skd);
+  s+=P('M-92 -18 Q-104 -16 -112 -8 Q-100 -10 -88 -12Z',`fill:${sk};${OL(1.8)}`);
+  const hx=lerp(70,100,hd),hy=-26+Math.sin(T*2.2)*1.5*hd;
+  s+=P(`M60 -30 Q${f1(hx-20)} ${f1(hy-14)} ${f1(hx)} ${f1(hy-8)} L${f1(hx)} ${f1(hy+8)} Q${f1(hx-18)} ${f1(hy+8)} 60 -10Z`,`fill:${sk};${OL(2)}`);
+  s+=G(hx,hy,1,0,G(0,0,1,0,P('M-6 -16 Q22 -18 30 -4 Q30 2 26 4 L-4 6Z',`fill:${sk};${OL(2)}`))+G(0,4,1,op*20,P('M-4 0 L26 0 Q22 10 -2 10Z',`fill:${skd};${OL(2)}`))+
+    (op>.05?El(20,4,5*op,4*op,'#5a1a22'):'')+Ci(12,-8,4.4,'#fff',OL(1.4))+Ci(13.5,-8,2.2,K.ink)+Ci(14.3,-9,.8,'#fff')+P('M6 -14 Q12 -16 18 -13',ST(K.ink,1.6)));
+  s+=P('M-96 -12 Q-90 -86 0 -88 Q90 -86 96 -12Z',`fill:${c};${OL(2.6)}`);
+  s+=clipG(P('M-60 -16 L-52 -50 L-20 -64 L20 -64 L52 -50 L60 -16 M-20 -64 L-26 -86 M20 -64 L26 -86 M-52 -50 L-82 -56 M52 -50 L82 -56 M-20 -64 L-8 -40 L8 -40 L20 -64 M-8 -40 L-12 -16 M8 -40 L12 -16 M-52 -50 L-40 -16 M52 -50 L40 -16',ST(cd,3)),'<path d="M-96 -12 Q-90 -86 0 -88 Q90 -86 96 -12Z"/>');
+  s+=P('M-70 -66 Q-40 -82 -6 -82',ST('#fff',4,'opacity:.35'));
+  s+=Rc(-100,-16,200,12,'#d9c27a',6,OL(2.2));
+  s+=leg(-26,-sw*14,sk)+leg(62,sw*14,sk);
+  return G(0,-Math.abs(Math.sin(ph))*2*wk,1,0,s);}
+/* geco tokay de perfil (gris azulado con lunares naranjas) · o={T,open,walk} */
+function geckoS(o={}){const T=o.T||0,op=cl(o.open||0),wk=o.walk||0,ph=T*8,sw=Math.sin(ph)*wk,c='#8aa0c6',cd='#5f7499';
+  const leg=(x,a,col)=>G(x,-14,1,a,P('M0 0 Q-10 8 -14 14',ST(K.ink,9))+P('M0 0 Q-10 8 -14 14',ST(col,5.5))+Ci(-18,15,3,col,OL(1.2))+Ci(-12,16,3,col,OL(1.2))+Ci(-6,15,3,col,OL(1.2)));
+  let s=leg(-30,sw*18,cd)+leg(36,-sw*18,cd);
+  s+=P(`M-58 -18 Q-110 -14 -150 ${f1(-30+Math.sin(T*2.4)*8)} Q-108 -4 -56 -6Z`,`fill:${c};${OL(2)}`);
+  s+=P('M-62 -12 Q-50 -40 0 -40 Q40 -40 56 -28 L58 -8 Q20 -2 -20 -2 Q-56 -2 -62 -12Z',`fill:${c};${OL(2.2)}`);
+  [[-40,-24],[-18,-32],[4,-26],[24,-32],[38,-20],[-4,-14],[-28,-12],[-90,-18],[-118,-22]].forEach(([x,y],i)=>s+=Ci(x,y,i>6?3:4.2,'#f08a3c'));
+  s+=G(52,-26,1,0,P('M0 -14 Q30 -22 50 -6 Q52 0 48 4 L2 12Z',`fill:${c};${OL(2.2)}`)+G(4,4,1,op*24,P('M0 0 L46 0 Q40 12 2 10Z',`fill:${cd};${OL(2)}`))+(op>.05?El(34,6,7*op,4*op,'#c2344f'):'')+
+    Ci(24,-8,7.5,'#f6c43a',OL(1.6))+El(24,-8,1.6,6,K.ink)+Ci(36,-10,3,'#f08a3c'));
+  s+=leg(-14,-sw*18,c)+leg(56,sw*18,c);
+  return G(0,0,1,0,s);}
+/* gavial macho (hocico largo y fino con el «ghara») · o={T,ghara 0..1 resaltado,open} */
+function gharialS(o={}){const T=o.T||0,hg=cl(o.ghara||0),op=cl(o.open||0),c=o.c||'#7c8a5a',cd=o.cd||'#5c6a40',bl='#d8d3a4';let s='';
+  const leg=(x,a,col)=>G(x,-8,1,a,P('M0 0 Q-4 14 -12 22 L8 22',ST(K.ink,13))+P('M0 0 Q-4 14 -12 22 L8 22',ST(col,9))+P('M8 22 l6 -2 M8 22 l6 3',ST(K.ink,2)));
+  s+=leg(-120,Math.sin(T*3)*6,cd)+leg(20,-Math.sin(T*3)*6,cd);
+  s+=P(`M-280 ${f1(-14+Math.sin(T*1.6)*6)} Q-200 -40 -110 -62 Q-20 -76 50 -56 L66 -16 Q-20 -2 -110 -6 Q-200 -6 -280 ${f1(-6+Math.sin(T*1.6)*6)}Z`,`fill:${c};${OL(2.4)}`);
+  s+=P('M-200 -10 Q-110 -2 50 -18',ST(bl,6))+P('M-200 -10 Q-110 -2 50 -18',ST(K.ink,1.4,'opacity:.4'));
+  for(let i=0;i<10;i++){const x=-230+i*28,y=-24-Math.sin(Math.PI*cl((i+1)/11))*44;s+=P(`M${x} ${f1(y)} l8 -10 l8 10`,`fill:${cd};${OL(1.4)}`);}
+  for(let i=0;i<7;i++)s+=Ci(-150+i*30,-40+(i%2)*8,3.4,cd);
+  s+=G(52,-36,1,0,G(0,0,1,-op*6,P('M0 -20 Q16 -26 44 -16 L198 -10 Q206 -8 206 0 L0 4Z',`fill:${c};${OL(2.2)}`)+[...Array(12)].map((_,i)=>P(`M${30+i*14} 2 l3 6 l3 -6`,'fill:#fffbe8;'+OL(.9))).join(''))+
+    G(0,6,1,op*8,P('M0 -2 L200 0 Q206 6 196 10 L0 16Z',`fill:${bl};${OL(2)}`)+[...Array(12)].map((_,i)=>P(`M${36+i*14} -1 l3 -6 l3 6`,'fill:#fffbe8;'+OL(.9))).join(''))+
+    El(22,-22,14,11,c,OL(2.2))+Ci(24,-24,5.4,'#ffd84a',OL(1.4))+El(24,-24,1.5,4.2,K.ink));
+  s+=leg(-90,-Math.sin(T*3)*6,c)+leg(44,Math.sin(T*3)*6,c);
+  const gx=256,gy=-50;s+=(hg>0?Ci(gx,gy,26+5*Math.sin(T*6),'none',`stroke:${K.pink};stroke-width:3.6;opacity:${f2(hg)}`):'')+P(`M${gx-18} ${gy+10} Q${gx-20} ${gy-14} ${gx} ${gy-16} Q${gx+20} ${gy-14} ${gx+18} ${gy+10}Z`,'fill:#6b5a40;'+OL(2.2))+Ci(gx-6,gy-4,3.2,'#3a2e22')+Ci(gx+6,gy-4,3.2,'#3a2e22');
+  return G(0,Math.sin(T*2)*2,1,0,s);}
+/* lagartija (lagartija llorona de Chile: parda con bandas) · o={T,open,walk,freeze} */
+function lizardS(o={}){const T=o.T||0,op=cl(o.open||0),wk=o.walk||0,ph=T*10,sw=Math.sin(ph)*wk,c=o.c||'#9a7a4e',cd=o.cd||'#6e5534',st=o.st||'#e3cf9a';
+  const leg=(x,a,col)=>G(x,-10,1,a,P('M0 0 Q-6 6 -10 10 l-5 0 M-10 10 l-2 4 M-10 10 l3 4',ST(K.ink,6))+P('M0 0 Q-6 6 -10 10',ST(col,3.4)));
+  let s=leg(-22,sw*20,cd)+leg(26,-sw*20,cd);
+  s+=P(`M-40 -12 Q-80 -10 -120 ${f1(-2+Math.sin(T*3)*6*(1-(o.freeze||0)))} Q-80 2 -40 -1Z`,`fill:${c};${OL(1.8)}`);
+  s+=P('M-44 -6 Q-34 -26 0 -26 Q30 -26 42 -18 L42 -4 Q10 0 -20 0 Q-40 0 -44 -6Z',`fill:${c};${OL(2)}`);
+  s+=P('M-40 -14 Q0 -22 40 -14',ST(st,3))+P('M-38 -8 Q0 -12 38 -8',ST(cd,2));
+  s+=G(40,-16,1,0,P('M0 -9 Q22 -14 36 -3 Q36 2 32 4 L0 8Z',`fill:${c};${OL(1.8)}`)+G(2,3,1,op*26,P('M0 0 L32 0 Q28 8 0 7Z',`fill:${cd};${OL(1.6)}`))+(op>.05?El(24,5,6*op,3.5*op,'#c2344f'):'')+
+    Ci(16,-5,4,'#fff',OL(1.2))+Ci(17,-5,2.2,K.ink));
+  s+=leg(-8,-sw*20,c)+leg(38,sw*20,c);
+  return G(0,0,1,0,s);}
+/* micrófono de estudio con soporte · o={rec 0..1} */
+function micS(o={}){let s=P('M0 40 L0 120 M-36 124 L36 124',ST(K.ink,6))+P('M-34 0 Q-34 46 0 46 Q34 46 34 0',ST(K.ink,5));
+  s+=Rc(-22,-60,44,88,'#3a3a44',22,OL(2.4))+[...Array(6)].map((_,i)=>P(`M-20 ${-44+i*12} L20 ${-44+i*12}`,ST('#5a5a66',2))).join('')+P('M-12 -50 Q-14 -20 -10 10',ST('#fff',3,'opacity:.35'));
+  if(o.rec)s+=G(40,-60,1,0,Ci(0,0,7,K.red)+Tn(12,5,'REC',13,800,{a:'start',fill:K.red}),cl(o.rec));
+  return s;}
+/* pantalla con forma de onda (osciloscopio) · o={T,amp,c,w,h,label} */
+function oscS(o={}){const T=o.T||0,w=o.w||260,h=o.h||130,a=o.amp??1,c=o.c||'#7dffb0';let s=Rc(-w/2-10,-h/2-10,w+20,h+20,K.ink,14)+Rc(-w/2,-h/2,w,h,'#10261c',8);
+  for(let i=1;i<6;i++)s+=P(`M${f1(-w/2+i*w/6)} ${-h/2} L${f1(-w/2+i*w/6)} ${h/2}`,ST('rgba(125,255,176,.12)',1));
+  s+=P(`M${-w/2} 0 L${w/2} 0`,ST('rgba(125,255,176,.2)',1));
+  let d='';for(let i=0;i<=80;i++){const x=-w/2+i*w/80,u=i/80,env=Math.sin(Math.PI*u)*(o.burst?Math.exp(-Math.pow((u-.5)/.12,2)):1);
+    const y=Math.sin(u*40+T*18)*Math.sin(u*9+T*5)*h*.38*a*env;d+=(i?' L':'M')+f1(x)+' '+f1(y);}
+  s+=P(d,ST(c,2.4));if(o.label)s+=Tn(-w/2+10,-h/2+18,o.label,11,700,{a:'start',fill:c});
+  return s;}
+/* olla de barro (lo que significa «ghara») */
+function potS(){return P('M-40 -60 L40 -60 L34 -50 Q66 -20 50 20 Q36 50 0 52 Q-36 50 -50 20 Q-66 -20 -34 -50Z','fill:#c46a3a;'+OL(2.4))+
+  Rc(-44,-68,88,12,'#a8552c',5,OL(2.2))+P('M-48 -4 Q0 8 48 -4',ST('#f4d6a8',4))+P('M-44 12 Q0 22 44 12',ST('#8e4322',3))+P('M-30 -40 Q-40 -10 -30 20',ST('#fff',4,'opacity:.3'));}
+/* carné de identidad con «foto» · inner = dibujo dentro de la foto */
+function idCardS(inner,name='ALIGÁTOR',sub='tamaño: según su voz'){const w=300,h=180;let s=Rc(-w/2+6,-h/2+7,w,h,K.ink,14)+Rc(-w/2,-h/2,w,h,'#f4f1ea',14,OL(2.4));
+  s+=Rc(-w/2,-h/2,w,36,'url(#gWA)',14)+Rc(-w/2,-h/2+22,w,14,'url(#gWA)')+Tn(0,-h/2+24,'DOCUMENTO DE IDENTIDAD',12,800,{fill:'#fff',ls:.08});
+  s+=clipG(Rc(-130,-44,110,110,'#cfe3c9')+inner,'<rect x="-130" y="-44" width="110" height="110" rx="6"/>')+Rc(-130,-44,110,110,'none',6,OL(2));
+  s+=Tn(0,-18,'NOMBRE',9,700,{a:'start',fill:'#8a8a8a'})+Tn(0,0,name,17,800,{a:'start'})+Tn(0,26,'VOZ',9,700,{a:'start',fill:'#8a8a8a'})+Tn(0,44,sub,11.5,600,{a:'start'});
+  s+=P('M0 58 q10 -10 20 0 t20 0 t20 0 t20 0 t20 0',ST(K.pink,2.4));return s;}
+/* pez de aletas lobuladas (antepasado lejano) · o={T} */
+function lobeFishS(o={}){const T=o.T||0,wg=Math.sin(T*4)*6;let s='';
+  const fin=(x,y,a)=>G(x,y,1,a,P('M0 0 Q6 18 -4 30 Q-14 18 -6 2Z','fill:#a8662f;'+OL(1.8))+P('M-2 6 L-4 24',ST('#7d4a20',1.6)));
+  s+=fin(-10,10,20+wg)+fin(40,12,10-wg);
+  s+=P(`M-120 ${f1(wg)} Q-140 ${f1(-20+wg)} -150 ${f1(-30+wg)} Q-146 ${f1(wg)} -150 ${f1(30+wg)} Q-140 ${f1(20+wg)} -120 ${f1(wg)}Z`,'fill:#7d6a9a;'+OL(2));
+  s+=P(`M-124 ${f1(wg*.6)} Q-90 -34 0 -34 Q70 -34 96 -6 Q100 4 92 10 Q60 30 0 30 Q-80 30 -124 ${f1(4+wg*.6)}Z`,'fill:#8f7cb0;'+OL(2.2));
+  for(let i=0;i<10;i++)for(let j=0;j<3;j++)s+=P(`M${-90+i*16} ${-20+j*14} q6 6 0 12`,ST('#6d5b8c',1.4));
+  s+=P('M-40 -34 Q-20 -54 10 -34',`fill:#7d6a9a;${OL(1.8)}`)+P('M60 8 Q74 12 90 6',ST(K.ink,1.8))+Ci(70,-10,6,'#fff',OL(1.4))+Ci(71.5,-10,3,K.ink);
+  s+=fin(-6,18,-10-wg)+fin(46,18,-20+wg);
+  return G(0,0,1,0,s);}
+/* altavoz con ruido · o={T,on} */
+function speakerS(o={}){const T=o.T||0,k=1+.04*Math.sin(T*40)*(o.on??1);let s=Rc(-50,-80,100,160,'#2d2d35',14,OL(2.4));
+  s+=G(0,-34,k,0,Ci(0,0,24,'#4a4a55',OL(2))+Ci(0,0,8,'#1b1b20'))+G(0,30,k,0,Ci(0,0,36,'#4a4a55',OL(2))+Ci(0,0,14,'#1b1b20'));
+  return s;}
+/* cronómetro · o={txt,p (0..1 aguja)} */
+function stopwatchS(o={}){const p=o.p||0;let s=Rc(-10,-92,20,16,K.ink,4)+Ci(0,-8,74,'#fff',OL(3))+Ci(0,-8,64,'none',ST('#e3e3e3',2));
+  for(let i=0;i<12;i++){const a=i*Math.PI/6;s+=P(`M${f1(Math.sin(a)*56)} ${f1(-8-Math.cos(a)*56)} L${f1(Math.sin(a)*62)} ${f1(-8-Math.cos(a)*62)}`,ST(K.ink,2.4));}
+  const a=p*2*Math.PI;s+=P(`M0 -8 L${f1(Math.sin(a)*50)} ${f1(-8-Math.cos(a)*50)}`,ST(K.pink,4))+Ci(0,-8,6,K.ink);
+  if(o.txt)s+=G(0,30,1,0,pill(o.txt,{sz:15,w:800,fill:'url(#gRP)'}));return s;}
