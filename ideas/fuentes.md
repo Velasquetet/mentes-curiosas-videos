@@ -17,4 +17,5 @@
 - Publicación autónoma (autorizada por el usuario), en cuanto el vídeo esté listo, sin límite diario (2, 3 o 4 al día si hay noticias que lo merezcan).
 - Duración: mínimo 1 minuto (obligatorio).
 - Criterios (todos): gran impacto (mucha gente/países, histórico, ciencia/espacio, récord); confirmada por 2+ medios fiables con los mismos datos; se puede explicar en el estilo del canal; no repetida SALVO que sea una continuación con datos nuevos (actualización: se hace vídeo, enlazando con el anterior: «hace unas horas os contamos…»).
+- Antes de descartar una noticia como «solo un anuncio», comprobar si el evento ya se celebró, buscando también en inglés (Reuters vía otros medios, TechCrunch, AP…). Euronews no cubre todo: tecnología y lanzamientos virales de gran repercusión (p. ej. una presentación de Tesla o Apple) también cuentan.
 - Reglas: tono neutral sin opinión; tragedias con respeto (sin bromas ni caras graciosas de los personajes); nada de cifras provisionales como definitivas ni rumores; fuentes en el texto del post.
