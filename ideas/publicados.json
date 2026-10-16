@@ -35,6 +35,15 @@
    "tema": "Los reptiles hacen mucho más ruido del que crees",
    "video": "videos/2026-10-16_reptiles.mp4",
    "buffer_post": "6ad1530e4ed7d375a433ef00"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
+   "video": "videos/2026-10-16_tesla-roadster.mp4",
+   "buffer_post": "6ad23f3945dfa13a723940d4"
   }
  ]
 }

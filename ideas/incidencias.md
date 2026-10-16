@@ -15,3 +15,7 @@
 - La lectura web siguió sin poder abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía buscador, euronews.com/just-in y temas de EFE (12:00 GMT).
 - Sin noticias que cumplan todos los criterios: huracán Trudy (cat. 3, ~385 km al SO de Acapulco) sigue sin tocar tierra y el pronóstico no prevé que el ojo llegue a la costa; resto de temas son políticos/en curso (cumbre UE, Brasil, Albania).
 - Diario de hoy (reptiles) ya programado para las 18:30 (registrado en publicados.json); no se necesita recuperación.
+
+## 2026-10-16 17:15 · Noticia del Tesla Roadster (pedida por el usuario)
+- La revisión de las 14:00 descartó el Roadster como «solo anuncio, sin presentación», pero la presentación ya había ocurrido (15/10 por la noche en Texas, madrugada del 16 en España). Error de comprobación: hay que buscar también la noticia en inglés (Reuters vía otros medios, TechCrunch) y comprobar si el evento ya se celebró antes de descartar.
+- Publicada a las 17:14 (vídeo de 1:22). Fuentes: Reuters (vía The Korea Times), TechCrunch, Yahoo Finance.
