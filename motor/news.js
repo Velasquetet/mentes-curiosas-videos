@@ -523,3 +523,71 @@ NX_CATALOG.push(
  ['bullettrain · Tren bala',(lt)=>NX.bullettrain({},lt)],
  ['depth · Profundidad del hipocentro',(lt)=>NX.depth({depth:140},lt)],
  ['shield · Ciberseguridad (escudo)',(lt)=>NX.shield({},lt)]);
+
+/* ---------------- K · INUNDACIONES URBANAS (añadidos 16/10/2026, noticia de las inundaciones de Estambul) ---------------- */
+/* Columna de lluvia sobre 1 m² (cubo en perspectiva con regla) · o={T,mm (litros/m²),p (0-1 llenado),max (mm de la regla)} */
+function rainColumnS(o={}){const T=o.T||0,mm=o.mm||272,mx=o.max||300,p=o.p??1,W=200,D=70,H=240,lv=H*Math.min(1,mm/mx)*p,dx=D,dy=-D*.55;let s=shadowE(D/2,6,W*.7,.14);
+  const box=(h,fill,op)=>P(`M${-W/2} 0 L${W/2} 0 L${W/2} ${-h} L${-W/2} ${-h}Z`,`fill:${fill};opacity:${op}`)+P(`M${W/2} 0 L${W/2+dx} ${dy} L${W/2+dx} ${dy-h} L${W/2} ${-h}Z`,`fill:${fill};opacity:${op*.8}`);
+  s+=P(`M${-W/2} 0 L${W/2} 0 L${W/2+dx} ${dy} L${-W/2+dx} ${dy}Z`,'fill:#b9a58c;'+OL(2));
+  if(lv>0){let top=`M${-W/2} ${f1(-lv)}`;for(let i=0;i<=10;i++){const x=-W/2+i*W/10;top+=` L${f1(x)} ${f1(-lv+Math.sin(i*1.3+T*3)*2.5)}`;}
+    s+=box(lv,'#3f6fd8',.78)+P(`M${-W/2} ${f1(-lv)} L${W/2} ${f1(-lv)} L${W/2+dx} ${f1(dy-lv)} L${-W/2+dx} ${f1(dy-lv)}Z`,'fill:#8fb2ff;opacity:.85')+P(top,ST('#cfe0ff',2.4));}
+  s+=P(`M${-W/2} 0 L${-W/2} ${-H} M${W/2} 0 L${W/2} ${-H} M${W/2+dx} ${dy} L${W/2+dx} ${dy-H} M${-W/2} ${-H} L${W/2} ${-H} L${W/2+dx} ${dy-H} L${-W/2+dx} ${dy-H} L${-W/2} ${-H}`,ST(K.ink,2,'stroke-dasharray:6 5'));
+  s+=P(`M${-W/2} 0 L${W/2} 0 L${W/2+dx} ${dy}`,ST(K.ink,2.4));
+  /* regla */
+  s+=Rc(-W/2-44,-H,22,H,'#f6d36b',3,OL(2));for(let i=0;i<=mx/10;i++){const y=-H*i*10/mx;s+=P(`M${-W/2-22} ${f1(y)} l${i%5?-6:-12} 0`,ST(K.ink,1.4));if(i%10===0)s+=Tn(-W/2-52,y+4,String(i),10,700,{a:'end'});}
+  s+=Tn(-W/2-52,-H-12,'cm',10,700,{a:'end',fill:'#555'});
+  if(lv>0)s+=P(`M${-W/2-22} ${f1(-lv)} L${W/2+dx+14} ${f1(dy-lv)}`,ST(K.red,1.6,'stroke-dasharray:4 4'));
+  s+=G(0,24,1,0,Tn(0,0,'1 m²',15,800));
+  /* gotas cayendo */
+  for(let i=0;i<9;i++){const q=((T*1.5)+hs(i*2.1))%1,x=-W/2+12+hs(i+3)*(W+dx-24),y=-H-120+q*(120+H-lv);s+=P(`M${f1(x)} ${f1(y)} l-3 12`,ST('#5d7fb8',3,`opacity:${f2((1-q)*.9)}`));}
+  return s;}
+/* Calle en cuesta con riada que arrastra coches y los amontona abajo · o={T,p (0-1 avance del agua),pile (0-1)} */
+function streetFloodS(o={}){const T=o.T||0,p=o.p??1,pile=o.pile??0;let s='';
+  const yAt=x=>-140+(x+250)*.28; /* pendiente: baja hacia la derecha */
+  /* casas en la cuesta */
+  for(let i=0;i<5;i++){const x=-230+i*100,y=yAt(x)-6,h=110+hs(i*3)*70,c=['#f4eee2','#ffd0b8','#e3e8f5','#f6e3c3','#e9e4f5'][i];
+    s+=Rc(x,y-h,84,h,c,3,OL(2))+P(`M${x-6} ${y-h} L${x+42} ${y-h-30} L${x+90} ${y-h}Z`,`fill:${['#c2410c','#9a4a2f','#2a37d7','#8a3a26','#6b3fa0'][i]};${OL(2)}`);
+    for(let r=0;r<Math.floor(h/42);r++)s+=Rc(x+14,y-h+16+r*42,20,20,'#bcd3f0',2,OL(1.2))+Rc(x+50,y-h+16+r*42,20,20,'#bcd3f0',2,OL(1.2));}
+  s+=P(`M-280 ${f1(yAt(-280))} L280 ${f1(yAt(280))} L280 120 L-280 120Z`,'fill:#7c7f86;'+OL(2.4));
+  s+=P(`M-280 ${f1(yAt(-280)+20)} L280 ${f1(yAt(280)+20)}`,ST('#e8e8e8',3,'stroke-dasharray:18 14'));
+  /* agua marrón que baja */
+  const xe=lerp(-280,280,EZ.io(p));if(p>0){let d=`M-280 ${f1(yAt(-280)-10)}`;for(let x=-280;x<=xe;x+=20)d+=` L${x} ${f1(yAt(x)-12-Math.sin(x*.06-T*8)*4-(x>200?pile*30:0))}`;d+=` L${f1(xe)} ${f1(yAt(xe)+40)} L-280 ${f1(yAt(-280)+40)}Z`;
+    s+=P(d,'fill:#8a6a43;opacity:.82');for(let i=0;i<7;i++){const q=((T*1.3)+i/7)%1,x=lerp(-270,xe,q);s+=P(`M${f1(x)} ${f1(yAt(x)-4)} q14 -8 28 0`,ST('#e9d6b5',2.4,`opacity:${f2(Math.sin(Math.PI*q))}`));}}
+  /* coches */
+  const car=(c)=>Rc(-34,-26,68,20,c,6,OL(2))+P('M-20 -26 L-12 -40 L14 -40 L22 -26Z',`fill:${c};${OL(2)}`)+P('M-14 -27 L-9 -37 L0 -37 L0 -27Z M4 -27 L4 -37 L12 -37 L17 -27Z','fill:#bcd3f0')+Ci(-20,-6,8,K.ink)+Ci(20,-6,8,K.ink);
+  [['#e73568',-200,0],['#2a37d7',-120,.12],['#f6a81a',-40,.24],['#3f9b4f',40,.36],['#ffffff',-240,.48]].forEach(([c,x0],i)=>{const q=EZ.io(cl((p-.15-i*.07)*1.6)),tx=lerp(x0,165+(i%3)*28-(i>2?14:0),q),ty=yAt(tx)-(i>2?18*q*pile:0),r=lerp(0,[25,-35,160,-20,40][i],q*pile)+Math.sin(T*3+i)*4*q;
+    s+=G(tx,ty-8*q,.9,r+16,car(c));});
+  return s;}
+/* Suelo natural frente a asfalto: el agua se infiltra o corre por la superficie · o={T,p (0-1)} */
+function runoffS(o={}){const T=o.T||0,p=o.p??1;let s='';
+  /* izquierda: tierra con hierba */
+  s+=Rc(-230,0,210,120,'url(#gMUD)',0,OL(2.2))+P('M-230 0 '+[...Array(22)].map((_,i)=>`L${-230+i*10} ${i%2?-8:0}`).join(' ')+' L-20 0',`fill:#3f9b4f;${OL(1.6)}`);
+  for(let i=0;i<5;i++){const q=((T*.9)+i/5)%1,x=-200+i*40;s+=P(`M${x} ${f1(8+q*90)} l0 14 M${x-5} ${f1(16+q*90)} l5 6 l5 -6`,ST('#7fb2ff',3,`opacity:${f2(p*(1-q))}`));}
+  s+=G(-125,150,1,0,pill('se infiltra',{sz:13,w:800,fill:K.green}),cl(p*2));
+  /* derecha: asfalto y alcantarilla/cauce */
+  s+=Rc(20,0,210,120,'#55585e',0,OL(2.2))+Rc(20,-6,210,8,'#2b2d33')+P('M30 -2 L220 -2',ST('#e8e8e8',2,'stroke-dasharray:10 10'));
+  s+=P('M230 -6 L262 -6 L262 120 L230 120Z','fill:#3a3c42;'+OL(2))+Rc(232,120-100*p,28,100*p,'#3f6fd8','0','opacity:.8');
+  let d='M30 -6';for(let x=30;x<=230;x+=10)d+=` L${x} ${f1(-12-Math.sin(x*.08-T*7)*2.5)}`;d+=' L230 -6Z';s+=P(d,`fill:#3f6fd8;opacity:${f2(.8*p)}`);
+  for(let i=0;i<4;i++){const q=((T*1.2)+i/4)%1;s+=G(lerp(40,220,q),-24,1,0,P('M-14 -6 L6 -6 L6 -12 L18 0 L6 12 L6 6 L-14 6Z','fill:#2a37d7'),Math.sin(Math.PI*q)*p);}
+  s+=G(125,150,1,0,pill('corre por encima',{sz:13,w:800,fill:K.red}),cl(p*2));
+  /* lluvia sobre ambos */
+  for(let i=0;i<16;i++){const q=((T*1.6)+hs(i*1.7))%1,x=-225+hs(i+9)*450,y=-170+q*160;s+=P(`M${f1(x)} ${f1(y)} l-3 12`,ST('#5d7fb8',3,`opacity:${f2(1-q)}`));}
+  s+=Tn(-125,-186,'SUELO',13,800,{ls:.1})+Tn(125,-186,'ASFALTO',13,800,{ls:.1});
+  return s;}
+/* Pluviómetro de tubo con nivel y etiqueta · o={p (0-1),label,over (0-1 rebosa),T} */
+function rainGaugeS(o={}){const p=o.p??1,H=220,T=o.T||0;let s=shadowE(0,4,46,.14)+P('M-50 -260 L50 -260 L18 -226 L-18 -226Z','fill:#e9eef6;'+OL(2.2));
+  s+=Rc(-26,-226,52,226,'rgba(255,255,255,.6)',6,OL(2.4));const lv=H*Math.min(1,p);
+  if(lv>0)s+=Rc(-22,-4-lv,44,lv,'#3f6fd8',4,'opacity:.82')+P(`M-22 ${f1(-4-lv)} q11 ${f1(Math.sin(T*4)*3)} 22 0 q11 ${f1(-Math.sin(T*4)*3)} 22 0`,ST('#cfe0ff',2));
+  for(let i=1;i<10;i++)s+=P(`M26 ${-4-i*22} l-${i%2?6:12} 0`,ST(K.ink,1.4));
+  if(o.over>0){for(let i=0;i<5;i++){const q=((T*1.4)+i/5)%1;s+=Ci(-30-q*30+(i%2)*60+q*(i%2?60:0)-(i%2?0:0),-226+q*120,5,'#3f6fd8',`opacity:${f2(o.over*(1-q))}`);}}
+  if(o.label)s+=G(0,30,1,0,pill(o.label,{sz:12,w:800,fill:o.fill||K.ink}));
+  return s;}
+NX.raincolumn=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,rainColumnS(Object.assign({T:lt,p:EZ.io(sg(lt,.5,2.6))},o)));
+NX.streetflood=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,streetFloodS(Object.assign({T:lt,p:sg(lt,.2,2.6),pile:sg(lt,2.0,3.2)},o)));
+NX.runoff=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,runoffS(Object.assign({T:lt,p:sg(lt,.3,1.6)},o)));
+NX.raingauge=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,rainGaugeS(Object.assign({T:lt},o,{p:(o.p??1)*EZ.io(sg(lt,.3,1.8))})));
+NX_CATALOG.push(
+ ['raincolumn · Columna de lluvia sobre 1 m²',(lt)=>G(-10,140,1,0,NX.raincolumn({mm:272},lt))],
+ ['streetflood · Riada en una calle en cuesta',(lt)=>NX.streetflood({},lt%3.6)],
+ ['runoff · Suelo frente a asfalto',(lt)=>G(0,40,1,0,NX.runoff({},lt))],
+ ['raingauge · Pluviómetro',(lt)=>G(0,120,1,0,NX.raingauge({p:.8,label:'48 horas'},lt))]);
