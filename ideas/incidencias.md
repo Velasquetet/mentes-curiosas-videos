@@ -19,3 +19,9 @@
 ## 2026-10-16 17:15 · Noticia del Tesla Roadster (pedida por el usuario)
 - La revisión de las 14:00 descartó el Roadster como «solo anuncio, sin presentación», pero la presentación ya había ocurrido (15/10 por la noche en Texas, madrugada del 16 en España). Error de comprobación: hay que buscar también la noticia en inglés (Reuters vía otros medios, TechCrunch) y comprobar si el evento ya se celebró antes de descartar.
 - Publicada a las 17:14 (vídeo de 1:22). Fuentes: Reuters (vía The Korea Times), TechCrunch, Yahoo Finance.
+
+## 2026-10-16 18:50 · Tarea de noticias (revisión de las 18:00)
+- La lectura web siguió sin poder abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); revisado vía buscador, euronews.com/just-in y otros medios.
+- Publicada la noticia de la falsa alerta de terremoto M9,9 en Japón (vídeo de 1:20, publicado a las 18:50). Fuentes: NHK, Kyodo, BNO News, SBS, USGS. Huracán Trudy sigue sin tocar tierra.
+- Diario de hoy (reptiles) salió a las 18:32 (estado actualizado a «publicado»).
+- Nota técnica: `audio.py` (filtro svf_sweep en Python puro) tarda varios minutos si se ejecuta a la vez que el render; lanzarlo en segundo plano.

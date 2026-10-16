@@ -31,7 +31,7 @@
    "fecha": "2026-10-15",
    "sale": "2026-10-16",
    "tipo": "diario",
-   "estado": "programado",
+   "estado": "publicado",
    "tema": "Los reptiles hacen mucho más ruido del que crees",
    "video": "videos/2026-10-16_reptiles.mp4",
    "buffer_post": "6ad1530e4ed7d375a433ef00"
@@ -44,6 +44,15 @@
    "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
    "video": "videos/2026-10-16_tesla-roadster.mp4",
    "buffer_post": "6ad23f3945dfa13a723940d4"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Japón lanza por error una alerta de terremoto de magnitud 9,9 (era un 6,9 en Kamchatka)",
+   "video": "videos/2026-10-16_japon-alerta.mp4",
+   "buffer_post": "6ad255c1dcd88593548bd363"
   }
  ]
 }
