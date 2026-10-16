@@ -16,14 +16,12 @@ Guía para fabricar cada vídeo con la misma calidad (y mejorarla). La deben seg
 8. **Codificar**: H.264 crf 18, 1080×1920, 30 fps, AAC 192k, `-movflags +faststart`.
 9. **Publicar**: subir el mp4 a `videos/` en GitHub y crear el post en Buffer (canal @mentes.curiosas.tvs) con la URL raw. Sin etiqueta de IA.
 
-## Ritmo (indicación del usuario, 14/10)
-El vídeo del esturión se hizo lento. La gente tiene poca paciencia: **no se trata de acortar los vídeos, sino de darles más ritmo**.
-- **Pausas de la voz**: Azure deja ~0,8 s entre frases. Recortar los silencios entre frases a ≈0,25–0,3 s (y ajustar `words.json` en consecuencia) antes de montar.
-- **Guion**: frases cortas y con gancho; nada de introducciones. Abrir con el dato más sorprendente en los 2 primeros segundos y meter un «giro» o pregunta cada ~15 s.
-- **Cortes**: cambio de escena o de plano cada 2–3 s como máximo (una escena larga se parte en varios planos: zoom, cambio de encuadre, elemento nuevo).
-- **Movimiento constante**: la cámara siempre se mueve un poco (empuje/zoom lento); cada palabra clave tiene un golpe visual (pop, sello, sacudida) y su efecto de sonido.
-- **Nada estático**: ningún plano quieto ni vacío más de ~1 s (en el esturión hubo huecos de 1–1,5 s sin nada nuevo en pantalla).
-- Revisar en las hojas de contacto con 2 fotogramas por segundo y buscar huecos sin acción.
+## Ritmo (indicaciones del usuario, 14/10)
+El vídeo del esturión se hizo lento: hay que darle más ritmo **sin acortar los vídeos**. Pero sin pasarse («no exageres tanto»): que sea ágil, no frenético.
+- **Pausas de la voz**: recortar los silencios largos entre frases (Azure deja ~0,8 s) a unos 0,35–0,45 s, que siga sonando natural (`trim.py` del vídeo de los reptiles como plantilla).
+- **Guion**: empezar directamente con el gancho y quitar frases de relleno.
+- **Escenas**: que cada frase tenga algo que pase en pantalla; evitar planos quietos largos. No hace falta cortar cada 2 s.
+- Música y efectos como en el punto 7, sin saturar.
 
 ## Guía de estilo (copiada de los vídeos de referencia)
 - **Fondo** gris #c6c6c6 con viñeteado suave; bordes ligeramente rugosos (filtro `rough`), grano fino.
