@@ -421,3 +421,56 @@ NX_CATALOG.push(
  ['idcard · Carné de identidad',(lt)=>NX.idcard({},lt)],
  ['speaker · Altavoz con ruido',(lt)=>NX.speaker({},lt)],
  ['stopwatch · Cronómetro',(lt)=>NX.stopwatch({txt:'0,03 s'},lt)]);
+
+/* ---------------- I · MOTOR Y TECNOLOGÍA (añadidos 16/10/2026, noticia del Roadster) ---------------- */
+/* Superdeportivo eléctrico de perfil (blanco, anguloso; genérico, sin logotipos) · o={T,jets (0-1),c,suck (0-1)} · mira a la derecha, ruedas en y=0 */
+function hypercarS(o={}){const T=o.T||0,c=o.c||'#f4f6f8',spin=(T*900)%360;let s='';
+  const body='M-156 -16 L-152 -38 L-124 -46 L-50 -54 L-4 -74 L40 -74 L92 -52 L156 -38 L166 -24 L160 -12 L-156 -12Z';
+  if(o.suck>0){for(let i=0;i<4;i++){const q=((T*2.2)+i/4)%1;s+=P(`M${f1(-90+i*60)} ${f1(10+q*30)} l0 -14`,ST('#9fd8ff',3,`opacity:${f2(o.suck*(1-q))}`));}}
+  s+=shadowE(0,4,140,.16);
+  s+=P(body,`fill:${c};${OL(2.6)}`);
+  s+=P('M-40 -54 L-2 -71 L38 -71 L80 -53Z','fill:#16181d;'+OL(2))+P('M-22 -56 L0 -67 L16 -67 L0 -56Z','fill:#fff;opacity:.25')+P('M-150 -22 L-80 -30 L-30 -20 Z','fill:#16181d;opacity:.85')+P('M30 -22 L120 -34 L150 -26Z','fill:#16181d;opacity:.85');
+  s+=P('M-150 -32 L-50 -44 L60 -44 L160 -32',ST('#c9ced6',2));
+  s+=P('M110 -46 L156 -36',ST('#e6f4ff',3))+P('M-156 -30 L-140 -38',ST(K.red,4));
+  s+=P('M-148 -44 L-178 -52 L-178 -44 L-148 -38Z','fill:#16181d;'+OL(1.6));
+  // toberas
+  [[-152,-22],[-112,-12],[96,-12]].forEach(([x,y])=>s+=Rc(x-6,y-5,12,8,'#5b5f66',2,OL(1.4)));
+  const wheel=x=>G(x,-14,1,0,Ci(0,0,23,K.ink)+Ci(0,0,15,'#8a9099')+G(0,0,1,spin,P('M0 -14 L0 14 M-14 0 L14 0 M-10 -10 L10 10 M-10 10 L10 -10',ST('#d6dbe2',2.4)))+Ci(0,0,4,K.ink));
+  s+=wheel(-96)+wheel(104);
+  if(o.jets>0)s+=jetPuffS(-160,-22,180,o.jets,T)+jetPuffS(-112,-6,90,o.jets,T+1)+jetPuffS(96,-6,90,o.jets,T+2);
+  return s;}
+/* chorro de gas frío (aire comprimido) · (x,y,dirección en grados,intensidad 0-1,T) */
+function jetPuffS(x,y,ang,k,T){if(k<=0)return '';let s='';const a=ang*Math.PI/180;
+  for(let i=0;i<7;i++){const q=((T*3.4)+i/7)%1,d=12+q*80*k,r=(5+q*16)*k;s+=Ci(x+Math.cos(a)*d+Math.sin(T*9+i)*3,y+Math.sin(a)*d,r,'#ffffff',`opacity:${f2((1-q)*.85)};${OL(1.4,'rgba(20,18,18,'+f2((1-q)*.5)+')')}`);}
+  s+=P(`M${x} ${y} L${f1(x+Math.cos(a-.25)*26*k)} ${f1(y+Math.sin(a-.25)*26*k)} L${f1(x+Math.cos(a+.25)*26*k)} ${f1(y+Math.sin(a+.25)*26*k)}Z`,'fill:#cdeeff;opacity:.9');
+  return s;}
+/* camión tráiler de perfil · o={c} */
+function semiTruckS(o={}){const c=o.c||'#2a37d7';return Rc(-170,-110,190,94,'#e8e8e8',6,OL(2.4))+P('M-160 -96 L10 -96',ST('#cfcfcf',2))+
+  P('M24 -16 L24 -96 L70 -112 L96 -70 L100 -16Z',`fill:${c};${OL(2.4)}`)+P('M36 -92 L66 -104 L84 -74 L36 -74Z','fill:#bcd3f0;'+OL(1.6))+
+  [-150,-110,60].map(x=>Ci(x,-10,16,K.ink)+Ci(x,-10,7,'#aaa')).join('')+Rc(-170,-24,270,8,K.ink,3);}
+/* tanque de aire comprimido de fibra de carbono · o={p (presión 0-1)} */
+function copvS(o={}){const p=o.p??1;let s=Rc(-26,-90,52,180,'#2b2d33',26,OL(2.4));
+  for(let i=0;i<9;i++)s+=P(`M-26 ${-70+i*18} L26 ${-58+i*18}`,ST('#4d515a',3));
+  s+=clipG(Rc(-22,86-172*p,44,172*p,'rgba(159,216,255,.55)'),Rc(-22,-86,44,172,'#000',22));
+  s+=Rc(-10,-104,20,16,'#9aa0a8',3,OL(2))+Tn(0,6,'AIRE',11,800,{fill:'#fff',ls:.1});return s;}
+/* rampa invertida (tubo/arco por el que el coche va boca abajo) */
+function invRampS(){return P('M-230 0 Q-230 -260 0 -260 Q230 -260 230 0',ST(K.ink,14))+P('M-230 0 Q-230 -260 0 -260 Q230 -260 230 0',ST('#9aa0a8',8))+Rc(-250,-6,40,10,K.ink,3)+Rc(210,-6,40,10,K.ink,3);}
+/* etiqueta de precio colgante · o={txt,sub} */
+function priceTagS(o={}){const w=Math.max(130,mw(o.txt||'',fSans(24,800))+40);return P(`M0 -60 L0 -26`,ST(K.ink,2))+P(`M${-w/2} -26 L${w/2} -26 L${w/2} 26 L${-w/2} 26Z`,'fill:#fff;'+OL(2.4))+Rc(-w/2,-26,w,14,'url(#gRP)')+Ci(0,-19,3.6,'#fff')+
+  Tn(0,10,o.txt||'',24,800)+(o.sub?Tn(0,48,o.sub,12,700,{fill:'#555'}):'');}
+/* NX.hypercar · coche saltando con propulsores (arco completo) · o:{} */
+NX.hypercar=(o={},lt)=>{const q=sg(lt,.4,2.0),x=lerp(-220,220,q),y=-Math.sin(Math.PI*q)*190,r=Math.sin(Math.PI*q*2)*14,j=bel(q,0,.55)*1;
+  return G(0,0,1,0,G(x,y,.8,r,hypercarS({T:lt,jets:lt>.4&&q<.6?1:j*.3})),cl(lt*4));};
+NX.jet=(o={},lt)=>G(0,0,_ap(lt,0,.3),0,jetPuffS(0,0,o.ang??90,1,lt));
+NX.semi=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,semiTruckS(o));
+NX.copv=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,copvS({p:EZ.out(sg(lt,.3,1.3))}));
+NX.invramp=(o={},lt)=>{const th=EZ.io(sg(lt,.3,.3+(o.dur||2.1)))*Math.PI,ax=230*Math.cos(th),ay=-260*Math.sin(th),phi=(1.5*Math.PI-th)*180/Math.PI;
+  return G(0,0,_ap(lt,0,.4),0,invRampS()+G(ax,ay,.5,phi,G(0,-30,1,0,hypercarS({T:lt,suck:th>.3&&th<2.8?1:0}))));};
+NX.pricetag=(o={},lt)=>G(0,0,1,Math.sin(lt*3)*6*Math.exp(-lt*1.2),priceTagS(o),cl(lt*4));
+NX_CATALOG.push(
+ ['hypercar · Superdeportivo que salta',(lt)=>NX.hypercar({},lt%2.6)],
+ ['jet · Chorro de gas frío',(lt)=>NX.jet({ang:90},lt)],
+ ['semi · Camión tráiler',(lt)=>NX.semi({},lt)],
+ ['copv · Tanque de aire comprimido',(lt)=>NX.copv({},lt)],
+ ['invramp · Rampa boca abajo',(lt)=>NX.invramp({},lt)],
+ ['pricetag · Etiqueta de precio',(lt)=>NX.pricetag({txt:'50.000 $',sub:'reserva'},lt)]);
