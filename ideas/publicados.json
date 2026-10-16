@@ -62,6 +62,15 @@
       "tema": "Estambul sufre sus peores inundaciones en más de 80 años (4 muertos, 3 desaparecidos, cifras provisionales)",
       "video": "videos/2026-10-16_estambul-inundaciones.mp4",
       "buffer_post": "6ad272ebd8cc58ddf1696fde"
+    },
+    {
+      "fecha": "2026-10-16",
+      "sale": "2026-10-17",
+      "tipo": "diario",
+      "estado": "programado",
+      "tema": "La malvasía cabeciblanca: el pato español del pico azul",
+      "video": "videos/2026-10-17_malvasia.mp4",
+      "buffer_post": "6ad2a63487c49357709edd38"
     }
   ]
 }
