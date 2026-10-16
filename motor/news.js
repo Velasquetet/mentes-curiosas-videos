@@ -474,3 +474,52 @@ NX_CATALOG.push(
  ['copv · Tanque de aire comprimido',(lt)=>NX.copv({},lt)],
  ['invramp · Rampa boca abajo',(lt)=>NX.invramp({},lt)],
  ['pricetag · Etiqueta de precio',(lt)=>NX.pricetag({txt:'50.000 $',sub:'reserva'},lt)]);
+
+/* ---------------- J · ALERTAS SÍSMICAS Y JAPÓN (añadidos 16/10/2026, noticia de la falsa alerta M9,9) ---------------- */
+/* Móvil con alerta de terremoto a pantalla completa (vibra y suena) · o={T,mag,title,sub,cancel (0-1),buzz (0-1)} */
+function eewPhoneS(o={}){const T=o.T||0,bz=o.buzz??1,cx=o.cancel||0,sh=bz>0?Math.sin(T*70)*3*bz:0;let s='';
+  if(bz>0)for(let i=0;i<3;i++){const q=((T*1.6)+i/3)%1;s+=Rc(-100-q*40,-185-q*40,200+q*80,370+q*80,'none',30+q*20,`stroke:${K.red};stroke-width:3;opacity:${f2((1-q)*.55*bz)}`);}
+  let ph=Rc(-95,-180,190,360,K.ink,28)+Rc(-85,-170,170,340,mixc('#e0283a','#5d6470',cx),20)+Rc(-30,-165,60,12,K.ink,6);
+  const fl=bz>0&&Math.floor(T*4)%2?.18:0;ph+=Rc(-85,-170,170,340,'#ffffff',20,`opacity:${f2(fl)}`);
+  ph+=G(0,-96,1,0,P('M0 -34 L32 22 L-32 22Z','fill:#ffd23f;stroke:#141212;stroke-width:4;stroke-linejoin:round')+Rc(-3.5,-14,7,22,K.ink,3)+Ci(0,14,4,K.ink));
+  ph+=Tn(0,-34,o.title||'ALERTA DE TERREMOTO',13,800,{fill:'#fff',ls:.04})+Tn(0,-14,o.sub||'Sacudidas fuertes',11,600,{fill:'#ffe1e4'});
+  ph+=Rc(-62,6,124,64,'#fff',12)+Tn(0,30,'MAGNITUD',9.5,800,{fill:'#777',ls:.1})+Tn(0,62,o.mag||'9,9',34,800,{fill:mixc('#e0283a','#141212',cx)});
+  ph+=Rc(-70,92,140,34,'rgba(255,255,255,.18)',17)+Tn(0,114,'Ponte a cubierto',12,700,{fill:'#fff'});
+  if(cx>0)ph+=G(0,30,EZ.back(cl(cx*1.4)),-8,Rc(-80,-22,160,44,'#fff',8,OL(3,K.green))+Tn(0,8,'CANCELADA',20,800,{fill:K.green,ls:.08}),cl(cx*3));
+  return s+G(sh,0,1,sh*.6,ph);}
+/* Comparación de energía entre dos magnitudes: cubos con lado ∝ raíz cúbica de la energía · o={a,b,ratio,p (0-1 crecimiento)} */
+function energyCubesS(o={}){const p=o.p??1,ratio=o.ratio||32000,side=Math.cbrt(ratio),s0=8,S1=s0*lerp(1,side,EZ.out(p));
+  const cube=(x,z,c1,c2,c3)=>{const d=z*.42;return P(`M${x} 0 L${x+z} 0 L${x+z} ${-z} L${x} ${-z}Z`,`fill:${c1};${OL(2)}`)+P(`M${x} ${-z} L${x+d} ${-z-d} L${x+z+d} ${-z-d} L${x+z} ${-z}Z`,`fill:${c2};${OL(2)}`)+P(`M${x+z} 0 L${x+z+d} ${-d} L${x+z+d} ${-z-d} L${x+z} ${-z}Z`,`fill:${c3};${OL(2)}`);};
+  let s=cube(-150,s0,'#ffd23f','#fff0a8','#e0a910')+G(-146,26,1,0,Tn(0,0,o.a||'M 6,9',16,800));
+  s+=cube(-90,S1,'#ff5a7a','#ffb1c1','#c41f4e')+G(-90+S1/2,26,1,0,Tn(0,0,o.b||'M 9,9',16,800));
+  return s;}
+/* Tren bala de perfil (morro largo, genérico, sin logotipos) · o={T,c,stop (0-1 parado)} · mira a la derecha */
+function bulletTrainS(o={}){const c=o.c||'#2a37d7';let s=shadowE(-60,4,290,.14);
+  const car=(x,nose)=>nose?P(`M${x} -60 L${x+120} -60 Q${x+200} -56 ${x+226} -12 L${x+226} 0 L${x} 0Z`,`fill:#f7f7f7;${OL(2.4)}`)+P(`M${x+120} -54 Q${x+168} -50 ${x+188} -30 L${x+140} -30Z`,'fill:#16181d;'+OL(1.6)):Rc(x,-60,150,60,'#f7f7f7',6,OL(2.4));
+  s+=car(-330,0)+car(-176,0)+car(-22,1);
+  s+=Rc(-330,-22,556,7,c)+Rc(-330,-12,556,3,c);
+  for(let i=0;i<10;i++){const x=-318+i*30;if(x<-24||x>-10)s+=Rc(x+(x>-22?10:0),-48,18,14,'#bcd3f0',3,OL(1.2));}
+  [-300,-216,-146,-62,8,92].forEach(x=>s+=Ci(x,2,8,K.ink));
+  s+=P('M-340 -70 L250 -70',ST('#888',1.6,'stroke-dasharray:3 10'));
+  return s;}
+/* Corte de la corteza con hipocentro profundo · o={depth (km),p (0-1)} */
+function depthCutS(o={}){const w=400,h=260,d=o.depth||140,p=o.p??1,yh=-h/2+40+(h-60)*Math.min(1,d/180);let s=Rc(-w/2,-h/2,w,40,'#bcd3f0')+Rc(-w/2,-h/2+40,w,h-40,'url(#gMUD)');
+  s+=P(`M${-w/2} ${-h/2+40} L${w/2} ${-h/2+40}`,ST(K.ink,2.4))+Rc(-w/2,-h/2,w,h,'none',14,OL(2.4));
+  s+=DR(`M60 ${-h/2+40} L60 ${f1(yh)}`,ST('#fff',2.4,'stroke-dasharray:6 6'),EZ.io(p));
+  if(p>.9){for(let i=0;i<3;i++){const q=((o.T||0)*1.2+i/3)%1;s+=Ci(60,yh,10+q*80,'none',`stroke:${K.red};stroke-width:3;opacity:${f2(1-q)}`);}s+=G(60,yh,1,(o.T||0)*90,spark4(12,K.red));}
+  s+=G(-60,f1(yh),1,0,pill((o.label||(d+' km')),{sz:13,w:800}),cl((p-.6)*3));
+  return s;}
+/* Escudo de ciberseguridad con candado y check · o={} */
+function shieldS(o={}){return P('M0 -110 L90 -76 L90 -10 Q90 70 0 110 Q-90 70 -90 -10 L-90 -76Z','fill:url(#gWA);'+OL(3))+P('M0 -92 L72 -64 L72 -12 Q72 54 0 88Z','fill:#fff;opacity:.12')+
+  Rc(-30,-14,60,48,'#fff',8,OL(2.4))+P('M-18 -14 L-18 -32 Q-18 -52 0 -52 Q18 -52 18 -32 L18 -14',ST('#fff',7))+P('M-18 -14 L-18 -32 Q-18 -52 0 -52 Q18 -52 18 -32 L18 -14',ST(K.ink,2.4,'fill:none'))+Ci(0,6,6,K.ink)+Rc(-2.5,6,5,14,K.ink,2);}
+NX.eew=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,eewPhoneS(Object.assign({T:lt},o)));
+NX.energy=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,energyCubesS(Object.assign({},o,{p:EZ.io(sg(lt,.4,2.2))})));
+NX.bullettrain=(o={},lt)=>{const q=o.stop?EZ.out(sg(lt,0,1.4)):sg(lt,0,o.dur||2.4);return G(o.stop?lerp(-160,60,q):lerp(-520,520,q),0,.8,0,bulletTrainS(o));};
+NX.shield=(o={},lt)=>{let s=G(0,0,_ap(lt,0,.4),0,shieldS(o));for(let i=0;i<2;i++){const q=((lt*.9)+i/2)%1;s+=Ci(0,0,110+q*90,'none',`stroke:#2a37d7;stroke-width:3;opacity:${f2((1-q)*.5)}`);}return s;};
+NX.depth=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,depthCutS(Object.assign({T:lt,p:sg(lt,.3,1.3)},o)));
+NX_CATALOG.push(
+ ['eew · Móvil con alerta de terremoto',(lt)=>NX.eew({cancel:sg(lt,1.6,2.0),buzz:1-sg(lt,1.5,1.8)},lt)],
+ ['energy · Energía de dos terremotos',(lt)=>G(40,60,1,0,NX.energy({},lt))],
+ ['bullettrain · Tren bala',(lt)=>NX.bullettrain({},lt)],
+ ['depth · Profundidad del hipocentro',(lt)=>NX.depth({depth:140},lt)],
+ ['shield · Ciberseguridad (escudo)',(lt)=>NX.shield({},lt)]);
