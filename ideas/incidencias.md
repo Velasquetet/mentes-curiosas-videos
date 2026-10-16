@@ -25,3 +25,9 @@
 - Publicada la noticia de la falsa alerta de terremoto M9,9 en Japón (vídeo de 1:20, publicado a las 18:50). Fuentes: NHK, Kyodo, BNO News, SBS, USGS. Huracán Trudy sigue sin tocar tierra.
 - Diario de hoy (reptiles) salió a las 18:32 (estado actualizado a «publicado»).
 - Nota técnica: `audio.py` (filtro svf_sweep en Python puro) tarda varios minutos si se ejecuta a la vez que el render; lanzarlo en segundo plano.
+
+## 2026-10-16 20:55 · Tarea de noticias (revisión de las 20:00)
+- La lectura web siguió sin poder abrir es.euronews.com (permiso no concedido a tiempo); revisado vía buscador, boletines de Euronews (tarde/noche) y euronews.com/just-in.
+- Publicada la noticia de las inundaciones de Estambul, las peores en más de 80 años (vídeo de 1:28, publicado a las 20:54). Fuentes: AP, Xinhua, Anadolu (Daily Sabah), Euronews. Cifras de víctimas marcadas como provisionales.
+- Diario de hoy (reptiles) ya publicado a las 18:32; no hacía falta recuperación.
+- Nota: el render (2 procesos) tardó ~30 min para 88 s; conviene lanzarlo en cuanto la revisión de fotogramas esté hecha.
