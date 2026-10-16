@@ -591,3 +591,15 @@ NX_CATALOG.push(
  ['streetflood · Riada en una calle en cuesta',(lt)=>NX.streetflood({},lt%3.6)],
  ['runoff · Suelo frente a asfalto',(lt)=>G(0,40,1,0,NX.runoff({},lt))],
  ['raingauge · Pluviómetro',(lt)=>G(0,120,1,0,NX.raingauge({p:.8,label:'48 horas'},lt))]);
+
+/* ---------------- malvasía cabeciblanca (17/10) ---------------- */
+NX.duck=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,duckS(Object.assign({T:lt},o)));
+NX.bigegg=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,G(-70,0,.62,0,duckS({T:lt,kind:'hembra',tail:.3}))+G(80,0,.62*_ap(lt,.4,.4),0,bigEggS({glow:bel(lt%2,.6,1.6)})));
+NX.larva=(o={},lt)=>G(0,0,_ap(lt,0,.4)*(o.s||1),0,midgeLarvaS(lt,0,o));
+NX.structblue=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,structBlueS({T:lt,p:EZ.io(sg(lt,.2,1.0)),out:EZ.io(sg(lt,1.1,1.7))}));
+NX_CATALOG.push(
+ ['duck · Malvasía cabeciblanca (pico azul, cola tiesa)',(lt)=>G(0,80,1.3,0,NX.duck({bill:.5+.5*Math.sin(lt*2),tail:.5+.5*Math.sin(lt*1.4)},lt))],
+ ['duck · Malvasía canela / híbrido / hembra',(lt)=>G(-150,80,.8,0,NX.duck({kind:'canela'},lt))+G(0,80,.8,0,NX.duck({kind:'hibrido'},lt))+G(150,80,.8,0,NX.duck({kind:'hembra'},lt))],
+ ['bigegg · Hembra y su huevo enorme',(lt)=>G(0,100,1.4,0,NX.bigegg({},lt))],
+ ['larva · Larva de quironómido',(lt)=>G(0,0,3,0,NX.larva({},lt))],
+ ['structblue · Color estructural (azul sin pigmento)',(lt)=>G(0,80,1,0,NX.structblue({},lt))]);

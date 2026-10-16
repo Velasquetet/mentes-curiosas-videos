@@ -426,3 +426,65 @@ function stopwatchS(o={}){const p=o.p||0;let s=Rc(-10,-92,20,16,K.ink,4)+Ci(0,-8
   for(let i=0;i<12;i++){const a=i*Math.PI/6;s+=P(`M${f1(Math.sin(a)*56)} ${f1(-8-Math.cos(a)*56)} L${f1(Math.sin(a)*62)} ${f1(-8-Math.cos(a)*62)}`,ST(K.ink,2.4));}
   const a=p*2*Math.PI;s+=P(`M0 -8 L${f1(Math.sin(a)*50)} ${f1(-8-Math.cos(a)*50)}`,ST(K.pink,4))+Ci(0,-8,6,K.ink);
   if(o.txt)s+=G(0,30,1,0,pill(o.txt,{sz:15,w:800,fill:'url(#gRP)'}));return s;}
+
+/* ===== malvasía cabeciblanca y compañía (17/10) ===== */
+/* Pato de cola tiesa de perfil, mirando a la derecha; y=0 = línea de flotación.
+   o={T, kind:'malvasia'|'canela'|'hibrido'|'hembra', bill 0..1 (gris→azul), tail 0..1 (cola levantada),
+      swim 0..1 (balanceo), feet 0..1 (patas remando bajo el agua), open 0..1 (pico), look -1..1, puff 0..1 (cuello hinchado)} */
+function duckS(o={}){const T=o.T||0,kd=o.kind||'malvasia',bq=cl(o.bill??1),tq=cl(o.tail??.5),sw=o.swim??1,op=cl(o.open||0),pf=cl(o.puff||0);
+  const fem=kd==='hembra';
+  const body=fem?'#8a6a4c':kd==='canela'?'#b8532a':kd==='hibrido'?'#a8583a':'#b5592f',back=fem?'#6a4f37':kd==='canela'?'#8f3a1c':'#8a4426',
+    head='#fbfbf7',cap='#1a1513',neck=fem?'#6a4f37':'#1a1513';
+  const billC=fem?'#4a4440':mixc('#8b9097','#3fb4ff',bq),billD=fem?'#2f2a27':mixc('#62666c','#1f82d6',bq);
+  const bob=Math.sin(T*2.2)*2*sw,rock=Math.sin(T*1.6)*1.6*sw;let s='';
+  /* patas remando (bajo el agua) */
+  if(o.feet>0){const fq=cl(o.feet);for(let i=0;i<2;i++){const ph=T*9+i*Math.PI,a=Math.sin(ph)*28;
+    s+=G(-34+i*16,6,1,a,P('M0 0 L-6 30',ST(K.ink,6))+P('M0 0 L-6 30',ST('#5d6470',3.4))+G(-6,30,1,0,P('M0 0 L-22 -2 L-24 8 L-14 12 L-4 8Z',`fill:#5d6470;${OL(1.6)}`)),fq);}}
+  /* cola tiesa: abanico de plumas rígidas */
+  const ta=lerp(10,62,tq);let tail='';for(let i=0;i<7;i++){const a=(i-3)*7;tail+=G(0,0,1,a,P('M0 -3 L-66 -5 Q-72 0 -66 5 L0 3Z',`fill:${i%2?back:'#4a2a1a'};${OL(1.6)}`));}
+  s+=G(-92,-30,1,ta,tail);
+  /* cuerpo */
+  s+=P('M-100 -26 Q-104 -6 -86 0 L60 0 Q96 -8 92 -44 Q86 -70 50 -72 Q-20 -76 -70 -58 Q-98 -46 -100 -26Z',`fill:${body};${OL(2.4)}`);
+  s+=clipG(P('M-90 -40 Q-30 -66 40 -62 Q70 -60 80 -50 L80 -90 L-110 -90Z',`fill:${back}`)+
+    P('M-70 -30 q20 -8 40 0 M-40 -18 q20 -8 40 0 M-10 -34 q20 -8 40 0',ST(back,2.6,'opacity:.8'))+P('M-80 -6 Q0 -2 70 -8',ST('#fff',3,'opacity:.18')),
+    '<path d="M-100 -26 Q-104 -6 -86 0 L60 0 Q96 -8 92 -44 Q86 -70 50 -72 Q-20 -76 -70 -58 Q-98 -46 -100 -26Z"/>');
+  /* ala */
+  s+=P('M-60 -44 Q-10 -60 40 -46 Q10 -26 -54 -26Z',`fill:${back};${OL(1.8)}`)+P('M-40 -40 Q0 -48 26 -42',ST('#3a2216',1.6,'opacity:.6'));
+  /* cuello */
+  const nx=74,ny=-60;s+=P(`M50 -60 Q${54-pf*6} -96 ${nx} -104 L${nx+22} -100 Q${96+pf*8} -76 88 -44Z`,`fill:${neck};${OL(2.2)}`);
+  if(pf>0)s+=El(80,-70,16+10*pf,14+6*pf,neck,OL(2));
+  /* cabeza */
+  const hx=86,hy=-118;
+  s+=G(hx,hy,1,0,(()=>{let h=Ci(0,0,30,fem?'#8a6a4c':head,OL(2.4));
+    if(kd==='malvasia')h+=clipG(P('M-40 -40 L40 -40 L40 -14 Q20 -24 0 -22 Q-20 -18 -40 -6Z',`fill:${cap}`),'<circle cx="0" cy="0" r="30"/>');
+    else if(kd==='canela')h+=clipG(P('M-40 -40 L40 -40 L40 -2 Q24 -6 14 -8 Q4 -10 -6 -2 Q-24 12 -40 18Z',`fill:${cap}`),'<circle cx="0" cy="0" r="30"/>');
+    else if(kd==='hibrido')h+=clipG(P('M-40 -40 L40 -40 L40 -8 Q20 -14 4 -14 Q-16 -10 -40 6Z',`fill:${cap}`)+El(-4,8,14,9,'#2a2320','opacity:.55'),'<circle cx="0" cy="0" r="30"/>');
+    else h+=clipG(P('M-40 -40 L40 -40 L40 -10 Q0 -18 -40 -4Z',`fill:#3a2a1e`)+P('M-30 10 Q0 2 34 6',ST('#3a2a1e',5)),'<circle cx="0" cy="0" r="30"/>')+P('M-28 0 Q0 -6 30 -2',ST('#d8c8a8',4));
+    h+=Ci(30-8,-2,30,'none','opacity:0')+P('M-30 0 A30 30 0 0 1 30 0',ST('#fff',0));
+    /* pico ancho e hinchado en la base */
+    const lk=(o.look||0)*1.5;
+    h+=G(22,4,1.25,0,P(`M0 -14 Q14 -22 26 -10 Q36 -6 42 -2 Q44 4 38 6 L4 8 Q-4 0 0 -14Z`,`fill:${billC};${OL(2.2)}`)+
+      G(4,6,1,op*18,P('M0 0 L36 0 Q40 6 32 9 L2 8Z',`fill:${billD};${OL(1.8)}`))+P('M30 -7 q4 -2 8 1',ST('#fff',1.8,`opacity:${f2(.4+.4*bq)}`))+(bq>.6&&!fem?P('M8 -14 Q18 -18 24 -12',ST('#bdeaff',2.2,`opacity:${f2(sg(bq,.6,1)*.8)}`)):''));
+    h+=Ci(12+lk,-6,4.6,K.ink)+Ci(13.4+lk,-7.4,1.5,'#fff');
+    if(kd!=='malvasia'&&kd!=='hembra')h+=P('M2 -2 Q12 -12 22 -4',ST('#fff',1.4,'opacity:.0'));
+    return h;})());
+  return G(-8,bob,1,rock,s);}
+/* Huevo enorme junto a la hembra (comparativa de proporción) */
+function bigEggS(o={}){const g=o.glow||0;return shadowE(0,2,46,.16)+El(0,-58,44,58,'#f3efe4',OL(2.4))+El(-14,-80,10,16,'#fff','opacity:.6')+(g>0?El(0,-58,52,66,'none',`stroke:${K.yellow};stroke-width:4;opacity:${f2(g)}`):'');}
+/* Larva de quironómido (gusanito rojo que se retuerce) */
+function midgeLarvaS(T=0,ph=0,o={}){const n=11,c=o.c||'#d8282f',cd=o.cd||'#a01820';let d='';const pts=[];
+  for(let i=0;i<n;i++){const x=(i-(n-1)/2)*7,y=Math.sin(T*6+ph+i*.7)*6*(i/n+.3);pts.push([x,y]);}
+  pts.forEach(([x,y],i)=>d+=(i?' L':'M')+f1(x)+' '+f1(y));
+  let s=P(d,ST(K.ink,9))+P(d,ST(c,6));for(let i=1;i<n-1;i+=2){const [x,y]=pts[i];s+=P(`M${f1(x)} ${f1(y-3)} l0 6`,ST(cd,1.4));}
+  const [hx,hy]=pts[n-1];s+=Ci(hx+2,hy,4.6,'#5a1210',OL(1.2));return s;}
+/* Color estructural: sección del pico (queratina con nanoestructura) que devuelve solo el azul
+   o={p 0..1 llegada de la luz, out 0..1 salida azul, T} */
+function structBlueS(o={}){const p=cl(o.p??1),q=cl(o.out??1),T=o.T||0;let s='';
+  s+=Rc(-200,0,400,120,'#f0d9c4',10,OL(2.4))+Tn(-186,108,'tejido vivo',11,700,{a:'start',fill:'#8a6a52'});
+  s+=Rc(-200,-46,400,52,'rgba(200,225,240,.55)',8,OL(2.4))+Tn(-186,-52,'QUERATINA',11,800,{a:'start',fill:K.ink,ls:.08});
+  for(let r=0;r<3;r++)for(let i=0;i<22;i++){const x=-188+i*18+(r%2)*9,y=-36+r*14;s+=Ci(x,y,4.4,'#8fb7d3',`stroke:#5e8fb3;stroke-width:1`);}
+  const cols=['#ff4b4b','#ff9f2e','#ffe14a','#4fd16a','#3fb4ff','#8a5cff'];
+  cols.forEach((c,i)=>{const x0=-170+i*16,y0=-230;s+=DR(`M${x0} ${y0} L${x0+70} -48`,ST(c,4),p);});
+  if(p>=1){cols.forEach((c,i)=>{if(i===4)return;const x=-100+i*16;s+=Ci(x,-36,8,'none',`stroke:${c};stroke-width:2;opacity:${f2(.6*(1-((T*2+i*.2)%1)))}`);});}
+  s+=DR('M-10 -48 L110 -230',ST('#3fb4ff',8),q)+(q>.95?G(110,-230,1,-55,P('M-10 -12 L10 0 L-10 12',ST('#3fb4ff',6))):'');
+  return s;}
