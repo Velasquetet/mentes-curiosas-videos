@@ -122,6 +122,13 @@ function compose(t){
       const fx=tr.fx||270,fy=tr.fy||480,r=lerp(tr.r0||10,1150,EZ.in2(p));
       return A+clipG(BG()+B,`<circle cx="${f1(fx)}" cy="${f1(fy)}" r="${f1(r)}"/>`)+Ci(fx,fy,r,'none',`stroke:#fff;stroke-width:${f1(10*(1-p))};opacity:${f2(1-p)}`);}
     case 'fade':return A+G(0,0,1,0,BG()+B,EZ.io(p));
+    case 'glitch':{ // corte con interferencia (franjas desplazadas y separación de color), como en la referencia
+      const on=p<.5?A:BG()+B,k=Math.sin(Math.PI*p);let out=G(0,0,1,0,on);
+      const n=6;for(let i=0;i<n;i++){const y=Math.floor(hs(i*7+Math.floor(p*12))*H),h=8+hs(i+Math.floor(p*12))*60,dx=(hs(i*3+Math.floor(p*20))-.5)*120*k;
+        out+=clipG(G(dx,0,1,0,on),Rc(0,y,W,h,'#000'));}
+      out+=Rc(0,0,W,H,'#ff2e63',0,`opacity:${f2(.12*k)};mix-blend-mode:screen`)+G(6*k,0,1,0,Rc(0,0,W,H,'#2a37d7',0,`opacity:${f2(.08*k)}`));
+      for(let i=0;i<4;i++)out+=Rc(0,hs(i+Math.floor(p*30))*H,W,2+hs(i)*3,i%2?'#fff':'#141212',0,`opacity:${f2(.5*k)}`);
+      return out;}
     case 'swap':return G(0,0,1,0,A,1-EZ.out(sg(p,0,.6)))+G(0,0,1,0,B,EZ.out(sg(p,.3,1)));
   }
   return B;

@@ -63,3 +63,16 @@ Muestrario completo: `motor/newsgal.js` (vídeo `catalogo_noticias.mp4`).
 Las opciones de cada uno están en el comentario encima de su definición en `news2.js`. Los recursos nuevos de cada vídeo pueden ir en `news.js` o en `news2.js` (con su `n2cat(...)`).
 
 Regla (indicación del usuario): **no escatimar en recursos nuevos**. En cada noticia y cada vídeo diario se crean siempre que sea posible recursos nuevos hechos a medida (objetos, lugares, animales, gráficos, escenas) y **se añaden a la biblioteca** (`news.js` o `fauna.js`/`land.js`) con su entrada en el catálogo, para que la galería crezca con cada vídeo.
+
+## Lo aprendido de 5 vídeos de referencia más (17/10/2026)
+Analizados fotograma a fotograma (Luis XIV y la fístula, fraude electoral, el gato de Schrödinger, acuerdos electorales, acampada). Qué copiar:
+- **Reparto propio en cada vídeo**: los protagonistas son personajes hechos para la historia (rey, cirujano, científico, ladrón, médicos, cardenales…), con cabeza redonda de color plano, ojos de punto, cuerpo en bloque, piernas cortas, manos flotantes y **sin contorno**, con su nombre en una pastilla. → `figure()` y `CAST_PRESETS` en `cast.js`, `NX.cast`, `NX.lineup`, `NX.pyramid`. Grano, Pipa, Lenteja y Garbanzo pueden seguir apareciendo como apoyo, pero la historia la cuentan sus protagonistas.
+- **Un animal recurrente** con gracia (el gato): `catS()` / `NX.cat` (feliz, dormido, «muerto» con aureola).
+- **Escenarios dibujados a línea** fina negra sobre gris (palacios con ventanas en arco, estanterías, oficinas, calles) con líneas de suelo en perspectiva: `roomS()` / `NX.room`.
+- **Cámara dentro del mismo escenario**: en vez de muchas escenas sueltas, la cámara se acerca y se aleja dentro de un mismo «set» (del palacio a la peluca, de la peluca al armario) y solo cambia de escenario con barridos, zoom o **corte con interferencia** (`in:{type:'glitch'}`).
+- **Recursos de explicación**: rejilla de tarjetas que se rellena («había:» → `NX.cardgrid`), suma de tarjetas = resultado (`NX.cardsum`), tarjetas tachadas sobre negro («no es esto, no es aquello» → `NX.negate`), expedientes con sellos (`NX.dossier`), pizarra con recuento (`NX.tally`), plano técnico azul con cotas (`NX.blueprint`, `dimS()`), telón que se abre con cartel (`NX.curtain`), año gigante con rayas (`NX.bigyear`), columnas que crecen hasta el cielo para comparar (`NX.pillar`), cotas para comparar tamaños (`dimS`), bocadillos con texto que se escribe (`NX.bubble`, `NX.chatter`), cita tachada (`NX.strikequote`), piezas de puzle (`NX.puzzle`), reloj de arena, ovillo, nube de pensamiento, manos gigantes.
+- **Golpes de efecto**: pantalla negra con «Y *no.*» en grande (`NX.punch`) y foco sobre negro para presentar a alguien (`NX.spot`). Úsalos 1–2 veces por vídeo, en los giros.
+- **Fondo de rayas grises** (`stripesBg`) y de cuadrícula (`gridBg`) para las escenas de explicación.
+- **Tono**: frases cortas, humor, se habla al espectador («Tú verás», «Tranquilos», «¿Veis el problema?»), un giro cada pocos segundos. La referencia usa tacos; nosotros no (salvo que el usuario lo pida).
+- **Gancho**: empiezan con una pregunta provocadora o una afirmación rotunda («¿Quieres hacer fraude electoral?», «El experimento más famoso de la física…») y en 2–3 s ya hay un personaje haciendo algo.
+
