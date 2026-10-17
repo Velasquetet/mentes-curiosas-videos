@@ -66,7 +66,11 @@ Regla (indicación del usuario): **no escatimar en recursos nuevos**. En cada no
 
 ## Lo aprendido de 5 vídeos de referencia más (17/10/2026)
 Analizados fotograma a fotograma (Luis XIV y la fístula, fraude electoral, el gato de Schrödinger, acuerdos electorales, acampada). Qué copiar:
-- **Reparto propio en cada vídeo**: los protagonistas son personajes hechos para la historia (rey, cirujano, científico, ladrón, médicos, cardenales…), con cabeza redonda de color plano, ojos de punto, cuerpo en bloque, piernas cortas, manos flotantes y **sin contorno**, con su nombre en una pastilla. → `figure()` y `CAST_PRESETS` en `cast.js`, `NX.cast`, `NX.lineup`, `NX.pyramid`. Grano, Pipa, Lenteja y Garbanzo pueden seguir apareciendo como apoyo, pero la historia la cuentan sus protagonistas.
+- **Reparto (decisión del usuario, 17/10)**:
+  - **Protagonistas**: siempre Grano, Pipa, Lenteja y Garbanzo.
+  - **Secundarios** (público, gente, extras, «un cirujano», «un votante»…): bolas y formas geométricas de color con cara simple → `blobS()`, `blobCrowd()`, `NX.extras`, `NX.lineup`, `NX.pyramid`.
+  - **Protagonistas invitados** (personas reales de la noticia o de la historia: Napoleón, Pedro Sánchez, Donald Trump…): estilo `figure()` pero **parecidos a la persona real** (peinado, color de pelo, barba, ropa típica, sombrero) → `FAMOSOS` y `famoso('clave')` en `cast.js`, `NX.cast(famoso('trump'),lt)`. Si sale alguien que no está, se crea su entrada en `FAMOSOS` copiando sus rasgos reconocibles y se añade al catálogo.
+  - Reglas con personas reales: aspecto reconocible y respetuoso (sin burlarse del físico), el mismo trato para todos los políticos y **nunca** ponerles frases que no hayan dicho (solo citas reales, con fuente).
 - **Un animal recurrente** con gracia (el gato): `catS()` / `NX.cat` (feliz, dormido, «muerto» con aureola).
 - **Escenarios dibujados a línea** fina negra sobre gris (palacios con ventanas en arco, estanterías, oficinas, calles) con líneas de suelo en perspectiva: `roomS()` / `NX.room`.
 - **Cámara dentro del mismo escenario**: en vez de muchas escenas sueltas, la cámara se acerca y se aleja dentro de un mismo «set» (del palacio a la peluca, de la peluca al armario) y solo cambia de escenario con barridos, zoom o **corte con interferencia** (`in:{type:'glitch'}`).

@@ -28,14 +28,16 @@ NX.room=(o={},lt)=>G(-270,-480,1,0,roomS(o.type||'palace',o),_ao(lt,0,.4));
 tcat('room · Fondos de línea (biblioteca, palacio, oficina…)',lt=>{const ty=['library','palace','office','classroom','street'][Math.floor(lt/2)%5];return G(0,-40,1,0,NX.room({type:ty},1));},'');
 /* Personaje del reparto con aparición y nombre · o: opciones de figure() o {preset} */
 NX.cast=(o={},lt)=>{const base=o.preset?Object.assign({},CAST_PRESETS[o.preset],o):o;const p=EZ.back(sg(lt,0,.4));return G(0,0,p,0,figure(Object.assign({},base,{T:lt,s:base.s||1.4})));};
-tcat('cast · Personajes a medida (figure)',lt=>{const ks=Object.keys(CAST_PRESETS),k=ks[Math.floor(lt/1.2)%ks.length];return G(0,180,1,0,NX.cast({preset:k},lt%1.2+.4));});
+tcat('cast · Famosos (protagonistas invitados)',lt=>{const ks=Object.keys(FAMOSOS),k=ks[Math.floor(lt/1.2)%ks.length];return G(0,180,1,0,NX.cast(famoso(k),lt%1.2+.4));});
+NX.extras=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,blobCrowd(Object.assign({T:lt},o)));
+tcat('extras · Secundarios (bolas de color)',lt=>G(0,120,1.1,0,NX.extras({n:8,rows:2},lt)));
 NX.cat=(o={},lt)=>G(0,0,EZ.back(sg(lt,0,.4)),0,catS(Object.assign({T:lt,s:1.6},o)));
 tcat('cat · Gato',lt=>G(0,160,1,0,NX.cat({emo:lt%4>2?'dead':'happy'},lt)));
 /* Pirámide social / jerarquía con gente en pisos · o:{tiers:[n,…], top:svg} */
 NX.pyramid=(o={},lt)=>{const tiers=o.tiers||[1,3,5,7],H=90;let s='';const n=tiers.length;
   tiers.forEach((k,i)=>{const w=120+i*110,y=-((n-i)*H),p=_ao(lt,.1+i*.15,.3);s+=G(0,0,1,0,P(`M${-w/2} ${y+H} L${-w/2+14} ${y} L${w/2-14} ${y} L${w/2} ${y+H}`,ST('#141212',2.4))+P(`M${-w/2-10} ${y+H} L${w/2+10} ${y+H}`,ST('#141212',2.4)),p);
     for(let j=0;j<k;j++){const x=(j-(k-1)/2)*Math.min(70,(w-40)/Math.max(1,k)),q=_ap(lt,.3+i*.15+j*.04,.3);if(q<=0)continue;const pr=i===0&&o.top?null:{skin:['amarillo','rosa','naranja','lila','claro'][(i+j)%5],hair:['short','curly','bun','none','side'][(j+i*2)%5],c:['#2a37d7','#e73568','#f6a81a','#3f9b4f','#8005f0','#141212'][(i*3+j)%6],body:i===0?'cape':'suit',hat:i===0?'crown':(i===1&&j%2?'cardinal':undefined),emo:i===n-1?'worried':'happy'};
-      s+=G(x,y+H-4,q*(.42+i*.02),0,o.top&&i===0?o.top:figure(Object.assign({T:lt,ph:i*3+j,shadow:false},pr)));}});
+      s+=G(x,y+H-4,q*(.62+i*.02),0,o.top&&i===0?o.top:(i===0?figure(Object.assign({T:lt,s:.7,shadow:false},FAMOSOS.luis14,{name:undefined})):blobS({T:lt,ph:i*3+j,emo:i===n-1?'worried':'happy',acc:j%3===0?[['glasses','cap','hat','bow'][(i+j)%4]]:[]})));}});
   return G(0,n*H/2,1,0,s);};
 tcat('pyramid · Pirámide social',lt=>G(0,60,1,0,NX.pyramid({},lt)));
 /* Rejilla de tarjetas que se van rellenando («había:») · o:{cards:[[texto,svg]],cols,step} */
@@ -48,7 +50,7 @@ NX.cardgrid=(o={},lt)=>{const cards=o.cards||[['símbolos',G(0,0,.5,0,NX.flag({c
   return s;};
 tcat('cardgrid · Rejilla de tarjetas',lt=>NX.cardgrid({title:'había:'},lt));
 /* Suma de tarjetas = resultado («si… ? + ? = cirugía») · o:{cards:[[texto,svg]],result} */
-NX.cardsum=(o={},lt)=>{const cards=o.cards||[['un cirujano',G(0,10,.4,0,figure(CAST_PRESETS.cirujano))],['un bisturí',P('M-50 10 L40 -10 L50 -4 L-40 14Z','fill:#d6dbe2;'+OL(2))],['el paciente',G(0,10,.4,0,figure(CAST_PRESETS.rey))],['¡sigue vivo!',P(heartPath(0,0,30),'fill:#ff3b5b')]],n=cards.length,st=o.step||.6;let s='';
+NX.cardsum=(o={},lt)=>{const cards=o.cards||[['un cirujano',G(0,40,.7,0,blobS({ph:3,acc:['hat']}))],['un bisturí',P('M-50 10 L40 -10 L50 -4 L-40 14Z','fill:#d6dbe2;'+OL(2))],['el paciente',G(0,40,.36,0,figure(famoso('luis14',{name:undefined})))],['¡sigue vivo!',P(heartPath(0,0,30),'fill:#ff3b5b')]],n=cards.length,st=o.step||.6;let s='';
   cards.forEach((c,i)=>{const x=(i%2-.5)*200,y=Math.floor(i/2)*190-200,p=sg(lt,.2+i*st,.55+i*st);s+=Rc(x-88,y-80,176,160,'none',10,_dash('rgba(20,18,18,.45)',2))+Tn(x,y+8,'?',30,500,{fill:'rgba(20,18,18,.3)'});if(p>0)s+=G(x,y,EZ.back(p)*.9,(1-p)*10,cardS(c[0],c[1],{w:180,h:165,bg:'#fff4e6'}));
     if(i<n-1)s+=G(i%2===0?0:-100,i%2===0?y:y+95,_ap(lt,.4+i*st,.25),0,Ci(0,0,14,'url(#gRP)',OL(1.6,'#fff'))+Tn(0,6,'+',18,800,{fill:'#fff'}));});
   const rt=.4+n*st;if(lt>rt){s+=G(0,190,1,0,Rc(-24,-16,48,10,'url(#gRP)',4)+Rc(-24,0,48,10,'url(#gRP)',4),_ao(lt,rt,.3));
@@ -86,7 +88,7 @@ NX.blueprint=(o={},lt)=>{const w=o.w||460,h=o.h||560;let s=Rc(-w/2,-h/2,w,h,'#1b
 tcat('blueprint · Plano técnico',lt=>NX.blueprint({title:'instrumental'},lt));
 /* Telón que se abre con cartel (gran revelación) · o:{title,it,sub} */
 NX.curtain=(o={},lt)=>{const op=EZ.io(sg(lt,.3,1.3));let s=Rc(-230,-300,460,560,'#2a37d7',4)+P('M-60 -300 L-160 260 L160 260 L60 -300Z','fill:rgba(255,255,255,.12)');
-  s+=G(0,-20,_ap(lt,1.0,.45),0,Rc(-130,-170,260,330,'#fff8ea',4,'stroke:#c9a24a;stroke-width:10')+Ci(0,-80,52,'#2a37d7',OL(2))+G(0,-60,.4,0,figure(CAST_PRESETS.rey))+Ts(0,50,o.title||'La',34)+Ts(0,96,o.it||'Gran Operación',38,{it:true,fill:'url(#gRP)',stroke:'url(#gRP)'})+Tn(0,140,o.sub||'Versalles · 1686',12,600,{fill:'#777'}));
+  s+=G(0,-20,_ap(lt,1.0,.45),0,Rc(-130,-170,260,330,'#fff8ea',4,'stroke:#c9a24a;stroke-width:10')+Ci(0,-80,52,'#2a37d7',OL(2))+G(0,-60,.4,0,figure(famoso('luis14',{name:undefined})))+Ts(0,50,o.title||'La',34)+Ts(0,96,o.it||'Gran Operación',38,{it:true,fill:'url(#gRP)',stroke:'url(#gRP)'})+Tn(0,140,o.sub||'Versalles · 1686',12,600,{fill:'#777'}));
   for(const d of[-1,1]){const x=d*lerp(0,200,op);let fold='';for(let i=0;i<6;i++)fold+=P(`M${d*(i*22)} -300 Q${d*(i*22+10)} 0 ${d*(i*22)} 260`,ST('rgba(0,0,0,.18)',3));s+=G(x,0,1,0,P(`M0 -300 L${d*240} -300 L${d*240} 260 L0 260 Q${d*20} 0 0 -300Z`,'fill:#e2264a')+fold);}
   s+=Rc(-240,-320,480,40,'#c9a24a',6,OL(2))+Rc(-250,260,500,30,'#7d4a2a',3,OL(2));
   for(let i=0;i<14;i++)s+=Ci(-230+i*35,320,22,'#0d0b0c');
@@ -102,7 +104,7 @@ tcat('bigyear · Año gigante',lt=>NX.bigyear({},lt));
 /* Columna/pedestal que crece hasta el cielo (comparar prestigio, precios…) · o:{items:[[etiqueta,altura,color]],sky} */
 NX.pillar=(o={},lt)=>{const it=o.items||[['médicos',420,'url(#gOR)'],['cirujanos',90,'url(#gOR)']],mx=Math.max(...it.map(x=>x[1]));let s='';
   const top=EZ.io(sg(lt,.4,1.8))*mx;if(o.sky!==false&&top>260)s+=G(0,0,1,0,Rc(-250,-520,500,300,'#2a37d7')+[[-150,-470],[60,-420],[170,-490],[-60,-380]].map(([x,y])=>G(x,y,.9,0,cloudS(90))).join(''),sg(top,260,380));
-  it.forEach(([lab,h,c],i)=>{const x=(i-(it.length-1)/2)*170,hh=Math.min(h,top);s+=Rc(x-46,-hh,92,hh,c,0,OL(2.2))+Rc(x-56,-hh-14,112,16,'#f6a81a',3,OL(2))+[...Array(Math.floor(hh/30))].map((_,k)=>P(`M${x+30} ${-k*30-15} l14 0`,ST('rgba(20,18,18,.35)',2))).join('')+G(x,-hh-40,1,0,pill(lab,{sz:12,w:700}))+G(x,-hh-14,.42,0,figure(i?CAST_PRESETS.cirujano:CAST_PRESETS.cientifico));});
+  it.forEach(([lab,h,c],i)=>{const x=(i-(it.length-1)/2)*170,hh=Math.min(h,top);s+=Rc(x-46,-hh,92,hh,c,0,OL(2.2))+Rc(x-56,-hh-14,112,16,'#f6a81a',3,OL(2))+[...Array(Math.floor(hh/30))].map((_,k)=>P(`M${x+30} ${-k*30-15} l14 0`,ST('rgba(20,18,18,.35)',2))).join('')+G(x,-hh-40,1,0,pill(lab,{sz:12,w:700}))+G(x,-hh-4,.7,0,blobS({ph:i*5+2,T:lt,acc:[i?'tuft':'hat']}));});
   return G(0,240,1,0,s+Rc(-250,0,500,14,'#141212'));};
 tcat('pillar · Columna que crece',lt=>NX.pillar({},lt));
 /* Golpe de efecto sobre negro: «Y no.» (pantalla completa) · o:{a,b} */
@@ -112,7 +114,7 @@ NX.punch=(o={},lt)=>{const p=EZ.back(sg(lt,0,.25)),a=o.a||'Y',b=o.b||'no.',sz=11
 tcat('punch · «Y no.» sobre negro',lt=>NX.punch({},lt),'full');
 /* Foco sobre negro con personaje · o:{who (preset), text} */
 NX.spot=(o={},lt)=>{const r=EZ.out(sg(lt,0,.5))*230;let s=Rc(-300,-500,600,1000,'#0d0b0c')+El(0,60,r,r*1.05,'#f4ead2')+P(`M-40 -500 L${-r*.9} 60 L${r*.9} 60 L40 -500Z`,`fill:rgba(244,234,210,${f2(.12*sg(lt,0,.5))})`);
-  s+=G(0,200,_ap(lt,.3,.35),0,figure(Object.assign({T:lt,s:1.6},CAST_PRESETS[o.who||'ladron'])));
+  s+=G(0,200,_ap(lt,.3,.35),0,o.who&&FAMOSOS[o.who]?figure(famoso(o.who,{T:lt,s:1.6})):blobS({T:lt,s:2,c:'#141212',shape:'ball',acc:['beanie'],accC:'#141212'}));
   if(o.text)s+=G(0,-300,1,0,Ts(0,0,o.text,42,{it:true,fill:'url(#gRP)',stroke:'url(#gRP)'}),_ao(lt,.5,.3));
   return s;};
 tcat('spot · Foco sobre negro',lt=>NX.spot({text:'¡Perfecto!'},lt),'');
@@ -151,7 +153,7 @@ NX.tangle=(o={},lt)=>{let s='';for(let k=0;k<3;k++){let d='';for(let i=0;i<=80;i
   return G(0,0,1,lt*8,s);};
 tcat('tangle · Lío / ovillo',lt=>NX.tangle({},lt));
 /* Nube de pensamiento con contenido · o:{inner, who} */
-NX.thought=(o={},lt)=>{let s='';const p=EZ.back(sg(lt,.3,.8));s+=G(-120,170,1,0,figure(Object.assign({T:lt,s:1.1},CAST_PRESETS[o.who||'cientifico'])));
+NX.thought=(o={},lt)=>{let s='';const p=EZ.back(sg(lt,.3,.8));s+=G(-120,170,1,0,figure(famoso(o.who||'einstein',{T:lt,s:1.1})));
   [[-80,-50,8],[-60,-80,12]].forEach(([x,y,r],i)=>s+=Ci(x,y,r*_ap(lt,.1+i*.1,.2),'#fff',OL(2)));
   const cl='M-120 0 Q-150 -40 -110 -70 Q-110 -120 -50 -116 Q-20 -160 40 -130 Q100 -150 120 -100 Q170 -80 140 -30 Q160 20 100 30 Q60 60 0 40 Q-60 60 -90 30 Q-140 30 -120 0Z';
   s+=G(60,-180,p,0,P(cl,'fill:#fff;'+OL(2.4))+G(0,-50,1,0,o.inner||G(0,40,.5,0,catS({T:lt}))));
@@ -163,7 +165,7 @@ NX.hands=(o={},lt)=>{const q=EZ.out(sg(lt,0,.6)),c=o.c||'#b526ad';let s='';
   return s;};
 tcat('hands · Manos gigantes',lt=>NX.hands({},lt));
 /* Equipo/banda de personajes en fila (la «banda», el equipo) · o:{n,presets} */
-NX.lineup=(o={},lt)=>{const ps=o.presets||['ladron','cientifico','obrero','doctora','policia'];let s='';ps.forEach((k,i)=>{const x=(i-(ps.length-1)/2)*90,p=_ap(lt,i*.12,.35);if(p>0)s+=G(x,0,p,0,figure(Object.assign({T:lt,ph:i,s:.85,acc:['sunglasses']},CAST_PRESETS[k],{name:undefined})));});
+NX.lineup=(o={},lt)=>{const n=o.n||5;let s='';for(let i=0;i<n;i++){const x=(i-(n-1)/2)*90,p=_ap(lt,i*.12,.35);if(p>0)s+=G(x,0,p,0,blobS({T:lt,ph:i*4+1,s:1.1,acc:o.acc||['glasses']}));}
   return G(0,120,1,0,s+P('M-240 0 L240 0',ST('#141212',2.4)));};
 tcat('lineup · El equipo en fila',lt=>NX.lineup({},lt));
 
