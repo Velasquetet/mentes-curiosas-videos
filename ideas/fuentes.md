@@ -19,3 +19,9 @@
 - Criterios (todos): gran impacto (mucha gente/países, histórico, ciencia/espacio, récord); confirmada por 2+ medios fiables con los mismos datos; se puede explicar en el estilo del canal; no repetida SALVO que sea una continuación con datos nuevos (actualización: se hace vídeo, enlazando con el anterior: «hace unas horas os contamos…»).
 - Antes de descartar una noticia como «solo un anuncio», comprobar si el evento ya se celebró, buscando también en inglés (Reuters vía otros medios, TechCrunch, AP…). Euronews no cubre todo: tecnología y lanzamientos virales de gran repercusión (p. ej. una presentación de Tesla o Apple) también cuentan.
 - Reglas: tono neutral sin opinión; tragedias con respeto (sin bromas ni caras graciosas de los personajes); nada de cifras provisionales como definitivas ni rumores; fuentes en el texto del post.
+
+## Lo que funciona (datos de Buffer, 16/10/2026 21:22)
+- Mejor vídeo: alerta falsa de terremoto en Japón (859 vistas, 24 likes, **16 compartidos**). Gancho cercano («¿y si tu móvil te avisa…?») y pregunta final personal («¿qué habrías hecho tú?»): la gente lo comparte.
+- Las noticias con un dato sorprendente y algo que le pueda pasar al espectador funcionan mejor que las curiosidades largas.
+- Retención media ~18–20 s en vídeos de 80–115 s: los primeros segundos deciden. El gancho debe ser una situación concreta, no un tema.
+- Reptiles: pocas vistas (94) pero la mejor retención (27 s) y engagement (11,7 %).
