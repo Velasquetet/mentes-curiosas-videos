@@ -67,7 +67,7 @@
       "fecha": "2026-10-16",
       "sale": "2026-10-17",
       "tipo": "diario",
-      "estado": "programado",
+      "estado": "publicado",
       "tema": "La malvasía cabeciblanca: el pato español del pico azul",
       "video": "videos/2026-10-17_malvasia.mp4",
       "buffer_post": "6ad2a63487c49357709edd38"
@@ -80,6 +80,15 @@
       "tema": "El mundo elimina el segundo intercalar desde mayo de 2027 (CGPM, Versalles, 15/10)",
       "video": "videos/2026-10-17_segundo-intercalar.mp4",
       "buffer_post": "6ad38ec9ae173d6e00c07ed4"
+    },
+    {
+      "fecha": "2026-10-17",
+      "sale": "2026-10-17",
+      "tipo": "noticia",
+      "estado": "publicado",
+      "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
+      "video": "videos/2026-10-17_papa-alta.mp4",
+      "buffer_post": "6ad3a9c7e272c4918f948238"
     }
   ]
 }

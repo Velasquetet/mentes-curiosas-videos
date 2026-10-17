@@ -58,3 +58,10 @@
 - Descartado por ahora: aviso rojo por lluvias torrenciales en 7 comarcas de Barcelona con ES-Alert (previsión, sin daños confirmados; Meteocat lo describe como menos extenso que el de hace dos semanas) → vigilar en la próxima revisión. Huracán Trudy sigue sin tocar tierra → vigilar.
 - Recursos nuevos en news2.js: `leapclock`, `atomclock`, `drift` (con entrada en el catálogo).
 - Diario de hoy (malvasía cabeciblanca) confirmado en Buffer, programado para las 18:30; no hace falta recuperación.
+
+## 2026-10-17 18:10 · Tarea de noticias (revisión de las 18:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletín de mediodía de Euronews, temas de EFE Internacional (12:00 GMT) y buscador.
+- Publicada la noticia del alta del Papa León XIV en el Gemelli, 4 días después de que le extirparan el lóbulo inferior del pulmón derecho por un adenocarcinoma (vídeo de 1:40, publicado a las 19:00). Fuentes: Vatican News (Santa Sede), EFE, CNN, NBC News, NPR, InfoVaticana. Tono neutral; sin cifras de pronóstico (el Vaticano no ha dado estadio ni tratamiento posterior).
+- Descartado por ahora: aviso rojo por lluvias en Barcelona/Girona (previsión, sin daños confirmados al revisar); huracán Trudy aún sin tocar tierra → vigilar.
+- Recursos nuevos en news2.js: `lungs`, `hospital` (con catálogo) y famoso `leon14` en cast.js.
+- Diario de hoy (malvasía cabeciblanca) publicado por Buffer a las 18:32; no hacía falta recuperación.
