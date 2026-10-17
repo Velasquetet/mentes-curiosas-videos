@@ -36,3 +36,8 @@
 - La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); revisado vía euronews.com/news/international, temas de EFE Internacional (02:00 GMT) y buscador.
 - Sin noticias que cumplan los criterios: superpetrolero que habría chocado con una mina en Ormuz (solo lo afirma la Guardia Revolucionaria iraní, sin nombre del buque ni confirmación independiente; parte de una crisis en curso con ataques casi diarios); huracán Trudy (cat. 3, previsión de cat. 4) aún no ha tocado tierra en Jalisco/Colima, vigilar en próximas revisiones.
 - Diario de hoy (malvasía cabeciblanca) programado en Buffer para las 18:30; no hace falta recuperación.
+
+## 2026-10-17 10:15 · Tarea de noticias (revisión de las 10:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía euronews.com/just-in, AP News in Brief y buscador.
+- Sin noticias que cumplan los criterios: huracán Trudy (cat. 1 según AP) aún no ha tocado tierra; acercamiento máximo previsto el 18/10 → vigilar. Derrumbe del techo de una escuela en Peshawar (34 niños y una maestra) ocurrió el 15-16/10, suceso local con más de 24 h; naufragio frente a Baja California (16 rescatados, ~11 desaparecidos) e incendio Norte en San Clemente (~100 ha, sin víctimas): impacto local.
+- Diario de hoy (malvasía cabeciblanca) confirmado en Buffer para las 18:30; no hace falta recuperación.
