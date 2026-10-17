@@ -38,7 +38,8 @@ def build(folder, scene_file='scenes.js', out='render.html', dur=None):
     js="const INK='var(--tinta)';"+EASE+"\n"
     for f in ['rig.js','emo.js','pers.js','charstyle.js']: js+=rd(os.path.join(M,f))+"\n"
     js+="window.WORDS="+words+";\nwindow.GEOJ="+rd(os.path.join(M,'geo.json'))+";\nwindow.WORLDJ="+rd(os.path.join(M,'world.json'))+";\n"
-    for f in ['kit.js','land.js','fauna.js','main.js','news.js']: js+=rd(os.path.join(M,f))+"\n"
+    for f in ['kit.js','land.js','fauna.js','main.js','news.js','news2.js']:
+        if os.path.exists(os.path.join(M,f)): js+=rd(os.path.join(M,f))+"\n"
     js+=rd(os.path.join(folder,scene_file))+"\n"
     if dur: js+=f"window.DUR={dur};\n"
     rel=os.path.relpath(M,folder)

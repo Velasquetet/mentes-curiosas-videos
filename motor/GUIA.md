@@ -49,4 +49,16 @@ Muestrario completo: `motor/newsgal.js` (vídeo `catalogo_noticias.mp4`).
 | Ciencia/salud/tec | `rocket`, `orbit`, `virus`, `medical`, `chip` |
 | Transporte/alertas | `vehicle` (plane/ship/train/car), `siren`, `alert`, `arrows` |
 
+### Ampliación (17/10/2026) · `motor/news2.js` (+115 entradas en el catálogo)
+| Grupo | Componentes |
+|---|---|
+| Desastres/clima/emergencias | `tsunami`, `tornado`, `drought`, `blizzard`, `landslide`, `heatcity`, `smoke` (calidad del aire), `collapse`, `blackout`, `evacuation`, `helicopter`, `ambulance`, `firetruck`, `sandbags`, `magscale` (comparar magnitudes), `hail`, `oilspill`, `glacier`, `forecast` (previsión 4 días), `wind` |
+| Política/sociedad/justicia/conflicto | `gavel`, `justice`, `handcuffs`, `signing`, `summit` (banderas por colores), `border`, `passport`, `tents`, `strike`, `sanctions`, `dove` (alto el fuego), `drone`, `warship`, `armored`, `intercept`, `resign`, `poll`, `debate`, `megaphone`, `briefcase`, `lawbook`, `tape`, `police` |
+| Economía/energía | `oil`, `gaspump`, `cart` (IPC), `housing`, `bank`, `card`, `crypto`, `factory`, `port`, `tariff`, `queue` (paro), `plug` (precio de la luz), `solar`, `windturbine`, `nuclear`, `battery`, `charger` |
+| Ciencia/espacio/salud/tecnología | `telescope`, `asteroid`, `satellite`, `lander`, `mars`, `eclipse`, `comet`, `microscope`, `flask`, `vaccine`, `pills`, `ecg`, `brain`, `robot`, `chatai`, `cyber`, `servers`, `antenna` |
+| Rótulos/datos/mapas | `ticker` (teletipo, pantalla completa), `headcard`, `tv`, `factcheck`, `ranking`, `compare` («×N veces más»), `heights`, `globe`, `split`, `pie`, `stack`, `distance`, `search`, `notifs`, `email`, `leak`, `bigq` |
+| Transporte | `departures` (panel de vuelos), `traffic`, `metro`, `bike`, `cruise`, `roadblock` |
+| Deporte/cultura | `goal`, `trophy`, `scoreboard`, `stadium`, `hoop`, `racecar`, `finish`, `award`, `concert`, `clapper`, `gamepad`, `book`, `painting`, `music` |
+Las opciones de cada uno están en el comentario encima de su definición en `news2.js`. Los recursos nuevos de cada vídeo pueden ir en `news.js` o en `news2.js` (con su `n2cat(...)`).
+
 Regla (indicación del usuario): **no escatimar en recursos nuevos**. En cada noticia y cada vídeo diario se crean siempre que sea posible recursos nuevos hechos a medida (objetos, lugares, animales, gráficos, escenas) y **se añaden a la biblioteca** (`news.js` o `fauna.js`/`land.js`) con su entrada en el catálogo, para que la galería crezca con cada vídeo.
