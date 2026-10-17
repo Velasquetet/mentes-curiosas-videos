@@ -70,3 +70,10 @@
 - La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletín de tarde de Euronews (17/10), buscador y medios mexicanos/españoles.
 - Sin noticias que cumplan los criterios: protestas por el coste de la vida en Francia (París, Marsella, Lyon) y en Albania (disturbios políticos, sin explicación en el estilo del canal); sismo M5,1 en Chiapas sin daños; huracán Trudy (cat. 1) no se espera que toque tierra, se alejará el domingo; aviso por lluvias torrenciales en Barcelona (solo previsión y medidas preventivas, sin daños confirmados; punto álgido previsto la noche del sábado al domingo) → vigilar en la próxima revisión.
 - Diario de hoy (malvasía cabeciblanca) ya publicado (18:32); no hace falta recuperación.
+
+## 2026-10-17 22:10 · Tarea de noticias (revisión de las 22:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletín de tarde de Euronews (17/10, 18:00), buscador y medios.
+- Publicada la noticia de la orden ejecutiva de Trump (viernes 16/10) que pone en pausa las sanciones de la ley Lindsey Graham contra Rusia (vídeo de 1:17, publicado a las 22:49). Fuentes: AP (vía ABC News), ABC News, CNBC, The Washington Post, The Moscow Times, Euronews. Solo datos confirmados en 2+ fuentes (aranceles de hasta el 100 % a los 5 mayores compradores; no se usan el 500 % ni el resultado exacto de la votación, que solo daba una fuente). Tono neutral.
+- Descartado: lluvias torrenciales en Cataluña (un desaparecido en Cabrera de Mar, cortes de tren y carreteras, sin incidencias graves al revisar; situación en curso) → vigilar en la próxima revisión.
+- Recursos nuevos en news2.js: `pausedlaw`, `oiltoll`, `whitehouse` (con catálogo) y famoso `graham` en cast.js.
+- Diario de hoy (malvasía cabeciblanca) ya publicado (18:32); además ya son más de las 21:00: no hace falta recuperación.

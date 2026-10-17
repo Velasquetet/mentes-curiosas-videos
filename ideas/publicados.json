@@ -89,6 +89,15 @@
       "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
       "video": "videos/2026-10-17_papa-alta.mp4",
       "buffer_post": "6ad3a9c7e272c4918f948238"
+    },
+    {
+      "fecha": "2026-10-17",
+      "sale": "2026-10-17",
+      "tipo": "noticia",
+      "estado": "publicado",
+      "tema": "Trump pone en pausa las sanciones de la ley Graham contra Rusia (orden ejecutiva, 16/10)",
+      "video": "videos/2026-10-17_sanciones-rusia.mp4",
+      "buffer_post": "6ad3df510a208cb32338bf7b"
     }
   ]
 }
