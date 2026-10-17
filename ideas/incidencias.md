@@ -31,3 +31,8 @@
 - Publicada la noticia de las inundaciones de Estambul, las peores en más de 80 años (vídeo de 1:28, publicado a las 20:54). Fuentes: AP, Xinhua, Anadolu (Daily Sabah), Euronews. Cifras de víctimas marcadas como provisionales.
 - Diario de hoy (reptiles) ya publicado a las 18:32; no hacía falta recuperación.
 - Nota: el render (2 procesos) tardó ~30 min para 88 s; conviene lanzarlo en cuanto la revisión de fotogramas esté hecha.
+
+## 2026-10-17 08:15 · Tarea de noticias (revisión de las 08:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); revisado vía euronews.com/news/international, temas de EFE Internacional (02:00 GMT) y buscador.
+- Sin noticias que cumplan los criterios: superpetrolero que habría chocado con una mina en Ormuz (solo lo afirma la Guardia Revolucionaria iraní, sin nombre del buque ni confirmación independiente; parte de una crisis en curso con ataques casi diarios); huracán Trudy (cat. 3, previsión de cat. 4) aún no ha tocado tierra en Jalisco/Colima, vigilar en próximas revisiones.
+- Diario de hoy (malvasía cabeciblanca) programado en Buffer para las 18:30; no hace falta recuperación.
