@@ -848,5 +848,42 @@ NX.hospital=(o={},lt)=>{let s=Rc(-200,-170,400,250,'#f1ece3',6,OL(2.6))+Rc(-70,-
   return G(0,0,_ap(lt,0,.4),0,s);};
 n2cat('hospital · Hospital',lt=>NX.hospital({name:'POLICLÍNICO',label:'Roma',door:1.5},lt%4));
 
+/* Ley en pausa: documento firmado al que cae encima un gran botón de pausa · o:{title,label,at} (at = segundo en que cae la pausa) */
+NX.pausedlaw=(o={},lt)=>{const at=o.at??.9,q=EZ.back(sg(lt,at,at+.35)),gray=EZ.out(sg(lt,at+.2,at+.7));
+  let doc=Rc(-130,-160,260,310,K.ink,8)+Rc(-136,-166,260,310,'#fbf8f2',8,OL(2.2))+Ts(-6,-118,o.title||'LEY',24)
+   +[...Array(7)].map((_,i)=>Rc(-108,-92+i*20,i===6?120:216,6,'#d7d0c4',3)).join('')
+   +P('M-100 100 C-86 70 -76 120 -60 92 C-48 70 -42 110 -26 96 C-16 86 -6 100 4 92',ST('#1b2596',3));
+  let s=G(0,0,1,0,doc,1-.45*gray);
+  if(q>0){s+=G(0,-10,q,0,Ci(0,0,86,'#141212',OL(2.6))+Rc(-30,-38,20,76,'#fff',5)+Rc(10,-38,20,76,'#fff',5));
+    const r=86+40*sg(lt,at,at+.6);s+=Ci(0,-10,r,'none',`stroke:#141212;stroke-width:3;opacity:${f2(1-sg(lt,at,at+.6))}`);}
+  if(o.label)s+=G(0,200,1,0,pill(o.label,{sz:16,w:800,fill:'url(#gRP)'}),_ao(lt,at+.5,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('pausedlaw · Ley en pausa',lt=>NX.pausedlaw({title:'LEY',label:'EN PAUSA'},lt%4));
+/* Barriles de petróleo que viajan de un país a otro y pagan un peaje (arancel) al llegar a otro país
+   · o:{from,to,mid,pct} — from vende, to compra, mid es el país que aplica el arancel */
+NX.oiltoll=(o={},lt)=>{const from=o.from||'RUSIA',to=o.to||'COMPRADOR',mid=o.mid||'EE. UU.',pct=o.pct||'+100 %';
+  let s=Rc(-230,-60,120,90,'#e2264a',10,OL(2.4))+Tn(-170,-8,from,14,800,{fill:'#fff'})
+   +Rc(-60,-60,120,90,'#f6a81a',10,OL(2.4))+Tn(0,-8,to,13,800,{fill:'#141212'})
+   +Rc(110,-60,120,90,'#2a37d7',10,OL(2.4))+Tn(170,-8,mid,14,800,{fill:'#fff'});
+  const bar=(x,y,k=1)=>G(x,y,k,0,El(0,-22,16,5,'#1b1b22',OL(1.4))+Rc(-16,-22,32,40,'#2a2a33',0,OL(1.4))+El(0,18,16,5,'#2a2a33',OL(1.4))+P('M0 -10 Q8 0 0 8 Q-8 0 0 -10Z','fill:#f6a81a'));
+  for(let i=0;i<3;i++){const k=EZ.io(sg(lt,.3+i*.25,1.3+i*.25));if(k>0&&k<1)s+=bar(lerp(-150,-30,k),70-Math.sin(k*Math.PI)*40);}
+  const box=EZ.io(sg(lt,1.8,2.7));if(box>0)s+=G(lerp(20,140,box),60-Math.sin(box*Math.PI)*40,1,0,Rc(-24,-20,48,40,'#d9b483',4,OL(1.8)));
+  if(lt>2.7){const g=EZ.back(sg(lt,2.7,3.0));s+=G(170,-110,g,-8,Rc(-62,-24,124,48,'#141212',12)+Tn(0,9,pct,22,800,{fill:'#fff'}));}
+  s+=P('M-110 -15 L-60 -15 M60 -15 L110 -15',ST(K.ink,2.4,'stroke-dasharray:6 6'));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('oiltoll · Petróleo y arancel en cadena',lt=>NX.oiltoll({},lt%4.5));
+
+/* Casa Blanca (fachada con pórtico de columnas y bandera de EE. UU.) · o:{label} */
+NX.whitehouse=(o={},lt)=>{let s=Rc(-230,-90,460,170,'#f7f5ef',4,OL(2.4))+Rc(-236,-100,472,14,'#e9e4d8',2,OL(2));
+  for(let i=0;i<8;i++){const x=-205+i*58;if(i===3||i===4)continue;s+=Rc(x,-66,26,38,'#bcd3f0',3,OL(1.4))+Rc(x,2,26,38,'#bcd3f0',3,OL(1.4))+P(`M${x} -47 L${x+26} -47 M${x} 21 L${x+26} 21`,ST('#7d97c2',1.2));}
+  s+=P('M-80 -100 Q0 -150 80 -100Z','fill:#f7f5ef;'+OL(2.2))+Rc(-86,-100,172,10,'#e9e4d8',1,OL(1.6));
+  for(let i=0;i<6;i++){const x=-70+i*28;s+=Rc(x-5,-90,10,166,'#fdfcf8',2,OL(1.4));}
+  s+=Rc(-12,30,24,46,'#5a4632',3,OL(1.4))+Rc(-240,80,480,14,'#d9d2c2',2,OL(2));
+  s+=P('M0 -132 L0 -200',ST(K.ink,3));let d='M0 -198';for(let x=0;x<=56;x+=7)d+=` L${x} ${f1(-198+Math.sin(x*.13-lt*5)*3)}`;for(let x=56;x>=0;x-=7)d+=` L${x} ${f1(-162+Math.sin(x*.13-lt*5)*3)}`;
+  s+=P(d+'Z','fill:#e2264a;'+OL(1.4))+[0,1,2].map(i=>P(`M0 ${-192+i*12} L56 ${-192+i*12}`,ST('#fff',3.4))).join('')+Rc(0,-198,24,18,'#1b2596',1);
+  if(o.label)s+=G(0,130,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.45),0,s);};
+n2cat('whitehouse · Casa Blanca',lt=>NX.whitehouse({label:'CASA BLANCA'},lt));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
