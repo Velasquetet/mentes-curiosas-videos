@@ -10,6 +10,7 @@ Guía para fabricar cada vídeo con la misma calidad (y mejorarla). La deben seg
 4. **Construir**: `python3 motor/build.py videos/<carpeta>`.
 5. **Revisar** con `DIR=videos/<carpeta> python3 motor/pv.py render.html t1,t2,… hoja.png` (una imagen por segundo como mínimo). Corregir solapes de texto, personajes cortados y elementos fuera de pantalla ANTES de renderizar.
 6. **Renderizar** (2 procesos en paralelo): `DIR=videos/<carpeta> python3 motor/renderp.py 0 2 &` y `… 1 2 &`.
+6b. **Revisión fotograma a fotograma (obligatoria, indicación del usuario 17/10)**: después de renderizar y ANTES de codificar, `python3 motor/review.py videos/<carpeta>` y mirar TODAS las hojas de `revision/` (todos los fotogramas, uno a uno). Si algo está descuadrado, cortado, solapado o fuera de pantalla: corregir `scenes.js`, volver a renderizar ese tramo (`renderp.py K N inicio fin`) y repetir la revisión de ese tramo.
 7. **Audio**: voz (loudnorm −14 LUFS) + música **que se perciba** (≈ −28 LUFS, unos 14 dB bajo la voz, con ducking suave) + efectos ocasionales (`motor/audio.py` como plantilla). Mezcla de referencia:
    `ffmpeg -i voz.wav -i musica.wav -i sfx.wav -filter_complex "[0:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,apad=whole_dur=DUR[v];[1:a]loudnorm=I=-28:TP=-9[m];[v][m][2:a]amix=inputs=3:normalize=0:duration=longest,atrim=0:DUR,alimiter=limit=0.95[a]" -map "[a]" -ar 48000 -ac 2 mezcla.wav`
    (Nota del usuario, 14/10: en el vídeo del esturión la música a −46 LUFS casi no se oía. Escuchar la mezcla antes de publicar: la música debe notarse en las pausas.)

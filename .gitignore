@@ -8,3 +8,4 @@ __pycache__/
 videos/*/*.png
 videos/*/*.log
 videos/*/final.mp4
+videos/*/revision/

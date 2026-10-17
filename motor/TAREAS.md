@@ -20,7 +20,7 @@ Procedimiento que siguen las tareas programadas. Cada ejecución empieza en una 
 ## 2 · Vídeo
 Seguir `motor/GUIA.md` → «Flujo de un vídeo» (escenas en `scenes.js`, `build.py`, revisión con `pv.py` mirando las hojas de contacto, `renderp.py` en 2 procesos, audio, ffmpeg).
 - Audio: adaptar `motor/audio.py` (DUR y los instantes de los efectos a las transiciones del vídeo nuevo); música muy baja, efectos ocasionales; voz a −14 LUFS.
-- Calidad: revisar al menos un fotograma por segundo antes de renderizar. Nada de textos solapados, cortados o fuera de pantalla.
+- Calidad: revisar al menos un fotograma por segundo antes de renderizar y, después de renderizar, **revisar TODOS los fotogramas uno a uno** con `motor/review.py` (hojas en `revision/`) antes de codificar. Si algo está descuadrado, se corrige y se vuelve a renderizar ese tramo. Nada de textos solapados, cortados o fuera de pantalla.
 - Crear siempre al menos un recurso nuevo a medida y añadirlo a la biblioteca (`news.js`, `fauna.js` o `land.js`) con su entrada en el catálogo (`newsgal.js`).
 - No subir fotogramas ni `render.html` (están en .gitignore).
 
