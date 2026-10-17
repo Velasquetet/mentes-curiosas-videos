@@ -819,5 +819,34 @@ NX.drift=(o={},lt)=>{const la=o.la||'Reloj atómico',lb=o.lb||'Giro de la Tierra
   return G(0,0,_ap(lt,0,.4),0,s);};
 n2cat('drift · Desfase entre dos relojes',lt=>NX.drift({},lt%3));
 
+/* ===== Recursos nuevos · noticia del alta del Papa León XIV (17/10/2026) ===== */
+/* Pulmones con sus 5 lóbulos (derecho 3, izquierdo 2; el derecho del paciente queda a la izquierda de la pantalla)
+   o:{count (numera los lóbulos uno a uno), countAt, hl:'RU|RM|RL|LU|LL' (resalta), hlAt, remove (el lóbulo resaltado sale), removeAt, labels} */
+NX.lungs=(o={},lt)=>{const L={RU:'M-70 -150 Q-128 -132 -146 -40 L-30 -64 L-30 -122 Q-40 -150 -70 -150Z',RM:'M-146 -40 L-30 -64 L-30 4 L-124 34 Q-152 0 -146 -40Z',RL:'M-124 34 L-30 4 L-30 108 Q-82 132 -140 120 Q-158 78 -124 34Z',
+  LU:'M70 -150 Q128 -132 148 -12 L30 28 L30 -122 Q40 -150 70 -150Z',LL:'M148 -12 L30 28 L30 108 Q82 132 140 120 Q162 60 148 -12Z'};
+  const cen={RU:[-82,-100],RM:[-92,-20],RL:[-90,70],LU:[86,-80],LL:[96,60]},ord=['RU','RM','RL','LU','LL'];
+  let s=Rc(-11,-214,22,100,'#e8d6d0',8,OL(2.2))+[0,1,2,3,4].map(i=>P(`M-11 ${-200+i*18} l22 0`,ST('#bfa59c',2))).join('');
+  s+=P('M0 -118 Q-10 -96 -40 -78 M0 -118 Q10 -96 40 -78',ST('#bfa59c',10))+P('M0 -118 Q-10 -96 -40 -78 M0 -118 Q10 -96 40 -78',ST('#e8d6d0',5));
+  const ca=o.countAt??.5,ha=o.hlAt??.5,ra=o.removeAt??1.5;
+  ord.forEach((k,i)=>{let tr='',op=1,fill='#f39bb0';
+    if(o.hl===k&&lt>ha){const pu=.5+.5*Math.sin((lt-ha)*9);fill=`rgb(${Math.round(240-20*pu)},${Math.round(90-40*pu)},${Math.round(110-40*pu)})`;
+      if(o.remove&&lt>ra){const q=EZ.io(sg(lt,ra,ra+.8));tr=`translate(${f1(-70*q)} ${f1(60*q)}) rotate(${f1(-14*q)} ${cen[k][0]} ${cen[k][1]})`;op=1-.55*q;}}
+    s+=`<g transform="${tr}" opacity="${f2(op)}"><path d="${L[k]}" style="fill:${fill};${OL(2.6)}"/>`+P(L[k].replace(/Z$/,''),'fill:none;stroke:#ffffff;stroke-width:1;opacity:.35')+'</g>';
+    if(o.remove&&o.hl===k&&lt>ra)s+=`<path d="${L[k]}" style="fill:none;stroke:#141212;stroke-width:2;stroke-dasharray:7 6;opacity:${f2(EZ.out(sg(lt,ra+.2,ra+.6)))}"/>`;
+    if(o.count){const q=_ap(lt,ca+i*.32,.3);if(q>0)s+=G(cen[k][0],cen[k][1],q,0,Ci(0,0,17,'#141212')+Tn(0,7,String(i+1),19,800,{fill:'#fff'}));}});
+  if(o.labels){s+=G(-90,168,1,0,pill('derecho · 3',{sz:12,w:700}),_ao(lt,.4,.3))+G(92,168,1,0,pill('izquierdo · 2',{sz:12,w:700}),_ao(lt,.55,.3));}
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('lungs · Pulmones y sus 5 lóbulos',lt=>NX.lungs({count:true,hl:'RL',hlAt:2.4,remove:true,removeAt:3.2,labels:true},lt%5));
+/* Hospital (fachada con cruz, ventanas que se encienden y puerta) · o:{label,name,door (abre la puerta en ese instante)} */
+NX.hospital=(o={},lt)=>{let s=Rc(-200,-170,400,250,'#f1ece3',6,OL(2.6))+Rc(-70,-230,140,64,'#f1ece3',6,OL(2.6));
+  s+=Ci(0,-198,24,'#fff',OL(2))+Rc(-6,-214,12,32,K.red,2)+Rc(-16,-204,32,12,K.red,2);
+  for(let r=0;r<4;r++)for(let c=0;c<8;c++){if(r===3&&(c===3||c===4))continue;const on=hs(r*11+c*3+Math.floor(lt*.8))<.55;s+=Rc(-180+c*46,-150+r*52,30,34,on?'#ffe08a':'#9fb3c8',3,OL(1.4));}
+  const dq=o.door!=null?EZ.io(sg(lt,o.door,o.door+.5)):0;
+  s+=Rc(-40,6,80,74,'#141212',3)+Rc(-38,8,38-34*dq,72,'#7fa6c9',2,OL(1.2))+Rc(0+34*dq,8,38-34*dq,72,'#7fa6c9',2,OL(1.2));
+  if(o.name)s+=Rc(-110,-26,220,26,'#2a37d7',4)+Tn(0,-8,o.name,13,800,{fill:'#fff',ls:.06});
+  if(o.label)s+=G(0,120,1,0,pill(o.label,{sz:13,w:700}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('hospital · Hospital',lt=>NX.hospital({name:'POLICLÍNICO',label:'Roma',door:1.5},lt%4));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);

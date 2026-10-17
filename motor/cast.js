@@ -27,6 +27,7 @@ function figure(o={}){
   if(body==='military')bd=Rc(-34,by,68,78,c,18)+Rc(-14,by,28,60,o.c3||'#fff',6)+Rc(-34,by,68,12,o.c4||'#e2264a',6)+[0,1,2].map(i=>Ci(-20,by+22+i*16,2.6,'#f6c443')+Ci(20,by+22+i*16,2.6,'#f6c443')).join('');
   if(body==='sweater')bd=Rc(-34,by,68,78,c,18)+Rc(-14,by-2,28,10,c2,5)+P(`M-30 ${by+60} L30 ${by+60}`,ST('rgba(0,0,0,.15)',3));
   if(acc.has('epaulettes'))bd+=Rc(-46,by+2,22,10,'#f6c443',4)+Rc(24,by+2,22,10,'#f6c443',4)+[0,1,2,3].map(i=>P(`M${-44+i*5} ${by+12} l0 8 M${26+i*5} ${by+12} l0 8`,ST('#f6c443',2))).join('');
+  if(acc.has('pectoral'))bd+=P(`M-14 ${by+2} Q0 ${by+26} 14 ${by+2}`,ST('#d9a520',2))+Rc(-2.5,by+22,5,22,'#d9a520',1)+Rc(-8,by+28,16,5,'#d9a520',1);
   if(acc.has('flagpin'))bd+=Rc(-24,by+12,9,6,'#2a37d7',1)+Rc(-24,by+15,9,3,'#e2264a',0);
   if(acc.has('longtie'))bd+=P(`M0 ${by+6} L-7 ${by+14} L-2 ${by+74} L2 ${by+74} L7 ${by+14}Z`,`fill:${o.tieC||'#e2264a'}`);
   if(acc.has('ruff'))bd+=El(0,by+2,40,12,'#fff');
@@ -187,6 +188,7 @@ const FAMOSOS={
   cleopatra:{name:'Cleopatra',skin:'moreno',hair:'bob',hairC:'#141212',hat:'headband',body:'dress',c:'#ffffff',c2:'#f6c443',acc:['necklace','earrings'],emo:'smug'},
   colon:{name:'Cristóbal Colón',skin:'claro',hair:'shoulder',hairC:'#d9d9d9',hat:'beret',hatC:'#141212',body:'coat',c:'#6b2a2a',c2:'#141212',emo:'neutral'},
   cervantes:{name:'Miguel de Cervantes',skin:'claro',hair:'balding',hairC:'#6b4a2a',body:'coat',c:'#141212',c2:'#141212',acc:['ruff','mustache','trimbeard'],beardC:'#8a6a4a',mustC:'#6b4a2a',emo:'neutral'},
+  leon14:{name:'León XIV',skin:'claro',hair:'short',hairC:'#9a9aa0',hat:'cardinal',hatC:'#ffffff',body:'robe',c:'#f7f5ef',acc:['pectoral'],legs:'#f7f5ef',emo:'happy'},
   luis14:{name:'Luis XIV',skin:'claro',hair:'curly',hairC:'#2a1a10',hat:'crown',body:'cape',c:'#1b2596',c2:'#e73568',emo:'smug'}
 };
 /* famoso(clave, extra) → opciones para figure() */
