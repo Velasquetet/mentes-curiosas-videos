@@ -41,3 +41,8 @@
 - La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía euronews.com/just-in, AP News in Brief y buscador.
 - Sin noticias que cumplan los criterios: huracán Trudy (cat. 1 según AP) aún no ha tocado tierra; acercamiento máximo previsto el 18/10 → vigilar. Derrumbe del techo de una escuela en Peshawar (34 niños y una maestra) ocurrió el 15-16/10, suceso local con más de 24 h; naufragio frente a Baja California (16 rescatados, ~11 desaparecidos) e incendio Norte en San Clemente (~100 ha, sin víctimas): impacto local.
 - Diario de hoy (malvasía cabeciblanca) confirmado en Buffer para las 18:30; no hace falta recuperación.
+
+## 2026-10-17 12:15 · Tarea de noticias (revisión de las 12:00)
+- es.euronews.com/noticias/internacional respondió, pero mostraba contenido desactualizado (lo más reciente del 12/10); Reuters no se probó (bloqueado). Revisado vía boletín de mediodía de Euronews (17/10), buscador y medios en inglés.
+- Sin noticias que cumplan los criterios: superpetrolero en llamas tras chocar con una mina en Ormuz (solo lo afirma la Guardia Revolucionaria; crisis en curso, ya descartada a las 08:00); torpedo «con IA» de Corea del Norte (solo afirmación estatal); Trump suspende sanciones a Rusia y escenario político francés (política, sin explicación en el estilo del canal); huracán Trudy aún no ha tocado tierra → vigilar.
+- Diario de hoy (malvasía cabeciblanca) ya programado para las 18:30 en publicados.json; no hace falta recuperación.
