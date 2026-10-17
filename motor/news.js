@@ -603,3 +603,81 @@ NX_CATALOG.push(
  ['bigegg · Hembra y su huevo enorme',(lt)=>G(0,100,1.4,0,NX.bigegg({},lt))],
  ['larva · Larva de quironómido',(lt)=>G(0,0,3,0,NX.larva({},lt))],
  ['structblue · Color estructural (azul sin pigmento)',(lt)=>G(0,80,1,0,NX.structblue({},lt))]);
+
+/* ---------------- chocolate de Etowah (18/10) ---------------- */
+/* Mazorca de cacao (acanalada) · o:{c,open} — centrada; open 0..1 la parte y enseña las semillas */
+function cacaoPodS(o={}){const c=o.c||'#f2a02a',d=o.d||'#c4621a',op=cl(o.open||0);
+  const body=`M0 -58 C30 -54 40 -20 38 6 C36 34 18 56 0 60 C-18 56 -36 34 -38 6 C-40 -20 -30 -54 0 -58Z`;
+  let ribs='';for(let i=-2;i<=2;i++)ribs+=P(`M${i*9} -54 Q${i*15} 0 ${i*9} 56`,ST(d,2.2,'opacity:.7'));
+  const half=(sd)=>G(sd*op*26,0,1,sd*op*14,clipG(P(body,`fill:${c}`)+ribs+P('M-14 -40 Q-24 0 -12 34',ST('#fff',4,'opacity:.35')),Rc(sd<0?-60:0,-80,60,160,'#000'))+P(body,`fill:none;${OL(2.4)}`));
+  let s=P('M0 -58 L2 -74',ST('#6b4a2e',5));
+  if(op>0){for(let i=0;i<7;i++){const y=-38+i*12;s+=El(-5+(i%2)*10,y,8,6,'#f4ead2',OL(1.4));s+=El(-5+(i%2)*10,y,4,3,'#7a3d1e');}}
+  return s+half(-1)+half(1);}
+/* Árbol de cacao (las mazorcas salen del tronco) · o:{T,frost 0..1} — base en (0,0) */
+function cacaoTreeS(o={}){const T=o.T||0,fr=cl(o.frost||0),sw=Math.sin(T*1.6)*3;
+  const lc=mixc('#2f9a4a','#9fc7d8',fr),lc2=mixc('#1f6b33','#7aa8be',fr),tc=mixc('#6b4a2e','#7d8b96',fr);
+  let s=El(0,4,90,12,'rgba(20,18,18,.14)')+P('M-16 0 Q-10 -90 -6 -170 L8 -170 Q12 -90 18 0Z',`fill:${tc};${OL(2.4)}`)+P('M-2 -150 Q-50 -190 -96 -196 M4 -160 Q50 -200 92 -206 M0 -168 Q4 -220 -6 -260',ST(tc,8));
+  s+=[[-70,-222,78,46],[50,-230,84,50],[-6,-266,70,44]].map(([x,y,rx,ry])=>El(x+sw*.6,y,rx,ry,mixc('#257a3c','#8fb5c6',fr),OL(2))).join('');
+  const LV=[[-130,-214,-60],[-96,-250,-36],[-44,-290,-14],[30,-292,12],[80,-262,30],[128,-224,58],[-150,-176,-76],[146,-186,72],[-100,-200,-30],[-70,-236,-10],[-30,-266,-4],[20,-270,8],[64,-240,18],[100,-212,30],[-120,-170,-50],[118,-180,46],[-40,-220,-20],[46,-214,24],[0,-236,0]];
+  LV.forEach(([x,y,r],i)=>{s+=G(x+sw*(1-y/-300),y,1,r+Math.sin(T*2+i)*3,P('M0 0 Q26 -30 0 -78 Q-26 -30 0 0Z',`fill:${i%2?lc:lc2};${OL(1.8)}`)+P('M0 -4 L0 -70',ST('rgba(255,255,255,.35)',1.6)));});
+  [[-22,-60,-12,'#f2a02a'],[22,-96,14,'#b0306a'],[-20,-128,-8,'#e2c13a'],[20,-40,10,'#c4621a']].forEach(([x,y,r,c],i)=>{s+=G(x,y,.42,r+Math.sin(T*2+i)*2,cacaoPodS({c:mixc(c,'#b9ccd6',fr*.7),d:'#8e4322'}));});
+  if(fr>0){s+=G(0,0,1,0,[[-100,-268],[-30,-330],[30,-336],[96,-280],[0,-290]].map(([x,y])=>P(`M${x-26} ${y+8} Q${x} ${y-10} ${x+26} ${y+8} Q${x} ${y+2} ${x-26} ${y+8}Z`,'fill:#fff;'+OL(1.6))).join('')
+     +[...Array(6)].map((_,i)=>P(`M${-90+i*36} ${-196+Math.abs(i-2.5)*6} l4 ${f1(14+hs(i)*12)} l4 ${f1(-14-hs(i)*12)}`,`fill:#e8f6ff;${OL(1.2)}`)).join(''),fr);}
+  return s;}
+/* Montículo de plataforma misisipiano (pirámide truncada de tierra, rampa y templo) · o:{w,h,grow 0..1,temple 0..1} — base en (0,0) */
+function moundS(o={}){const w=o.w||300,H=(o.h||130)*cl(o.grow??1),tw=w*.52,tp=cl(o.temple??1);
+  if(H<2)return Rc(-w/2,-4,w,4,'#8a5a34');
+  const top=-H,twh=lerp(w,tw,H/(o.h||130));
+  let s=El(0,2,w*.56,10,'rgba(20,18,18,.14)')+P(`M${-w/2} 0 L${-twh/2} ${top} L${twh/2} ${top} L${w/2} 0Z`,'fill:#7cb35b;'+OL(2.4))
+   +P(`M${twh*.1} ${top} L${twh/2} ${top} L${w/2} 0 L${w*.14} 0Z`,'fill:#4e8a3c')
+   +P(`M${-w/2} 0 L${-twh/2} ${top} L${twh/2} ${top} L${w/2} 0`,'fill:none;'+OL(2.4));
+  for(let i=1;i<5;i++){const y=top*i/5,ww=lerp(w,twh,i/5);s+=P(`M${f1(-ww/2+6)} ${f1(y)} L${f1(-ww/4)} ${f1(y-1)}`,ST('#5a8f3e',2,'opacity:.6'));}
+  const rw=w*.16;s+=P(`M${-rw/2} 0 L${-rw/3} ${top} L${rw/3} ${top} L${rw/2} 0Z`,'fill:#c99a62;'+OL(1.8));
+  for(let i=1;i<Math.max(2,Math.floor(H/12));i++){const y=top*i/Math.floor(H/12),ww=lerp(rw,rw*.66,i/Math.floor(H/12));s+=P(`M${f1(-ww/2)} ${f1(y)} L${f1(ww/2)} ${f1(y)}`,ST('#8a5a34',1.6));}
+  if(tp>0){const th=56*tp;s+=G(0,top,1,0,Rc(-tw*.28,-th*.62,tw*.56,th*.62,'#e9cf9a',2,OL(2))+P(`M${-tw*.36} ${-th*.6} L0 ${-th*1.3} L${tw*.36} ${-th*.6}Z`,'fill:#c98a3a;'+OL(2))+[...Array(5)].map((_,i)=>P(`M${f1(-tw*.3+i*tw*.15)} ${f1(-th*.62)} l${f1(4)} ${f1(-th*.3)}`,ST('#8a5a20',1.4))).join('')+Rc(-9,-th*.4,18,th*.4,'#5a3a20',2));}
+  return s;}
+/* Fragmento de cerámica «Etowah Complicated Stamped» (estampado en espirales) · o:{seed,c,glow} — centrado */
+function sherdS(o={}){const sd=o.seed||1,c=o.c||'#b9784a';let d='M';const n=9;for(let i=0;i<n;i++){const a=i/n*Math.PI*2,r=46+hs(sd*9+i)*20;d+=`${i?' L':''}${f1(Math.cos(a)*r*1.15)} ${f1(Math.sin(a)*r*.85)}`;}d+='Z';
+  let pat='';for(let k=0;k<3;k++){const cx=-30+k*30+hs(sd+k)*8,cy=-10+(k%2)*22;for(let r=6;r<=22;r+=6)pat+=Ci(cx,cy,r,'none',ST('#7a4a2a',2.2,'opacity:.8'));}
+  pat+=P('M-70 -36 Q0 -20 70 -40 M-70 34 Q0 50 70 30',ST('#7a4a2a',2,'opacity:.6'));
+  let s='';if(o.glow)s+=Ci(0,0,90,'#fff',`opacity:${f2(.35*o.glow)}`);
+  return s+P(d,'fill:#2a1a12;transform:translate(4px,5px)')+clipG(P(d,`fill:${c}`)+pat,P(d,''))+P(d,`fill:none;${OL(2.4)}`);}
+/* Yaupón (Ilex vomitoria): arbusto de hojas pequeñas y bayas rojas · o:{T} — base en (0,0) */
+function yauponS(o={}){const T=o.T||0;let s=El(0,4,80,10,'rgba(20,18,18,.14)')+P('M0 0 L-4 -60 M0 -20 L-40 -80 M0 -30 L42 -90 M-4 -60 L-10 -120 M-4 -60 L26 -130',ST('#5a4632',5));
+  for(let i=0;i<34;i++){const a=hs(i*3.3)*Math.PI*2,r=20+hs(i*1.7)*62,x=Math.cos(a)*r*1.05,y=-96+Math.sin(a)*r*.62+Math.sin(T*2+i)*1.5;
+    s+=G(x,y,1,a*57,El(0,0,11,6,i%3?'#2f7d3f':'#3f9b4f',OL(1.2)));}
+  for(let i=0;i<14;i++){const x=(hs(i*5.1)-.5)*140,y=-96+(hs(i*2.9)-.5)*90;s+=Ci(x,y,5,'#e2264a',OL(1.2))+Ci(x-1.5,y-1.5,1.6,'#fff','opacity:.7');}
+  return s;}
+/* Tableta de chocolate con envoltorio · o:{bite} — centrada */
+function chocoBarS(o={}){let s=Rc(-70,-110,140,220,'#2a37d7',10,OL(2.4))+Rc(-70,-10,140,120,'#e2264a',0,OL(2.4))+Tn(0,-22,'CHOCO',20,800,{fill:'#fff',ls:.08});
+  s+=Rc(-62,-170,124,120,'#5a2e18',8,OL(2.4));for(let r=0;r<3;r++)for(let k=0;k<3;k++)s+=Rc(-56+k*40,-164+r*36,32,30,'#6e3a20',4,'stroke:#3e1e0e;stroke-width:1.6')+P(`M${-52+k*40} ${-160+r*36} l24 0`,ST('#8a4a28',2));
+  if(o.bite)s+=Ci(54,-168,22,'#c6c6c6')+Ci(30,-176,16,'#c6c6c6');
+  return s;}
+/* Vaso de barro con chocolate espumoso y vapor · o:{T} — base en (0,0) */
+function cacaoCupS(o={}){const T=o.T||0;let s=El(0,2,46,7,'rgba(20,18,18,.16)')+P('M-40 -96 L40 -96 L32 -6 Q30 2 22 2 L-22 2 Q-30 2 -32 -6Z','fill:#c46a3a;'+OL(2.4));
+  s+=P('M-36 -60 L36 -60',ST('#7a3d1e',3))+[...Array(5)].map((_,i)=>Ci(-24+i*12,-40,4,'none',ST('#7a3d1e',2))).join('')+El(0,-96,40,9,'#6b3418',OL(2));
+  for(let i=0;i<5;i++)s+=Ci(-24+i*12+Math.sin(T*3+i)*1.5,-100,7+hs(i)*3,'#e6c9a0',OL(1.2));
+  for(let i=0;i<3;i++){const q=((T*.6)+i/3)%1,x=-16+i*16+Math.sin(T*2+i)*6;s+=P(`M${f1(x)} ${f1(-112-q*50)} q8 -10 0 -20 q-8 -10 0 -20`,ST('#fff',3,`opacity:${f2((1-q)*.9)}`));}
+  return s;}
+/* Trozos de ADN antiguo: hebras cortas y rotas frente a una larga y moderna · o:{T,n,old 0..1} — centrado */
+function dnaFragS(o={}){const T=o.T||0,old=cl(o.old??1);let s='';const rung=(x,y,l,c1,c2)=>{let r='',a='',b='';for(let i=0;i<=l;i+=4){const h=Math.sin(i*.16+T*2)*12;a+=`${i?'L':'M'}${f1(x+i)} ${f1(y-h)} `;b+=`${i?'L':'M'}${f1(x+i)} ${f1(y+h)} `;if(i%8===0)r+=P(`M${f1(x+i)} ${f1(y-h)} L${f1(x+i)} ${f1(y+h)}`,ST('#fff',3));}return r+P(a,ST(c1,6))+P(b,ST(c2,6));};
+  const segs=[[-170,-50,44],[-100,-40,30],[-46,-56,52],[30,-44,36],[90,-52,24],[130,-38,40],[-150,30,34],[-90,40,22],[-40,26,46],[30,36,30],[84,24,50]];
+  segs.forEach(([x,y,l],i)=>{const sh=(1-old)*0,dx=old*(hs(i)-.5)*16,dy=old*(hs(i+4)-.5)*10;s+=G(dx,dy+Math.sin(T*2+i)*2,1,old*(hs(i+7)-.5)*14,rung(x,y,l,'#f34841','#8005f0'));});
+  return s;}
+NX.cacaopod=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,cacaoPodS(o));
+NX.cacaotree=(o={},lt)=>G(0,0,_ap(lt,0,.45),0,cacaoTreeS(Object.assign({T:lt},o)));
+NX.mound=(o={},lt)=>G(0,0,1,0,moundS(Object.assign({grow:EZ.out(sg(lt,0,1.2)),temple:EZ.back(sg(lt,1.0,1.4))},o)),_ao(lt,0,.2));
+NX.sherd=(o={},lt)=>G(0,0,_ap(lt,0,.35),Math.sin(lt*2)*3,sherdS(o));
+NX.yaupon=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,yauponS(Object.assign({T:lt},o)));
+NX.chocobar=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,chocoBarS(o));
+NX.cacaocup=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,cacaoCupS(Object.assign({T:lt},o)));
+NX.dnafrag=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,dnaFragS(Object.assign({T:lt},o)));
+NX_CATALOG.push(
+ ['cacaopod · Mazorca de cacao (se abre: semillas)',(lt)=>G(0,40,2,0,NX.cacaopod({open:EZ.io(sg(lt%2.6,.8,1.6))},lt))],
+ ['cacaotree · Árbol de cacao (con helada opcional)',(lt)=>G(0,200,1.2,0,NX.cacaotree({frost:EZ.io(sg(lt,1.2,2.2))},lt))],
+ ['mound · Montículo de plataforma con templo',(lt)=>G(0,160,1.2,0,NX.mound({},lt))],
+ ['sherd · Fragmento de cerámica estampada',(lt)=>G(0,60,2,0,NX.sherd({seed:3,glow:bel(lt,1,2.4)},lt))],
+ ['yaupon · Yaupón (arbusto de la «bebida negra»)',(lt)=>G(0,180,1.6,0,NX.yaupon({},lt))],
+ ['chocobar · Tableta de chocolate',(lt)=>G(0,120,1.2,0,NX.chocobar({bite:lt>1.2},lt))],
+ ['cacaocup · Vaso de chocolate espumoso',(lt)=>G(0,140,1.8,0,NX.cacaocup({},lt))],
+ ['dnafrag · ADN antiguo en trozos cortos',(lt)=>G(0,40,1.2,0,NX.dnafrag({old:EZ.io(sg(lt,.4,1.4))},lt))]);
