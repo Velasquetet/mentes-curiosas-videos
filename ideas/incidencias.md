@@ -46,3 +46,8 @@
 - es.euronews.com/noticias/internacional respondió, pero mostraba contenido desactualizado (lo más reciente del 12/10); Reuters no se probó (bloqueado). Revisado vía boletín de mediodía de Euronews (17/10), buscador y medios en inglés.
 - Sin noticias que cumplan los criterios: superpetrolero en llamas tras chocar con una mina en Ormuz (solo lo afirma la Guardia Revolucionaria; crisis en curso, ya descartada a las 08:00); torpedo «con IA» de Corea del Norte (solo afirmación estatal); Trump suspende sanciones a Rusia y escenario político francés (política, sin explicación en el estilo del canal); huracán Trudy aún no ha tocado tierra → vigilar.
 - Diario de hoy (malvasía cabeciblanca) ya programado para las 18:30 en publicados.json; no hace falta recuperación.
+
+## 2026-10-17 14:20 · Tarea de noticias (revisión de las 14:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletines de Euronews (mañana y mediodía, 17/10), portada de Al Jazeera, AP (vía ABC News) y buscador.
+- Sin noticias que cumplan los criterios: incidentes con buques en Ormuz (crisis en curso, ya descartada a las 08:00 y 12:00; sin dato nuevo de gran impacto); torpedo «con IA» de Corea del Norte (solo afirmación estatal); política UE/EE. UU. (sin explicación en el estilo del canal); huracán Trudy (cat. 1 según AP, sin daños) aún no ha tocado tierra, acercamiento previsto entre sábado y domingo → vigilar; tifón Champi se dirige a Guam → vigilar.
+- Diario de hoy (malvasía cabeciblanca) confirmado en Buffer como programado para las 18:30; no hace falta recuperación.
