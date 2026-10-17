@@ -788,5 +788,36 @@ NX.music=(o={},lt)=>{const b=1+.05*Math.max(0,Math.sin(lt*8));let s=G(0,0,b,0,P(
   return G(0,40,_ap(lt,0,.4),0,s);};
 n2cat('music · Música',lt=>NX.music({},lt));
 
+/* ===== Recursos nuevos · noticia del segundo intercalar (17/10/2026) ===== */
+/* Reloj digital que pasa por un segundo intercalar 23:59:60 · o:{seq:[...],step,hl (índice resaltado),label,badge ('+1 s'/'−1 s'),badgeC} */
+NX.leapclock=(o={},lt)=>{const seq=o.seq||['23:59:58','23:59:59','23:59:60','00:00:00'],st=o.step||.7,hl=o.hl??2,i=Math.min(seq.length-1,Math.floor(Math.max(0,lt-.3)/st)),isH=i===hl;
+  let s=Rc(-200,-80,400,160,'#141212',22,OL(2.6))+Rc(-186,-66,372,132,'#0b1410',14);
+  const ft=lt-.3-i*st,bump=isH?1+.12*Math.max(0,1-ft/.25):1;
+  s+=G(0,0,bump,0,Tn(0,26,seq[i],70,700,{fill:isH?'#ff4f7b':'#5dff9b',ls:.02}));
+  if(isH)s+=Rc(-186,-66,372,132,'#ff2e63',14,'opacity:'+f2(.15*(1+Math.sin(lt*14))));
+  s+=Rc(-150,80,24,18,'#141212',3)+Rc(126,80,24,18,'#141212',3);
+  if(o.label)s+=G(0,-118,1,0,pill(o.label,{sz:13,w:700}),_ao(lt,.4,.3));
+  if(isH)s+=G(150,-76,1,-8,Rc(-44,-16,88,32,o.badgeC||'url(#gRP)',16)+Tn(0,6,o.badge||'+1 s',16,800,{fill:'#fff'}),cl(ft*5));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('leapclock · Reloj con segundo intercalar 23:59:60',lt=>NX.leapclock({label:'31 dic 2016 · UTC'},lt%4));
+/* Reloj atómico de laboratorio (átomo + cifras que corren) · o:{label} */
+NX.atomclock=(o={},lt)=>{let s=Rc(-170,-150,340,300,'#e8e6ef',18,OL(2.6))+Rc(-150,-130,300,90,'#141212',10);
+  const ms=Math.floor(lt*1000)%1000,sec=Math.floor(lt)%60;s+=Tn(0,-70,`12:00:${String(sec).padStart(2,'0')}.${String(ms).padStart(3,'0')}`,30,700,{fill:'#5dff9b'});
+  const cx=-70,cy=50;for(let k=0;k<3;k++)s+=G(cx,cy,1,k*60+lt*40,El(0,0,62,22,'none',ST('#2a37d7',3)));
+  s+=Ci(cx,cy,12,'url(#gRP)',OL(2));for(let k=0;k<3;k++){const a=lt*5+k*2.1,r=k*60+lt*40,ca=Math.cos(r*Math.PI/180),sa=Math.sin(r*Math.PI/180),ex=Math.cos(a)*62,ey=Math.sin(a)*22;s+=Ci(cx+ex*ca-ey*sa,cy+ex*sa+ey*ca,5,'#f6a81a',OL(1.4));}
+  for(let r=0;r<3;r++)s+=Ci(60,10+r*36,9,hs(r+Math.floor(lt*3))<.6?'#3ff07a':'#1b5a3a',OL(1.4))+Rc(80,4+r*36,70,12,'#c9c6d6',4,OL(1.2));
+  s+=Rc(-140,150,40,14,'#141212',3)+Rc(100,150,40,14,'#141212',3);
+  if(o.label)s+=G(0,-186,1,0,pill(o.label,{sz:13,w:700}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('atomclock · Reloj atómico',lt=>NX.atomclock({label:'Reloj atómico'},lt));
+/* Deriva entre dos relojes (Tierra vs. atómico) con hueco que se abre y se corrige · o:{la,lb,gap,fix:[t...]} */
+NX.drift=(o={},lt)=>{const la=o.la||'Reloj atómico',lb=o.lb||'Giro de la Tierra',max=o.gap||60,fixes=o.fix||[];
+  let g=Math.min(max,lt*40);fixes.forEach(f=>{if(lt>f)g=Math.max(0,g-Math.min(max,(lt-f)*200));});const W2=380;
+  let s=Rc(-W2/2,-70,W2,26,'#2a37d7',13,OL(2))+Tn(-W2/2,-82,la,13,700,{a:'start'});
+  s+=Rc(-W2/2,10,W2-g,26,'#3f9b4f',13,OL(2))+Tn(-W2/2,-2,lb,13,700,{a:'start'});
+  if(g>8)s+=P(`M${f1(W2/2-g)} 50 L${W2/2} 50`,ST(K.red,3))+P(`M${f1(W2/2-g)} 42 l0 16 M${W2/2} 42 l0 16`,ST(K.red,3))+Tn(W2/2-g/2,78,'desfase',12,700,{fill:K.red});
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('drift · Desfase entre dos relojes',lt=>NX.drift({},lt%3));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
