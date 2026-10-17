@@ -65,3 +65,8 @@
 - Descartado por ahora: aviso rojo por lluvias en Barcelona/Girona (previsión, sin daños confirmados al revisar); huracán Trudy aún sin tocar tierra → vigilar.
 - Recursos nuevos en news2.js: `lungs`, `hospital` (con catálogo) y famoso `leon14` en cast.js.
 - Diario de hoy (malvasía cabeciblanca) publicado por Buffer a las 18:32; no hacía falta recuperación.
+
+## 2026-10-17 20:15 · Tarea de noticias (revisión de las 20:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletín de tarde de Euronews (17/10), buscador y medios mexicanos/españoles.
+- Sin noticias que cumplan los criterios: protestas por el coste de la vida en Francia (París, Marsella, Lyon) y en Albania (disturbios políticos, sin explicación en el estilo del canal); sismo M5,1 en Chiapas sin daños; huracán Trudy (cat. 1) no se espera que toque tierra, se alejará el domingo; aviso por lluvias torrenciales en Barcelona (solo previsión y medidas preventivas, sin daños confirmados; punto álgido previsto la noche del sábado al domingo) → vigilar en la próxima revisión.
+- Diario de hoy (malvasía cabeciblanca) ya publicado (18:32); no hace falta recuperación.
