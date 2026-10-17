@@ -51,3 +51,10 @@
 - La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletines de Euronews (mañana y mediodía, 17/10), portada de Al Jazeera, AP (vía ABC News) y buscador.
 - Sin noticias que cumplan los criterios: incidentes con buques en Ormuz (crisis en curso, ya descartada a las 08:00 y 12:00; sin dato nuevo de gran impacto); torpedo «con IA» de Corea del Norte (solo afirmación estatal); política UE/EE. UU. (sin explicación en el estilo del canal); huracán Trudy (cat. 1 según AP, sin daños) aún no ha tocado tierra, acercamiento previsto entre sábado y domingo → vigilar; tifón Champi se dirige a Guam → vigilar.
 - Diario de hoy (malvasía cabeciblanca) confirmado en Buffer como programado para las 18:30; no hace falta recuperación.
+
+## 2026-10-17 17:10 · Tarea de noticias (revisión de las 16:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletines y euronews.com/just-in, buscador y medios en inglés.
+- Publicada la noticia del fin del segundo intercalar (votación de la CGPM en Versalles el 15/10, se aplica desde el 20/05/2027; vídeo de 1:27, publicado a las 17:05). No se había detectado en revisiones anteriores. Fuentes: Euronews, Scientific American (vía Nature World News), CNN, Geo News.
+- Descartado por ahora: aviso rojo por lluvias torrenciales en 7 comarcas de Barcelona con ES-Alert (previsión, sin daños confirmados; Meteocat lo describe como menos extenso que el de hace dos semanas) → vigilar en la próxima revisión. Huracán Trudy sigue sin tocar tierra → vigilar.
+- Recursos nuevos en news2.js: `leapclock`, `atomclock`, `drift` (con entrada en el catálogo).
+- Diario de hoy (malvasía cabeciblanca) confirmado en Buffer, programado para las 18:30; no hace falta recuperación.
