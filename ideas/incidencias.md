@@ -89,3 +89,9 @@
 - Vigilar: explosión e incendio en la base militar CFB Wainwright (Alberta, Canadá; sábado 17/10). Ministro de Defensa confirma muertos y heridos, pero sin cifra oficial (el «al menos 7» viene solo de fuentes militares anónimas de Global News). Si se confirma la cifra oficial → posible noticia.
 - Recursos nuevos en news2.js (con catálogo): `pandal`, `density`, `funnel`, `chestpress`.
 - Diario de hoy (chocolate de Etowah) programado en Buffer para las 18:30 (comprobado); no hace falta recuperación.
+
+## 2026-10-18 12:15 · Tarea de noticias (revisión de las 12:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters no se probó (bloqueado). Revisado vía boletín de Euronews (18/10 mañana, ES y EN), Yahoo/Euronews, CP24, Global News y buscador.
+- Sin noticias que cumplan los criterios. CFB Wainwright (Alberta): el ministro McGuinty y el primer ministro Carney confirman muertos y heridos, pero sigue sin cifra oficial (el «al menos 7 muertos y decenas de heridos» sigue viniendo solo de fuentes militares anónimas de Global News, repetido por teleSUR/esdiario); causa tampoco confirmada (ejercicio de fuego real que habría alcanzado una tubería o pozo de gas, según esas fuentes) → vigilar; en cuanto DND/CAF dé cifras, hacer noticia. Protestas en Francia (aguja del ayuntamiento de Limoges derrumbada) y Albania: política, ya descartadas. Lluvias en Cataluña: sin novedades de impacto.
+- Diario de hoy (chocolate de Etowah) programado en Buffer para las 18:30 (comprobado); no hace falta recuperación.
+- Nota técnica: la rama `main` local no compartía historia con `origin/main` (historia reescrita en remoto); se renombró a `old-main-local` y se trabaja sobre `origin/main`.
