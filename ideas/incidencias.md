@@ -120,3 +120,10 @@
 - Recursos nuevos en news2.js con catálogo: `basefire`, `halfmast`; famoso `carney` en cast.js.
 - Vigilar: rueda de prensa en Wainwright (posible nueva cifra de víctimas → vídeo de actualización). DANA «Adam»: alerta roja en Valencia/Alicante hasta el lunes (si hay daños/víctimas confirmados, posible noticia).
 - Diario de hoy (chocolate de Etowah) salió a las 18:32 (Buffer «sent»); estado actualizado a «publicado». No hacía falta recuperación.
+
+## 2026-10-18 22:10 · Tarea de noticias (revisión de las 22:00)
+- Euronews (portada e internacional) respondió pero sin titulares nuevos de impacto; Reuters bloqueado. Revisado también vía buscador, EFE (Infobae), El Debate, Vozpópuli, Telecinco.
+- Publicada la noticia de la **dana Adam**: aviso rojo de la Aemet («peligro extraordinario») en el litoral sur de Valencia, norte de Alicante e Ibiza/Formentera hasta la mañana del lunes; 300–400 l/m² previstos localmente; >200 l/m² en Rafelcofer y Real de Gandia (Avamet); Adif corta C1 y C2; aeropuerto de Ibiza parado 2 h con cancelaciones y desvíos (cifras dispares entre medios → no se dan); sin clases el lunes en Mallorca, Ibiza, Formentera y municipios valencianos como Gandia; UME rumbo a las islas; 1 víctima (mujer arrastrada por una riera en Cabrera de Mar, Barcelona). Vídeo 1:29 revisado fotograma a fotograma, post 6ad537b60b0d72757a3c2eb8 (shareNow 23:18, sin etiqueta de IA).
+- Recursos nuevos en news2.js con catálogo: `esalert`, `spainalert` (+ `motor/geo_es.mjs`, provincias en geo.json), `alertlevels`. `renderp.py` admite `SKIP=1` para no repetir fotogramas ya hechos.
+- Nota: el render tardó ~35 min (2 núcleos); la rama `main` local volvía a no compartir historia con `origin/main` (renombrada a `old-main-local`).
+- Diario de hoy (chocolate) ya publicado; no hacía falta recuperación (además eran más de las 21:00).
