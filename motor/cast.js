@@ -190,6 +190,7 @@ const FAMOSOS={
   cervantes:{name:'Miguel de Cervantes',skin:'claro',hair:'balding',hairC:'#6b4a2a',body:'coat',c:'#141212',c2:'#141212',acc:['ruff','mustache','trimbeard'],beardC:'#8a6a4a',mustC:'#6b4a2a',emo:'neutral'},
   leon14:{name:'León XIV',skin:'claro',hair:'short',hairC:'#9a9aa0',hat:'cardinal',hatC:'#ffffff',body:'robe',c:'#f7f5ef',acc:['pectoral'],legs:'#f7f5ef',emo:'happy'},
   graham:{name:'Lindsey Graham',skin:'claro',hair:'short',hairC:'#d6d6da',body:'suit',c:'#2a2f45',c2:'#fff',acc:['tie','brows'],browC:'#c9c9cf',tieC:'#8a1f2b',emo:'neutral'},
+  carney:{name:'Mark Carney',skin:'claro',hair:'part',hairC:'#c8c8cc',body:'suit',c:'#22283a',c2:'#fff',acc:['tie','brows'],browC:'#9a9aa0',tieC:'#8a1f2b',emo:'neutral'},
   luis14:{name:'Luis XIV',skin:'claro',hair:'curly',hairC:'#2a1a10',hat:'crown',body:'cape',c:'#1b2596',c2:'#e73568',emo:'smug'}
 };
 /* famoso(clave, extra) → opciones para figure() */

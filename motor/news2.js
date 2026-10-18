@@ -995,5 +995,36 @@ NX.warfunds=(o={},lt)=>{const st=o.step||.9,cut=o.cut||0;let s='';
   return G(0,0,_ao(lt,0,.3),0,s);};
 n2cat('warfunds · Del petróleo al dinero de la guerra',lt=>NX.warfunds({cut:sg(lt%5,3.2,3.6)},lt%5));
 
+/* Base militar de entrenamiento con incendio forestal que avanza empujado por el viento y cruza la valla · o:{spread (s hasta cruzar), wind (flechas), label} */
+NX.basefire=(o={},lt)=>{const sp=o.spread||4,q=EZ.io(sg(lt,.3,.3+sp));let s='';
+  s+=Rc(-260,0,520,60,'#b9a46a',0,OL(2))+P('M-260 0 L260 0',ST(K.ink,2.4));
+  for(let i=0;i<9;i++)s+=P(`M${-250+i*60} 18 l8 -8 l8 8`,ST('#8f7c45',2));
+  /* valla con postes */
+  s+=P('M150 0 L150 -46 M175 0 L175 -46 M200 0 L200 -46 M225 0 L225 -46 M250 0 L250 -46',ST(K.ink,3))+P('M140 -40 L260 -40 M140 -24 L260 -24',ST('#6b6f78',2));
+  /* barracones, tiendas y vehículos */
+  s+=Rc(-240,-58,90,58,'#d7cdb0',2,OL(2))+P('M-246 -58 L-195 -80 L-144 -58Z','fill:#7c6e48;'+OL(2))+Rc(-206,-30,18,30,'#5a4a2a');
+  [[-110,0],[-55,0]].forEach(([x])=>s+=G(x,0,1,0,P('M-30 0 L0 -40 L30 0Z','fill:#6f7a4f;'+OL(2))+P('M-6 0 L0 -14 L6 0Z','fill:#2f3420')));
+  s+=G(20,0,.9,0,Rc(-44,-26,88,26,'#5d6842',8,OL(2))+Rc(-26,-44,48,20,'#6f7a4f',5,OL(2))+Rc(16,-38,46,7,'#4a5236',3,OL(1.4))+[-28,-8,12,32].map(x=>Ci(x,0,8,'#2b2b2b',OL(1.4))).join(''));
+  s+=G(95,0,.75,0,Rc(-30,-40,60,40,'#6f7a4f',4,OL(2))+Rc(30,-28,24,28,'#5d6842',4,OL(2))+Ci(-14,0,9,'#2b2b2b',OL(1.4))+Ci(36,0,9,'#2b2b2b',OL(1.4)));
+  /* frente de fuego: avanza de izquierda a derecha */
+  const fx=lerp(-300,280,q),fw=Math.max(40,fx+260);
+  if(lt>.3){s+=G((fx-260)/2-10,0,.42+.18*q,0,NX.fire({n:Math.max(3,Math.round(fw/45)),w:fw},lt));
+    for(let k=0;k<8;k++){const qq=((lt*.3)+k/8)%1;s+=Ci(-240+hs(k)*Math.max(20,fw)+qq*120,-120-qq*220,16+qq*40,'#4a4545',`opacity:${f2(.55*Math.sin(Math.PI*qq)*Math.min(1,q*3))}`);}}
+  /* viento */
+  if(o.wind!==false)for(let k=0;k<3;k++){const m=((lt*.8)+k/3)%1;s+=G(-200+m*400,-230+k*36,1,0,P('M-40 0 Q-10 -10 20 0 M8 -10 L24 0 L8 10',ST('#ffffff',5)),f2(Math.sin(Math.PI*m)));}
+  if(o.label)s+=G(0,70,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('basefire · Incendio en una base militar (viento)',lt=>G(0,80,1,0,NX.basefire({label:'zona de entrenamiento'},lt%6)));
+/* Bandera que baja a media asta (luto) · o:{colors (bandas verticales), leaf (hoja de arce central, Canadá), at (s en que empieza a bajar)} */
+NX.halfmast=(o={},lt)=>{const cs=o.colors||[K.red,'#ffffff',K.red],at=o.at??.6,q=EZ.io(sg(lt,at,at+2.2)),fy=lerp(-300,-170,q),w=150,h=90;let s='';
+  s+=P('M0 60 L0 -310',ST('#8b8f98',7))+Ci(0,-314,7,'#c9a04a',OL(1.4))+Rc(-30,52,60,14,'#6b6f78',3,OL(2));
+  const wv=k=>_osc(lt,.6,4,k);let fl='';
+  cs.forEach((c,i)=>{const x0=4+i*w/cs.length,x1=4+(i+1)*w/cs.length;fl+=P(`M${f1(x0)} ${f1(fy+wv(i))} L${f1(x1)} ${f1(fy+wv(i+1))} L${f1(x1)} ${f1(fy+h+wv(i+1))} L${f1(x0)} ${f1(fy+h+wv(i))}Z`,'fill:'+c);});
+  if(o.leaf!==false){const cx=4+w/2,cy=fy+h/2+wv(1.5);fl+=G(cx,cy,.9,0,P('M0 -26 L6 -14 L14 -18 L11 -4 L22 -8 L18 2 L24 6 L8 10 L10 18 L2 14 L2 26 L-2 26 L-2 14 L-10 18 L-8 10 L-24 6 L-18 2 L-22 -8 L-11 -4 L-14 -18 L-6 -14Z','fill:'+K.red));}
+  s+=fl+P(`M4 ${f1(fy+wv(0))} L${4+w} ${f1(fy+wv(3))} L${4+w} ${f1(fy+h+wv(3))} L4 ${f1(fy+h+wv(0))}Z`,'fill:none;'+OL(2));
+  if(o.label)s+=G(0,100,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,at+2.2,.3));
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('halfmast · Bandera a media asta',lt=>G(0,140,1,0,NX.halfmast({label:'a media asta'},lt%5)));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);

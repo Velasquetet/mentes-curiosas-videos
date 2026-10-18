@@ -103,7 +103,7 @@
       "fecha": "2026-10-17",
       "sale": "2026-10-18",
       "tipo": "diario",
-      "estado": "programado",
+      "estado": "publicado",
       "tema": "El chocolate más antiguo al este del Misisipi (ADN de cacao en cerámica de Etowah, Georgia)",
       "video": "videos/2026-10-18_chocolate.mp4",
       "buffer_post": "6ad3fcff938409f1d0a6e2ed"
@@ -125,6 +125,15 @@
       "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
       "video": "videos/2026-10-18_drones-rusia.mp4",
       "buffer_post": "6ad4d4480a208cb3236ad783"
+    },
+    {
+      "fecha": "2026-10-18",
+      "sale": "2026-10-18",
+      "tipo": "noticia",
+      "estado": "pendiente",
+      "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
+      "video": "videos/2026-10-18_wainwright-incendio.mp4",
+      "buffer_post": null
     }
   ]
 }
