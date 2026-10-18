@@ -18,6 +18,7 @@ Procedimiento que siguen las tareas programadas. Cada ejecución empieza en una 
 5. Duración del audio = duración del vídeo (+0,6 s de cola). Diario: 60–150 s. Noticia: ≥ 60 s. Si se queda corto, ampliar el guion y regenerar (borrar el .wav viejo).
 
 ## 2 · Vídeo
+- **Arranque impactante obligatorio** (ver GUIA → «Arranque impactante»): la frase más fuerte primero y una escena 1 impactante, a pantalla llena y en movimiento desde el fotograma 0.
 Seguir `motor/GUIA.md` → «Flujo de un vídeo» (escenas en `scenes.js`, `build.py`, revisión con `pv.py` mirando las hojas de contacto, `renderp.py` en 2 procesos, audio, ffmpeg).
 - Audio: adaptar `motor/audio.py` (DUR y los instantes de los efectos a las transiciones del vídeo nuevo); música muy baja, efectos ocasionales; voz a −14 LUFS.
 - Calidad: revisar al menos un fotograma por segundo antes de renderizar y, después de renderizar, **revisar TODOS los fotogramas uno a uno** con `motor/review.py` (hojas en `revision/`) antes de codificar. Si algo está descuadrado, se corrige y se vuelve a renderizar ese tramo. Nada de textos solapados, cortados o fuera de pantalla.

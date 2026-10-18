@@ -17,6 +17,14 @@ Guía para fabricar cada vídeo con la misma calidad (y mejorarla). La deben seg
 8. **Codificar**: H.264 crf 18, 1080×1920, 30 fps, AAC 192k, `-movflags +faststart`.
 9. **Publicar**: subir el mp4 a `videos/` en GitHub y crear el post en Buffer (canal @mentes.curiosas.tvs) con la URL raw. Sin etiqueta de IA.
 
+## Arranque impactante (OBLIGATORIO · indicación del usuario 18/10)
+El vídeo de la alerta de terremoto en Japón (más de 20.000 visualizaciones) funcionó porque **lo más impactante va lo primero**: desde el fotograma 1 hay un móvil gigante con «ALERTA DE TERREMOTO» sonando sobre la ciudad, la franja de ÚLTIMA HORA y, a los 2 s, decenas de móviles alrededor.
+- **Guion**: la primera frase es el dato o la situación más fuerte de toda la historia (no el contexto). Ej.: «Los móviles de medio Japón sonaron avisando de un terremoto de 9,9… que nunca llegó». El contexto y el «cómo» van después.
+- **Escena 1 (0–3 s)**: siempre una imagen impactante a pantalla llena, ya en movimiento en el fotograma 0 (nada de fundidos desde gris ni escenas vacías): el objeto/escena clave en grande + algo que se multiplica, tiembla, explota, cae o suena. Con sonido desde el principio.
+- Nada de introducciones, presentaciones de personajes ni el logo al principio. Los personajes pueden entrar a partir del segundo 2–3.
+- **Comprobar antes de renderizar**: mirar los fotogramas 0, 15, 30, 45 y 60 (0–2 s). Si en el fotograma 0 no se entiende ya qué pasa y por qué es sorprendente, rehacer la escena 1.
+- La portada (miniatura) del post de Buffer se toma de esa escena (`thumbnailOffset` dentro de los 2 primeros segundos).
+
 ## Ritmo (indicaciones del usuario, 14/10)
 El vídeo del esturión se hizo lento: hay que darle más ritmo **sin acortar los vídeos**. Pero sin pasarse («no exageres tanto»): que sea ágil, no frenético.
 - **Pausas de la voz**: recortar los silencios largos entre frases (Azure deja ~0,8 s) a unos 0,35–0,45 s, que siga sonando natural (`trim.py` del vídeo de los reptiles como plantilla).
