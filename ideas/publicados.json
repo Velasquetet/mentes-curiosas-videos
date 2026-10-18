@@ -130,10 +130,10 @@
       "fecha": "2026-10-18",
       "sale": "2026-10-18",
       "tipo": "noticia",
-      "estado": "pendiente",
+      "estado": "publicado",
       "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
       "video": "videos/2026-10-18_wainwright-incendio.mp4",
-      "buffer_post": null
+      "buffer_post": "6ad514930a208cb32379cdc7"
     }
   ]
 }

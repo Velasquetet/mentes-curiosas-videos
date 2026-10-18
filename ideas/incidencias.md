@@ -113,3 +113,10 @@
 - La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters bloqueado. Revisado vía resumen internacional de EFE (Infobae, 18/10 12:00 GMT), ABC News (AU), CNBC/CBS/Washington Post (titulares) y buscador.
 - Sin noticias que cumplan los criterios. CFB Wainwright: el ministro McGuinty sigue sin dar cifras oficiales («más en las próximas horas y días»); el «al menos 7 muertos» sigue atribuido a fuentes anónimas (Global News, CBC); EFE: se descarta terrorismo → vigilar. Francia: Macron habla esta noche (política, vigilar). Egipto-hutíes: sin votación. Sin terremotos ni catástrofes nuevas relevantes.
 - Diario de hoy (chocolate de Etowah) programado en Buffer para las 18:30 (comprobado con list_posts); no hace falta recuperación.
+
+## 2026-10-18 20:10 · Tarea de noticias (revisión de las 20:00)
+- La lectura web no pudo abrir es.euronews.com (permiso no concedido a tiempo); Reuters bloqueado. Revisado vía boletín de Euronews (18/10 tarde), buscador, EFE (Infobae), La Opinión, CBS, TNND, Al Jazeera, Global News.
+- Publicada la noticia del incendio en la base CFB Wainwright (Alberta, Canadá): ya hay cifra oficial — Carney confirma 4 militares muertos y decenas de heridos (familias notificadas); fuego hacia las 16:00 locales del sábado en una zona de entrenamiento, salió de la base con fuertes vientos; ambulancias aéreas desde Edmonton y Saskatoon; hospitales cercanos desbordados; causa en investigación (con la RCMP), sin indicios de terrorismo; el «ejercicio con fuego real / 7 muertos» de Global News se cita como no confirmado. Vídeo 1:30, revisado fotograma a fotograma, post 6ad514930a208cb32379cdc7 (shareNow 20:48, sin etiqueta de IA).
+- Recursos nuevos en news2.js con catálogo: `basefire`, `halfmast`; famoso `carney` en cast.js.
+- Vigilar: rueda de prensa en Wainwright (posible nueva cifra de víctimas → vídeo de actualización). DANA «Adam»: alerta roja en Valencia/Alicante hasta el lunes (si hay daños/víctimas confirmados, posible noticia).
+- Diario de hoy (chocolate de Etowah) salió a las 18:32 (Buffer «sent»); estado actualizado a «publicado». No hacía falta recuperación.
