@@ -1026,5 +1026,48 @@ NX.halfmast=(o={},lt)=>{const cs=o.colors||[K.red,'#ffffff',K.red],at=o.at??.6,q
   return G(0,0,_ao(lt,0,.3),0,s);};
 n2cat('halfmast · Bandera a media asta',lt=>G(0,140,1,0,NX.halfmast({label:'a media asta'},lt%5)));
 
+/* ---------------- dana Adam · alerta roja en Valencia, Alicante y Baleares (18/10/2026) ---------------- */
+/* Móvil con ES-Alert (alerta de Protección Civil) a pantalla completa, vibra y suena · o:{title,sub,level ('ROJO'), buzz (0-1), small (sin texto largo)} */
+function esAlertS(o={}){const T=o.T||0,bz=o.buzz??1,sh=bz>0?Math.sin(T*70)*3*bz:0;let s='';
+  if(bz>0)for(let i=0;i<3;i++){const q=((T*1.6)+i/3)%1;s+=Rc(-100-q*40,-185-q*40,200+q*80,370+q*80,'none',30+q*20,`stroke:${K.red};stroke-width:3;opacity:${f2((1-q)*.55*bz)}`);}
+  let ph=Rc(-95,-180,190,360,K.ink,28)+Rc(-85,-170,170,340,'#c81e2c',20)+Rc(-30,-165,60,12,K.ink,6);
+  const fl=bz>0&&Math.floor(T*4)%2?.16:0;ph+=Rc(-85,-170,170,340,'#ffffff',20,`opacity:${f2(fl)}`);
+  ph+=Rc(-85,-150,170,30,'rgba(0,0,0,.25)')+Tn(0,-130,'ES-ALERT · Protección Civil',10.5,800,{fill:'#fff',ls:.03});
+  /* icono: nube con lluvia */
+  const cl0=P('M-34 -6 Q-36 -30 -14 -30 Q-8 -48 12 -44 Q30 -42 32 -24 Q48 -22 46 -6Z','fill:#fff;'+OL(3));
+  let dr='';for(let i=0;i<4;i++){const q=((T*2.2)+i/4)%1;dr+=P(`M${-24+i*16} ${f1(4+q*22)} l-4 10`,ST('#fff',4,`opacity:${f2(1-q)}`));}
+  ph+=G(0,-78,1,0,cl0+dr);
+  ph+=Tn(0,-18,o.title||'ALERTA ROJA',20,800,{fill:'#fff',ls:.05});
+  ph+=Tn(0,4,o.sub||'Peligro extraordinario',12,700,{fill:'#ffe1e4'})+Tn(0,20,o.sub2||'por lluvias',12,700,{fill:'#ffe1e4'});
+  ph+=Rc(-70,40,140,56,'#fff',12)+Tn(0,60,'NIVEL',9.5,800,{fill:'#777',ls:.1})+Tn(0,86,o.level||'ROJO',24,800,{fill:'#c81e2c'});
+  ph+=Rc(-72,110,144,34,'rgba(255,255,255,.18)',17)+Tn(0,132,o.tip||'Evita desplazarte',12,700,{fill:'#fff'});
+  return s+G(sh,0,1,sh*.6,ph);}
+NX.esalert=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,esAlertS(Object.assign({T:lt},o)));
+n2cat('esalert · Móvil con ES-Alert (alerta roja por lluvias)',lt=>NX.esalert({buzz:1-sg(lt%4,3,3.4)},lt%4));
+
+/* Mapa de avisos de la Aemet por provincias (península + Baleares) · o:{red:[nombres], orange:[…], yellow:[…], pins:[['Valencia','texto'],…], at (s en que se colorea), w (ancho, por defecto 460), lx (desplaza etiquetas), over:(pt,lt)=>svg extra}
+   Nombres de provincia como en es-atlas (se aceptan trozos: 'Valencia', 'Alicante', 'Balears'). Puntos con nombre en GEOJ.espt (ver geo_es.mjs). */
+NX.spainalert=(o={},lt)=>{const g=window.GEOJ,at=o.at??.4,q=EZ.io(sg(lt,at,at+.8)),pulse=.75+.25*Math.sin(lt*6);const has=(arr,n)=>(arr||[]).some(k=>n.includes(k));
+  let m=Rc(-40,-30,540,432,'#bcd3f0',14);
+  g.esprov.forEach(f=>{let c='#fbfbfb';if(has(o.red,f.n))c=mixc('#fbfbfb','#e0283a',q*pulse);else if(has(o.orange,f.n))c=mixc('#fbfbfb','#f76e19',q);else if(has(o.yellow,f.n))c=mixc('#fbfbfb','#f6c21a',q);
+    m+=P(f.d,`fill:${c};stroke:${K.ink};stroke-width:1.1;stroke-linejoin:round`);});
+  if(o.over)m+=o.over(g.espt,lt); /* capa extra en coordenadas del mapa (flechas, rutas) */
+  let pins='';(o.pins||[]).forEach(([k,lab],i)=>{const pt=g.espt[k];if(!pt)return;const a=at+.6+i*.25,qq=sg(lt,a,a+.35);if(qq<=0)return;
+    pins+=G(pt[0],pt[1],1,0,_pulse(lt-a,12,K.red,2,1.3)+Ci(0,0,5,K.ink,OL(2,'#fff')))+(lab?G(pt[0]+(o.lx||0),pt[1]-22,1,0,pill(lab,{sz:12,w:800}),_ao(lt,a+.2,.3)):'');});
+  const leg=[['ROJO','#e0283a'],['NARANJA','#f76e19'],['AMARILLO','#f6c21a']].map(([t,c],i)=>G(20+i*104,382,1,0,Rc(0,-10,18,18,c,4,OL(1.6))+Tn(24,4,t,11,800,{a:'start'}))).join('');
+  const W=o.w||460,k=W/460;
+  return G(-230*k,-190*k,k,0,G(0,0,1,0,m+pins)+G(0,0,1,0,leg,_ao(lt,at+.8,.3))+Rc(-40,-30,540,432,'none',14,OL(2.4)));};
+n2cat('spainalert · Mapa de avisos de la Aemet por provincias',lt=>G(0,0,.9,0,NX.spainalert({red:['Valencia','Alicante'],orange:['Murcia','Almería','Balears'],yellow:['Barcelona','Tarragona'],pins:[['Valencia','aviso rojo']]},lt%5)));
+
+/* Semáforo de avisos de la Aemet: 4 niveles, el indicador sube hasta el nivel indicado · o:{level (0-3), at, dur} */
+NX.alertlevels=(o={},lt)=>{const L=[['VERDE','sin riesgo','#3f9b4f'],['AMARILLO','riesgo','#f6c21a'],['NARANJA','riesgo importante','#f76e19'],['ROJO','peligro extraordinario','#e0283a']];
+  const lv=o.level??3,at=o.at??.3,dur=o.dur||1.6,pos=lv*EZ.io(sg(lt,at,at+dur));let s='';
+  L.forEach(([n,d,c],i)=>{const y=150-i*100,on=pos>=i-.05,big=i===lv&&pos>lv-.05?1+.06*Math.sin(lt*7):1;
+    s+=G(-80,y,_ap(lt,i*.08,.3)*big,0,Rc(-70,-42,140,84,on?c:'#e6e6e6',14,OL(2.4))+Tn(0,8,n,i===3?22:18,800,{fill:on?'#fff':'#9a9a9a',ls:.06}));
+    s+=G(30,y,1,0,Tn(0,6,d,15,700,{a:'start',fill:on?K.ink:'#9a9a9a'}),_ao(lt,i*.08+.2,.3));});
+  const ay=150-pos*100;s+=G(-172,ay,1,0,P('M-18 -16 L10 0 L-18 16Z','fill:'+K.ink));
+  return s;};
+n2cat('alertlevels · Niveles de aviso de la Aemet',lt=>G(0,40,1,0,NX.alertlevels({level:3},lt%4)));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);

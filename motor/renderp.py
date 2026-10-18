@@ -11,6 +11,7 @@ with sync_playwright() as pw:
     t0=time.time();c=0
     for i in range(i0,i1):
         if (i-i0)%N!=K: continue
+        if os.environ.get('SKIP') and os.path.exists(f'{V}/{out}/f{i:04d}.png'): continue
         p.evaluate(f"render({i/FPS})")
         p.locator('#stage').screenshot(path=f'{V}/{out}/f{i:04d}.png'); c+=1
     print('done',K,c,round(time.time()-t0,1)); br.close()
