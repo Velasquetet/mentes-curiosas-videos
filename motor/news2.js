@@ -885,5 +885,57 @@ NX.whitehouse=(o={},lt)=>{let s=Rc(-230,-90,460,170,'#f7f5ef',4,OL(2.4))+Rc(-236
   return G(0,0,_ap(lt,0,.45),0,s);};
 n2cat('whitehouse · Casa Blanca',lt=>NX.whitehouse({label:'CASA BLANCA'},lt));
 
+
+/* ===== Recursos nuevos · noticia de la estampida del Durga Puja en Calcuta (18/10/2026) ===== */
+/* Pandal: pabellón temporal de fiesta (bambú y tela, arco de entrada, guirnaldas de luces) · o:{label,narrow (entrada estrecha 0-1),rain (0-1)} */
+NX.pandal=(o={},lt)=>{const nw=o.narrow??0,dw=lerp(120,54,nw);let s='';
+  s+=P('M-210 60 L-210 -120 Q-210 -230 0 -260 Q210 -230 210 -120 L210 60Z','fill:#f6a81a;'+OL(2.6));
+  s+=P('M-180 60 L-180 -110 Q-180 -205 0 -228 Q180 -205 180 -110 L180 60Z','fill:#e2264a;'+OL(2));
+  s+=P('M-150 60 L-150 -100 Q-150 -180 0 -198 Q150 -180 150 -100 L150 60Z','fill:#ffd23f;'+OL(2));
+  for(let i=0;i<9;i++){const a=Math.PI*(.12+i*.095),x=Math.cos(a)*-150,y=-100-Math.sin(a)*92;s+=G(x,y,1,0,P('M0 -14 Q10 0 0 14 Q-10 0 0 -14Z','fill:#e2264a;'+OL(1.2)));}
+  s+=P(`M${f1(-dw/2)} 60 L${f1(-dw/2)} -40 Q0 ${f1(-40-dw*.7)} ${f1(dw/2)} -40 L${f1(dw/2)} 60Z`,'fill:#3a2414;'+OL(2.2));
+  s+=Ci(0,-130,26,'#fff7d6',OL(2))+[0,1,2,3,4,5,6,7].map(k=>{const a=k*Math.PI/4+lt*.6;return P(`M${f1(Math.cos(a)*32)} ${f1(-130+Math.sin(a)*32)} L${f1(Math.cos(a)*42)} ${f1(-130+Math.sin(a)*42)}`,ST('#f6a81a',3));}).join('');
+  s+=Rc(-232,-140,10,200,'#c9a46a',3,OL(1.6))+Rc(222,-140,10,200,'#c9a46a',3,OL(1.6));
+  let d='M-226 -140';for(let x=-226;x<=226;x+=28)d+=` Q${x+14} -118 ${x+28} -140`;s+=P(d,ST(K.ink,1.6));
+  for(let x=-212;x<=212;x+=28){const on=hs(x*.37+Math.floor(lt*4))>.35;s+=Ci(x,-128,5,on?'#fff36b':'#9a8f5a',OL(1));}
+  const rn=o.rain||0;if(rn>0)for(let i=0;i<34;i++){const q=((lt*1.8)+hs(i*1.9))%1,x=hs(i+3)*520-260,y=-300+q*380;s+=P(`M${f1(x)} ${f1(y)} l-5 18`,ST('#5d7fb8',2.6,`opacity:${f2(rn*(1-q)*.85)}`));}
+  if(o.label)s+=G(0,104,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('pandal · Pabellón de fiesta (pandal)',lt=>NX.pandal({label:'pandal',rain:lt>1.5?sg(lt,1.5,2.2):0,narrow:sg(lt,2.5,3.2)},lt%4.5));
+/* Densidad: 1 metro cuadrado visto desde arriba que se llena de personas (puntos) · o:{steps:[1,2,4,6],every (s por paso),wave (0-1, se mueven a oleadas),label} */
+NX.density=(o={},lt)=>{const steps=o.steps||[1,2,4,6],ev=o.every||.8,k=Math.min(steps.length-1,Math.floor(lt/ev)),n=steps[k],wv=o.wave||0;
+  const S=220;let s=Rc(-S/2,-S/2,S,S,'#ecebf2',6,OL(2.6))+P(`M${-S/2} ${S/2+22} L${S/2} ${S/2+22} M${-S/2} ${S/2+14} l0 16 M${S/2} ${S/2+14} l0 16`,ST(K.ink,2))+Tn(0,S/2+46,'1 metro',13,700);
+  const pos=[[0,0],[-50,40],[50,-40],[-55,-55],[55,55],[0,-70],[0,70],[-75,10],[75,-10]];
+  for(let i=0;i<n;i++){const [x,y]=pos[i],ph=i*1.3,dx=wv*Math.sin(lt*4-x*.02)*20,dy=wv*Math.cos(lt*3-y*.02)*8,ti=ev*steps.findIndex(v=>v>i),q=EZ.back(sg(lt,ti,ti+.3));
+    s+=G(x+dx,y+dy,q,0,Ci(0,0,26,['#2a37d7','#e73568','#8005f0','#f6a81a','#3f9b4f','#f34841'][i%6],OL(2))+Ci(0,0,10,'rgba(255,255,255,.35)'));}
+  const col=n>=5?K.red:n>=4?'#f6a81a':'#3f9b4f';
+  s+=G(0,-S/2-46,1,0,Rc(-92,-26,184,52,col,26,OL(2))+Tn(-30,10,String(n),28,800,{fill:'#fff'})+Tn(28,6,o.label||'por m²',13,700,{fill:'#fff'}));
+  if(wv>0)s+=G(S/2+34,0,1,0,P('M-10 -30 Q10 -15 -10 0 Q10 15 -10 30',ST(K.red,4))+P('M-20 22 L-10 30 L-2 20',ST(K.red,4)),wv);
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('density · Personas por metro cuadrado',lt=>NX.density({steps:[1,2,4,6],every:.8,wave:lt>3.4?sg(lt,3.4,3.8):0},lt%5.5));
+/* Embudo visto desde arriba: gente (puntos) que avanza hacia una entrada estrecha y se atasca · o:{jam (instante del atasco),fall (0-1 algunos caen),label} */
+NX.funnel=(o={},lt)=>{const ja=o.jam??1.5,jq=EZ.io(sg(lt,ja,ja+.8)),fl=o.fall||0;let s='';
+  s+=P('M-240 -150 L-40 -20 L-40 150 M240 -150 L40 -20 L40 150',ST(K.ink,5));
+  s+=Rc(-40,110,80,40,'#3a2414',2)+Tn(0,170,'entrada',12,700);
+  for(let i=0;i<46;i++){const r=hs(i*2.3),c=hs(i*5.1),flow=((lt*.35)+r)%1,adv=lerp(flow,.55+.45*r,jq);
+    const y=lerp(-230,90,adv),half=y<-20?lerp(240,40,(y+150)/130):38,x=(c-.5)*2*Math.max(28,Math.min(230,half-14))*(y<-150?1:1);
+    const jit=jq*Math.sin(lt*7+i)*3;const down=fl>0&&i%6===0&&adv>.8;
+    s+=down?El(x,y+6,18,9,'#9a9aa8',OL(1.4)+`;opacity:${f2(.4+.6*fl)}`):Ci(x+jit,y,11,['#2a37d7','#e73568','#8005f0','#f6a81a','#3f9b4f'][i%5],OL(1.4));}
+  if(jq>0){s+=G(-120,10,1,25,P('M-26 0 L18 0 M6 -12 L18 0 L6 12',ST(K.red,5)),jq)+G(120,10,1,155,P('M-26 0 L18 0 M6 -12 L18 0 L6 12',ST(K.red,5)),jq)+G(0,-120,1,90,P('M-26 0 L18 0 M6 -12 L18 0 L6 12',ST(K.red,5)),jq);}
+  if(o.label)s+=G(0,-262,1,0,pill(o.label,{sz:14,w:800,fill:'url(#gRP)'}),_ao(lt,ja,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('funnel · Multitud que se atasca en una entrada',lt=>NX.funnel({jam:1.4,fall:sg(lt,2.6,3.2),label:'atasco'},lt%4.5));
+/* Presión sobre el pecho: torso de perfil frontal con pulmones que no pueden hincharse; flechas que aprietan; guard = brazos delante del pecho · o:{press,guard,label} */
+NX.chestpress=(o={},lt)=>{const pa=o.press??.8,pq=EZ.io(sg(lt,pa,pa+.6)),gq=o.guard!=null?EZ.back(sg(lt,o.guard,o.guard+.4)):0;
+  const br=1+.08*Math.sin(lt*3.2)*(1-pq*.85),sq=1-pq*.16+gq*.1;let s='';
+  s+=P('M-120 140 L-120 -40 Q-120 -110 -60 -120 L60 -120 Q120 -110 120 -40 L120 140Z','fill:#ecd6c4;'+OL(2.6));
+  s+=Ci(0,-170,44,'#ecd6c4',OL(2.6))+Rc(-18,-132,36,18,'#ecd6c4',4);
+  s+=`<g transform="translate(0 10) scale(${f2(sq*br)} ${f2(br)})">`+P('M-14 -80 Q-80 -80 -88 10 Q-90 80 -30 86 Q-12 60 -14 -80Z','fill:#f39bb0;'+OL(2.2))+P('M14 -80 Q80 -80 88 10 Q90 80 30 86 Q12 60 14 -80Z','fill:#f39bb0;'+OL(2.2))+'</g>';
+  if(pq>0){const off=lerp(90,0,pq);s+=G(-180-off*.2,10,1,0,P('M-40 0 L20 0 M4 -16 L20 0 L4 16',ST(K.red,7)),pq)+G(180+off*.2,10,1,180,P('M-40 0 L20 0 M4 -16 L20 0 L4 16',ST(K.red,7)),pq);}
+  if(gq>0)s+=G(0,-10,gq,0,Rc(-100,-14,200,28,'#2a37d7',14,OL(2.2))+Rc(-100,16,200,28,'#2a37d7',14,OL(2.2))+Ci(-104,1,18,'#ecd6c4',OL(2))+Ci(104,1,18,'#ecd6c4',OL(2)));
+  if(o.label)s+=G(0,190,1,0,pill(o.label,{sz:14,w:800,fill:gq>0?'#2a37d7':K.red}),_ao(lt,gq>0?o.guard+.2:pa+.3,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('chestpress · Presión sobre el pecho',lt=>NX.chestpress({press:.8,label:'no deja respirar'},lt%3.5));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
