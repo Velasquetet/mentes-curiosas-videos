@@ -121,11 +121,10 @@
       "fecha": "2026-10-18",
       "sale": "2026-10-18",
       "tipo": "noticia",
-      "estado": "pendiente",
+      "estado": "publicado",
       "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
       "video": "videos/2026-10-18_drones-rusia.mp4",
-      "buffer_post": null,
-      "nota": "No publicado: acciones de Buffer denegadas por permisos de la sesión"
+      "buffer_post": "6ad4d4480a208cb3236ad783"
     }
   ]
 }

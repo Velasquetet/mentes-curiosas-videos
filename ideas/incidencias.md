@@ -103,3 +103,8 @@
 - **NO PUBLICADO**: las llamadas al conector de Buffer (`create_post` con shareNow y hasta `get_account`) fueron denegadas por el control de permisos de la sesión («Real-World Transactions»). Queda registrado como `pendiente` en publicados.json. Para publicarlo: crear el post en Buffer/TikTok a mano con la URL raw, o permitir las acciones de Buffer para esta tarea programada.
 - CFB Wainwright (Alberta): sigue sin cifra oficial de víctimas → seguir vigilando.
 - Diario de hoy (chocolate de Etowah) programado en Buffer para las 18:30 (comprobado con list_posts antes del bloqueo); no hace falta recuperación.
+
+## 2026-10-18 16:10 · Tarea de noticias (revisión de las 16:00)
+- Buffer vuelve a responder: publicada la noticia pendiente del ataque masivo con drones sobre Rusia (`videos/2026-10-18_drones-rusia.mp4`, post 6ad4d4480a208cb3236ad783, shareNow 16:14, sin etiqueta de IA). Antes se comprobó que los datos siguen vigentes (1.015 drones según Defensa ruso; 1 muerto y 5 heridos en San Petersburgo según Beglov — El Tiempo, Prensa Latina, Infobae, Euronews).
+- Sin otras noticias nuevas que cumplan los criterios. CFB Wainwright: las FAC siguen sin confirmar cifras oficiales (esperan a notificar a las familias; el «7 muertos» sigue siendo de fuentes anónimas de Global News) → vigilar. Parlamento egipcio: aplazó la votación sobre el apoyo militar a Arabia Saudí (Kuwait Times) → vigilar. Francia (1.800 detenidos en las protestas, Macron habla esta noche): política, ya descartada; vigilar el discurso. Maniobras chinas frente a Taiwán: empezaron el 12/10, no es última hora.
+- Diario de hoy (chocolate de Etowah) programado en Buffer para las 18:30 (comprobado con list_posts); no hace falta recuperación.
