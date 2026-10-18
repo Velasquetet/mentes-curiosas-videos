@@ -77,3 +77,8 @@
 - Descartado: lluvias torrenciales en Cataluña (un desaparecido en Cabrera de Mar, cortes de tren y carreteras, sin incidencias graves al revisar; situación en curso) → vigilar en la próxima revisión.
 - Recursos nuevos en news2.js: `pausedlaw`, `oiltoll`, `whitehouse` (con catálogo) y famoso `graham` en cast.js.
 - Diario de hoy (malvasía cabeciblanca) ya publicado (18:32); además ya son más de las 21:00: no hace falta recuperación.
+
+## 2026-10-18 08:15 · Tarea de noticias (revisión de las 08:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional, su portada ni Reuters (permiso no concedido a tiempo). Revisado vía euronews.com/just-in, boletín de Euronews (18/10 mañana), resumen internacional de EFE (18/10, 02:00 GMT) y buscador.
+- Sin noticias que cumplan los criterios: protestas en Francia/Bélgica/Albania (ya descartadas a las 20:00, política sin explicación en el estilo del canal); lluvias en Cataluña (225 incidentes, búsqueda activa de una mujer en Cabrera de Mar; impacto local, episodio hasta el domingo por la mañana) → vigilar; sesión extraordinaria del Parlamento egipcio sobre posible intervención frente a los hutíes (aún no celebrada) → vigilar.
+- Diario de hoy (chocolate de Etowah) confirmado en Buffer, programado para las 18:30; no hace falta recuperación.
