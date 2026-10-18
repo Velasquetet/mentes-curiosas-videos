@@ -937,5 +937,63 @@ NX.chestpress=(o={},lt)=>{const pa=o.press??.8,pq=EZ.io(sg(lt,pa,pa+.6)),gq=o.gu
   return G(0,0,_ap(lt,0,.4),0,s);};
 n2cat('chestpress · Presión sobre el pecho',lt=>NX.chestpress({press:.8,label:'no deja respirar'},lt%3.5));
 
+/* ===== Recursos nuevos · noticia del ataque masivo con drones sobre Rusia (18/10/2026) ===== */
+/* Enjambre de drones: cielo nocturno que se llena de drones (puntos con hélices) y contador · o:{n (drones dibujados),count (número del contador),label,grow (s hasta llenarse),sky} */
+NX.droneswarm=(o={},lt)=>{const W=480,H=o.h||420,n=o.n||70,gr=o.grow||2.2,q=EZ.out(sg(lt,0,gr));let s='';
+  s+=Rc(-W/2,-H,W,H,lgrad([[0,'#0d1130'],[1,'#3a3f6a']],0,0,0,1),12);
+  for(let i=0;i<22;i++)s+=Ci(-W/2+10+hs(i*1.7)*(W-20),-H+10+hs(i*2.9)*H*.55,1.3,'#fff',`opacity:${f2(.4+.4*hs(i+Math.floor(lt*2)))}`);
+  const vis=Math.floor(n*q);
+  for(let i=0;i<vis;i++){const bx=-W/2+20+hs(i*3.1)*(W-40),by=-H+30+hs(i*7.7)*(H-120),z=1.2+hs(i*1.3)*1.3,dx=_osc(lt,.25+hs(i)*.2,10,i),dy=_osc(lt,.4,4,i*2),r=Math.abs(Math.cos(lt*40+i));
+    const a=EZ.out(sg(lt,i/n*gr,i/n*gr+.3));
+    s+=G(bx+dx-(1-a)*60,by+dy+(1-a)*30,z,0,Rc(-9,-3,18,6,'#1b1d26',2)+P('M-9 -1 L-16 -5 M9 -1 L16 -5',ST('#1b1d26',2))+El(-16,-6,6*r+2,1.4,'rgba(255,255,255,.55)')+El(16,-6,6*r+2,1.4,'rgba(255,255,255,.55)')+Ci(6,0,1.6,Math.floor(lt*3+i)%2?'#ff4d4d':'#7a1f1f'),a);}
+  s+=G(0,0,1,0,_skyline(W,{T:lt,c:'#1e2236',seed:7}));
+  let out=clipG(s,Rc(-W/2,-H,W,H,'#000',12))+Rc(-W/2,-H,W,H,'none',12,OL(2.4));
+  if(o.count){const v=Math.round(o.count*EZ.out4(sg(lt,.2,gr)));out+=G(0,-H+56,_ap(lt,.1,.35),0,Rc(-110,-34,220,68,'#fff',14,OL(2.4))+Tn(0,14,String(v).replace(/\B(?=(\d{3})+(?!\d))/g,'.'),40,800,{fill:K.red}));}
+  if(o.label)out+=G(0,36,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.5,.3));
+  return G(0,0,_ao(lt,0,.3),0,out);};
+n2cat('droneswarm · Enjambre de drones con contador',lt=>G(0,200,1,0,NX.droneswarm({count:1015,label:'drones en una noche'},lt%5)));
+/* Terminal petrolera junto al agua: tanques cilíndricos, tuberías y un petrolero; burn = nº de tanques que arden (desde fireAt) · o:{tanks,burn,fireAt,ship,label} */
+NX.oilterminal=(o={},lt)=>{const nt=o.tanks||5,nb=o.burn||0,fa=o.fireAt??.8;let s='';
+  s+=Rc(-260,30,520,70,'url(#gWA)')+P(`M-260 30 ${[...Array(13)].map((_,i)=>`Q${-250+i*40} ${f1(26+_osc(lt,.8,2,i))} ${-240+i*40} 30`).join(' ')}`,ST('#a7b0ff',2.4));
+  if(o.ship!==false){const sx=lerp(170,150,EZ.io(sg(lt,0,3)));s+=G(sx,40,1,0,P('M-70 -8 L70 -8 L58 12 L-62 12Z','fill:#2a2f45;'+OL(2))+Rc(36,-26,24,18,'#fff',2,OL(1.4))+Rc(-50,-14,80,6,K.red,1));}
+  s+=Rc(-250,0,420,30,'#9aa0a8',2,OL(2.2));
+  s+=P('M-240 -6 L160 -6',ST('#5b5f66',5))+P('M120 -6 L120 26 L150 26',ST('#5b5f66',4));
+  const sp=380/nt;
+  for(let i=0;i<nt;i++){const x=-215+sp*i+sp/2-sp/2,big=i%2===0,hw=big?32:26,h=big?90:70,ap=_ap(lt,i*.08,.35);
+    let t=El(0,-h,hw,8,'#e8e9ee',OL(2))+Rc(-hw,-h,hw*2,h,'#d6dbe2',0,OL(2.2))+El(0,0,hw,8,'#d6dbe2',OL(2))+P(`M${-hw} ${-h*.45} Q0 ${-h*.45+8} ${hw} ${-h*.45}`,ST('#9aa0a8',2))+Rc(-hw,-h*.45-4,hw*2,8,'#2a37d7');
+    const burning=i<nb&&lt>fa+i*.35;
+    if(burning){const fq=EZ.out(sg(lt,fa+i*.35,fa+i*.35+.6));t+=G(0,-h,fq*.55,0,NX.fire({n:3,w:hw*2.4},lt+i));
+      for(let k=0;k<5;k++){const qq=((lt*.35)+k/5+i*.13)%1;t+=Ci(_osc(lt,.3,10,k)+qq*40,-h-90-qq*170,14+qq*30,'#3b3838',`opacity:${f2(.55*fq*Math.sin(Math.PI*qq))}`);}}
+    s+=G(x,0,ap,0,t);}
+  if(o.label)s+=G(-40,80,1,0,pill(o.label,{sz:14,w:800,fill:K.ink}),_ao(lt,.5,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('oilterminal · Terminal petrolera que arde',lt=>G(0,60,1,0,NX.oilterminal({burn:2,fireAt:1,label:'terminal petrolera'},lt%5)));
+/* Almacén logístico (compras por internet): nave con persianas, cajas que salen en cinta; fire = instante en que empieza a arder · o:{fire,label,brand} */
+NX.warehouse=(o={},lt)=>{const fi=o.fire;let s='';
+  s+=P('M-210 0 L-210 -150 L-140 -190 L140 -190 L210 -150 L210 0Z','fill:#e2e4ea;'+OL(2.6));
+  s+=P('M-210 -150 L210 -150',ST('#9aa0a8',3));
+  for(let i=0;i<3;i++){const x=-150+i*110;s+=Rc(x-40,-110,80,110,'#9aa0a8',3,OL(2));for(let k=1;k<7;k++)s+=P(`M${x-40} ${-110+k*15} L${x+40} ${-110+k*15}`,ST('#7a8088',1.4));}
+  s+=Rc(-90,-178,180,26,o.brandC||'#2a37d7',6,OL(1.8))+Tn(0,-160,o.brand||'ALMACÉN',13,800,{fill:'#fff'});
+  s+=Rc(-240,-4,480,8,'#3b3f46',3);
+  for(let i=0;i<6;i++){const q=((lt*.25)+i/6)%1;const x=lerp(-230,230,q);if(fi==null||lt<fi)s+=G(x,-18,1,0,Rc(-14,-14,28,28,'#c9a46a',2,OL(1.4))+P('M-14 -4 L14 -4',ST('#a07c45',2)));}
+  if(fi!=null&&lt>fi){const fq=EZ.out(sg(lt,fi,fi+.8));s+=G(40,-190,fq*.9,0,NX.fire({n:4,w:260},lt));
+    for(let k=0;k<6;k++){const qq=((lt*.3)+k/6)%1;s+=Ci(20+qq*80+_osc(lt,.3,8,k),-300-qq*200,18+qq*40,'#3b3838',`opacity:${f2(.5*fq*Math.sin(Math.PI*qq))}`);}}
+  if(o.label)s+=G(0,40,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('warehouse · Almacén logístico (que arde)',lt=>G(0,120,1,0,NX.warehouse({fire:1.5,brand:'OZON',label:'centro logístico'},lt%4.5)));
+/* Del petróleo a la guerra: barril → monedas → presupuesto militar (flujo de dinero explicativo) · o:{step (s entre pasos),cut (0-1: el flujo se corta)} */
+NX.warfunds=(o={},lt)=>{const st=o.step||.9,cut=o.cut||0;let s='';
+  const nodes=[[-170,'#2a2a33','petróleo'],[0,'#f6a81a','dinero'],[170,'#6f7a4f','guerra']];
+  nodes.forEach(([x,c,lb],i)=>{const a=_ap(lt,i*st,.35);let ic='';
+    if(i===0)ic=El(0,-40,32,9,'#1b1b22',OL(2))+Rc(-32,-40,64,74,'#2a2a33',0,OL(2))+El(0,34,32,9,'#2a2a33',OL(2))+P('M0 -16 Q12 0 0 12 Q-12 0 0 -16Z','fill:#f6a81a');
+    if(i===1)ic=[0,1,2].map(k=>El(0,20-k*14,34,10,'#ffd23f',OL(2))).join('')+Tn(0,-12,'€',16,800,{fill:'#a06b00'});
+    if(i===2)ic=Rc(-44,0,88,26,'#3b4029',10,OL(2))+Rc(-30,-22,52,22,'#6f7a4f',6,OL(2))+Rc(14,-16,44,8,'#5d6842',3,OL(1.6));
+    s+=G(x,0,a,0,Ci(0,0,64,'#fff',OL(2.4))+ic+G(0,96,1,0,pill(lb,{sz:13,w:800})));});
+  for(let i=0;i<2;i++){const x0=-170+i*170+70,q=sg(lt,(i+.6)*st,(i+.6)*st+.4);if(q>0){s+=P(`M${x0} 0 L${f1(x0+30*q)} 0`,ST(K.ink,5))+G(x0+30*q,0,q,0,P('M-8 -10 L4 0 L-8 10',ST(K.ink,5)));
+      if(i===0||cut===0)for(let k=0;k<3;k++){const m=((lt*.9)+k/3)%1;s+=Ci(x0-10+m*50,-26,5,'#ffd23f',OL(1)+`;opacity:${f2(Math.sin(Math.PI*m)*(i===0?1-cut*.8:1))}`);}}}
+  if(cut>0)s+=G(-85,0,EZ.back(cut),0,P('M-22 -22 L22 22 M22 -22 L-22 22',ST(K.red,8)));
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('warfunds · Del petróleo al dinero de la guerra',lt=>NX.warfunds({cut:sg(lt%5,3.2,3.6)},lt%5));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
