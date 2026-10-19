@@ -535,7 +535,7 @@ function rainColumnS(o={}){const T=o.T||0,mm=o.mm||272,mx=o.max||300,p=o.p??1,W=
   s+=P(`M${-W/2} 0 L${W/2} 0 L${W/2+dx} ${dy}`,ST(K.ink,2.4));
   /* regla */
   s+=Rc(-W/2-44,-H,22,H,'#f6d36b',3,OL(2));for(let i=0;i<=mx/10;i++){const y=-H*i*10/mx;s+=P(`M${-W/2-22} ${f1(y)} l${i%5?-6:-12} 0`,ST(K.ink,1.4));if(i%10===0)s+=Tn(-W/2-52,y+4,String(i),10,700,{a:'end'});}
-  s+=Tn(-W/2-52,-H-12,'cm',10,700,{a:'end',fill:'#555'});
+  s+=Tn(-W/2-52,-H-12,o.unit||'cm',10,700,{a:'end',fill:'#555'});
   if(lv>0)s+=P(`M${-W/2-22} ${f1(-lv)} L${W/2+dx+14} ${f1(dy-lv)}`,ST(K.red,1.6,'stroke-dasharray:4 4'));
   s+=G(0,24,1,0,Tn(0,0,'1 m²',15,800));
   /* gotas cayendo */
@@ -681,3 +681,102 @@ NX_CATALOG.push(
  ['chocobar · Tableta de chocolate',(lt)=>G(0,120,1.2,0,NX.chocobar({bite:lt>1.2},lt))],
  ['cacaocup · Vaso de chocolate espumoso',(lt)=>G(0,140,1.8,0,NX.cacaocup({},lt))],
  ['dnafrag · ADN antiguo en trozos cortos',(lt)=>G(0,40,1.2,0,NX.dnafrag({old:EZ.io(sg(lt,.4,1.4))},lt))]);
+
+/* ---------------- cuerdas de la Edad de Piedra (diario 19/10/2026) ---------------- */
+/* Herramienta de marfil de Hohle Fels para hacer cuerda: placa de unos 20 cm con 4 agujeros y ranuras en espiral
+   o:{T, asm (0-1: 0 = 15 trozos sueltos, 1 = montada), fib (0-1: fibras pasando por los agujeros y torciéndose en cuerda), grooves (0-1 resalta las ranuras), glow} */
+function ropeToolS(o={}){const T=o.T||0,asm=o.asm??1,fib=o.fib||0,gr=o.grooves??0;let s='';
+  const HX=[-96,-32,32,96];
+  /* fibras: bajan desde arriba, pasan por cada agujero y se juntan debajo en una cuerda */
+  if(fib>0){const L=EZ.io(cl(fib*1.6));HX.forEach((x,i)=>{const c=['#c79a4a','#b8863a','#d6ae62','#a87a32'][i];
+      s+=DR(`M${x+(i-1.5)*14} -230 Q${x} -120 ${x} 0`,ST(c,7,'stroke-linecap:round'),L);});
+    const q=EZ.io(sg(fib,.45,1));if(q>0){for(let i=0;i<4;i++){const x0=HX[i];s+=DR(`M${x0} 0 Q${x0*.6} 70 0 120`,ST(['#c79a4a','#b8863a','#d6ae62','#a87a32'][i],7,'stroke-linecap:round'),q);}
+      const len=200*q;let a='',b='';for(let y=0;y<=len;y+=6){const w=9*Math.sin(y*.18-T*8);a+=(y?' L':'M')+f1(w)+' '+f1(120+y);b+=(y?' L':'M')+f1(-w)+' '+f1(120+y);}
+      s+=P(a,ST('#b8863a',9,'stroke-linecap:round'))+P(b,ST('#e0bb70',9,'stroke-linecap:round'))+P(a,ST(K.ink,1.4,'opacity:.5'));}}
+  /* placa troceada en 15 piezas (5×3) */
+  const xs=[-170,-102,-34,34,102,170],ys=[-46,-15,15,46];
+  const jit=(i,j)=>[xs[i]+(i>0&&i<5?(hs(i*7+j*3)-.5)*18:0),ys[j]+(j>0&&j<3?(hs(i*5+j*11)-.5)*10:0)];
+  const R=(x,y)=>{/* recorta a la forma redondeada de la placa */const ex=Math.max(-1,Math.min(1,x/170));const hh=46*Math.sqrt(1-Math.pow(Math.abs(ex),6));return [x,Math.max(-hh,Math.min(hh,y))];};
+  let k=0;for(let i=0;i<5;i++)for(let j=0;j<3;j++){const pts=[jit(i,j),jit(i+1,j),jit(i+1,j+1),jit(i,j+1)].map(p=>R(p[0],p[1]));
+    const cx=(pts[0][0]+pts[2][0])/2,cy=(pts[0][1]+pts[2][1])/2,off=1-EZ.io(cl(asm*1.15-k*.01));
+    const dx=(hs(k*3.3)-.5)*260*off+cx*.5*off,dy=(hs(k*7.7)-.5)*200*off+cy*1.2*off,rr=(hs(k*1.9)-.5)*80*off;k++;
+    s+=G(dx,dy,1,rr,P('M'+pts.map(p=>f1(p[0])+' '+f1(p[1])).join(' L')+'Z',`fill:${['#f1e6c8','#eadcb8','#f4ead2'][k%3]};stroke:${K.ink};stroke-width:${f2(asm>.97?.6:2)};stroke-linejoin:round`));}
+  if(asm>.95){s+=P('M-170 0 C-170 -50 -150 -46 0 -46 C150 -46 170 -50 170 0 C170 50 150 46 0 46 C-150 46 -170 50 -170 0Z','fill:none;'+OL(2.6));
+    for(let i=0;i<6;i++)s+=P(`M${-150+i*55} ${-30+hs(i)*8} q20 ${4+hs(i+2)*6} 40 0`,ST('#c9b78f',1.6));
+    HX.forEach((x,i)=>{s+=Ci(x,0,17,'#3a2b1c',OL(2.2));
+      for(let a=0;a<4;a++){const an=a*Math.PI/2+T*.6;s+=P(`M${f1(x+Math.cos(an)*17)} ${f1(Math.sin(an)*17)} A17 17 0 0 1 ${f1(x+Math.cos(an+.9)*17)} ${f1(Math.sin(an+.9)*17)}`,ST(gr>0?K.orange:'#d8c9a0',gr>0?4:2.4,`opacity:${f2(.6+.4*gr)}`));
+        s+=P(`M${f1(x+Math.cos(an+.45)*17)} ${f1(Math.sin(an+.45)*17)} l${f1(Math.cos(an+.45+1.7)*9)} ${f1(Math.sin(an+.45+1.7)*9)}`,ST(gr>0?K.orange:'#d8c9a0',2,`opacity:${f2(.5+.5*gr)}`));}});}
+  if(o.glow)s=Ci(0,0,200,'#fff4c9',`opacity:${f2(.35*o.glow)}`)+s;
+  return s;}
+NX.ropetool=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,ropeToolS(Object.assign({T:lt},o)));
+/* Agujero de la herramienta visto de cerca, con las ranuras en espiral y la fibra girando · o:{T, fib (0-1)} */
+function holeZoomS(o={}){const T=o.T||0,fib=o.fib??0;let s=Ci(0,0,170,'#f1e6c8',OL(3))+Ci(0,0,110,'#3a2b1c',OL(3));
+  for(let a=0;a<5;a++){const an=a*2*Math.PI/5;let d='';for(let k=0;k<=20;k++){const u=k/20,r=110-u*18,ang=an+u*1.3;d+=(k?' L':'M')+f1(Math.cos(ang)*r)+' '+f1(Math.sin(ang)*r);}s+=P(d,ST(K.orange,7,'stroke-linecap:round'));}
+  if(fib>0){const r=40*fib;for(let i=0;i<3;i++){const an=T*3+i*2.1;s+=Ci(Math.cos(an)*r*.5,Math.sin(an)*r*.5,26*fib,['#c79a4a','#d6ae62','#a87a32'][i],OL(2));}
+    s+=P('M-60 -60 A85 85 0 0 1 60 -60',ST('#fff',4,'opacity:.8'))+P('M50 -72 l14 10 l-17 4',ST('#fff',4,'opacity:.8'));}
+  return s;}
+NX.holezoom=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,holeZoomS(Object.assign({T:lt},o)));
+/* Cuerda de tres cabos: hélice de tres hebras; split (0-1) abre el extremo derecho en los tres cabos; arrows muestra los giros · o:{T,len,split,arrows,c:[3 colores]} */
+function cord3S(o={}){const T=o.T||0,len=o.len||380,sp=o.split||0,C=o.c||['#c79a4a','#9a6a2a','#e0bb70'],w=o.w||14;let s='';
+  const x0=-len/2,x1=len/2,xs=x1-len*.35*sp;
+  for(let i=0;i<3;i++){let d='';for(let x=x0;x<=x1;x+=4){const ph=(x-x0)*.06+i*2.094;let y=Math.sin(ph)*w*.5;if(x>xs){const u=(x-xs)/(x1-xs+1e-6);y=y*(1-u)+(i-1)*w*2.6*u*sp+Math.sin(x*.2+i)*3*u;}d+=(x===x0?'M':' L')+f1(x)+' '+f1(y);}
+    s+=P(d,ST(K.ink,w*.62+2.4,'stroke-linecap:round'))+P(d,ST(C[i],w*.62,'stroke-linecap:round'));}
+  for(let x=x0+8;x<xs;x+=14){s+=P(`M${f1(x)} ${f1(-w*.4)} l7 ${f1(w*.8)}`,ST(K.ink,1,'opacity:.35'));}
+  if(o.arrows>0){const a=o.arrows;s+=G(x1-30,-w*4.2,1,0,P('M-26 0 A26 12 0 1 1 26 0',ST(K.red,4))+P('M20 -10 L28 2 L14 4Z','fill:'+K.red)+Tn(0,-22,'↻ un lado',13,800,{fill:K.red}),a);
+    s+=G(x0+70,w*4.4,1,0,P('M26 0 A26 12 0 1 1 -26 0',ST(K.blue,4))+P('M-20 -10 L-28 2 L-14 4Z','fill:'+K.blue)+Tn(0,40,'↺ al otro',13,800,{fill:K.blue}),a);}
+  return s;}
+NX.cord3=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,cord3S(Object.assign({T:lt},o)));
+/* Lo que aguanta y lo que se pudre: hacha de piedra, lanza de madera, bolsa de cuero y cordel · o:{rot (0-1), labels} */
+function decayS(o={}){const r=o.rot||0,T=o.T||0;let s=P('M-250 0 L250 0',ST(K.ink,2.4));
+  const fade=k=>1-EZ.io(sg(r,k*.15,.55+k*.15));
+  /* piedra */
+  s+=G(-185,0,1,0,P('M-34 0 L-26 -58 L0 -86 L24 -60 L32 0Z','fill:#9a9a94;'+OL(2.4))+P('M-14 -50 L0 -70 L12 -46 M-10 -20 L6 -36 L16 -16',ST('#6f6f6a',2))+(r>.6?Tn(46,-80,'✦',22,800,{fill:'#fff'}):''));
+  const items=[[-62,P('M-6 0 L-6 -150 L0 -170 L6 -150 L6 0Z','fill:#b0773d;'+OL(2))+P('M-14 -150 L0 -186 L14 -150Z','fill:#8a8a84;'+OL(2))],
+    [62,P('M-36 0 Q-44 -46 -20 -60 L20 -60 Q44 -46 36 0Z','fill:#9a5a2c;'+OL(2.2))+P('M-20 -60 Q0 -84 20 -60',ST(K.ink,3))],
+    [185,P('M-40 -8 C-20 -30 0 10 20 -18 S40 -30 44 -10',ST('#c79a4a',8,'stroke-linecap:round'))+P('M-40 -8 C-20 -30 0 10 20 -18 S40 -30 44 -10',ST(K.ink,1.4,'opacity:.4'))]];
+  items.forEach(([x,g],k)=>{const f=fade(k);s+=G(x,0,1,0,G(0,0,1,0,g),f*.85+.0);
+    if(f<.95&&f>.05)for(let i=0;i<3;i++){const q=((T*.8)+i/3)%1;s+=Ci(x-20+i*20,-40-q*60,3,'#7a6a4a',`opacity:${f2((1-q)*(1-f))}`);}
+    if(f<.4)s+=G(x,-30,1,0,P('M-30 0 Q0 -16 30 0',ST('#7a6a4a',3,'stroke-dasharray:4 6;opacity:.6')),1-f);});
+  if(o.labels!==false){s+=G(-185,30,1,0,pill('piedra',{sz:13,w:800}));['madera','cuero','fibras'].forEach((t,k)=>s+=G([-62,62,185][k],30,1,0,pill(t,{sz:13,w:800,fill:'#7a6a4a'}),.4+.6*fade(k)));}
+  return s;}
+NX.decay=(o={},lt)=>G(0,0,_ao(lt,0,.3),0,decayS(Object.assign({T:lt},o)));
+/* Entrada de una cueva en una ladera de roca caliza · o:{lamp (0-1), label} */
+function caveS(o={}){const T=o.T||0;let s=P('M-260 60 L-200 -60 L-120 -120 L-20 -150 L90 -130 L190 -80 L260 20 L260 60Z','fill:#d9d2bf;'+OL(2.6));
+  s+=P('M-150 -70 L-90 -96 M60 -110 L130 -84 M-200 0 L-150 -10 M150 -20 L210 -10',ST('#a89f88',2.4));
+  s+=P('M-90 60 Q-96 -40 -20 -62 Q60 -70 90 -10 Q104 30 100 60Z','fill:#2d241c;'+OL(2.6));
+  if(o.lamp>0)s+=Ci(10,30,40+6*Math.sin(T*9),'#f6c443',`opacity:${f2(.35*o.lamp)}`)+G(10,40,1,0,P('M-6 0 Q0 -18 6 0Z','fill:#f76e19'),o.lamp);
+  s+=P('M-260 60 L260 60',ST(K.ink,2.4))+bushBand(-260,260,46,14,4,{c:'#8fcf7a'});
+  if(o.label)s+=G(0,96,1,0,pill(o.label,{sz:14,w:800}));
+  return s;}
+NX.cave=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,caveS(Object.assign({T:lt},o)));
+/* Lasca de sílex con un trocito de cordel pegado (Abri du Maras) · o:{cord (0-1), mag (0-1 lupa con «6 mm»)} */
+function flintCordS(o={}){let s=shadowE(0,40,120,.14)+P('M-130 30 L-90 -40 L-10 -62 L80 -50 L130 -10 L100 30 L-40 42Z','fill:#b9a58c;'+OL(2.6))+P('M-90 -40 L-40 0 L-10 -62 M-40 0 L80 -50 M-40 0 L-40 42 M-40 0 L100 30',ST('#8f7c63',2));
+  const c=o.cord??1;if(c>0)s+=G(30,-6,1,-18,P('M-18 0 L18 0',ST('#9a6a2a',7,'stroke-linecap:round'))+P('M-14 -3 l4 6 M-6 -3 l4 6 M2 -3 l4 6 M10 -3 l4 6',ST(K.ink,1.2)),c);
+  if(o.mag>0){const m=o.mag;s+=G(120,-130,EZ.back(cl(m)),0,Ci(0,0,70,'#fff',OL(3))+G(0,0,1,0,cord3S({len:120,w:16,T:o.T||0}))+DR('M-50 -26 L-50 26',ST(K.red,2.4),m)+Tn(0,52,'6 mm',18,800,{fill:K.red})+P('M-46 54 L-82 104',ST(K.ink,9,'stroke-linecap:round')));
+    s+=P('M30 -6 L70 -80',ST(K.ink,1.6,'stroke-dasharray:4 4;opacity:'+f2(m)));}
+  return s;}
+NX.flintcord=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,flintCordS(Object.assign({T:lt},o)));
+/* Dos trozos de piel unidos con cordel (cueva de Oregón, ~12.000 años) · o:{p (0-1 puntadas)} */
+function sewnHideS(o={}){const p=o.p??1;let s=P('M-170 -60 Q-120 -90 -60 -70 Q-20 -60 -8 -20 Q0 30 -20 70 Q-90 90 -150 60 Q-190 0 -170 -60Z','fill:#c99a64;'+OL(2.4))+P('M170 -50 Q130 -86 60 -74 Q12 -60 8 -20 Q4 30 22 66 Q90 86 150 62 Q194 10 170 -50Z','fill:#b8874f;'+OL(2.4));
+  for(let i=0;i<6;i++){const y=-56+i*24,q=sg(p,i/6,(i+1)/6);if(q>0)s+=DR(`M-20 ${y} L20 ${y+12}`,ST('#5a3a20',5,'stroke-linecap:round'),q)+DR(`M20 ${y} L-20 ${y+12}`,ST('#7a4f28',5,'stroke-linecap:round'),sg(q,.5,1));}
+  s+=P('M-140 -20 q10 6 20 0 M-120 30 q10 6 20 0 M110 -30 q10 6 20 0 M120 20 q10 6 20 0',ST('#a5784a',2));
+  return s;}
+NX.sewnhide=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,sewnHideS(Object.assign({p:EZ.io(sg(lt,.3,2.2))},o)));
+/* Lo que se hace con cuerda: red, bolsa, cesta y trampa (aparecen una a una) · o:{at:[t1,t2,t3,t4]} */
+function ropeUsesS(o={},lt=9){const at=o.at||[.2,.6,1.0,1.4];const it=[['redes',()=>{let g='';for(let i=-3;i<=3;i++)g+=P(`M${i*14-40} -40 L${i*14+40} 40 M${i*14+40} -40 L${i*14-40} 40`,ST('#9a6a2a',3));return G(0,0,.8,0,g+Rc(-44,-44,88,88,'none',8,ST(K.ink,2.4)));}],
+   ['bolsas',()=>P('M-36 -20 Q-44 40 0 44 Q44 40 36 -20Z','fill:#c99a64;'+OL(2.4))+P('M-30 -20 Q0 -60 30 -20',ST('#9a6a2a',5))+P('M-30 0 L30 0 M-34 20 L34 20',ST('#9a6a2a',2.4,'stroke-dasharray:5 4'))],
+   ['cestas',()=>{let g=P('M-46 -24 L46 -24 L34 40 L-34 40Z','fill:#e0bb70;'+OL(2.4));for(let i=0;i<4;i++)g+=P(`M-44 ${-12+i*14} L44 ${-12+i*14}`,ST('#9a6a2a',3));for(let i=-2;i<=2;i++)g+=P(`M${i*18} -24 L${i*14} 40`,ST('#9a6a2a',2.4));return g;}],
+   ['trampas',()=>P('M-50 40 L50 40 M-30 40 L-30 -30 M-30 -30 Q20 -50 34 -10',ST('#7a4f28',5,'stroke-linecap:round'))+P('M34 -10 L34 30',ST('#c79a4a',3))+Ci(34,32,12,'none',ST('#c79a4a',3))]];
+  let s='';it.forEach(([lab,f],i)=>{const q=_ap(lt,at[i],.35);if(q<=0)return;const x=(i%2?1:-1)*110,y=(i<2?-1:1)*110;
+    s+=G(x,y,q,0,Rc(-90,-90,180,180,'#fff',18,OL(2.4))+G(0,-14,1,0,f())+G(0,64,1,0,pill(lab,{sz:13,w:800})));});
+  return s;}
+NX.ropeuses=(o={},lt)=>ropeUsesS(o,lt);
+NX_CATALOG.push(
+ ['ropetool · Herramienta de marfil para hacer cuerda (Hohle Fels)',(lt)=>G(0,40,1,0,NX.ropetool({asm:sg(lt%6,.2,1.6),fib:sg(lt%6,2,4.5)},lt))],
+ ['holezoom · Agujero con ranuras en espiral (de cerca)',(lt)=>NX.holezoom({fib:sg(lt%4,1,2)},lt)],
+ ['cord3 · Cuerda de tres cabos (se abre en sus cabos)',(lt)=>NX.cord3({split:EZ.io(sg(lt%5,1,2.5)),arrows:sg(lt%5,3,3.4)},lt)],
+ ['decay · Lo que aguanta (piedra) y lo que se pudre',(lt)=>G(0,80,1,0,NX.decay({rot:sg(lt%6,.5,4)},lt))],
+ ['cave · Entrada de una cueva',(lt)=>G(0,40,1,0,NX.cave({lamp:1,label:'Hohle Fels'},lt))],
+ ['flintcord · Lasca de sílex con cordel (lupa 6 mm)',(lt)=>G(-30,80,1,0,NX.flintcord({mag:sg(lt%5,1,1.6)},lt))],
+ ['sewnhide · Piel cosida con cordel',(lt)=>NX.sewnhide({},lt%4)],
+ ['ropeuses · Redes, bolsas, cestas y trampas',(lt)=>NX.ropeuses({},lt%5)]);

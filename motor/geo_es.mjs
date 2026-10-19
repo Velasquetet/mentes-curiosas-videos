@@ -9,7 +9,7 @@ const p=geoPath(proj).digits(1);
 const g=JSON.parse(fs.readFileSync('geo.json'));
 g.esprov=pv.map(f=>({n:f.properties.name,d:p(f),c:p.centroid(f).map(v=>+v.toFixed(1))}));
 g.esproj={rot:3.5,note:'puntos: usar GEOJ.espt'};
-const pts={Valencia:[-0.376,39.47],Alicante:[-0.48,38.35],Gandia:[-0.18,38.97],Palma:[2.65,39.57],Ibiza:[1.43,38.91],Barcelona:[2.17,41.39],'Cabrera de Mar':[2.39,41.53],Madrid:[-3.70,40.42]};
+const pts={Valencia:[-0.376,39.47],Alicante:[-0.48,38.35],Gandia:[-0.18,38.97],Palma:[2.65,39.57],Ibiza:[1.43,38.91],Barcelona:[2.17,41.39],'Cabrera de Mar':[2.39,41.53],Madrid:[-3.70,40.42],Sagunto:[-0.27,39.68],Pego:[-0.12,38.84],Oliva:[-0.12,38.92],Forna:[-0.17,38.80]};
 g.espt=Object.fromEntries(Object.entries(pts).map(([k,v])=>[k,proj(v).map(x=>+x.toFixed(1))]));
 fs.writeFileSync('geo.json',JSON.stringify(g));
 console.log(g.esprov.map(f=>f.n).join('|'));console.log(JSON.stringify(g.espt), g.esprov.reduce((a,f)=>a+f.d.length,0));

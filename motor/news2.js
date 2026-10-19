@@ -1069,5 +1069,21 @@ NX.alertlevels=(o={},lt)=>{const L=[['VERDE','sin riesgo','#3f9b4f'],['AMARILLO'
   return s;};
 n2cat('alertlevels · Niveles de aviso de la Aemet',lt=>G(0,40,1,0,NX.alertlevels({level:3},lt%4)));
 
+/* Comparar cantidades de lluvia con depósitos de cristal que se llenan (p. ej. «un día en Pego» frente a «un año en Madrid») · o:{bars:[{lab,v,c,txt}], max, at, step, H (alto), gap, line (índice de la barra cuyo nivel se marca con línea discontinua)} */
+NX.yearrain=(o={},lt)=>{const B=o.bars||[{lab:'un año',v:420},{lab:'un día',v:640,c:'#e0283a'}],mx=o.max||Math.max(...B.map(b=>b.v))*1.1,H=o.H||300,gap=o.gap||150,at=o.at??.3,st=o.step??.5,n=B.length;let s='';
+  B.forEach((b,i)=>{const x=(i-(n-1)/2)*gap,a=at+i*st,q=EZ.io(sg(lt,a,a+1.4)),lv=H*b.v/mx*q,c=b.c||'#3f6fd8',W=96;
+    let g=shadowE(0,6,W*.6,.14)+Rc(-W/2,-H,W,H,'rgba(255,255,255,.55)',8,OL(2.2));
+    if(lv>0){let top=`M${-W/2+3} ${f1(-lv)}`;for(let k=0;k<=8;k++)top+=` L${f1(-W/2+3+k*(W-6)/8)} ${f1(-lv+Math.sin(k*1.4+lt*4)*2.2)}`;
+      g+=Rc(-W/2+3,-lv,W-6,lv,c,6,'opacity:.8')+P(top,ST('#e4ecff',2.4));
+      for(let k=0;k<4;k++){const qq=((lt*.7)+k/4+i*.13)%1;g+=Ci(-W/4+k*W/6,-qq*lv,3,'#fff',`opacity:${f2(.5*(1-qq))}`);}}
+    for(let k=1;k<6;k++)g+=P(`M${W/2} ${f1(-H*k/6)} l-10 0`,ST(K.ink,1.4));
+    g+=G(0,30,1,0,pill(b.lab,{sz:13,w:800,fill:b.c?b.c:K.ink}),_ao(lt,a,.3));
+    if(b.txt)g+=G(0,-H-22,1,0,Tn(0,0,b.txt,22,800,{fill:b.c||K.ink}),_ao(lt,a+1.2,.3));
+    s+=G(x,0,_ap(lt,a-.15,.35),0,g);});
+  if(o.line!=null){const b=B[o.line],x0=(o.line-(n-1)/2)*gap,y=-H*b.v/mx,qq=sg(lt,at+o.line*st+1.4,at+o.line*st+2);
+    if(qq>0)s+=P(`M${x0-60} ${f1(y)} L${f1(x0-60+qq*((n-1)/2*gap+60-x0+60))} ${f1(y)}`,ST(K.ink,2.2,'stroke-dasharray:8 6'));}
+  return s;};
+n2cat('yearrain · Depósitos de lluvia para comparar (un día frente a un año)',lt=>G(0,170,1,0,NX.yearrain({bars:[{lab:'un año en Madrid',v:420},{lab:'un año en Valencia',v:450},{lab:'un día en Pego',v:638,c:'#e0283a',txt:'638 l/m²'}],max:700,line:1},lt%6)));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
