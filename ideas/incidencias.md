@@ -134,3 +134,4 @@
 - Recurso nuevo en news2.js con catálogo: `yearrain` (depósitos para comparar lluvia de un día con la de un año). Nuevos puntos en GEOJ.espt: Sagunto, Pego, Oliva, Forna.
 - Diario de hoy (cuerdas): no había post programado en Buffer ni entrada en publicados.json (solo el guion y la voz) → recuperación en marcha en esta misma tarea.
 - Nota: la rama `main` local estaba desfasada (guardada como `backup-local-main`) y se igualó a `origin/main`. Render ~45 min con 2 núcleos.
+- 10:35 · Diario de hoy recuperado: «Las cuerdas de la Edad de Piedra» (1:49), revisado fotograma a fotograma (se quitó una cueva que tapaba los subtítulos y se adelantaron las tarjetas del final), programado en Buffer para hoy a las 18:30 (post 6ad5d5cdea56886c4715f828, sin etiqueta de IA). Recursos nuevos en news.js con catálogo: `ropetool`, `holezoom`, `cord3`, `decay`, `cave`, `flintcord`, `sewnhide`, `ropeuses`.
