@@ -780,3 +780,46 @@ NX_CATALOG.push(
  ['flintcord · Lasca de sílex con cordel (lupa 6 mm)',(lt)=>G(-30,80,1,0,NX.flintcord({mag:sg(lt%5,1,1.6)},lt))],
  ['sewnhide · Piel cosida con cordel',(lt)=>NX.sewnhide({},lt%4)],
  ['ropeuses · Redes, bolsas, cestas y trampas',(lt)=>NX.ropeuses({},lt%5)]);
+
+/* Placa de piedra tallada «EDAD DE PIEDRA» que se rebautiza: una cuerda la envuelve, tacha «PIEDRA» y aparece «DE LA CUERDA» (diario 19/10/2026)
+   o:{T, drop (0-1 caída), p (0-1 rebautizo), a:'EDAD DE', b:'PIEDRA', c:'LA CUERDA'} */
+function ageSignS(o={}){const T=o.T||0,p=o.p||0,dr=o.drop??1;let s='';
+  const slab='M-200 -70 L-170 -96 L-40 -104 L90 -98 L190 -86 L206 -20 L196 66 L120 84 L-20 90 L-160 82 L-204 50Z';
+  s+=shadowE(0,104,190,.18)+P(slab,'fill:#aaa79c;'+OL(3))+P('M-150 -60 L-120 -40 M130 -70 L160 -50 M-180 30 L-150 50 M150 40 L180 20',ST('#8b887d',2.4));
+  for(let i=0;i<9;i++)s+=Ci(-180+hs(i*3.3)*360,-80+hs(i*7.1)*150,2+hs(i)*3,'#8b887d','opacity:.6');
+  const carve=(x,y,txt,sz)=>Tn(x+1.5,y+2,txt,sz,800,{fill:'#e8e5dc',ls:.06})+Tn(x,y,txt,sz,800,{fill:'#55524a',ls:.06});
+  s+=carve(0,-30,o.a||'EDAD DE',34)+carve(0,40,o.b||'PIEDRA',62);
+  if(p>0){/* la cuerda envuelve la placa */
+    const w=EZ.io(sg(p,0,.4));s+=G(0,-96,1,-2,clipG(cord3S({len:440,w:12,T}),Rc(-220,-30,440*w,60,'#000')));
+    s+=G(0,84,1,2,clipG(cord3S({len:440,w:12,T:T+1}),Rc(220-440*w,-30,440*w,60,'#000')));
+    /* tachón y nuevo nombre */
+    s+=DR('M-150 30 L150 22',ST(K.red,10,'stroke-linecap:round'),EZ.out(sg(p,.35,.6)));
+    const q=EZ.back(sg(p,.55,.9));if(q>0)s+=G(40,128,q,-4,Rc(-170,-34,340,62,'#f4ead2',14,OL(3))+P('M-160 20 C-80 30 80 10 160 22',ST('#c79a4a',5,'stroke-dasharray:9 5'))+Ts(0,14,o.c||'LA CUERDA',44,{it:true,fill:'url(#gRP)',stroke:'url(#gRP)'}));}
+  return G(0,-(1-EZ.in2(dr))*700,1,0,s);}
+NX.agesign=(o={},lt)=>ageSignS(Object.assign({T:lt},o));
+/* Neandertal (secundario con aire de bola: frente marcada, barba, piel de abrigo) retorciendo un cordel entre las manos
+   o:{T, twist (0-1 el cordel crece), emo:'happy'|'focus'} */
+function neanderS(o={}){const T=o.T||0,tw=o.twist||0,bob=Math.abs(Math.sin(T*3))*2;let s=El(0,2,46,7,'rgba(20,18,18,.15)');
+  s+=Rc(-24,-30,16,30,'#c58a5e',6,OL(2))+Rc(8,-30,16,30,'#c58a5e',6,OL(2));
+  /* cuerpo con piel */
+  s+=P(`M-50 ${-26-bob} Q-60 ${-110-bob} -10 ${-126-bob} Q48 ${-132-bob} 54 ${-80-bob} Q62 ${-34-bob} 46 ${-26-bob} L34 ${-16-bob} L24 ${-28-bob} L12 ${-16-bob} L0 ${-28-bob} L-12 ${-16-bob} L-24 ${-28-bob} L-36 ${-16-bob}Z`,'fill:#8a5a34;'+OL(2.4));
+  s+=P(`M-30 ${-90-bob} q8 6 16 0 M10 ${-100-bob} q8 6 16 0 M-14 ${-60-bob} q8 6 16 0`,ST('#5f3b1f',2));
+  /* cabeza */
+  const hy=-150-bob;s+=Ci(0,hy,38,'#d9a27a',OL(2.4));
+  s+=P(`M-40 ${hy-6} Q-46 ${hy-50} 0 ${hy-46} Q44 ${hy-50} 40 ${hy-8} Q30 ${hy-30} 0 ${hy-28} Q-30 ${hy-30} -40 ${hy-6}Z`,'fill:#5a3a22;'+OL(2));
+  s+=P(`M-30 ${hy-10} Q-15 ${hy-20} 0 ${hy-12} Q15 ${hy-20} 30 ${hy-10}`,ST(K.ink,5,'stroke-linecap:round'));
+  const blink=(T%3.7)<.12,foc=o.emo==='focus';
+  s+=blink?P(`M-17 ${hy} L-7 ${hy} M7 ${hy} L17 ${hy}`,ST(K.ink,2.6)):Ci(-12,hy+(foc?3:0),4,K.ink)+Ci(12,hy+(foc?3:0),4,K.ink);
+  s+=El(0,hy+12,9,7,'#c98d66',OL(1.8));
+  s+=P(`M-34 ${hy+8} Q-36 ${hy+50} 0 ${hy+54} Q36 ${hy+50} 34 ${hy+8} Q20 ${hy+26} 0 ${hy+26} Q-20 ${hy+26} -34 ${hy+8}Z`,'fill:#5a3a22;'+OL(2));
+  s+=P(foc?`M-6 ${hy+31} L6 ${hy+31}`:`M-8 ${hy+29} Q0 ${hy+36} 8 ${hy+29}`,ST('#f1d2b8',2.6));
+  /* brazos y cordel */
+  const hx=34,hyy=-84-bob;s+=P(`M-44 ${-96-bob} Q-50 ${hyy+10} -${hx} ${hyy}`,ST('#d9a27a',12,'stroke-linecap:round'))+P(`M44 ${-96-bob} Q50 ${hyy+10} ${hx} ${hyy}`,ST('#d9a27a',12,'stroke-linecap:round'));
+  if(tw>0){const L=60+tw*90;s+=G(0,hyy,1,0,clipG(cord3S({len:L,w:7,T:T*2,c:['#c79a4a','#9a6a2a','#e0bb70']}),Rc(-L/2-4,-12,L+8,24,'#000')));
+    s+=G(0,hyy,1,0,P(`M${f1(L/2)} 0 Q${f1(L/2+20)} 30 ${f1(L/2+10)} 60`,ST('#c79a4a',3))+P(`M${f1(-L/2)} 0 Q${f1(-L/2-20)} 30 ${f1(-L/2-6)} 64`,ST('#9a6a2a',3)));}
+  s+=Ci(-hx-(tw?tw*45:0),hyy,9,'#d9a27a',OL(2))+Ci(hx+(tw?tw*45:0),hyy,9,'#d9a27a',OL(2));
+  return s;}
+NX.neander=(o={},lt)=>G(0,0,_ap(lt,0,.4),0,neanderS(Object.assign({T:lt},o)));
+NX_CATALOG.push(
+ ['agesign · Placa «Edad de Piedra» que se rebautiza (cuerda, tachón y nuevo nombre)',(lt)=>G(0,0,.95,0,NX.agesign({drop:sg(lt%6,0,.5),p:sg(lt%6,1.5,4)},lt))],
+ ['neander · Neandertal retorciendo un cordel',(lt)=>G(0,120,1.3,0,NX.neander({twist:sg(lt%5,.5,3),emo:lt%5>3.5?'happy':'focus'},lt))]);
