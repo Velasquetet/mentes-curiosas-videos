@@ -127,3 +127,10 @@
 - Recursos nuevos en news2.js con catálogo: `esalert`, `spainalert` (+ `motor/geo_es.mjs`, provincias en geo.json), `alertlevels`. `renderp.py` admite `SKIP=1` para no repetir fotogramas ya hechos.
 - Nota: el render tardó ~35 min (2 núcleos); la rama `main` local volvía a no compartir historia con `origin/main` (renombrada a `old-main-local`).
 - Diario de hoy (chocolate) ya publicado; no hacía falta recuperación (además eran más de las 21:00).
+
+## 2026-10-19 08:10 · Tarea de noticias (revisión de las 08:00)
+- La lectura web no pudo abrir es.euronews.com/noticias/internacional (permiso no concedido a tiempo); Reuters bloqueado. Revisado vía buscador, artículo de Euronews (19/10 8:04), EFE en elDiario.es, El Debate, Infobae, Telecinco.
+- Publicada la **actualización de la dana Adam** («hace unas horas os contábamos…»): más de 600 l/m² en 24 h (Pego 638,5 y Forna 635,2 según Avamet; >450 en Villalonga, Barx, Gandia, Oliva), situación 2 de emergencia por inundaciones en la Safor, UME en Oliva, 2 víctimas mortales (Cabrera de Mar y Sagunto), sin clases en Mallorca, Ibiza, Formentera y decenas de municipios valencianos; la Aemet prevé que pierda fuerza y pase a Cataluña. Vídeo 1:30 revisado fotograma a fotograma, post 6ad5c80cee362c3569484bd2 (shareNow, sin etiqueta de IA).
+- Recurso nuevo en news2.js con catálogo: `yearrain` (depósitos para comparar lluvia de un día con la de un año). Nuevos puntos en GEOJ.espt: Sagunto, Pego, Oliva, Forna.
+- Diario de hoy (cuerdas): no había post programado en Buffer ni entrada en publicados.json (solo el guion y la voz) → recuperación en marcha en esta misma tarea.
+- Nota: la rama `main` local estaba desfasada (guardada como `backup-local-main`) y se igualó a `origin/main`. Render ~45 min con 2 núcleos.

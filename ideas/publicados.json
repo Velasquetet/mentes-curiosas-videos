@@ -1,148 +1,157 @@
 {
-  "publicados": [
-    {
-      "fecha": "2026-10-13",
-      "tema": "Por qué los flamencos son rosas",
-      "video": "videos/2026-10-13_flamencos.mp4",
-      "buffer_post": "6acd4da35562ebe80f6cc894",
-      "sale": "2026-10-13",
-      "tipo": "diario",
-      "estado": "publicado"
-    },
-    {
-      "fecha": "2026-10-14",
-      "sale": "2026-10-14",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El esturión de lago: el pez que podría vivir más de 400 años",
-      "video": "videos/2026-10-14_esturion.mp4",
-      "buffer_post": "6acfc2282397c8676abbe2a5"
-    },
-    {
-      "fecha": "2026-10-15",
-      "sale": "2026-10-15",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El T. rex tenía labios (y otras cosas que hemos corregido)",
-      "video": "videos/2026-10-15_trex.mp4",
-      "buffer_post": "6ad106cb5738dc2c7b0e81ab"
-    },
-    {
-      "fecha": "2026-10-15",
-      "sale": "2026-10-16",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "Los reptiles hacen mucho más ruido del que crees",
-      "video": "videos/2026-10-16_reptiles.mp4",
-      "buffer_post": "6ad1530e4ed7d375a433ef00"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
-      "video": "videos/2026-10-16_tesla-roadster.mp4",
-      "buffer_post": "6ad23f3945dfa13a723940d4"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Japón lanza por error una alerta de terremoto de magnitud 9,9 (era un 6,9 en Kamchatka)",
-      "video": "videos/2026-10-16_japon-alerta.mp4",
-      "buffer_post": "6ad255c1dcd88593548bd363"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Estambul sufre sus peores inundaciones en más de 80 años (4 muertos, 3 desaparecidos, cifras provisionales)",
-      "video": "videos/2026-10-16_estambul-inundaciones.mp4",
-      "buffer_post": "6ad272ebd8cc58ddf1696fde"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-17",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "La malvasía cabeciblanca: el pato español del pico azul",
-      "video": "videos/2026-10-17_malvasia.mp4",
-      "buffer_post": "6ad2a63487c49357709edd38"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "El mundo elimina el segundo intercalar desde mayo de 2027 (CGPM, Versalles, 15/10)",
-      "video": "videos/2026-10-17_segundo-intercalar.mp4",
-      "buffer_post": "6ad38ec9ae173d6e00c07ed4"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
-      "video": "videos/2026-10-17_papa-alta.mp4",
-      "buffer_post": "6ad3a9c7e272c4918f948238"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Trump pone en pausa las sanciones de la ley Graham contra Rusia (orden ejecutiva, 16/10)",
-      "video": "videos/2026-10-17_sanciones-rusia.mp4",
-      "buffer_post": "6ad3df510a208cb32338bf7b"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-18",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El chocolate más antiguo al este del Misisipi (ADN de cacao en cerámica de Etowah, Georgia)",
-      "video": "videos/2026-10-18_chocolate.mp4",
-      "buffer_post": "6ad3fcff938409f1d0a6e2ed"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Estampida en el Durga Puja de Calcuta: al menos 19 muertos y unos 25 heridos (sábado 17/10, cifras provisionales) + por qué una multitud es peligrosa",
-      "video": "videos/2026-10-18_calcuta-estampida.mp4",
-      "buffer_post": "6ad48e83769b457934b60efe"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
-      "video": "videos/2026-10-18_drones-rusia.mp4",
-      "buffer_post": "6ad4d4480a208cb3236ad783"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
-      "video": "videos/2026-10-18_wainwright-incendio.mp4",
-      "buffer_post": "6ad514930a208cb32379cdc7"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Alerta roja por la dana Adam en Valencia, Alicante y Baleares (18/10): hasta 300-400 l/m², +200 l/m² en la Safor, Cercanías C1/C2 cortadas, aeropuerto de Ibiza 2 h parado, sin clases el lunes, UME a las islas, 1 víctima en Cabrera de Mar (datos provisionales)",
-      "video": "videos/2026-10-18_dana-adam.mp4",
-      "buffer_post": "6ad537b60b0d72757a3c2eb8"
-    }
-  ]
+ "publicados": [
+  {
+   "fecha": "2026-10-13",
+   "tema": "Por qué los flamencos son rosas",
+   "video": "videos/2026-10-13_flamencos.mp4",
+   "buffer_post": "6acd4da35562ebe80f6cc894",
+   "sale": "2026-10-13",
+   "tipo": "diario",
+   "estado": "publicado"
+  },
+  {
+   "fecha": "2026-10-14",
+   "sale": "2026-10-14",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El esturión de lago: el pez que podría vivir más de 400 años",
+   "video": "videos/2026-10-14_esturion.mp4",
+   "buffer_post": "6acfc2282397c8676abbe2a5"
+  },
+  {
+   "fecha": "2026-10-15",
+   "sale": "2026-10-15",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El T. rex tenía labios (y otras cosas que hemos corregido)",
+   "video": "videos/2026-10-15_trex.mp4",
+   "buffer_post": "6ad106cb5738dc2c7b0e81ab"
+  },
+  {
+   "fecha": "2026-10-15",
+   "sale": "2026-10-16",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "Los reptiles hacen mucho más ruido del que crees",
+   "video": "videos/2026-10-16_reptiles.mp4",
+   "buffer_post": "6ad1530e4ed7d375a433ef00"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
+   "video": "videos/2026-10-16_tesla-roadster.mp4",
+   "buffer_post": "6ad23f3945dfa13a723940d4"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Japón lanza por error una alerta de terremoto de magnitud 9,9 (era un 6,9 en Kamchatka)",
+   "video": "videos/2026-10-16_japon-alerta.mp4",
+   "buffer_post": "6ad255c1dcd88593548bd363"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Estambul sufre sus peores inundaciones en más de 80 años (4 muertos, 3 desaparecidos, cifras provisionales)",
+   "video": "videos/2026-10-16_estambul-inundaciones.mp4",
+   "buffer_post": "6ad272ebd8cc58ddf1696fde"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-17",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "La malvasía cabeciblanca: el pato español del pico azul",
+   "video": "videos/2026-10-17_malvasia.mp4",
+   "buffer_post": "6ad2a63487c49357709edd38"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "El mundo elimina el segundo intercalar desde mayo de 2027 (CGPM, Versalles, 15/10)",
+   "video": "videos/2026-10-17_segundo-intercalar.mp4",
+   "buffer_post": "6ad38ec9ae173d6e00c07ed4"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
+   "video": "videos/2026-10-17_papa-alta.mp4",
+   "buffer_post": "6ad3a9c7e272c4918f948238"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Trump pone en pausa las sanciones de la ley Graham contra Rusia (orden ejecutiva, 16/10)",
+   "video": "videos/2026-10-17_sanciones-rusia.mp4",
+   "buffer_post": "6ad3df510a208cb32338bf7b"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-18",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El chocolate más antiguo al este del Misisipi (ADN de cacao en cerámica de Etowah, Georgia)",
+   "video": "videos/2026-10-18_chocolate.mp4",
+   "buffer_post": "6ad3fcff938409f1d0a6e2ed"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Estampida en el Durga Puja de Calcuta: al menos 19 muertos y unos 25 heridos (sábado 17/10, cifras provisionales) + por qué una multitud es peligrosa",
+   "video": "videos/2026-10-18_calcuta-estampida.mp4",
+   "buffer_post": "6ad48e83769b457934b60efe"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
+   "video": "videos/2026-10-18_drones-rusia.mp4",
+   "buffer_post": "6ad4d4480a208cb3236ad783"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
+   "video": "videos/2026-10-18_wainwright-incendio.mp4",
+   "buffer_post": "6ad514930a208cb32379cdc7"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Alerta roja por la dana Adam en Valencia, Alicante y Baleares (18/10): hasta 300-400 l/m², +200 l/m² en la Safor, Cercanías C1/C2 cortadas, aeropuerto de Ibiza 2 h parado, sin clases el lunes, UME a las islas, 1 víctima en Cabrera de Mar (datos provisionales)",
+   "video": "videos/2026-10-18_dana-adam.mp4",
+   "buffer_post": "6ad537b60b0d72757a3c2eb8"
+  },
+  {
+   "fecha": "2026-10-19",
+   "sale": "2026-10-19",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Actualización dana Adam: más de 600 l/m² en 24 h en la Safor y la Marina Alta (Pego 638, Forna 635 según Avamet), situación 2 de emergencia en la Safor, UME en Oliva, 2 víctimas mortales (Cabrera de Mar y Sagunto), sin clases en Baleares y decenas de municipios (datos provisionales, 19/10 mañana)",
+   "video": "videos/2026-10-19_dana-adam-600.mp4",
+   "buffer_post": "6ad5c80cee362c3569484bd2"
+  }
+ ]
 }
