@@ -149,3 +149,5 @@
 - Recursos nuevos en news2.js con catálogo: `ebolavirus`, `contacttrace`, `watchdays`, `notair`.
 - Diario de hoy: no existía → recuperación en marcha en esta tarea (el pulpo, de temas.json). Recursos `octopus` y `bloodtubes`.
 - Vigilar: posibles nuevos casos en Nigeria (secuenciación genómica, origen del contagio) → vídeo de actualización.
+- 19:46 · Diario de hoy recuperado: «El pulpo: tres corazones y sangre azul» (1:22), revisado fotograma a fotograma (se corrigieron tres huecos vacíos: tubos de sangre, escena del cobre y gráfico de neuronas), publicado ya (post 6ada4be39a8a68d3cd71d287, shareNow, sin etiqueta de IA). Tema quitado de temas.json.
+- Nota técnica: `renderp.py K N a b` reparte los fotogramas del tramo entre N procesos; para re-renderizar un tramo completo hay que lanzar todos los K (0..N-1) con el mismo tramo, o usar `0 1`.
