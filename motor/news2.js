@@ -1085,5 +1085,104 @@ NX.yearrain=(o={},lt)=>{const B=o.bars||[{lab:'un año',v:420},{lab:'un día',v:
   return s;};
 n2cat('yearrain · Depósitos de lluvia para comparar (un día frente a un año)',lt=>G(0,170,1,0,NX.yearrain({bars:[{lab:'un año en Madrid',v:420},{lab:'un año en Valencia',v:450},{lab:'un día en Pego',v:638,c:'#e0283a',txt:'638 l/m²'}],max:700,line:1},lt%6)));
 
+/* ===== Noticia del ébola en Nigeria (22/10/2026) ===== */
+/* Virus del ébola (filovirus): filamento largo enroscado en forma de cayado con espículas, que se retuerce · o:{s (grosor), label, c} */
+NX.ebolavirus=(o={},lt)=>{const k=o.s||1,c=o.c||'#c41f4e',wob=Math.sin(lt*2.2)*6;
+  const d=`M-150 ${f1(70+wob)} C-90 ${f1(40-wob)} -40 ${f1(90+wob)} 10 ${f1(50-wob*.6)} S 90 -20 80 -70 S 10 -130 -20 -90 S 0 -30 40 -50`;
+  const q=EZ.out(sg(lt,0,.9));let s='';
+  for(let i=0;i<26;i++){const u=i/25;if(u>q)break;const a=hs(i*3.7)*6.28;s+='';}
+  s+=DR(d,ST(K.ink,34*k),q)+DR(d,ST(c,28*k),q)+DR(d,ST('#ff7a95',10*k,'opacity:.7'),q)+DR(d,ST('#7a0f2c',3*k,'stroke-dasharray:.012 .02'),q);
+  /* espículas alrededor del filamento */
+  const pts=[[-150,70],[-120,52],[-90,52],[-60,66],[-30,76],[0,58],[30,30],[60,0],[80,-40],[70,-80],[40,-110],[0,-112],[-22,-80],[0,-50],[30,-48]];
+  pts.forEach(([x,y],i)=>{const u=i/(pts.length-1);if(u>q)return;const a=(hs(i*2.1)-.5)*1.4+(i<6?-1.57:i<10?-.6:i<13?-1.9:1.57);
+    const yy=y+(i<6?(i%2?-1:1)*wob*.5:0);s+=G(x,yy,_ap(lt,.2+u*.6,.25),0,P(`M0 0 L${f1(Math.cos(a)*24*k)} ${f1(Math.sin(a)*24*k)}`,ST('#7a0f2c',3))+Ci(Math.cos(a)*26*k,Math.sin(a)*26*k,4.5*k,'#ff5a7a',OL(1.4)));});
+  if(o.label)s+=G(0,150,1,0,pill(o.label,{sz:14,w:800,fill:K.ink}),_ao(lt,.8,.3));
+  return s;};
+n2cat('ebolavirus · Virus del ébola (filovirus enroscado)',lt=>NX.ebolavirus({label:'cepa Bundibugyo'},lt%4));
+
+/* Rastreo de contactos: un caso en el centro (aislado) y sus contactos alrededor, unidos por líneas que se trazan; después cada contacto recibe su ✓ de vigilancia · o:{n, at, check (s en que empiezan los ✓), label, R} */
+NX.contacttrace=(o={},lt)=>{const n=o.n||44,at=o.at??.2,R=o.R||200,ck=o.check;let s='';
+  const pos=[];let i=0;[[.42,10],[.7,14],[1,20]].forEach(([r,m])=>{for(let j=0;j<m&&i<n;j++,i++){const a=j/m*6.283+r*1.7;pos.push([Math.cos(a)*R*r,Math.sin(a)*R*r*.92]);}});
+  while(pos.length<n){const a=pos.length*2.4;pos.push([Math.cos(a)*R*1.1,Math.sin(a)*R]);}
+  pos.forEach(([x,y],j)=>{const a=at+.15+j*.035,q=sg(lt,a,a+.3);if(q<=0)return;s+=P(`M0 0 L${f1(x*EZ.out(q))} ${f1(y*EZ.out(q))}`,ST('rgba(20,18,18,.35)',1.4));});
+  pos.forEach(([x,y],j)=>{const a=at+.3+j*.035;if(lt<a)return;const on=ck!=null&&lt>ck+j*.03;
+    s+=G(x,y,_ap(lt,a,.3),0,Ci(0,0,11,on?'#3f9b4f':'#fff',OL(2))+(on?P('M-5 0 L-1 4 L6 -5',ST('#fff',2.6)):Ci(0,-2,3.6,K.ink)+P('M-6 7 Q0 1 6 7',ST(K.ink,2))));});
+  /* caso aislado en el centro */
+  const pl=1+.05*Math.sin(lt*5);
+  s+=G(0,0,_ap(lt,at,.4)*pl,0,Rc(-40,-40,80,80,'#fff',14,OL(3,K.red))+Ci(0,-8,13,K.red)+P('M-20 26 Q0 4 20 26',`fill:${K.red}`)+Rc(-40,-40,80,16,K.red,6)+Tn(0,-28,'AISLADA',9,800,{fill:'#fff',ls:.06}));
+  if(o.label)s+=G(0,R+44,1,0,pill(o.label,{sz:15,w:800,fill:K.ink}),_ao(lt,at+1,.3));
+  return s;};
+n2cat('contacttrace · Rastreo de contactos (un caso aislado y sus contactos)',lt=>G(0,-30,.9,0,NX.contacttrace({n:44,check:3,label:'44 contactos'},lt%6)));
+
+/* Calendario de vigilancia de N días (21 = periodo máximo de incubación del ébola): las casillas se van tachando · o:{days, at, dur, title} */
+NX.watchdays=(o={},lt)=>{const n=o.days||21,at=o.at??.3,dur=o.dur||2.4,cols=7,cw=50,ch=46,rows=Math.ceil(n/cols),w=cols*cw,h=rows*ch;let s='';
+  s+=Rc(-w/2-14,-h/2-58,w+28,h+74,'#fff',14,OL(2.4))+Rc(-w/2-14,-h/2-58,w+28,40,K.red,14)+Rc(-w/2-14,-h/2-30,w+28,12,K.red)+Tn(0,-h/2-31,o.title||'VIGILANCIA',16,800,{fill:'#fff',ls:.08});
+  const cur=sg(lt,at,at+dur)*n;
+  for(let i=0;i<n;i++){const x=-w/2+(i%cols)*cw+cw/2,y=-h/2+Math.floor(i/cols)*ch+ch/2+8,done=cur>i+.5,now=cur>i&&!done;
+    s+=Rc(x-cw/2+4,y-ch/2+4,cw-8,ch-8,done?'#e8f5ea':'#f6f6f6',8,OL(1.4,'#bdbdbd'))+Tn(x,y+6,String(i+1),15,700,{fill:done?'#3f9b4f':'#777'});
+    if(done||now)s+=DR(`M${x-14} ${y+2} L${x-4} ${y+12} L${x+15} ${y-12}`,ST('#3f9b4f',3.6),done?1:(cur-i)*2);}
+  if(cur>=n-.01)s+=G(w/2-10,h/2+6,1,0,stampA(0,0,lt-(at+dur),o.done||'21 DÍAS',{c:'#3f9b4f',sz:18,r:-8}));
+  return s;};
+n2cat('watchdays · Calendario de vigilancia (21 días)',lt=>NX.watchdays({},lt%5));
+
+/* No se contagia por el aire / sí por contacto directo: dos tarjetas, aire tachado y gota de fluido con ✓ · o:{at, la, lb} */
+NX.notair=(o={},lt)=>{const at=o.at??.2;let s='';
+  /* tarjeta A: aire */
+  let a=Rc(-110,-120,220,240,'#fff',18,OL(2.4));
+  for(let i=0;i<3;i++){const y=-50+i*30,ph=lt*3+i;a+=P(`M-80 ${y} q20 ${f1(-12*Math.sin(ph))} 40 0 t40 0 t40 0`,ST('#8fb2e6',5));}
+  a+=G(40,-58,.32,0,NX.virus({},lt+1));
+  a+=Tn(0,70,o.la||'POR EL AIRE',17,800);
+  const xq=sg(lt,at+.9,at+1.3);a+=DR('M-80 -100 L80 40',ST(K.red,9),xq)+DR('M80 -100 L-80 40',ST(K.red,9),sg(lt,at+1.1,at+1.5));
+  s+=G(-120,0,_ap(lt,at,.4),-3,a);
+  /* tarjeta B: contacto directo */
+  let b=Rc(-110,-120,220,240,'#fff',18,OL(2.4));
+  const dy=Math.sin(lt*3)*4;b+=G(-28,-40+dy,1,0,P('M0 -38 C 18 -12 26 2 26 14 A26 26 0 0 1 -26 14 C -26 2 -18 -12 0 -38Z',`fill:${K.red};${OL(2.4)}`)+El(-9,6,6,10,'#fff','opacity:.45'));
+  b+=G(38,-32,1,-20,P('M-22 30 L-22 -8 Q-22 -16 -14 -16 Q-6 -16 -6 -8 L-6 -30 Q-6 -38 2 -38 Q10 -38 10 -30 L10 -6 L18 -6 Q26 -6 26 4 L26 30 Q26 44 10 44 L-8 44 Q-22 44 -22 30Z',`fill:#f6d0b0;${OL(2.2)}`));
+  b+=Tn(0,62,o.lb||'CONTACTO',17,800)+Tn(0,84,'DIRECTO',17,800);
+  b+=G(78,-92,_ap(lt,at+1.8,.35),0,Ci(0,0,22,'#3f9b4f',OL(2.4))+P('M-9 0 L-2 7 L10 -7',ST('#fff',4)));
+  s+=G(120,0,_ap(lt,at+.4,.4),3,b);
+  return s;};
+n2cat('notair · No se contagia por el aire / sí por contacto directo',lt=>NX.notair({},lt%5));
+
+/* ===== Diario del pulpo (22/10/2026) ===== */
+/* Pulpo dibujado con 8 brazos ondulantes · o:{c, cd, swim (0..1: brazos juntos hacia atrás, modo propulsión), walk (0..1: camina con los brazos), xray (0..1: ventana con los 3 corazones), beat:[branquial izq, branquial dcho, sistémico] (1 late, 0 parado), blood ('blue'|'none'), arms (0..1: brazos iluminados = neuronas), emo ('ok'|'tired'|'wow'), jet (0..1 chorro de agua)} */
+NX.octopus=(o={},lt)=>{const c=o.c||'#e2678f',cd=o.cd||'#b8406b',sw=cl(o.swim||0),wk=o.walk||0,xr=cl(o.xray||0),am=cl(o.arms||0),T=lt;let s='';
+  /* brazos */
+  for(let i=0;i<8;i++){const side=i<4?-1:1,k=i%4,bx=side*(10+k*9),ph=T*2.6+i*.8+(wk?T*4:0);
+    const spread=side*(26+k*22)*(1-sw),len=120+k*6-(sw*20),wav=Math.sin(ph)*16*(1-sw*.7);
+    const x1=bx+spread*.5+wav*.4,y1=60+len*.35,x2=bx+spread+wav,y2=60+len*.75+(wk?Math.abs(Math.sin(ph))*-10:0),x3=bx+spread*1.25+Math.sin(ph+1)*22*(1-sw*.6),y3=60+len-Math.max(0,Math.sin(ph+.5))*18*(1-sw);
+    const d=`M${f1(bx)} 50 Q${f1(x1)} ${f1(y1)} ${f1(x2)} ${f1(y2)} T${f1(x3)} ${f1(y3)}`;
+    s+=P(d,ST(K.ink,23-k))+P(d,ST(k%2?cd:c,19-k));
+    if(am>0){s+=P(d,ST('#ffe066',6,`opacity:${f2(am*(.55+.45*Math.sin(T*8+i)))}`));}}
+  if(o.jet){const j=cl(o.jet);for(let k=0;k<6;k++){const q=((T*2.2)+k/6)%1;s+=Ci(Math.sin(k*2.1)*14*q,190+q*120,(10+q*16)*j,'#cfe6ff',`opacity:${f2(.75*(1-q)*j)};${OL(1.4,'#8fb2e6')}`);}}
+  /* manto y cabeza */
+  s+=El(0,-40,78,96,c,OL(3))+El(-24,-80,22,30,'#ffffff','opacity:.18');
+  for(let k=0;k<7;k++)s+=Ci(-46+hs(k*3)*90,-90+hs(k*7)*90,3+hs(k)*4,cd,'opacity:.55');
+  /* ventana de rayos X con los tres corazones */
+  if(xr>0){const bt=o.beat||[1,1,1],H=(x,y,r,on,col,lab)=>{const b=on?1+.16*Math.max(0,Math.sin(T*9)):1;return G(x,y,b*r/20,0,P('M0 8 C-14 -2 -20 -14 -10 -20 C-4 -24 0 -18 0 -14 C0 -18 4 -24 10 -20 C20 -14 14 -2 0 8Z',`fill:${on?col:'#8e8e8e'};${OL(1.6)}`))+(lab?G(x,y+r+12,1,0,Tn(0,0,lab,9,800,{fill:'#fff'})):'');};
+    let w=El(0,-30,58,66,'#1d2a44','opacity:.92')+El(0,-30,58,66,'none',OL(2.4,'#9ec3ff'));
+    w+=G(-38,-4,1,0,El(0,0,14,22,'#3d6a5a',OL(1.4,'#9ec3ff')))+G(38,-4,1,0,El(0,0,14,22,'#3d6a5a',OL(1.4,'#9ec3ff')));
+    w+=P('M-38 -20 Q-20 -50 0 -40 M38 -20 Q20 -50 0 -40',ST(o.blood==='blue'?'#4f8cff':'#c9d6e8',3,'opacity:.9'));
+    w+=H(-38,-4,15,bt[0],'#ff5a7a')+H(38,-4,15,bt[1],'#ff5a7a')+H(0,-44,24,bt[2],'#ff2e63');
+    if(!bt[2])w+=G(0,-44,1,0,P('M-14 -14 L14 14 M14 -14 L-14 14',ST('#fff',4)));
+    s+=G(0,-38,.78,0,w,xr);}
+  /* ojos */
+  const em=o.emo||'ok',ey=em==='tired'?.35:1,eb=em==='wow'?1.25:1;
+  [[-30,0],[30,0]].forEach(([x])=>{s+=El(x,10,16*eb,15*eb,'#fff',OL(2.2))+(ey<1?P(`M${x-13} ${10-2} L${x+13} ${10-2}`,ST(K.ink,3)):'')+El(x+3,12,5*eb,7*eb*ey,K.ink);});
+  s+=P(em==='tired'?'M-10 40 Q0 34 10 40':'M-9 36 Q0 42 9 36',ST(K.ink,2.6));
+  return s;};
+n2cat('octopus · Pulpo (8 brazos, rayos X con 3 corazones, propulsión, brazos que «piensan»)',lt=>{const ph=lt%8;return G(0,-40,.9,0,NX.octopus({xray:ph>2&&ph<6?1:0,beat:[1,1,ph<4?1:0],blood:'blue',swim:ph>4&&ph<6?1:0,jet:ph>4&&ph<6?1:0,arms:ph>6?1:0,emo:ph>4&&ph<6?'tired':'ok'},lt));});
+
+/* Dos tubos de sangre para comparar: roja (hemoglobina, hierro Fe) y azul (hemocianina, cobre Cu), con su casilla de la tabla periódica · o:{at, la, lb} */
+NX.bloodtubes=(o={},lt)=>{const at=o.at??.2;let s='';
+  const tube=(x,col,lab,el,num,a)=>{const q=EZ.io(sg(lt,a+.3,a+1.3)),H=230;let g=Rc(-34,-H,68,H,'rgba(255,255,255,.55)',30,OL(2.4))+Rc(-44,-H-14,88,20,'#d8d8d8',6,OL(2.2));
+    g+=clipG(Rc(-34,-H*.8*q,68,H*.8*q+2,col)+Rc(-34,-H*.8*q,68,10,'#ffffff',0,'opacity:.25'),Rc(-31,-H+3,62,H-6,'#000',28));
+    g+=G(0,-H-80,_ap(lt,a+1.2,.35),0,Rc(-38,-38,76,76,'#fff',8,OL(2.4,col))+Tn(-24,-18,String(num),11,700,{a:'start',fill:'#555'})+Tn(0,16,el,34,800,{fill:col}));
+    g+=G(0,34,1,0,pill(lab,{sz:13,w:800,fill:col}),_ao(lt,a+.8,.3));
+    return G(x,0,_ap(lt,a,.4),0,g);};
+  s+=tube(-100,'#d6283a',o.la||'hemoglobina',"Fe",26,at)+tube(100,'#2f6fe0',o.lb||'hemocianina','Cu',29,at+(o.gap??.6));
+  return s;};
+n2cat('bloodtubes · Sangre roja (hierro) frente a sangre azul (cobre)',lt=>G(0,120,1,0,NX.bloodtubes({},lt%5)));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
