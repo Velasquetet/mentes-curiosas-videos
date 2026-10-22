@@ -1239,4 +1239,78 @@ NX.cutstairs=(o={},lt)=>{const it=o.items||[['2025',100,'hoy',0],['2030',82,'−
 n2cat('cutstairs · Escalera de recortes de emisiones (y lo prometido)',lt=>G(0,250,1,0,NX.cutstairs({promise:['2035',87,'promesas: −11 a −15 %',3]},lt%6)));
 
 /* registrar en el catálogo */
+
+
+/* ===== Noticia del virus Shamonda (22/10/2026) ===== */
+/* Vaca de perfil (mira a la derecha), pies en y=0 · o:{c (manchas), walk (0..1 anda), sick (0..1: fiebre, termómetro y ojos cansados), milk (0..1 nivel del cubo de leche; null = sin cubo), virus (0..1 halo de virus alrededor), emo ('ok'|'tired')} */
+NX.cow=(o={},lt)=>{const T=lt,wk=o.walk||0,sk=cl(o.sick||0),pc=o.c||'#2a2525';let s='';
+  const bob=wk?Math.abs(Math.sin(T*6))*-3:Math.sin(T*1.6)*1.2;
+  /* patas */
+  [[-78,0],[-50,1],[44,1],[70,0]].forEach(([x,ph],i)=>{const a=wk?Math.sin(T*6+ph*3.14)*14:0;
+    s+=G(x,-62,1,a,Rc(-9,0,18,60,'#fbfbfb',6,OL(2.2))+Rc(-10,50,20,12,K.ink,4));});
+  /* cola */
+  const tw=Math.sin(T*3)*14;s+=P(`M-112 -128 Q${f1(-136+tw*.3)} -90 ${f1(-130+tw)} -58`,ST(K.ink,4))+El(-130+tw,-54,6,10,K.ink);
+  /* cuerpo con manchas */
+  const body='M-112 -150 Q-118 -66 -96 -62 L88 -62 Q108 -66 104 -150 Q100 -160 80 -160 L-92 -160 Q-112 -160 -112 -150Z';
+  s+=G(0,bob,1,0,P(body,`fill:#fbfbfb;${OL(2.6)}`)+clipG(El(-60,-136,34,24,pc)+El(10,-90,30,20,pc)+El(70,-140,22,18,pc)+El(-90,-80,18,14,pc),P(body,'fill:#000'))+P(body,`fill:none;${OL(2.6)}`)
+    +P('M-30 -62 Q-30 -40 -14 -40 Q2 -40 2 -62Z',`fill:#f4a6b8;${OL(2)}`)+P('M-22 -42 L-22 -34 M-8 -42 L-8 -34',ST(K.ink,2)));
+  /* cabeza */
+  const hb=Math.sin(T*1.3)*2+bob;let h='';
+  h+=El(-4,-30,12,8,'#fbfbfb',OL(2))+El(-2,-30,6,4,'#f4a6b8');
+  h+=P('M-6 -40 Q-14 -60 -2 -60 M26 -40 Q34 -60 22 -60',ST('#d9c7a0',5))+P('M-6 -40 Q-14 -60 -2 -60 M26 -40 Q34 -60 22 -60',ST(K.ink,1.4,'opacity:.6'));
+  h+=P('M-12 -36 Q-14 6 6 22 L30 22 Q48 6 40 -36 Q14 -50 -12 -36Z',`fill:#fbfbfb;${OL(2.4)}`)+El(4,-26,12,10,pc);
+  h+=El(14,18,30,18,'#f4a6b8',OL(2.4))+El(4,18,4,5,K.ink)+El(24,18,4,5,K.ink);
+  const ey=o.emo==='tired'||sk>.5?.35:1;
+  [[2,-12],[28,-12]].forEach(([x,y])=>{h+=El(x,y,6,6,'#fff',OL(1.6))+El(x+1,y+1,3,3.6*ey,K.ink)+(ey<1?P(`M${x-7} ${y-2} L${x+7} ${y-2}`,ST(K.ink,2.4)):'');});
+  if(sk>0){h+=G(46,24,sk,-25,Rc(-3,-4,40,8,'#fff',4,OL(1.6))+Ci(38,0,6,K.red,OL(1.4))+Rc(8,-1.5,30*sk,3,K.red));
+    for(let i=0;i<2;i++){const q=((T*.9)+i*.5)%1;h+=G(-14-i*6,-20+q*18,sk*(1-q),0,P('M0 -6 C 4 0 4 4 0 6 C -4 4 -4 0 0 -6Z','fill:#8fc4ff;'+OL(1.2,'#3a78c9')));}}
+  s+=G(98,-140+hb,1,8,h);
+  /* cubo de leche */
+  if(o.milk!=null){const lv=cl(o.milk);let b=P('M-26 -46 L26 -46 L20 0 L-20 0Z',`fill:#c9d2dc;${OL(2.2)}`);
+    b+=clipG(Rc(-30,-46+46*(1-lv),60,50,'#ffffff'),P('M-24 -44 L24 -44 L19 -2 L-19 -2Z','fill:#000'))+P('M-24 -46 Q0 -76 24 -46',ST(K.ink,2.2));
+    s+=G(150,0,1,0,b);}
+  if(o.virus){const v=cl(o.virus);for(let i=0;i<6;i++){const a=i/6*6.28+T*.7;s+=G(Math.cos(a)*150,-100+Math.sin(a)*90,.16*v,0,NX.virus({},lt+i),v);}}
+  return s;};
+n2cat('cow · Vaca (anda, enferma con fiebre, cubo de leche que baja, virus alrededor)',lt=>{const t=lt%8;return G(-40,160,1,0,NX.cow({walk:t<2?1:0,sick:t>3?Math.min(1,(t-3)*1.5):0,milk:t>2?Math.max(.15,1-(t-2)*.25):null,virus:t>5.5?1:0},lt));});
+
+/* Jején (Culicoides): insecto diminuto con alas moteadas que zumba y pica · o:{s, bite (0..1 baja la probóscide y se posa), fly (0..1 vuela en zigzag), path (ancho del zigzag), spots (alas con manchas)} */
+NX.midge=(o={},lt)=>{const T=lt,fl=o.fly??1,bt=cl(o.bite||0),A=o.path||60;let s='';
+  const x=fl*(Math.sin(T*2.3)*A+Math.sin(T*5.1)*A*.25),y=fl*(Math.cos(T*3.1)*A*.4)+bt*20;
+  const flap=fl>0||bt<1?Math.abs(Math.sin(T*55)):.2,ws=.25+.75*flap;
+  let b='';
+  /* patas */
+  for(let i=0;i<3;i++){const lx=-10+i*12;b+=P(`M${lx} 8 L${lx-8} 30 L${lx-12} 44 M${lx} 8 L${lx+8} 30 L${lx+12} 44`,ST(K.ink,1.6));}
+  /* alas moteadas */
+  const wing=(dir)=>{let w=El(0,-26,46,16,'rgba(235,240,250,.85)',OL(1.6,'#4a4a52'));if(o.spots!==false)[[-24,-28],[-6,-22],[12,-30],[26,-24],[-14,-34]].forEach(([a,c])=>{w+=Ci(a,c,4,'#6a6a72','opacity:.6');});return G(dir*6,-4,1,dir*-24,G(dir*30,0,1,0,w),1,ws*(1));};
+  b+=wing(-1)+wing(1);
+  /* cuerpo */
+  b+=El(-26,6,24,12,'#5a4636',OL(1.8))+P('M-44 2 L-12 2 M-40 10 L-14 10',ST('#3a2a1f',1.4))+El(6,0,16,14,'#4a382b',OL(1.8))+Ci(30,4,11,'#3a2a1f',OL(1.8));
+  b+=Ci(34,0,4.4,'#c93030')+P(`M36 -6 Q46 -18 54 -14 M36 -6 Q42 -22 50 -24`,ST(K.ink,1.4));
+  b+=P(`M38 10 L${f1(48+bt*4)} ${f1(18+bt*14)}`,ST(K.ink,2.2));
+  s+=G(x,y,o.s||1,bt*20,b);
+  if(fl>0){for(let i=0;i<3;i++){const q=((T*2)+i/3)%1;s+=G(x-30-q*40,y-10+Math.sin(i*2)*12,1,0,Tn(0,0,'z',12+q*6,800,{fill:'rgba(20,18,18,'+f2(.6*(1-q))+')'}));}}
+  return s;};
+n2cat('midge · Jején (Culicoides): vuela zumbando y pica',lt=>{const t=lt%6;return G(0,0,2.2,0,NX.midge({fly:t<3.5?1:Math.max(0,1-(t-3.5)*2),bite:t>4?Math.min(1,(t-4)*2):0},lt));});
+
+/* Comparación de tamaño: mosquito frente a jején (diminuto) con lupa · o:{at} */
+NX.midgesize=(o={},lt)=>{const at=o.at??.2;let s='';
+  const mosq=(()=>{let m='';for(let i=0;i<3;i++){const lx=-14+i*12;m+=P(`M${lx} 4 L${lx-16} 40 L${lx-26} 70 M${lx} 4 L${lx+16} 40 L${lx+26} 70`,ST(K.ink,1.8));}
+    m+=El(-20,-26,52,13,'rgba(235,240,250,.85)',OL(1.6,'#4a4a52'))+El(-50,4,40,9,'#6b5a4a',OL(1.8))+El(4,0,14,12,'#5a4636',OL(1.8))+Ci(24,0,9,'#3a2a1f',OL(1.8))+P('M30 4 L62 22',ST(K.ink,2.2));return m;})();
+  s+=G(-120,0,_ap(lt,at,.35),0,mosq+G(0,96,1,0,pill('mosquito',{sz:14,w:800,fill:K.ink})));
+  s+=G(120,0,_ap(lt,at+.5,.35),0,G(0,6,.32,0,NX.midge({fly:0,bite:0},lt))+Ci(0,0,58,'rgba(255,255,255,.25)',OL(4))+P('M40 42 L78 80',ST(K.ink,10))+G(0,96,1,0,pill('jején',{sz:14,w:800,fill:'url(#gRP)'})));
+  return s;};
+n2cat('midgesize · Mosquito frente a jején (con lupa)',lt=>NX.midgesize({},lt%4));
+
+/* Salto de especie: virus que pasa de un animal (vaca) a una persona por primera vez · o:{at, label} */
+NX.spillover=(o={},lt)=>{const at=o.at??.3;let s='';
+  s+=G(-120,70,.55,0,NX.cow({},lt),_ao(lt,at,.3));
+  const per=Ci(0,-96,26,'#f6d0b0',OL(2.4))+P('M-36 0 Q-36 -58 0 -62 Q36 -58 36 0Z',`fill:#5b6b8a;${OL(2.4)}`)+El(-8,-98,3,3.6,K.ink)+El(8,-98,3,3.6,K.ink)+P('M-7 -84 Q0 -86 7 -84',ST(K.ink,2));
+  s+=G(160,70,1,0,per,_ao(lt,at+.2,.3));
+  const q=EZ.io(sg(lt,at+.6,at+1.8)),bx=lerp(-60,150,q),by=-30-Math.sin(q*3.14)*150;
+  s+=DR('M-60 -30 Q45 -330 150 -30',ST(K.red,3,'stroke-dasharray:.02 .02'),q);
+  if(lt>at+.6)s+=G(bx,by,.2,lt*60,NX.virus({c:'#e58a1f'},lt));
+  if(q>=1)s+=G(160,-20,1,0,_pulse(lt-at-1.8,40,K.red,3,1.2));
+  if(o.label&&lt>at+1.9)s+=G(0,150,1,0,stampA(0,0,lt-at-1.9,o.label,{c:K.red,sz:22,r:-5}));
+  return s;};
+n2cat('spillover · Salto de especie: de la vaca a la persona',lt=>NX.spillover({label:'1.er CASO HUMANO'},lt%5));
 NX_CATALOG.push(..._N2);
