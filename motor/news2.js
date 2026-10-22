@@ -1184,5 +1184,59 @@ NX.bloodtubes=(o={},lt)=>{const at=o.at??.2;let s='';
   return s;};
 n2cat('bloodtubes · Sangre roja (hierro) frente a sangre azul (cobre)',lt=>G(0,120,1,0,NX.bloodtubes({},lt%5)));
 
+
+/* ===== Noticia del informe de la ONU sobre la brecha de emisiones (22/10/2026) ===== */
+/* Termómetro gigante cuyo mercurio rompe la cinta del límite (p. ej. 1,5 °C) · o:{at (instante en que rompe), label, top (valor máx. escala), lim, val (valor final)} */
+NX.limitbreak=(o={},lt)=>{const at=o.at??.8,top=o.top||3,lim=o.lim??1.5,vf=o.val??1.8,H=440,Y=v=>-v/top*H;let s='';
+  const v=lt<at?lerp(lim*.82,lim,EZ.io(sg(lt,0,at))):lim+(vf-lim)*EZ.out(sg(lt,at,at+1.2)),brk=lt>=at;
+  /* ondas de calor */
+  for(let i=0;i<4;i++){const q=((lt*.7)+i/4)%1;s+=P(`M${-90-i*8} ${f1(-120-q*260)} q12 -14 0 -28 t0 -28`,ST('#f6a81a',4,`opacity:${f2((1-q)*.7)}`));s+=P(`M${90+i*8} ${f1(-100-q*260)} q12 -14 0 -28 t0 -28`,ST('#f6a81a',4,`opacity:${f2((1-q)*.7)}`));}
+  /* tubo */
+  s+=Rc(-34,-H-30,68,H+40,'rgba(255,255,255,.75)',34,OL(2.6));
+  for(let k=0;k<=top;k++){s+=P(`M34 ${f1(Y(k))} l18 0`,ST(K.ink,2.4))+Tn(78,Y(k)+6,k+' °C',15,700,{a:'start'});}
+  s+=clipG(Rc(-22,Y(v),44,-Y(v)+20,brk?K.red:'#f36d3b')+Rc(-22,Y(v),44,8,'#fff',0,'opacity:.3'),Rc(-22,-H-20,44,H+30,'#000',22));
+  s+=Ci(0,40,50,brk?K.red:'#f36d3b',OL(2.6))+Ci(-14,26,12,'#fff','opacity:.35');
+  /* cinta del límite */
+  const yl=Y(lim),q=EZ.out(sg(lt,at,at+.5));
+  const tape=(dx,rot,side)=>G(dx,yl,1,rot,Rc(side<0?-220:0,-14,220,28,'#ffd400',0,OL(2))+[0,1,2,3,4].map(i=>P(`M${side<0?-210+i*44:10+i*44} 14 l22 -28`,ST(K.ink,7))).join(''));
+  if(!brk)s=tape(0,0,-1)+tape(0,0,1)+s;else s=tape(-q*40,-q*24,-1)+tape(q*40,q*24,1)+s;
+  s+=G(-150,yl-36,1,0,pill(o.label||'LÍMITE 1,5 °C',{sz:16,w:800,fill:K.red}));
+  if(brk){s+=G(0,yl,1,0,[0,1,2,3,4,5].map(i=>{const a=i*1.05,r=30+q*60;return P(`M${f1(Math.cos(a)*20)} ${f1(Math.sin(a)*12)} L${f1(Math.cos(a)*r)} ${f1(Math.sin(a)*r*.6)}`,ST(K.ink,3,`opacity:${f2(1-sg(lt,at+.6,at+1.2))}`));}).join(''));}
+  return s;};
+n2cat('limitbreak · Termómetro que rompe el límite de 1,5 °C',lt=>G(0,250,.85,0,NX.limitbreak({},lt%4)));
+
+/* Gráfico de temperatura global 1850-2100 con la línea del límite y escenarios · o:{w,h,top,lim, hist (instante en que se dibuja la historia), scen:[[valor 2100, etiqueta, color, instante, desplazamiento y de la etiqueta]], over (instante del escenario de sobrepaso: sube a 1,75 y vuelve a 1,5), dim (atenúa escenarios)} */
+NX.warmcurve=(o={},lt)=>{const w=o.w||400,h=o.h||300,top=o.top||3,lim=o.lim??1.5,X=y=>-w/2+(y-1850)/250*w,Y=v=>-v/top*h;let s='';
+  s+=Rc(-w/2-46,-h-30,w+92,h+78,'#fff',16,OL(2.4));
+  for(let k=0;k<=top;k++){s+=P(`M${-w/2} ${f1(Y(k))} L${w/2} ${f1(Y(k))}`,ST('#e2e2e2',1.4))+Tn(-w/2-10,Y(k)+5,k+'°',13,700,{a:'end',fill:'#666'});}
+  [1850,1950,2025,2100].forEach(y=>{s+=Tn(X(y),24,String(y),12,700,{fill:'#666'});});
+  s+=P(`M${-w/2} 0 L${w/2} 0`,ST(K.ink,2.2));
+  const yl=Y(lim);s+=P(`M${-w/2} ${f1(yl)} L${w/2} ${f1(yl)}`,ST(K.red,3,'stroke-dasharray:10 7'))+G(-w/2+52,yl-14,1,0,Tn(0,0,'1,5 °C',14,800,{fill:K.red}));
+  const H=[[1850,0],[1880,.02],[1910,.05],[1940,.25],[1960,.25],[1980,.42],[2000,.78],[2010,.95],[2020,1.25],[2025,1.42]];
+  const path=pts=>'M'+pts.map(([y,v])=>f1(X(y))+' '+f1(Y(v))).join(' L');
+  const ha=o.hist??0;s+=DR(path(H),ST(K.ink,4),sg(lt,ha,ha+1.4));
+  const curve=(vf,n=12)=>{const r=[];for(let i=0;i<=n;i++){const y=2025+i*75/n,u=i/n;r.push([y,1.42+(vf-1.42)*(1-Math.pow(1-u,1.35))]);}return r;};
+  (o.scen||[]).forEach(([vf,lab,col,a,dy],i)=>{dy=dy||0;const p=sg(lt,a,a+1.1),dm=o.dim?.35:1;s+=G(0,0,1,0,DR(path(curve(vf)),ST(col,4.5),p),dm);
+    if(p>=1)s+=G(X(2100)+8,Y(vf)+dy,1,0,Rc(-2,-15,lab.length*9.2+18,30,col,15)+Tn(7,6,lab,15,800,{a:'start',fill:'#fff'}),_ao(lt,a+1.1,.25)*dm);});
+  if(o.over!=null){const a=o.over,pts=[];for(let i=0;i<=20;i++){const y=2025+i*75/20,u=(y-2025)/75;const v=u<.33?1.42+(1.75-1.42)*Math.sin(u/.33*Math.PI/2):1.75-(1.75-1.45)*EZ.io((u-.33)/.67);pts.push([y,v]);}
+    const p=sg(lt,a,a+1.6);
+    const ov=pts.filter(([y,v])=>v>lim);if(p>.95&&ov.length)s+=P('M'+ov.map(([y,v])=>f1(X(y))+' '+f1(Y(v))).join(' L')+` L${f1(X(ov[ov.length-1][0]))} ${f1(yl)} L${f1(X(ov[0][0]))} ${f1(yl)}Z`,`fill:${K.red};opacity:${f2(.25*_ao(lt,a+1.6,.4))}`);
+    s+=DR(path(pts),ST('#f36d3b',5),p);
+    if(p>=.5)s+=G(X(2050),Y(1.75)-26,1,0,pill('pico 1,7-1,8 °C',{sz:13,w:800,fill:'#f36d3b'}),_ao(lt,a+.8,.3));}
+  return G(0,0,_ap(lt,0,.35),0,s);};
+n2cat('warmcurve · Temperatura global 1850-2100: escenarios y sobrepaso del 1,5 °C',lt=>{const t=lt%7;return G(0,150,1,0,NX.warmcurve({hist:.3,scen:[[2.8,'2,8 °C',K.red,1.8,-12],[2.6,'2,6 °C','#f36d3b',2.4,12],[2.1,'2,1 °C','#f6a81a',3]],over:t>4.2?4.2:null,dim:t>4.2},t));});
+
+/* Escalera de recortes de emisiones (2025 = 100) con la barra «fantasma» de lo prometido · o:{items:[[año,%restante,etiqueta,instante]], promise:[año,%restante,etiqueta,instante], h} */
+NX.cutstairs=(o={},lt)=>{const it=o.items||[['2025',100,'hoy',0],['2030',82,'−18 %',.6],['2035',55,'−45 %',1.2],['2040',31,'−69 %',1.8]],h=o.h||300,bw=78,gap=22,n=it.length,tw=n*bw+(n-1)*gap;let s=P(`M${-tw/2-20} 0 L${tw/2+20} 0`,ST(K.ink,2.4));
+  it.forEach(([y,v,lab,a],i)=>{const x=-tw/2+i*(bw+gap),q=EZ.out(sg(lt,a,a+.5)),bh=v/100*h*q;
+    s+=Rc(x,-bh,bw,bh,i?'url(#gWA)':'#7a7a7a',6,OL(2.2));
+    if(i){const smk=lt>a;if(smk)s+=G(x+bw/2,-bh-16,1,0,Tn(0,0,lab,20,800,{fill:K.green2||'#3f9b4f'}),_ao(lt,a+.4,.25));}
+    else s+=G(x+bw/2,-bh-14,1,0,Tn(0,0,'100',18,800,{fill:'#555'}),_ao(lt,a+.3,.25));
+    s+=Tn(x+bw/2,24,y,15,800,{fill:'#555'});});
+  if(o.promise){const [y,v,lab,a]=o.promise,i=it.findIndex(e=>e[0]===y);if(i>=0&&lt>a){const x=-tw/2+i*(bw+gap),bh=v/100*h,p=_ao(lt,a,.4);
+    s+=G(0,0,1,0,Rc(x-6,-bh,bw+12,bh,'rgba(243,72,65,.12)',6,`stroke:${K.red};stroke-width:3;stroke-dasharray:8 6`),p)+G(x+bw/2,-bh-44,1,0,pill(lab,{sz:13,w:800,fill:K.red}),_ao(lt,a+.3,.3));}}
+  return s;};
+n2cat('cutstairs · Escalera de recortes de emisiones (y lo prometido)',lt=>G(0,250,1,0,NX.cutstairs({promise:['2035',87,'promesas: −11 a −15 %',3]},lt%6)));
+
 /* registrar en el catálogo */
 NX_CATALOG.push(..._N2);
