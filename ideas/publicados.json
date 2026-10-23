@@ -1,202 +1,211 @@
 {
-  "publicados": [
-    {
-      "fecha": "2026-10-13",
-      "tema": "Por qué los flamencos son rosas",
-      "video": "videos/2026-10-13_flamencos.mp4",
-      "buffer_post": "6acd4da35562ebe80f6cc894",
-      "sale": "2026-10-13",
-      "tipo": "diario",
-      "estado": "publicado"
-    },
-    {
-      "fecha": "2026-10-14",
-      "sale": "2026-10-14",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El esturión de lago: el pez que podría vivir más de 400 años",
-      "video": "videos/2026-10-14_esturion.mp4",
-      "buffer_post": "6acfc2282397c8676abbe2a5"
-    },
-    {
-      "fecha": "2026-10-15",
-      "sale": "2026-10-15",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El T. rex tenía labios (y otras cosas que hemos corregido)",
-      "video": "videos/2026-10-15_trex.mp4",
-      "buffer_post": "6ad106cb5738dc2c7b0e81ab"
-    },
-    {
-      "fecha": "2026-10-15",
-      "sale": "2026-10-16",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "Los reptiles hacen mucho más ruido del que crees",
-      "video": "videos/2026-10-16_reptiles.mp4",
-      "buffer_post": "6ad1530e4ed7d375a433ef00"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
-      "video": "videos/2026-10-16_tesla-roadster.mp4",
-      "buffer_post": "6ad23f3945dfa13a723940d4"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Japón lanza por error una alerta de terremoto de magnitud 9,9 (era un 6,9 en Kamchatka)",
-      "video": "videos/2026-10-16_japon-alerta.mp4",
-      "buffer_post": "6ad255c1dcd88593548bd363"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-16",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Estambul sufre sus peores inundaciones en más de 80 años (4 muertos, 3 desaparecidos, cifras provisionales)",
-      "video": "videos/2026-10-16_estambul-inundaciones.mp4",
-      "buffer_post": "6ad272ebd8cc58ddf1696fde"
-    },
-    {
-      "fecha": "2026-10-16",
-      "sale": "2026-10-17",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "La malvasía cabeciblanca: el pato español del pico azul",
-      "video": "videos/2026-10-17_malvasia.mp4",
-      "buffer_post": "6ad2a63487c49357709edd38"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "El mundo elimina el segundo intercalar desde mayo de 2027 (CGPM, Versalles, 15/10)",
-      "video": "videos/2026-10-17_segundo-intercalar.mp4",
-      "buffer_post": "6ad38ec9ae173d6e00c07ed4"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
-      "video": "videos/2026-10-17_papa-alta.mp4",
-      "buffer_post": "6ad3a9c7e272c4918f948238"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-17",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Trump pone en pausa las sanciones de la ley Graham contra Rusia (orden ejecutiva, 16/10)",
-      "video": "videos/2026-10-17_sanciones-rusia.mp4",
-      "buffer_post": "6ad3df510a208cb32338bf7b"
-    },
-    {
-      "fecha": "2026-10-17",
-      "sale": "2026-10-18",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El chocolate más antiguo al este del Misisipi (ADN de cacao en cerámica de Etowah, Georgia)",
-      "video": "videos/2026-10-18_chocolate.mp4",
-      "buffer_post": "6ad3fcff938409f1d0a6e2ed"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Estampida en el Durga Puja de Calcuta: al menos 19 muertos y unos 25 heridos (sábado 17/10, cifras provisionales) + por qué una multitud es peligrosa",
-      "video": "videos/2026-10-18_calcuta-estampida.mp4",
-      "buffer_post": "6ad48e83769b457934b60efe"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
-      "video": "videos/2026-10-18_drones-rusia.mp4",
-      "buffer_post": "6ad4d4480a208cb3236ad783"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
-      "video": "videos/2026-10-18_wainwright-incendio.mp4",
-      "buffer_post": "6ad514930a208cb32379cdc7"
-    },
-    {
-      "fecha": "2026-10-18",
-      "sale": "2026-10-18",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Alerta roja por la dana Adam en Valencia, Alicante y Baleares (18/10): hasta 300-400 l/m², +200 l/m² en la Safor, Cercanías C1/C2 cortadas, aeropuerto de Ibiza 2 h parado, sin clases el lunes, UME a las islas, 1 víctima en Cabrera de Mar (datos provisionales)",
-      "video": "videos/2026-10-18_dana-adam.mp4",
-      "buffer_post": "6ad537b60b0d72757a3c2eb8"
-    },
-    {
-      "fecha": "2026-10-19",
-      "sale": "2026-10-19",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Actualización dana Adam: más de 600 l/m² en 24 h en la Safor y la Marina Alta (Pego 638, Forna 635 según Avamet), situación 2 de emergencia en la Safor, UME en Oliva, 2 víctimas mortales (Cabrera de Mar y Sagunto), sin clases en Baleares y decenas de municipios (datos provisionales, 19/10 mañana)",
-      "video": "videos/2026-10-19_dana-adam-600.mp4",
-      "buffer_post": "6ad5c80cee362c3569484bd2"
-    },
-    {
-      "fecha": "2026-10-19",
-      "sale": "2026-10-19",
-      "tipo": "diario",
-      "estado": "programado",
-      "tema": "Las cuerdas de la Edad de Piedra: la herramienta de marfil de Hohle Fels (~40.000 años) y la cuerda de tres cabos de Abri du Maras (~50.000 años, neandertales)",
-      "video": "videos/2026-10-19_cuerdas.mp4",
-      "buffer_post": "6ad5d5cdea56886c4715f828"
-    },
-    {
-      "fecha": "2026-10-22",
-      "sale": "2026-10-22",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "El ébola llega a Nigeria (caso importado en Abuya, 44 contactos); brote de RD Congo: +9.700 casos y ~4.700 muertes (OMS, 20/10), 2.º más mortífero de la historia; Kenia 9 casos; cepa Bundibugyo sin vacuna (cifras provisionales)",
-      "video": "videos/2026-10-22_ebola-nigeria.mp4",
-      "buffer_post": "6ada448b9a8a68d3cd70137a"
-    },
-    {
-      "fecha": "2026-10-22",
-      "sale": "2026-10-22",
-      "tipo": "diario",
-      "estado": "publicado",
-      "tema": "El pulpo: tres corazones (el sistémico se para al nadar a propulsión), sangre azul por la hemocianina (cobre) y dos tercios de las neuronas en los brazos",
-      "video": "videos/2026-10-22_pulpo.mp4",
-      "buffer_post": "6ada4be39a8a68d3cd71d287"
-    },
-    {
-      "fecha": "2026-10-22",
-      "sale": "2026-10-22",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "La ONU (PNUMA, Informe sobre la Brecha de Emisiones 2026, 21/10) dice por primera vez que ya no se puede evitar superar 1,5 °C: 2,8 °C con políticas actuales, 2,6 con promesas, 2,1 en el mejor caso; recortes necesarios −18 % 2030, −45 % 2035, −69 % 2040 (promesas: −11 a −15 % en 2035); sobrepaso mínimo con pico 1,7-1,8 °C",
-      "video": "videos/2026-10-22_clima-1-5-grados.mp4",
-      "buffer_post": "6ada5c90399af6f1f72edd13"
-    },
-    {
-      "fecha": "2026-10-22",
-      "sale": "2026-10-22",
-      "tipo": "noticia",
-      "estado": "publicado",
-      "tema": "Virus Shamonda: Francia confirma el primer caso humano (22/10): hombre gravemente inmunodeprimido ingresado en Lyon, fallecido a principios de octubre con complicaciones cerebrales muy probablemente ligadas al virus (se investiga si causó o contribuyó a la muerte); hipótesis: picadura de jején Culicoides en el este de Francia; virus descubierto en Nigeria en los 60, ganado de África y Japón; verano 2026 primera vez en Europa occidental (animales en una docena de países, incl. España); sin riesgo para la población general según las autoridades",
-      "video": "videos/2026-10-22_shamonda.mp4",
-      "buffer_post": "6ada7dd203768a8d4fd67f39"
-    }
-  ]
+ "publicados": [
+  {
+   "fecha": "2026-10-13",
+   "tema": "Por qué los flamencos son rosas",
+   "video": "videos/2026-10-13_flamencos.mp4",
+   "buffer_post": "6acd4da35562ebe80f6cc894",
+   "sale": "2026-10-13",
+   "tipo": "diario",
+   "estado": "publicado"
+  },
+  {
+   "fecha": "2026-10-14",
+   "sale": "2026-10-14",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El esturión de lago: el pez que podría vivir más de 400 años",
+   "video": "videos/2026-10-14_esturion.mp4",
+   "buffer_post": "6acfc2282397c8676abbe2a5"
+  },
+  {
+   "fecha": "2026-10-15",
+   "sale": "2026-10-15",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El T. rex tenía labios (y otras cosas que hemos corregido)",
+   "video": "videos/2026-10-15_trex.mp4",
+   "buffer_post": "6ad106cb5738dc2c7b0e81ab"
+  },
+  {
+   "fecha": "2026-10-15",
+   "sale": "2026-10-16",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "Los reptiles hacen mucho más ruido del que crees",
+   "video": "videos/2026-10-16_reptiles.mp4",
+   "buffer_post": "6ad1530e4ed7d375a433ef00"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Tesla presenta el nuevo Roadster con propulsores que salta coches",
+   "video": "videos/2026-10-16_tesla-roadster.mp4",
+   "buffer_post": "6ad23f3945dfa13a723940d4"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Japón lanza por error una alerta de terremoto de magnitud 9,9 (era un 6,9 en Kamchatka)",
+   "video": "videos/2026-10-16_japon-alerta.mp4",
+   "buffer_post": "6ad255c1dcd88593548bd363"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-16",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Estambul sufre sus peores inundaciones en más de 80 años (4 muertos, 3 desaparecidos, cifras provisionales)",
+   "video": "videos/2026-10-16_estambul-inundaciones.mp4",
+   "buffer_post": "6ad272ebd8cc58ddf1696fde"
+  },
+  {
+   "fecha": "2026-10-16",
+   "sale": "2026-10-17",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "La malvasía cabeciblanca: el pato español del pico azul",
+   "video": "videos/2026-10-17_malvasia.mp4",
+   "buffer_post": "6ad2a63487c49357709edd38"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "El mundo elimina el segundo intercalar desde mayo de 2027 (CGPM, Versalles, 15/10)",
+   "video": "videos/2026-10-17_segundo-intercalar.mp4",
+   "buffer_post": "6ad38ec9ae173d6e00c07ed4"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "El Papa León XIV recibe el alta 4 días después de su operación de pulmón (Gemelli, 17/10)",
+   "video": "videos/2026-10-17_papa-alta.mp4",
+   "buffer_post": "6ad3a9c7e272c4918f948238"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-17",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Trump pone en pausa las sanciones de la ley Graham contra Rusia (orden ejecutiva, 16/10)",
+   "video": "videos/2026-10-17_sanciones-rusia.mp4",
+   "buffer_post": "6ad3df510a208cb32338bf7b"
+  },
+  {
+   "fecha": "2026-10-17",
+   "sale": "2026-10-18",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El chocolate más antiguo al este del Misisipi (ADN de cacao en cerámica de Etowah, Georgia)",
+   "video": "videos/2026-10-18_chocolate.mp4",
+   "buffer_post": "6ad3fcff938409f1d0a6e2ed"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Estampida en el Durga Puja de Calcuta: al menos 19 muertos y unos 25 heridos (sábado 17/10, cifras provisionales) + por qué una multitud es peligrosa",
+   "video": "videos/2026-10-18_calcuta-estampida.mp4",
+   "buffer_post": "6ad48e83769b457934b60efe"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Ataque masivo con más de mil drones sobre Rusia: arden instalaciones petroleras en San Petersburgo (noche 17-18/10; 1.015 según Defensa ruso; VK y Ozon alcanzados; víctimas provisionales)",
+   "video": "videos/2026-10-18_drones-rusia.mp4",
+   "buffer_post": "6ad4d4480a208cb3236ad783"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Incendio en la base militar CFB Wainwright (Alberta, Canadá): 4 militares muertos y decenas de heridos según Carney (sábado 17/10; causa en investigación, sin indicios de terrorismo; cifras provisionales)",
+   "video": "videos/2026-10-18_wainwright-incendio.mp4",
+   "buffer_post": "6ad514930a208cb32379cdc7"
+  },
+  {
+   "fecha": "2026-10-18",
+   "sale": "2026-10-18",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Alerta roja por la dana Adam en Valencia, Alicante y Baleares (18/10): hasta 300-400 l/m², +200 l/m² en la Safor, Cercanías C1/C2 cortadas, aeropuerto de Ibiza 2 h parado, sin clases el lunes, UME a las islas, 1 víctima en Cabrera de Mar (datos provisionales)",
+   "video": "videos/2026-10-18_dana-adam.mp4",
+   "buffer_post": "6ad537b60b0d72757a3c2eb8"
+  },
+  {
+   "fecha": "2026-10-19",
+   "sale": "2026-10-19",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Actualización dana Adam: más de 600 l/m² en 24 h en la Safor y la Marina Alta (Pego 638, Forna 635 según Avamet), situación 2 de emergencia en la Safor, UME en Oliva, 2 víctimas mortales (Cabrera de Mar y Sagunto), sin clases en Baleares y decenas de municipios (datos provisionales, 19/10 mañana)",
+   "video": "videos/2026-10-19_dana-adam-600.mp4",
+   "buffer_post": "6ad5c80cee362c3569484bd2"
+  },
+  {
+   "fecha": "2026-10-19",
+   "sale": "2026-10-19",
+   "tipo": "diario",
+   "estado": "programado",
+   "tema": "Las cuerdas de la Edad de Piedra: la herramienta de marfil de Hohle Fels (~40.000 años) y la cuerda de tres cabos de Abri du Maras (~50.000 años, neandertales)",
+   "video": "videos/2026-10-19_cuerdas.mp4",
+   "buffer_post": "6ad5d5cdea56886c4715f828"
+  },
+  {
+   "fecha": "2026-10-22",
+   "sale": "2026-10-22",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "El ébola llega a Nigeria (caso importado en Abuya, 44 contactos); brote de RD Congo: +9.700 casos y ~4.700 muertes (OMS, 20/10), 2.º más mortífero de la historia; Kenia 9 casos; cepa Bundibugyo sin vacuna (cifras provisionales)",
+   "video": "videos/2026-10-22_ebola-nigeria.mp4",
+   "buffer_post": "6ada448b9a8a68d3cd70137a"
+  },
+  {
+   "fecha": "2026-10-22",
+   "sale": "2026-10-22",
+   "tipo": "diario",
+   "estado": "publicado",
+   "tema": "El pulpo: tres corazones (el sistémico se para al nadar a propulsión), sangre azul por la hemocianina (cobre) y dos tercios de las neuronas en los brazos",
+   "video": "videos/2026-10-22_pulpo.mp4",
+   "buffer_post": "6ada4be39a8a68d3cd71d287"
+  },
+  {
+   "fecha": "2026-10-22",
+   "sale": "2026-10-22",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "La ONU (PNUMA, Informe sobre la Brecha de Emisiones 2026, 21/10) dice por primera vez que ya no se puede evitar superar 1,5 °C: 2,8 °C con políticas actuales, 2,6 con promesas, 2,1 en el mejor caso; recortes necesarios −18 % 2030, −45 % 2035, −69 % 2040 (promesas: −11 a −15 % en 2035); sobrepaso mínimo con pico 1,7-1,8 °C",
+   "video": "videos/2026-10-22_clima-1-5-grados.mp4",
+   "buffer_post": "6ada5c90399af6f1f72edd13"
+  },
+  {
+   "fecha": "2026-10-22",
+   "sale": "2026-10-22",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Virus Shamonda: Francia confirma el primer caso humano (22/10): hombre gravemente inmunodeprimido ingresado en Lyon, fallecido a principios de octubre con complicaciones cerebrales muy probablemente ligadas al virus (se investiga si causó o contribuyó a la muerte); hipótesis: picadura de jején Culicoides en el este de Francia; virus descubierto en Nigeria en los 60, ganado de África y Japón; verano 2026 primera vez en Europa occidental (animales en una docena de países, incl. España); sin riesgo para la población general según las autoridades",
+   "video": "videos/2026-10-22_shamonda.mp4",
+   "buffer_post": "6ada7dd203768a8d4fd67f39"
+  },
+  {
+   "fecha": "2026-10-23",
+   "sale": "2026-10-23",
+   "tipo": "noticia",
+   "estado": "publicado",
+   "tema": "Terremoto de magnitud 7 en el Tíbet (condado de Baqing, Nagqu, ~4.800 m; jueves 22/10 22:33 hora local): al menos 16 muertos, 65 heridos (11 graves), +300 casas derrumbadas o dañadas, 12.489 evacuados, +400 réplicas (mayor 4,3), +1.600 rescatistas, G317 cortada, tren Qinghai-Tíbet con velocidad limitada; fractura por extensión; precedente Dingri enero 2025 (126 muertos). Cifras provisionales",
+   "video": "videos/2026-10-23_terremoto-tibet.mp4",
+   "buffer_post": "6adb0ba0c4349d575b9957cd"
+  }
+ ]
 }
