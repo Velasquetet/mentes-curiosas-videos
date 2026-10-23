@@ -1397,4 +1397,113 @@ NX.aftershocks=(o={},lt)=>{const n=o.n||400,dur=o.dur||2.2,w=440;let s=Rc(-w/2-1
   return s;};
 n2cat('aftershocks · Réplicas: sismógrafo con contador',lt=>NX.aftershocks({n:413},lt%5));
 
+/* ===== Recursos nuevos · diario de las leyendas de Europa (23/10/2026) ===== */
+/* Puente del Diablo (Martorell): gran arco gótico apuntado sobre el río, estribos romanos y arco del triunfo romano a un lado
+   o:{build (0-1 el arco se levanta piedra a piedra), night (0-1), roman (0-1 resalta la base romana), cat (0-1 un gato cruza), label} · base del río y=0, ancho ~460 */
+NX.devilbridge=(o={},lt)=>{const b=o.build??1,nt=o.night||0,ro=o.roman||0;let s='';
+  s+=Rc(-260,-20,520,60,mixc('#7fb0e0','#26345e',nt));
+  for(let i=0;i<6;i++){const x=-240+((i*90+lt*30)%480);s+=P(`M${f1(x)} 6 q8 -4 16 0`,ST('#fff',2,`opacity:${f2(.6-nt*.3)}`));}
+  /* estribos */
+  const stone=mixc('#d8c7a4','#6f6650',nt),stone2=mixc('#c4b08a','#5e5644',nt);
+  s+=P('M-250 -20 L-250 -110 L-150 -110 L-120 -20Z',`fill:${stone};${OL(2.2)}`)+P('M250 -20 L250 -110 L150 -110 L120 -20Z',`fill:${stone};${OL(2.2)}`);
+  if(ro>0)s+=P('M-250 -20 L-250 -110 L-150 -110 L-120 -20Z M250 -20 L250 -110 L150 -110 L120 -20Z',`fill:rgba(243,72,65,${f2(.35*ro)});${OL(3,K.red)}`);
+  /* arco gótico apuntado (dos arcos de radio 220), piedra a piedra */
+  const R=220,cxA=70,top=-110,apx=Math.atan2(-Math.sqrt(R*R-cxA*cxA),-cxA);const arcPt=(side,u)=>{const ang=Math.PI+(apx+2*Math.PI-Math.PI)*u;const x=cxA+R*Math.cos(Math.PI-(Math.PI-(apx+2*Math.PI))*0)};
+  const pt=(side,u)=>{const a0=Math.PI,a1=Math.atan2(-Math.sqrt(R*R-cxA*cxA),-cxA)+2*Math.PI;const ang=a0+(a1-a0)*u;return [side*-(cxA+R*Math.cos(ang)),top+R*Math.sin(ang)];};
+  const N=11;for(let side of [-1,1])for(let i=0;i<N;i++){const u=(i+.5)/N;if(u>b*1.02)continue;const [x,y]=pt(side,u),[x2,y2]=pt(side,Math.min(1,u+.02));
+    s+=G(x,y,1,Math.atan2(y2-y,x2-x)*180/Math.PI,Rc(-11,-9,22,18,i%2?stone:stone2,2,OL(1.4)));}
+  const apY=top-Math.sqrt(R*R-cxA*cxA);
+  if(b>=1){s+=P(`M-150 ${top} A${R} ${R} 0 0 1 0 ${f1(apY)} A${R} ${R} 0 0 1 150 ${top}`,ST(K.ink,2.4));
+    s+=P(`M-250 ${top-8} L-158 ${top-8} A${R+8} ${R+8} 0 0 1 0 ${f1(apY-10)} A${R+8} ${R+8} 0 0 1 158 ${top-8} L250 ${top-8}`,ST(mixc('#b69e70','#4a4232',nt),6));
+    s+=G(0,apY-18,1,0,Rc(-14,-30,28,30,stone,2,OL(1.8))+P('M-16 -30 L0 -44 L16 -30Z',`fill:${stone2};${OL(1.6)}`));}
+  /* arco del triunfo romano a la izquierda */
+  s+=G(-210,-110,.55,0,Rc(-50,-120,100,120,stone2,2,OL(2))+P('M-22 0 L-22 -60 Q0 -86 22 -60 L22 0Z',`fill:${mixc('#9fb6cf','#1d2748',nt)};${OL(1.8)}`)+Rc(-56,-132,112,14,stone,2,OL(1.8)));
+  if(o.cat!=null&&o.cat>0){const q=o.cat,[x,y0]=q<.5?pt(-1,q*2):pt(1,(1-q)*2),y=y0-18;
+    s+=G(x,y,.55,0,catS({T:lt*3,c:'#2a2a2a'}));}
+  if(o.label)s+=G(0,60,1,0,pill(o.label,{sz:14,w:800,fill:K.ink}),_ao(lt,.3,.3));
+  return s;};
+n2cat('devilbridge · Puente del Diablo (Martorell): arco gótico que se construye y gato que cruza',lt=>{const t=lt%7;return G(0,140,.95,0,NX.devilbridge({build:sg(t,.2,2.6),cat:t>3.5?sg(t,3.5,6.5):null,roman:t>2.6&&t<3.5?1:0},t));});
+
+/* Diablillo de cuento (rojo, cuernos, cola y tridente), sin dar miedo · o:{emo:'smug'|'angry'|'shock', fork (true), T} · pies en y=0 */
+NX.devil=(o={},lt)=>{const em=o.emo||'smug',T=lt,bob=_osc(T,.8,4),c='#e2264a',d='#9e1238';let s=El(0,2,46,8,'rgba(20,18,18,.16)');
+  s+=P(`M28 -30 Q70 ${f1(-20+_osc(T,.6,10))} 66 -70 l12 -6 l-4 14Z`,ST(d,5)+';fill:none')+P('M64 -76 L78 -80 L72 -66Z',`fill:${d};${OL(1.4)}`);
+  s+=G(0,bob,1,0,P('M-14 0 L-12 -24 M14 0 L12 -24',ST(K.ink,6))+El(0,-60,40,46,c,OL(2.4))+P('M-30 -92 Q-44 -126 -24 -132 Q-30 -112 -16 -100Z M30 -92 Q44 -126 24 -132 Q30 -112 16 -100Z',`fill:#f4eee2;${OL(1.8)}`)+
+    (em==='angry'?P('M-24 -78 L-8 -70 M24 -78 L8 -70',ST(K.ink,4)):'')+El(-13,-64,6,em==='shock'?9:7,'#fff',OL(1.6))+El(13,-64,6,em==='shock'?9:7,'#fff',OL(1.6))+Ci(-12,-63,3,K.ink)+Ci(14,-63,3,K.ink)+
+    (em==='smug'?P('M-16 -40 Q0 -28 18 -44',ST(K.ink,3.4)):em==='angry'?P('M-14 -34 Q0 -44 14 -34',ST(K.ink,3.4)):El(0,-36,7,9,'#5a0a1e',OL(1.6)))+P('M-8 -14 Q0 -6 8 -14 L0 4Z',`fill:${d}`));
+  if(o.fork!==false)s+=G(-48,-40+bob,1,-8,P('M0 40 L0 -70',ST('#6b4a2e',5))+P('M-14 -70 L-14 -90 M0 -70 L0 -96 M14 -70 L14 -90 M-14 -70 L14 -70',ST('#9a9a9a',4)));
+  return G(0,0,_ap(lt,0,.35),0,s);};
+n2cat('devil · Diablillo de cuento (smug/angry/shock)',lt=>{const e=['smug','angry','shock'][Math.floor(lt/2)%3];return G(0,60,1.4,0,NX.devil({emo:e},lt%2));});
+
+/* Calzada del Gigante: columnas de basalto hexagonales que bajan escalonadas hasta el mar · o:{rise (0-1 crecen), break (0-1 la calzada se rompe hacia el mar), top (true = vista desde arriba de hexágonos), label} · ancho ~480, base y=0 */
+NX.causeway=(o={},lt)=>{let s='';const rise=o.rise??1,br=o.break||0;
+  if(o.top){const r=26;for(let row=0;row<6;row++)for(let col=0;col<9;col++){const x=-200+col*r*1.5,y=-150+row*r*1.73+(col%2?r*.86:0),q=sg(rise*1.3-((row*9+col)/54)*.3,0,1);if(q<=0)continue;
+      let d='';for(let k=0;k<6;k++){const a=Math.PI/3*k;d+=(k?'L':'M')+f1(x+Math.cos(a)*r*.96*q)+' '+f1(y+Math.sin(a)*r*.96*q);}s+=P(d+'Z',`fill:${['#4a4a52','#56565e','#3e3e46'][(row+col)%3]};${OL(1.6,'#1a1a20')}`);}
+    return s;}
+  s+=Rc(-270,-40,540,90,'#5d8fc8');for(let i=0;i<7;i++){const x=-250+((i*80+lt*24)%520);s+=P(`M${f1(x)} -20 q10 -5 20 0`,ST('#fff',2,'opacity:.6'));}
+  const n=16;for(let i=0;i<n;i++){const x=-240+i*30,h0=210-i*11+hs(i)*24,h=h0*EZ.out(sg(rise*1.4-i/n*.4,0,1)),gone=br>0&&i>n*(1-br)?1:0;if(h<=1)continue;
+    const dy=gone?(br*120):0,rot=gone?br*30*(hs(i)>.5?1:-1):0;
+    s+=G(x,dy,1,rot,P(`M-14 -10 L-14 ${f1(-10-h)} L0 ${f1(-18-h)} L14 ${f1(-10-h)} L14 -10Z`,`fill:${['#4a4a52','#5a5a62'][i%2]};${OL(1.6,'#1a1a20')}`)+P(`M-14 ${f1(-10-h)} L0 ${f1(-2-h)} L14 ${f1(-10-h)} L0 ${f1(-18-h)}Z`,`fill:#7a7a84;${OL(1.4,'#1a1a20')}`)+P(`M0 ${f1(-2-h)} L0 -10`,ST('rgba(0,0,0,.3)',1.4)),gone?1-sg(br,.6,1)*.6:1);}
+  if(o.label)s+=G(0,80,1,0,pill(o.label,{sz:14,w:800,fill:K.ink}),_ao(lt,.3,.3));
+  return s;};
+n2cat('causeway · Calzada del Gigante (columnas que crecen, se rompen o vista de hexágonos)',lt=>{const t=lt%8;return t<4?G(0,120,1,0,NX.causeway({rise:sg(t,0,1.6),break:sg(t,2.2,3.6)},t)):NX.causeway({top:true,rise:sg(t,4,5.5)},t);});
+
+/* Gigante de cuento (barba pelirroja, túnica verde); con baby:true lleva gorrito y chupete de bebé · o:{baby, c, beard, emo:'ok'|'scared', T} · pies en y=0, alto ~300 */
+NX.giant=(o={},lt)=>{const c=o.c||'#2b7a3e',bd=o.beard||'#c4521a',bb=o.baby,sc=o.emo==='scared',sh=sc?_osc(lt,8,3):0;let s=El(0,4,90,12,'rgba(20,18,18,.16)');
+  s+=G(sh,0,1,0,P('M-30 0 L-26 -70 M30 0 L26 -70',ST('#5a3119',16))+P('M-70 -60 Q-80 -200 0 -210 Q80 -200 70 -60Z',`fill:${bb?'#f6f2ea':c};${OL(2.6)}`)+
+    (bb?P('M-70 -60 Q0 -40 70 -60',ST('#e7a0b4',8)):Rc(-70,-110,140,14,'#6b4a2e',4,OL(1.8)))+P('M-66 -170 Q-110 -120 -96 -84 M66 -170 Q110 -120 96 -84',ST(bb?'#f6f2ea':c,20))+
+    Ci(0,-250,52,'#f6c9a4',OL(2.6))+(bb?'':P('M-50 -244 Q-54 -180 0 -176 Q54 -180 50 -244 Q30 -220 0 -224 Q-30 -220 -50 -244Z',`fill:${bd};${OL(2)}`))+
+    El(-18,-262,6,sc?9:7,'#fff',OL(1.6))+El(18,-262,6,sc?9:7,'#fff',OL(1.6))+Ci(-17,-261,3,K.ink)+Ci(19,-261,3,K.ink)+
+    (bb?Ci(0,-232,10,'#7fd3ff',OL(1.8))+Rc(-4,-226,8,8,'#7fd3ff',2)+P('M-58 -268 Q-60 -320 0 -324 Q60 -320 58 -268 Q30 -290 0 -292 Q-30 -290 -58 -268Z',`fill:#bcd3f0;${OL(2)}`)+Ci(0,-326,9,'#ff8fab',OL(1.6)):
+      P('M-50 -280 Q-40 -312 0 -308 Q40 -312 50 -280',ST(bd,12))+(sc?El(0,-218,8,10,'#5a1a1a'):'')));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('giant · Gigante de cuento (y disfrazado de bebé)',lt=>G(0,170,.9,0,NX.giant({baby:Math.floor(lt/2.5)%2===1},lt%2.5)));
+
+/* Castillo de Wawel sobre su colina con la cueva del dragón al pie, junto al río · o:{statue (0-1 aparece la estatua de bronce que echa fuego), fire (0-1), bones (0-1 huesos colgados en la puerta, vista de cerca aparte)} · base y=0, ancho ~480 */
+NX.wawel=(o={},lt)=>{let s='';
+  s+=Rc(-260,-10,520,50,'#7fb0e0');
+  s+=P('M-260 -10 L-260 -150 Q-120 -230 60 -200 Q190 -170 260 -120 L260 -10Z',`fill:#7bbf6a;${OL(2.4)}`);
+  /* murallas y torres */
+  s+=Rc(-200,-300,330,110,'#efe4cf',2,OL(2.2));for(let i=0;i<11;i++)s+=Rc(-200+i*30,-312,16,14,'#efe4cf',1,OL(1.6));
+  s+=Rc(-170,-380,50,200,'#efe4cf',2,OL(2.2))+P('M-176 -380 L-145 -430 L-114 -380Z',`fill:#3f9b4f;${OL(2)}`);
+  s+=Rc(60,-360,46,170,'#efe4cf',2,OL(2.2))+P('M54 -360 Q83 -420 112 -360Z',`fill:#c9a227;${OL(2)}`)+Ci(83,-430,6,'#c9a227',OL(1.4));
+  for(let i=0;i<5;i++)s+=P(`M${-110+i*36} -230 L${-110+i*36} -256 Q${-100+i*36} -268 ${-90+i*36} -256 L${-90+i*36} -230Z`,`fill:#2a2f45;${OL(1.2)}`);
+  /* cueva */
+  s+=P('M120 -10 L120 -60 Q150 -96 180 -60 L180 -10Z','fill:#1a1410;'+OL(2.2));
+  const st=o.statue||0;if(st>0){s+=G(210,-10,.42*EZ.back(cl(st)),0,NX.dragon({bronze:true,fire:o.fire||0},lt));}
+  return s;};
+n2cat('wawel · Castillo de Wawel con la cueva del dragón (y la estatua que echa fuego)',lt=>G(0,170,.9,0,NX.wawel({statue:sg(lt%5,1,1.5),fire:lt%5>2?1:0},lt)));
+
+/* Dragón de cuento (verde) o estatua de bronce · o:{bronze, fire (0-1 echa fuego), bloat (0-1 tripa que se hincha), drink (true: bebe agua), burst (0-1 revienta), emo:'ok'|'hot'} · pies en y=0, mira a la derecha */
+NX.dragon=(o={},lt)=>{const br=o.bronze,c=br?'#8a6a3a':'#4fbf63',d=br?'#5e4520':'#2b7a3e',bl=o.bloat||0,bu=o.burst||0;let s='';
+  if(bu>0){for(let i=0;i<14;i++){const a=hs(i)*Math.PI*2,r=bu*180;s+=G(Math.cos(a)*r,-90+Math.sin(a)*r,1,a*60,Rc(-10,-6,20,12,i%2?c:d,3,OL(1.4)),1-sg(bu,.5,1));}
+    s+=G(0,-90,1+bu*2,0,spark4(40,'#f6d36b'),1-sg(bu,.3,.8));return s;}
+  s+=El(0,4,110,12,'rgba(20,18,18,.16)');
+  s+=P(`M-80 -60 Q-170 ${f1(-40+_osc(lt,.5,10))} -190 -110 L-176 -100 L-196 -130Z`,`fill:${c};${OL(2.4)}`);
+  const bw=80+bl*40,bh=56+bl*36;
+  s+=P('M-40 0 L-40 -40 M40 0 L40 -40',ST(d,16))+El(0,-70,bw,bh,c,OL(2.6))+El(0,-60,bw*.62,bh*.6,br?'#a8874f':'#c8eeb0');
+  for(let i=0;i<4;i++)s+=P(`M${-60+i*30} ${f1(-70-bh)} l12 -24 l12 24Z`,`fill:${d};${OL(1.6)}`);
+  s+=P(`M${f1(bw*.7)} -100 Q${f1(bw*.9+20)} -160 ${f1(bw*.9+70)} -170`,ST(c,30))+G(bw*.9+90,-176,1,0,El(0,0,44,30,c,OL(2.6))+El(30,6,18,14,br?'#a8874f':'#c8eeb0',OL(1.6))+Ci(40,0,3,K.ink)+Ci(-6,-12,9,'#fff',OL(1.6))+Ci(-4,-12,4,K.ink)+P('M-20 -26 L-30 -50 L-8 -30Z',`fill:${d};${OL(1.4)}`)+
+    (o.emo==='hot'?P('M-24 -30 L-4 -24',ST(K.ink,3))+P('M50 26 q-6 10 -14 4',ST('#ff6b3d',4)):''));
+  if(bl>0)for(let i=0;i<3;i++){const q=((lt*1.2)+i/3)%1;s+=G(-20+i*20,-70-bh-q*40,1,0,P('M0 0 q8 -8 0 -16 q-8 -8 0 -16',ST('#ff8a3d',4,`opacity:${f2(bl*(1-q))}`)));}
+  const fi=o.fire||0;if(fi>0){const fx=bw*.9+128,fy=-172;for(let i=0;i<10;i++){const q=((lt*2.4)+i/10)%1,len=fi*(60+q*180);s+=Ci(fx+len,fy+_osc(lt,3,8,i)+q*10,10+q*26,['#ffd23f','#ff8a3d','#f34841'][i%3],`opacity:${f2(fi*(1-q)*.9)}`);}}
+  if(o.drink){s+=P(`M${f1(bw*.9+130)} -150 Q${f1(bw*.9+150)} -60 ${f1(bw*.9+160)} 0`,ST('#7fb0e0',8,'stroke-dasharray:10 8;stroke-dashoffset:'+f1(-lt*60)));}
+  return G(0,0,1,0,s);};
+n2cat('dragon · Dragón (se hincha, bebe, revienta; o estatua de bronce que echa fuego)',lt=>{const t=lt%8;return G(-40,150,.7,0,t<6?NX.dragon({bloat:sg(t,1,4),drink:t>2&&t<5,emo:t>1?'hot':'ok',fire:0},t):NX.dragon({burst:sg(t,6,7.5)},t));});
+
+/* Oveja (cordero) rellena de azufre, con costuras · o:{sulfur (true)} · pies en y=0 */
+NX.sulfursheep=(o={},lt)=>{let s=El(0,4,60,8,'rgba(20,18,18,.16)')+P('M-30 0 L-30 -26 M-10 0 L-10 -24 M14 0 L14 -24 M34 0 L34 -26',ST(K.ink,6));
+  for(let i=0;i<9;i++)s+=Ci(-40+(i%5)*20,-50-Math.floor(i/5)*20+_osc(lt,.6,1,i),20,'#fbfbf6',OL(1.8));
+  s+=G(56,-60,1,0,El(0,0,20,16,'#3a3a3a',OL(1.8))+Ci(6,-4,3,'#fff')+El(-10,-14,8,5,'#3a3a3a',OL(1.4)));
+  if(o.sulfur!==false){s+=P('M-30 -40 l8 6 l8 -6 l8 6 l8 -6 l8 6',ST(K.ink,2))+G(-44,-86,1,0,pill('S',{sz:14,w:800,fill:'#d6b400',tc:K.ink}))+[0,1,2].map(i=>Ci(-20+i*14,-36+_osc(lt,.8,2,i),3,'#f6d200',OL(1))).join('');}
+  return G(0,0,_ap(lt,0,.35),0,s);};
+n2cat('sulfursheep · Oveja rellena de azufre',lt=>G(0,60,1.6,0,NX.sulfursheep({},lt)));
+
+/* Huesos colgados de una cadena (los «huesos del dragón» de la catedral de Wawel) · o:{q ('?' con interrogante)} · cuelgan desde y=0 */
+NX.bones=(o={},lt)=>{let s=P('M0 0 L0 40',ST('#6f6f6f',4,'stroke-dasharray:6 4'));const sw=_osc(lt,.4,4);
+  const bone=(len,w)=>P(`M${-len/2} 0 L${len/2} 0`,ST('#efe6d2',w))+Ci(-len/2,-w*.35,w*.45,'#efe6d2',OL(1.4))+Ci(-len/2,w*.35,w*.45,'#efe6d2',OL(1.4))+Ci(len/2,-w*.35,w*.45,'#efe6d2',OL(1.4))+Ci(len/2,w*.35,w*.45,'#efe6d2',OL(1.4))+P(`M${-len/2} 0 L${len/2} 0`,ST('#efe6d2',w-3));
+  s+=G(0,40,1,sw,G(0,30,1,80,bone(120,22))+G(-30,70,1,20,bone(160,26))+G(36,100,1,-30,bone(90,18)));
+  if(o.q)s+=G(90,60,1,0,Ts(0,0,'?',70,{it:true,fill:'url(#gRP)',stroke:'url(#gRP)'}),_ao(lt,.3,.3));
+  return s;};
+n2cat('bones · Huesos colgados (¿del dragón?)',lt=>G(0,-100,1.3,0,NX.bones({q:true},lt)));
+
 NX_CATALOG.push(..._N2);
