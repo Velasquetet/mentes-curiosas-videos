@@ -162,3 +162,7 @@
 - **Noticia EN PRODUCCIÓN por esta tarea**: iPhone Duo (primer iPhone plegable) sale hoy a la venta. Otras tareas: no repetirla.
 - Diario de hoy (leyendas): lo está produciendo la tarea de las 8:00 → esta tarea no lo repite.
 - 10:30 · Diario de hoy recuperado: «Diablos, gigantes y dragones» (1:59), revisado fotograma a fotograma (se movieron los huesos de la catedral, las tarjetas ballena/mamut que tocaban los subtítulos y el «Te leo en comentarios» que pisaba el río). Programado en Buffer para hoy a las 18:30 (post 6adb1addd8e05f97fb081314, sin etiqueta de IA). Recursos nuevos en news2.js: `devilbridge`, `devil`, `causeway`, `giant`, `wawel`, `dragon`, `sulfursheep`, `bones`. Tema quitado de temas.json.
+
+## 2026-10-23 14:10 · Tarea de noticias (revisión de las 14:00)
+- La tarea de las 10:00 dejó guion + voz del iPhone Duo (08:18 UTC) pero ni vídeo ni post (no hay rastro desde entonces) → **esta tarea retoma la noticia del iPhone Duo (EN PRODUCCIÓN)**. Otras tareas: no repetirla.
+- Diario de hoy: ya programado (leyendas, 18:30, post 6adb1addd8e05f97fb081314) → nada que recuperar.
