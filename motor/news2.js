@@ -1506,4 +1506,112 @@ NX.bones=(o={},lt)=>{let s=P('M0 0 L0 40',ST('#6f6f6f',4,'stroke-dasharray:6 4')
   return s;};
 n2cat('bones · Huesos colgados (¿del dragón?)',lt=>G(0,-100,1.3,0,NX.bones({q:true},lt)));
 
+/* ===== Recursos nuevos · noticia del iPhone Duo, el primer iPhone plegable (23/10/2026) ===== */
+/* pantalla interior/exterior genérica (fondo de colores + iconos), sin marcas */
+function _foldWall(x,y,w,h,lt,o={}){let s=Rc(x,y,w,h,o.bg||'#1d2350',10);
+  s+=Ci(x+w*.25,y+h*.3,w*.32,'#ec2f72',`opacity:.55`)+Ci(x+w*.8,y+h*.62,w*.38,'#f5562a',`opacity:.5`)+Ci(x+w*.45,y+h*.9,w*.3,'#2a37d7',`opacity:.7`);
+  const cols=o.cols||4,rows=o.rows||5,gx=w/cols;const ic=['#ffd86b','#7fd3ff','#a6e3a1','#ff8fab','#fff','#c9a7ff'];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const q=_ap(lt,.25+(r*cols+c)*.025,.3);if(q<=0)continue;
+    s+=G(x+gx*(c+.5),y+h*.24+r*gx*1.05,q,0,Rc(-gx*.3,-gx*.3,gx*.6,gx*.6,ic[(r*3+c)%6],gx*.16,OL(1)));}
+  if(o.clock)s+=Tn(x+w/2,y+h*.15,o.clock,w*.2,300,{fill:'#fff'});
+  return clipG(s,Rc(x,y,w,h,'#000',10));}
+/* Móvil plegable tipo libro (de frente): cerrado = pantalla exterior; abierto = pantalla interior doble.
+   o:{open 0-1, xray 0-1 (dos baterías + bisagra), touch 0-1 (huella en el botón lateral), dims 0-1 (cotas 5,4″ / 7,6″), crease (0-1 marca del pliegue), w (ancho de una mitad, 120), h (260), clock} · centrado en (0,0) */
+NX.foldphone=(o={},lt)=>{const w=o.w||120,h=o.h||260,op=cl(o.open??0),th=Math.PI*(1-EZ.io(op)),hx=lerp(w/2,0,EZ.io(op)),xr=o.xray||0;let s='';
+  const L=hx-w,cs=Math.cos(th),xe=hx+w*cs;
+  s+=El(0,h/2+18,w*(1+op)*.9,10,'rgba(20,18,18,.16)');
+  /* mitad izquierda (fija): marco + pantalla interior */
+  s+=Rc(L-6,-h/2-6,w+6,h+12,K.ink,16);
+  s+=_foldWall(L,-h/2,w,h,lt,{cols:3,rows:5});
+  /* mitad derecha que gira alrededor de la bisagra */
+  const x0=Math.min(hx,xe),pw=Math.abs(xe-hx),sk=Math.sin(th)*14;
+  if(pw>1){const fr=`M${f1(hx)} ${-h/2-6} L${f1(xe+(cs>0?6:-6))} ${f1(-h/2-6-sk)} L${f1(xe+(cs>0?6:-6))} ${f1(h/2+6+sk)} L${f1(hx)} ${h/2+6}Z`;
+    s+=P(fr,`fill:${K.ink}`);
+    if(cs>=0){s+=clipG(_foldWall(hx-w,-h/2,2*w,h,lt,{cols:6,rows:5}),P(`M${f1(hx)} ${-h/2} L${f1(xe)} ${f1(-h/2-sk)} L${f1(xe)} ${f1(h/2+sk)} L${f1(hx)} ${h/2}Z`,'#000'));
+      s+=P(`M${f1(hx)} ${-h/2} L${f1(xe)} ${f1(-h/2-sk)} L${f1(xe)} ${f1(h/2+sk)} L${f1(hx)} ${h/2}Z`,`fill:rgba(0,0,0,${f2(.45*Math.sin(th))})`);}
+    else{/* cara exterior (pantalla de fuera) */
+      s+=clipG(_foldWall(xe,-h/2,pw,h,lt,{cols:3,rows:4,bg:'#2b1d4a',clock:o.clock||'10:00'}),P(`M${f1(hx)} ${-h/2} L${f1(xe)} ${f1(-h/2-sk)} L${f1(xe)} ${f1(h/2+sk)} L${f1(hx)} ${h/2}Z`,'#000'));
+      s+=P(`M${f1(hx)} ${-h/2} L${f1(xe)} ${f1(-h/2-sk)} L${f1(xe)} ${f1(h/2+sk)} L${f1(hx)} ${h/2}Z`,`fill:rgba(0,0,0,${f2(.4*Math.sin(th))})`);
+      if(pw>w*.8)s+=Ci(xe+pw*.5,-h/2+14,4.5,'#000');}}
+  /* pliegue */
+  if(op>.6)s+=P(`M${f1(hx)} ${-h/2} L${f1(hx)} ${h/2}`,ST('rgba(255,255,255,.25)',2,`opacity:${f2((o.crease??.6)*sg(op,.6,1))}`));
+  /* botón lateral con huella */
+  const bx=op>.5?xe+6:L-6;s+=Rc(bx-3,-h/2+40,6,40,'#3a3a3a',3);
+  if(o.touch){const q=o.touch;s+=G(bx,-h/2+60,1,0,Ci(0,0,26*q,'rgba(255,46,99,.25)')+G(0,0,.5*q,0,NX.fingerprint({glow:1},lt)));}
+  /* rayos X: dos baterías y bisagra */
+  if(xr>0){const bw=w*.62,bh=h*.48,ofs=op>.5?[L+w/2,hx+w/2]:[0,0];
+    s+=Rc(L-6,-h/2-6,(op>.5?2*w:w)+12,h+12,`rgba(10,14,40,${f2(.78*xr)})`,16);
+    (op>.5?ofs:[0]).forEach((cx,i)=>{s+=G(cx,10,_ap(lt,.1+i*.25,.35)*xr,0,Rc(-bw/2,-bh/2,bw,bh,'#3f9b4f',10,OL(2,'#a6e3a1'))+P('M6 -30 L-14 4 L0 4 L-8 30 L16 -6 L2 -6Z','fill:#fff')+Tn(0,bh/2+20,'batería '+(i+1),12,800,{fill:'#a6e3a1'}));});
+    if(op>.5)s+=G(hx,0,xr,0,Rc(-7,-h/2+10,14,h-20,'#9aa3b8',6,OL(1.6,'#fff'))+[...Array(7)].map((_,i)=>Ci(0,-h/2+30+i*(h-60)/6,4,'#fff')).join(''));}
+  /* cotas */
+  if(o.dims){const q=EZ.out(cl(o.dims)),X0=op>.5?L:-w/2,X1=op>.5?hx+w:w/2,lab=op>.5?'7,6″':'5,4″';
+    s+=DR(`M${f1(X0+10)} ${h/2-10} L${f1(X1-10)} ${-h/2+10}`,ST('#fff',3,'stroke-dasharray:6 6'),q);
+    if(q>.6)s+=G((X0+X1)/2,0,_ap(cl((q-.6)/.4),0,1),0,pill(lab,{sz:26,w:800,fill:'url(#gRP)'}));}
+  return s;};
+n2cat('foldphone · Móvil plegable tipo libro (se abre, cotas, rayos X con dos baterías, huella)',lt=>{const t=lt%9;const op=t<1?0:t<2.4?sg(t,1,2.4):t<7?1:1-sg(t,7,8.4);return NX.foldphone({open:op,dims:t>2.6&&t<4.4?sg(t,2.6,3.4):0,xray:t>4.6&&t<6.8?sg(t,4.6,5):0,touch:t<1?sg(t,.1,.6):0},t);});
+
+/* Huella dactilar (crestas concéntricas) · o:{glow 0-1, scan 0-1 (línea que barre), c} · centro (0,0), radio ~44 */
+NX.fingerprint=(o={},lt)=>{const c=o.c||(o.glow?'#ff2e63':K.ink);let s='';
+  for(let i=0;i<7;i++){const r=8+i*6.2,a0=-200+hs(i)*30,a1=20-hs(i+3)*30;const p0=[r*Math.cos(a0*Math.PI/180),r*Math.sin(a0*Math.PI/180)],p1=[r*Math.cos(a1*Math.PI/180),r*Math.sin(a1*Math.PI/180)];
+    s+=DR(`M${f1(p0[0])} ${f1(p0[1]+6)} A${f1(r)} ${f1(r*1.15)} 0 1 1 ${f1(p1[0])} ${f1(p1[1]+6)}`,ST(c,3.2),EZ.out(sg(lt,i*.05,i*.05+.4)));}
+  s+=P('M-4 6 q4 -10 8 0',ST(c,3));
+  if(o.glow)s=Ci(0,0,52+3*Math.sin(lt*5),'rgba(255,46,99,.14)')+s;
+  if(o.scan!=null){const y=lerp(-44,50,cl(o.scan));s+=P(`M-50 ${f1(y)} L50 ${f1(y)}`,ST('#7fd3ff',3,'opacity:.9'));}
+  return s;};
+n2cat('fingerprint · Huella dactilar (lector de huella)',lt=>G(0,0,2,0,NX.fingerprint({glow:1,scan:(lt%2)/2},lt%4)));
+
+/* Visto de lado: el móvil se pliega y la pantalla flexible forma una gota dentro de la bisagra
+   o:{fold 0-1 (0 abierto plano, 1 cerrado), thick (texto de grosor al cerrar, p. ej. '11 mm'), loop (resalta la gota)} · bisagra en (0,0) */
+NX.foldside=(o={},lt)=>{const f=EZ.io(cl(o.fold??0)),ang=180*(1-f),L=200,T=10;let s='';
+  /* mitad izquierda fija (horizontal) */
+  s+=Rc(-L,-T,L,T*2,'#3a3a46',6,OL(2))+Rc(-L+6,-T-4,L-12,4,'#7fd3ff',2);
+  /* mitad derecha girando */
+  const a=(180-ang)*Math.PI/180;
+  s+=G(0,0,1,-(180-ang),Rc(0,-T,L,T*2,'#3a3a46',6,OL(2))+Rc(6,-T-4,L-12,4,'#7fd3ff',2));
+  /* gota de la pantalla en la bisagra */
+  const r=lerp(4,22,f);s+=P(`M${f1(-r*.9)} ${-T-2} C${f1(-r*1.6)} ${f1(-T-2-r*2.2)} ${f1(r*1.6)} ${f1(-T-2-r*2.2)} ${f1(r*.9)} ${-T-2}`,ST(o.loop?'#ff2e63':'#7fd3ff',4));
+  s+=Ci(0,0,13,'#9aa3b8',OL(2));for(let i=0;i<6;i++){const q=i*60+lt*90;s+=P(`M${f1(9*Math.cos(q*Math.PI/180))} ${f1(9*Math.sin(q*Math.PI/180))} L${f1(13*Math.cos(q*Math.PI/180))} ${f1(13*Math.sin(q*Math.PI/180))}`,ST(K.ink,2));}
+  if(o.thick&&f>.95){s+=G(-L-26,-T*2,_ap(sg(f,.95,1),0,1),0,P(`M0 ${-T*2+4} L0 ${T*2+16} M-8 ${-T*2+4} L8 ${-T*2+4} M-8 ${T*2+16} L8 ${T*2+16}`,ST(K.ink,2.4))+G(-50,8,1,0,pill(o.thick,{sz:16,w:800})));}
+  return s;};
+n2cat('foldside · Plegado de lado: la pantalla forma una gota en la bisagra',lt=>{const t=lt%6;return G(80,40,1,0,NX.foldside({fold:t<3?sg(t,.3,2.6):1-sg(t,4,5.6),thick:'11 mm',loop:t>2.6&&t<4},t));});
+
+/* Cristal rígido frente a lámina flexible: se doblan los dos; el cristal se raja y la lámina con píxeles se curva sin romperse
+   o:{bend 0-1, labels (true)} · centro (0,0) */
+NX.flexscreen=(o={},lt)=>{const b=cl(o.bend??0);let s='';
+  /* izquierda: cristal */
+  const bg=Math.min(b,.35)*1.0;const yA=-bg*60;
+  s+=G(-130,0,1,0,P(`M-90 0 Q0 ${f1(yA*2)} 90 0 L90 14 Q0 ${f1(yA*2+14)} -90 14Z`,`fill:rgba(190,225,255,.75);${OL(2.4)}`));
+  if(b>.35){const q=sg(b,.35,.55);s+=G(-130,yA,1,0,DR('M-6 -6 L4 4 L-4 10 L6 20 M4 4 L18 0 M-4 10 L-18 16',ST(K.red,3),q)+G(0,-40,_ap(q,0,1),0,pill('¡crac!',{sz:15,w:800,fill:K.red})));}
+  /* derecha: lámina con píxeles */
+  const yB=-b*90;let px='';
+  for(let i=0;i<13;i++){const u=(i+.5)/13,x=-90+u*180,y=yB*4*u*(1-u)*1;const ang=Math.atan(yB*4*(1-2*u)/180)*180/Math.PI;
+    px+=G(x,y,1,ang,Rc(-5,-11,4,7,'#f34841')+Rc(-1,-11,4,7,'#3f9b4f')+Rc(3,-11,4,7,'#2a37d7'));}
+  s+=G(130,0,1,0,P(`M-90 0 Q0 ${f1(yB*2)} 90 0`,ST('#ffd86b',6))+px);
+  if(o.labels!==false){s+=G(-130,70,1,0,pill('cristal rígido',{sz:14,w:800,fill:'#555'}),_ao(lt,.2,.3))+G(130,70,1,0,pill('lámina flexible',{sz:14,w:800,fill:'url(#gRP)'}),_ao(lt,.5,.3));}
+  return s;};
+n2cat('flexscreen · Cristal rígido que se raja frente a lámina flexible con píxeles',lt=>NX.flexscreen({bend:EZ.io(bel(lt%5,0,5)*1.2>1?1:bel(lt%5,0,5)*1.2)},lt%5));
+
+/* Tienda online: el botón «Comprar» pasa a «Agotado», cronómetro de minutos y fecha de entrega
+   o:{at (s en que se agota), mins (minutos que marca el cronómetro), date ('enero 2027'), price} · centro (0,0), ~300×380 */
+NX.soldout=(o={},lt)=>{const at=o.at??1.2,q=sg(lt,at,at+.25);let s=G(0,0,_ap(lt,0,.4),0,Rc(-150,-190,300,380,'#fff',22,OL(2.6))+Rc(-150,-190,300,40,'#ececec',22)+Rc(-150,-160,300,10,'#ececec')+Ci(-128,-170,5,K.red)+Ci(-112,-170,5,K.yellow)+Ci(-96,-170,5,K.green2));
+  s+=G(0,-70,.42,0,NX.foldphone({open:1},5),_ao(lt,.1,.3));
+  if(o.price)s+=Tn(0,30,o.price,22,800,{fill:K.ink});
+  const bc=q<1?mixc('#2a37d7','#8e8e8e',q):'#8e8e8e';s+=G(0,80,1+.06*bel(q,0,1),0,Rc(-110,-26,220,52,bc,26)+Tn(0,9,q<.5?'Comprar':'Agotado',22,800,{fill:'#fff'}));
+  if(o.date&&lt>at+.5)s+=G(0,142,1,0,Tn(0,0,'Entrega estimada:',12,600,{fill:'#666'})+Tn(0,24,o.date,20,800,{fill:K.red}),_ao(lt,at+.5,.3));
+  if(o.mins){const m=Math.round(o.mins*EZ.out(sg(lt,.2,at)));s+=G(128,-150,_ap(lt,.2,.3),0,Ci(0,0,34,K.ink,OL(2,'#fff'))+P(`M0 0 L${f1(22*Math.sin(m/60*2*Math.PI*6))} ${f1(-22*Math.cos(m/60*2*Math.PI*6))}`,ST('#fff',3))+Tn(0,52,m+' min',14,800));}
+  if(q>=1)s+=G(0,-10,1,0,NX.stamp({type:'falso',text:'AGOTADO',r:-12,sz:30},lt-at-.15));
+  return s;};
+n2cat('soldout · Tienda online: «Comprar» → «Agotado», cronómetro y fecha de entrega',lt=>NX.soldout({at:1.6,mins:5,date:'enero 2027'},lt%5));
+
+/* Estantería de una tienda que se queda casi vacía y cola de gente esperando · o:{left (cajas que quedan), n (personas en la cola), empty 0-1} · suelo en y=0 */
+NX.fewstock=(o={},lt)=>{const tot=12,left=o.left??2,e=cl(o.empty??EZ.io(sg(lt,.4,2)));let s='';
+  s+=Rc(-200,-260,260,250,'#f4eee2',6,OL(2.4));for(let r=0;r<3;r++)s+=Rc(-200,-180+r*80,260,8,'#9a4a2f',2,OL(1.4));
+  for(let i=0;i<tot;i++){const r=Math.floor(i/4),c=i%4,keep=i<left;const gone=keep?0:sg(e,(i/tot)*.8,(i/tot)*.8+.2);if(gone>=1)continue;
+    s+=G(-170+c*60+gone*260,-188+r*80-gone*40,1-gone*.4,0,Rc(-22,-50,44,50,'#fff',5,OL(1.8))+Rc(-12,-38,24,30,'#2b1d4a',4),1-gone);}
+  s+=P('M-260 0 L260 0',ST(K.ink,2.4));
+  const n=o.n||7;for(let i=0;i<n;i++){const ph=i*1.7;s+=G(110+i*40,0,.62,0,blobS({T:lt+ph,ph:ph+2}));}
+  if(left<=3&&e>.9)s+=G(-70,-290,_ap(sg(e,.9,1),0,1),0,pill('pocas unidades',{sz:16,w:800,fill:K.red}));
+  return s;};
+n2cat('fewstock · Estantería que se vacía y cola de gente («pocas unidades»)',lt=>G(-30,140,1,0,NX.fewstock({left:2,n:6},lt%5)));
+
 NX_CATALOG.push(..._N2);
