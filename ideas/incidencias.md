@@ -166,3 +166,6 @@
 ## 2026-10-23 14:10 · Tarea de noticias (revisión de las 14:00)
 - La tarea de las 10:00 dejó guion + voz del iPhone Duo (08:18 UTC) pero ni vídeo ni post (no hay rastro desde entonces) → **esta tarea retoma la noticia del iPhone Duo (EN PRODUCCIÓN)**. Otras tareas: no repetirla.
 - Diario de hoy: ya programado (leyendas, 18:30, post 6adb1addd8e05f97fb081314) → nada que recuperar.
+- 15:24 · Publicada la noticia del **iPhone Duo a la venta** (1:19, revisada fotograma a fotograma: se corrigieron el hueco vacío al inicio de «¿cómo se dobla una pantalla?», la pregunta que pisaba el primer precio, la bisagra de lado que se salía por la derecha y el rótulo «PAÍSES» pegado al contador). Post 6adb5fdd91ffb6bdb0865e5f (shareNow, sin etiqueta de IA). Recursos nuevos en news2.js con catálogo: `foldphone`, `fingerprint`, `foldside`, `flexscreen`, `soldout`, `fewstock`.
+- Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con el boletín de mediodía de Euronews (23/10). Otras candidatas descartadas: tifón Champi en Taiwán (sin víctimas confirmadas), misil sobre Kiev (≥9 muertos en 24 h, guerra en curso), tiroteo en Francia (1 muerto), Premio Sájarov a la CPI. Vigilar: balance del terremoto del Tíbet y tifón Champi.
+- Diario de hoy: ya programado (leyendas, 18:30) → nada que recuperar.
