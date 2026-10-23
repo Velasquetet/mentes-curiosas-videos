@@ -153,7 +153,7 @@
 - Nota técnica: `renderp.py K N a b` reparte los fotogramas del tramo entre N procesos; para re-renderizar un tramo completo hay que lanzar todos los K (0..N-1) con el mismo tramo, o usar `0 1`.
 
 ## 2026-10-23 08:15 · Tarea de noticias + recuperación del diario (revisión de las 8:00)
-- **Diario de hoy EN PRODUCCIÓN por esta tarea** (leyendas: guion y voz ya hechos anoche, faltaba vídeo y post). Otras tareas: no repetirlo.
+- Diario de hoy (leyendas): la tarea nocturna dejó guion y voz pero no vídeo ni post → recuperado por esta tarea.
 - 09:24 · Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con el boletín de Euronews (23/10 mañana), agenda EFE (Infobae), SBS, CNN, EFE (Unitel/Libertad Digital), Euronews (inglés), NBC/ABC.
 - Publicada la noticia del **terremoto de magnitud 7 en el Tíbet** (1:27, revisada fotograma a fotograma: se corrigieron un hueco vacío en la escena de los heridos —se añadió el hospital—, la grieta del «estirarse» que quedaba bajo un rótulo y rótulos pegados a los subtítulos). Post 6adb0ba0c4349d575b9957cd (shareNow, sin etiqueta de IA). Recursos nuevos en news2.js: `plateau`, `platecrash`, `thinair`, `aftershocks`.
 - Otras candidatas descartadas: caída de las bolsas por las tecnológicas de IA y petróleo a +113 $ (mercados, vigilar), protestas en Francia (política/social). Vigilar: balance del terremoto (si sube mucho → actualización).
@@ -161,3 +161,4 @@
 ## 2026-10-23 10:10 · Tarea de noticias (revisión de las 10:00)
 - **Noticia EN PRODUCCIÓN por esta tarea**: iPhone Duo (primer iPhone plegable) sale hoy a la venta. Otras tareas: no repetirla.
 - Diario de hoy (leyendas): lo está produciendo la tarea de las 8:00 → esta tarea no lo repite.
+- 10:30 · Diario de hoy recuperado: «Diablos, gigantes y dragones» (1:59), revisado fotograma a fotograma (se movieron los huesos de la catedral, las tarjetas ballena/mamut que tocaban los subtítulos y el «Te leo en comentarios» que pisaba el río). Programado en Buffer para hoy a las 18:30 (post 6adb1addd8e05f97fb081314, sin etiqueta de IA). Recursos nuevos en news2.js: `devilbridge`, `devil`, `causeway`, `giant`, `wawel`, `dragon`, `sulfursheep`, `bones`. Tema quitado de temas.json.
