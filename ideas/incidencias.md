@@ -169,3 +169,8 @@
 - 15:24 · Publicada la noticia del **iPhone Duo a la venta** (1:19, revisada fotograma a fotograma: se corrigieron el hueco vacío al inicio de «¿cómo se dobla una pantalla?», la pregunta que pisaba el primer precio, la bisagra de lado que se salía por la derecha y el rótulo «PAÍSES» pegado al contador). Post 6adb5fdd91ffb6bdb0865e5f (shareNow, sin etiqueta de IA). Recursos nuevos en news2.js con catálogo: `foldphone`, `fingerprint`, `foldside`, `flexscreen`, `soldout`, `fewstock`.
 - Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con el boletín de mediodía de Euronews (23/10). Otras candidatas descartadas: tifón Champi en Taiwán (sin víctimas confirmadas), misil sobre Kiev (≥9 muertos en 24 h, guerra en curso), tiroteo en Francia (1 muerto), Premio Sájarov a la CPI. Vigilar: balance del terremoto del Tíbet y tifón Champi.
 - Diario de hoy: ya programado (leyendas, 18:30) → nada que recuperar.
+
+## 2026-10-23 16:17 · Tarea de noticias (revisión de las 16:00)
+- Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con EFE Internacional (12:00 GMT, Infobae), Euronews (inglés), Al Jazeera, Noticias RCN.
+- **Sin noticias que cumplan los criterios.** Descartadas: sismo M5,7 en el mar Tirreno frente a Sicilia (sin daños ni víctimas), Trump insinúa nuevos ataques a Irán (declaración, no hecho), caída de tecnológicas (mercados), incendio en base militar de Canadá (del 19/10, solo se conoce la causa). Terremoto del Tíbet: balance sin cambios (16 muertos, 65 heridos) → no hay actualización.
+- Diario de hoy: ya programado (leyendas, 18:30, post 6adb1addd8e05f97fb081314, verificado en Buffer: scheduled) → nada que recuperar.
