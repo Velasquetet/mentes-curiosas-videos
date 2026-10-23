@@ -1313,4 +1313,88 @@ NX.spillover=(o={},lt)=>{const at=o.at??.3;let s='';
   if(o.label&&lt>at+1.9)s+=G(0,150,1,0,stampA(0,0,lt-at-1.9,o.label,{c:K.red,sz:22,r:-5}));
   return s;};
 n2cat('spillover · Salto de especie: de la vaca a la persona',lt=>NX.spillover({label:'1.er CASO HUMANO'},lt%5));
+
+/* ===== Recursos nuevos · noticia del terremoto del Tíbet (23/10/2026) ===== */
+/* Casa tibetana: muros blancos encalados, marcos de ventana negros trapezoidales, tejado plano con franja granate · o: k */
+function _tibHouse(k=1,seed=0){const w=70+hs(seed)*30,h=54+hs(seed+1)*20;let s=P(`M${-w/2} 0 L${-w/2+4} ${-h} L${w/2-4} ${-h} L${w/2} 0Z`,'fill:#f6f2ea;'+OL(2.2))+Rc(-w/2+2,-h-8,w-4,9,'#7a2430',1,OL(1.8));
+  for(let i=0;i<2;i++){const x=-w/4+i*w/2;s+=P(`M${x-11} ${-h*.62} L${x+11} ${-h*.62} L${x+8} ${-h*.3} L${x-8} ${-h*.3}Z`,'fill:#16181d')+Rc(x-7,-h*.6,14,10,'#f2c45a',1);}
+  s+=P(`M-8 0 L-8 ${-h*.25} L8 ${-h*.25} L8 0`,'fill:#3a2a22;'+OL(1.6));
+  return G(0,0,k,0,s);}
+/* Casa tibetana derrumbada (escombros) */
+function _tibRubble(k=1,seed=0){let s='';for(let i=0;i<9;i++){const x=-40+hs(seed+i)*80,y=-4-hs(seed+i*3)*26;s+=G(x,y,1,hs(i+seed)*70-35,Rc(-12,-7,18+hs(i+2)*16,12,i%3?'#f6f2ea':'#d9d2c4',2,OL(1.4)));}
+  s+=G(-6,-30,1,-24,Rc(-30,-4,60,8,'#7a2430',1,OL(1.6)));return G(0,0,k,0,s+P('M-50 0 L50 0',ST(K.ink,2)));}
+/* Banderas de oración entre dos postes */
+function _prayer(lt,w=200){const c=['#2a5fd7','#ffffff','#e2264a','#3f9b4f','#f6c21a'];let s=P(`M${-w/2} -60 L${-w/2} 0 M${w/2} -60 L${w/2} 0`,ST('#5a3119',3))+P(`M${-w/2} -58 Q0 -30 ${w/2} -58`,ST(K.ink,1.4));
+  for(let i=0;i<10;i++){const q=(i+.5)/10,x=-w/2+q*w,y=-58+Math.sin(Math.PI*q)*28;s+=G(x,y,1,_osc(lt,.8,8,i),Rc(-6,0,12,14,c[i%5],1,OL(1)));}return s;}
+/* Altiplano tibetano: cumbres nevadas, llanura alta, casas tibetanas y banderas de oración. Puede temblar, agrietarse y derrumbar casas.
+   o:{shake (0-1 intensidad), crack (0-1 grieta que se abre), fall (0-1 parte de casas caídas), snow (0-1 nieve que cae), night (0-1), alt ('4.800 m' rótulo de altímetro)} · ancho 540, base en y=0 */
+NX.plateau=(o={},lt)=>{const sh=(o.shake||0),dx=sh*_osc(lt,11,6),dy=sh*_osc(lt,13,3,1.3),nt=o.night||0;let s='';
+  s+=Rc(-270,-460,540,500,mixc('#bcd3f0','#1b2340',nt));
+  if(nt>0)for(let i=0;i<24;i++)s+=Ci(-260+hs(i)*520,-450+hs(i+7)*200,1.3,'#fff',`opacity:${f2(nt*(.5+.5*Math.sin(lt*3+i)))}`);
+  const mt=(x0,pk,col,sn,seed)=>{let d=`M${x0-170} 0`;const n=6;for(let i=0;i<=n;i++){const x=x0-170+i*340/n,y=-pk*Math.sin(Math.PI*i/n)*(.7+hs(seed+i)*.3);d+=` L${f1(x)} ${f1(y)}`;}d+=` L${x0+170} 0Z`;
+    return P(d,`fill:${col};${OL(2)}`)+P(`M${x0-60} ${f1(-pk*.62)} L${x0-30} ${f1(-pk*.78)} L${x0} ${f1(-pk*.96)} L${x0+34} ${f1(-pk*.8)} L${x0+64} ${f1(-pk*.6)} L${x0+30} ${f1(-pk*.66)} L${x0} ${f1(-pk*.58)} L${x0-28} ${f1(-pk*.68)}Z`,`fill:${sn};${OL(1.4)}`);};
+  s+=G(dx*.3,-150+dy*.3,1,0,mt(-150,250,mixc('#9a8fb8','#3a3560',nt),'#ffffff',1)+mt(170,300,mixc('#8a7fa8','#332e58',nt),'#ffffff',4)+mt(10,190,mixc('#a99cc4','#423c6a',nt),'#f4f6fb',9));
+  let g=Rc(-280,-150,560,360,mixc('#c9b98e','#5e5641',nt))+P('M-280 -150 L280 -150',ST(K.ink,2.2));
+  for(let i=0;i<14;i++)g+=P(`M${f1(-260+hs(i)*520)} ${f1(-130+hs(i+2)*120)} q6 -10 12 0`,ST(mixc('#8a7a52','#3a3528',nt),2));
+  const cr=o.crack||0;if(cr>0){const pts=[[-280,-60],[-190,-80],[-120,-50],[-40,-90],[30,-60],[110,-100],[190,-70],[280,-95]];let d='M'+pts.map(p=>p.join(' ')).join(' L');
+    g+=DR(d,ST('#2a1f18',3+cr*9),cr)+DR(d,ST('#000',1.4),cr);}
+  s+=G(dx,dy,1,0,g);
+  const fall=o.fall||0,hx=[-190,-95,0,95,190];hx.forEach((x,i)=>{const down=fall>0&&hs(i+30)<fall+.05&&i%2===0;const y=-150+(i%2?20:0)+30;
+    s+=G(x+dx*(1+i*.1),y+dy,.95,down?0:dx*.6,down?_tibRubble(.9,i):_tibHouse(.9,i));});
+  s+=G(dx,-150+dy-4,1,0,_prayer(lt,150),1);
+  const sn=o.snow||0;if(sn>0)for(let i=0;i<30;i++){const q=((lt*.25)+hs(i))%1;s+=Ci(-260+hs(i*3)*520+_osc(lt,.4,10,i),-450+q*500,2+hs(i)*2.5,'#fff',`opacity:${f2(sn*(1-sg(q,.85,1)))}`);}
+  if(sh>0)for(let i=0;i<6;i++){const q=((lt*1.4)+i/6)%1;s+=Ci(-200+hs(i)*400,-150,10+q*30,'#b9ad8e',`opacity:${f2(sh*.55*(1-q))}`);}
+  if(o.alt)s+=G(-170,-400,_ap(lt,.4,.35),0,Rc(-74,-30,148,60,'#fff',12,OL(2.4))+P('M-56 12 L-42 -12 L-30 4 L-22 -6 L-10 12Z',`fill:${K.blue};${OL(1.4)}`)+Tn(30,-6,'ALTITUD',10,800,{fill:'#555',ls:.08})+Tn(30,18,o.alt,20,800));
+  return s;};
+n2cat('plateau · Altiplano tibetano (tiembla, se agrieta, nieva)',lt=>G(0,250,.9,0,NX.plateau({shake:lt%6<3?1:0,crack:sg(lt%6,.5,2),fall:sg(lt%6,1,2),snow:lt%6>3?1:0,alt:'4.800 m'},lt)),'');
+
+/* Choque de placas: la placa India empuja contra Asia, la corteza se pliega y se levantan el Himalaya y la meseta; con «stretch» la meseta se estira y se rompe
+   o:{push (0-1), tension (0-1 brillo de tensión), stretch (0-1), labels (true)} · corte de unos 460×300 centrado */
+NX.platecrash=(o={},lt)=>{const pu=o.push??EZ.io(sg(lt,.3,2.6)),te=o.tension||0,stv=o.stretch||0;let s='';
+  const w=460,top=-40,ix=-230+pu*70;
+  s+=Rc(-w/2,-150,w,110,'#bcd3f0',0);
+  /* placa asiática (derecha) con relieve que crece */
+  const hM=40+pu*110,hP=20+pu*70;
+  let asia=`M${f1(ix+60)} ${top} Q${f1(ix+90)} ${f1(top-hM)} ${f1(ix+120)} ${f1(top-hM*.9)} L${f1(ix+150)} ${f1(top-hM*.7)} L${f1(ix+190)} ${f1(top-hP)} L230 ${f1(top-hP*.95)} L230 140 L${f1(ix+60)} 140Z`;
+  s+=P(asia,'fill:#d6b98a;'+OL(2.4));
+  for(let i=0;i<4;i++)s+=P(`M${f1(ix+70+i*8)} ${f1(top+10+i*20)} Q${f1(ix+130)} ${f1(top-hM*.4+i*24)} 230 ${f1(top+i*24-hP*.4)}`,ST('rgba(90,60,30,.35)',2));
+  /* nieve en las cumbres */
+  s+=P(`M${f1(ix+92)} ${f1(top-hM*.72)} Q${f1(ix+105)} ${f1(top-hM*1.0)} ${f1(ix+122)} ${f1(top-hM*.9)} L${f1(ix+140)} ${f1(top-hM*.72)}Z`,'fill:#fff;'+OL(1.4));
+  /* placa india (izquierda) que entra por debajo */
+  s+=P(`M-230 ${top} L${f1(ix+60)} ${top} Q${f1(ix+110)} ${top+30} ${f1(ix+160)} 120 L-230 120Z`,'fill:#c98a5a;'+OL(2.4));
+  s+=P(`M-230 120 L${f1(ix+160)} 120 L230 140`,ST(K.ink,2));
+  /* flechas de empuje */
+  const ar=(x,y,dir,c)=>G(x,y,1,dir<0?180:0,P('M-34 0 L18 0 M6 -14 L22 0 L6 14',ST(c,7)));
+  s+=ar(-150+_osc(lt,1.2,6),40,1,'#fff')+ar(150,40,-1,'rgba(255,255,255,.75)');
+  if(te>0){for(let i=0;i<3;i++){const q=((lt*1.1)+i/3)%1;s+=Ci(ix+110,top+20,20+q*60,'none',`stroke:${K.red};stroke-width:${f1(4*(1-q))};opacity:${f2(te*(1-q))}`);}
+    s+=G(ix+110,top+20,1,lt*80,spark4(14,K.red),te);}
+  if(stv>0){const cx=ix+275,cy=top-hP*.95,gap=stv*26;
+    s+=P(`M${f1(cx-gap/2)} ${f1(cy)} L${f1(cx-4)} ${f1(cy+40+stv*30)} L${f1(cx+4)} ${f1(cy+40+stv*30)} L${f1(cx+gap/2)} ${f1(cy)}Z`,'fill:#2a1f18;'+OL(1.6));
+    s+=G(cx-40-stv*14,cy+22,1,180,P('M-26 0 L12 0 M2 -10 L14 0 L2 10',ST(K.red,6)),_ao(stv,0,.3))+G(cx+40+stv*14,cy+22,1,0,P('M-26 0 L12 0 M2 -10 L14 0 L2 10',ST(K.red,6)),_ao(stv,0,.3));}
+  if(o.labels!==false){s+=G(-150,90,1,0,pill('placa India',{sz:13,w:800,fill:'#7a4a2a'}),_ao(lt,.2,.3))+G(170,100,1,0,pill('placa Euroasiática',{sz:13,w:800,fill:'#6b5434'}),_ao(lt,.3,.3));
+    if(pu>.6)s+=G(ix+118,f1(top-hM-34),1,0,pill('Himalaya',{sz:12,w:800,fill:K.ink}),_ao(pu,.6,.25));
+    if(pu>.8)s+=G(Math.min(180,ix+215),f1(top-hP-30),1,0,pill('meseta del Tíbet',{sz:12,w:800,fill:'url(#gRP)'}),_ao(pu,.8,.2));}
+  return clipG(s,Rc(-w/2,-260,w,410,'#000',16))+Rc(-w/2,-260,w,410,'none',16,OL(2.6));};
+n2cat('platecrash · Choque de placas: India contra Asia (Himalaya y Tíbet)',lt=>{const t=lt%7;return NX.platecrash({push:EZ.io(sg(t,.3,3)),tension:sg(t,3,3.5)*(1-sg(t,4.5,5)),stretch:sg(t,5,6)},t);});
+
+/* Aire con menos oxígeno en altura: dos frascos con moléculas de O₂ (nivel del mar / altura) · o:{alt ('4.800 m'), at} */
+NX.thinair=(o={},lt)=>{const at=o.at??.2;let s='';
+  const jar=(x,n,lab,c,a)=>{let j=Rc(-70,-130,140,180,'rgba(255,255,255,.55)',18,OL(2.4))+Rc(-50,-146,100,18,'#9a9a9a',4,OL(2));
+    for(let i=0;i<n;i++){const px=-50+hs(i*5+n)*100+_osc(lt,.5+hs(i)*.4,4,i),py=-112+hs(i*7+n)*150+_osc(lt,.4,4,i+2);j+=G(px,py,1,0,Ci(-5,0,6.5,K.red,OL(1.2))+Ci(5,0,6.5,K.red,OL(1.2)),_ao(lt,a+i*.03,.2));}
+    return G(x,0,_ap(lt,a-.1,.35),0,j+G(0,80,1,0,pill(lab,{sz:13,w:800,fill:c})));};
+  s+=jar(-110,22,'nivel del mar',K.blue,at)+jar(110,12,o.alt||'4.800 m',K.red,at+.5);
+  s+=G(0,-180,1,0,Tn(0,0,'O₂',30,800,{fill:K.red}),_ao(lt,at,.3));
+  s+=G(110,-180,1,0,pill('menos oxígeno',{sz:13,w:800,fill:K.ink}),_ao(lt,at+1.2,.3));
+  return s;};
+n2cat('thinair · Menos oxígeno en altura (frascos con O₂)',lt=>NX.thinair({},lt%5));
+
+/* Réplicas: tira de sismógrafo que se desplaza con muchos picos pequeños y un contador · o:{n (total), dur, label} */
+NX.aftershocks=(o={},lt)=>{const n=o.n||400,dur=o.dur||2.2,w=440;let s=Rc(-w/2-10,-80,w+20,160,'#fff',12,OL(2.2))+P(`M${-w/2} 0 L${w/2} 0`,ST('rgba(20,18,18,.15)',1.2));
+  let d=`M${-w/2} 0`;const N=160;for(let i=0;i<=N;i++){const x=-w/2+i*w/N,k=i+Math.floor(lt*40),spike=hs(k)>.86?(18+hs(k+3)*44):3,a=spike*Math.sin(k*2.3)*(i/N);d+=` L${f1(x)} ${f1(a)}`;}
+  s+=P(d,ST(K.red,2));s+=Ci(w/2-6,0,6,K.red);
+  const v=Math.round(n*EZ.out(sg(lt,.2,.2+dur)));
+  s+=G(0,124,1,0,Rc(-120,-30,240,60,K.ink,14)+Tn(-4,12,'+'+_fmt(v),32,800,{fill:'#fff',a:'end'})+Tn(6,10,o.label||'réplicas',18,700,{fill:'#ff8fab',a:'start'}),_ao(lt,.1,.3));
+  return s;};
+n2cat('aftershocks · Réplicas: sismógrafo con contador',lt=>NX.aftershocks({n:413},lt%5));
+
 NX_CATALOG.push(..._N2);
