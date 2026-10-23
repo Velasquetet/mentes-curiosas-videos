@@ -1614,4 +1614,58 @@ NX.fewstock=(o={},lt)=>{const tot=12,left=o.left??2,e=cl(o.empty??EZ.io(sg(lt,.4
   return s;};
 n2cat('fewstock · Estantería que se vacía y cola de gente («pocas unidades»)',lt=>G(-30,140,1,0,NX.fewstock({left:2,n:6},lt%5)));
 
+/* ---------------- ataque a una iglesia en Jordania (23/10/2026) ---------------- */
+/* Iglesia ortodoxa de pueblo (piedra clara, cúpula azul con cruz, campanario, puerta de madera en arco) · o:{night (0-1 oscurece), open (0-1 abre la puerta), glow (luz dentro), mourn (0-1 gente de luto en fila a la entrada), tape (0-1 cinta policial delante), label} · suelo y=0, ancho ~440 */
+NX.orthochurch=(o={},lt)=>{const nt=cl(o.night||0),op=cl(o.open||0),st='#ece3cf',sd='#d8ccb2';let s='';
+  s+=El(0,6,230,14,'rgba(20,18,18,.16)');
+  /* nave */
+  s+=Rc(-150,-210,300,210,st,4,OL(2.4));for(let r=0;r<6;r++)s+=P(`M-150 ${-35*r-35} L150 ${-35*r-35}`,ST(sd,1.4));
+  s+=P('M-162 -210 L0 -290 L162 -210Z',`fill:${sd};${OL(2.4)}`);
+  /* cúpula sobre tambor */
+  s+=Rc(-50,-330,100,46,st,3,OL(2.2))+[...Array(4)].map((_,i)=>Rc(-38+i*22,-322,10,26,'#2a3550',4)).join('');
+  s+=P('M-58 -330 Q-58 -410 0 -414 Q58 -410 58 -330Z',`fill:#2f6fb8;${OL(2.4)}`)+P('M-30 -350 Q-24 -394 0 -400',ST('rgba(255,255,255,.45)',4));
+  s+=P('M0 -414 L0 -470 M-16 -452 L16 -452 M-10 -436 L10 -432',ST('#c9a04a',5));
+  /* campanario */
+  s+=Rc(150,-330,70,330,st,3,OL(2.4))+P('M144 -330 L185 -380 L226 -330Z',`fill:#2f6fb8;${OL(2.2)}`)+P('M185 -380 L185 -412 M173 -400 L197 -400',ST('#c9a04a',4));
+  s+=P('M165 -300 L165 -260 Q185 -282 205 -260 L205 -300 Q185 -316 165 -300Z','fill:#2a3550;'+OL(1.6));
+  const sw=_osc(lt,.5,8*(o.bell||0));s+=G(185,-292,1,sw,P('M-8 0 Q-9 -14 0 -16 Q9 -14 8 0Z',`fill:#c9a04a;${OL(1.2)}`));
+  /* ventanas en arco */
+  const wl=nt>0?`rgba(255,200,110,${f2(.35+.6*nt*(o.glow??1))})`:'#2a3550';
+  [-105,105].forEach(x=>s+=P(`M${x-16} -90 L${x-16} -140 Q${x} -162 ${x+16} -140 L${x+16} -90Z`,`fill:${wl};${OL(1.8)}`));
+  s+=Ci(0,-238,20,wl,OL(2))+P('M0 -258 L0 -218 M-20 -238 L20 -238',ST(K.ink,1.6));
+  /* puerta */
+  s+=P('M-40 0 L-40 -110 Q0 -150 40 -110 L40 0Z',`fill:${nt>0?'rgba(255,190,100,.9)':'#2a1e14'};${OL(2.2)}`);
+  {const e=f1(lerp(0,-34,op)),e2=f1(lerp(0,34,op));s+=P(`M-40 0 L-40 -110 Q${f1(lerp(-20,-37,op))} -130 ${e} ${f1(lerp(-136,-118,op))} L${e} 0Z`,`fill:#7a4a28;${OL(1.8)}`)+P(`M40 0 L40 -110 Q${f1(lerp(20,37,op))} -130 ${e2} ${f1(lerp(-136,-118,op))} L${e2} 0Z`,`fill:#7a4a28;${OL(1.8)}`);}
+  s+=Rc(-60,0,120,8,'#bdb29a',2,OL(1.4));
+  /* gente de luto */
+  const mo=cl(o.mourn||0);if(mo>0){for(let i=0;i<6;i++){const x=-240+i*40+(i>2?360:0);s+=G(x,0,.6,0,blobS({T:lt*.2,ph:i*1.9+3,c:'#6b6b78'}),cl(mo*1.6-i*.12));}}
+  if(nt>0)s=s+Rc(-900,-1400,1800,1420,'#0d1020',0,`opacity:${f2(nt*.45)}`)+[-105,105].map(x=>P(`M${x-16} -90 L${x-16} -140 Q${x} -162 ${x+16} -140 L${x+16} -90Z`,`fill:rgba(255,200,110,${f2(.5*nt)})`)).join('');
+  const tp=cl(o.tape||0);if(tp>0)s+=G(0,-40,.62,0,NX.tape({text:'NO PASAR'},(lt-(o.tapeAt||0))));
+  if(o.label)s+=G(0,60,1,0,pill(o.label,{sz:15,w:800,fill:K.ink}),cl((lt-.4)*3));
+  return G(0,0,EZ.back(sg(lt,0,.4)),0,s);};
+n2cat('orthochurch · Iglesia ortodoxa de pueblo (cúpula azul, campanario; noche, luto, cinta policial)',lt=>{const t=lt%9;return G(0,160,.9,0,NX.orthochurch({night:t>3?sg(t,3,4):0,mourn:t<3?sg(t,.3,1.4):1,tape:t>6?1:0,tapeAt:6,bell:1},t));});
+
+/* Velas de luto que se encienden una a una (llama que tiembla) · o:{n (velas), gap, at (s entre velas), label} · base y=0 */
+NX.candles=(o={},lt)=>{const n=o.n||5,gp=o.gap||62,at=o.at??.35;let s=Rc(-n*gp/2-20,-6,n*gp+40,16,'#3a3a40',5,OL(1.8));
+  for(let i=0;i<n;i++){const x=-(n-1)*gp/2+i*gp,h=90+hs(i*3.7)*60,on=sg(lt,i*at,i*at+.25);
+    s+=Rc(x-14,-h,28,h,'#f4efe2',5,OL(2))+P(`M${x-14} ${-h+10} q7 6 14 0`,ST('#d8d0bc',2));
+    s+=P(`M${x} ${-h} L${x} ${-h-10}`,ST(K.ink,2));
+    if(on>0){const fl=_osc(lt,3.1,2,i)+_osc(lt,5.3,1,i*2),fy=-h-12;s+=G(x,fy,on,fl*2,Ci(0,-16,26,'rgba(255,190,80,.18)')+P('M0 0 Q-11 -14 0 -34 Q11 -14 0 0Z','fill:#ffb02e;'+OL(1.4,'#d4761b'))+P('M0 -3 Q-5 -10 0 -20 Q5 -10 0 -3Z','fill:#fff3c4'));}}
+  if(o.label)s+=G(0,56,1,0,pill(o.label,{sz:15,w:800,fill:K.ink}),cl((lt-n*at)*3));
+  return s;};
+n2cat('candles · Velas de luto que se encienden una a una',lt=>G(0,120,1,0,NX.candles({n:5,label:'en recuerdo'},lt%5)));
+
+/* Bandera de Jordania ondeando (franjas negra, blanca y verde, triángulo rojo con estrella blanca de 7 puntas) · o:{w,h,half (0-1 baja a media asta)} */
+NX.jordanflag=(o={},lt)=>{const w=o.w||210,h=o.h||124,hf=cl(o.half||0),fy=lerp(-330,-210,EZ.io(hf));let s=P('M0 70 L0 -340',ST('#8b8f98',7))+Ci(0,-344,7,'#c9a04a',OL(1.4))+Rc(-30,62,60,14,'#6b6f78',3,OL(2));
+  const wv=k=>_osc(lt,.6,5,k*.9);const X=k=>4+k*w,Y=(k,v)=>fy+v*h+wv(k*3);
+  const band=(v0,v1,c)=>{let d='M';for(let k=0;k<=6;k++)d+=`${f1(X(k/6))} ${f1(Y(k/6,v0))} L`;for(let k=6;k>=0;k--)d+=`${f1(X(k/6))} ${f1(Y(k/6,v1))} L`;return P(d.slice(0,-2)+'Z','fill:'+c);};
+  s+=band(0,1/3,'#111')+band(1/3,2/3,'#fff')+band(2/3,1,'#0a8a3a');
+  s+=P(`M4 ${f1(Y(0,0))} L${f1(X(.5))} ${f1(Y(.5,.5))} L4 ${f1(Y(0,1))}Z`,'fill:#ce1126');
+  let st='';for(let k=0;k<14;k++){const a=-Math.PI/2+k*Math.PI/7,r=k%2?5:12;st+=(k?'L':'M')+f1(Math.cos(a)*r)+' '+f1(Math.sin(a)*r);}
+  s+=G(X(.17),Y(.17,.5),1,0,P(st+'Z','fill:#fff'));
+  s+=P(`M4 ${f1(Y(0,0))} ${[...Array(7)].map((_,k)=>`L${f1(X((k+1)/6>1?1:(k+1)/6))} ${f1(Y(Math.min(1,(k+1)/6),0))}`).join(' ')} L${f1(X(1))} ${f1(Y(1,1))} L4 ${f1(Y(0,1))}Z`,'fill:none;'+OL(2));
+  if(o.label)s+=G(0,110,1,0,pill(o.label,{sz:14,w:800}),cl((lt-.6)*3));
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('jordanflag · Bandera de Jordania (y a media asta)',lt=>G(0,150,1,0,NX.jordanflag({half:sg(lt%6,2,4),label:'Jordania'},lt%6)));
+
 NX_CATALOG.push(..._N2);
