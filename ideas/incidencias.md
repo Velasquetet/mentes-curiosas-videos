@@ -174,3 +174,9 @@
 - Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con EFE Internacional (12:00 GMT, Infobae), Euronews (inglés), Al Jazeera, Noticias RCN.
 - **Sin noticias que cumplan los criterios.** Descartadas: sismo M5,7 en el mar Tirreno frente a Sicilia (sin daños ni víctimas), Trump insinúa nuevos ataques a Irán (declaración, no hecho), caída de tecnológicas (mercados), incendio en base militar de Canadá (del 19/10, solo se conoce la causa). Terremoto del Tíbet: balance sin cambios (16 muertos, 65 heridos) → no hay actualización.
 - Diario de hoy: ya programado (leyendas, 18:30, post 6adb1addd8e05f97fb081314, verificado en Buffer: scheduled) → nada que recuperar.
+
+## 2026-10-23 18:15 · Tarea de noticias (revisión de las 18:00)
+- Lectura web de es.euronews.com sin permiso a tiempo; Reuters bloqueado. Revisado con Euronews (inglés, internacional), Times of Israel (liveblog), Al Jazeera (con Reuters), CBS (AFP/AP), ABC, EFE (Infobae).
+- **Sin noticias que cumplan los criterios.** Descartada por ahora: ataque armado en una iglesia ortodoxa griega durante un funeral en Hamud (Karak, Jordania): cifras aún no coinciden (6 o 7 muertos; 28 o 34 heridos según la fuente/revisión), atacantes huidos, sin reivindicación → **vigilar**: si el balance se estabiliza y hay autoría, valorar vídeo (con respeto, sin caras graciosas). Terremoto del Tíbet: 16 muertos, heridos 65→76 (cambio menor, sin actualización). Otras: petróleo >113 $, Irán (declaraciones).
+- **Vigilar a las 20:00 (hora de Madrid)**: rueda de prensa de la NASA sobre la aceleración de Artemis (14:00 ET) → si anuncia cambios de fechas/misión, candidata (ciencia/espacio).
+- Diario de hoy: ya programado (leyendas, 18:30, post 6adb1addd8e05f97fb081314, verificado en Buffer: scheduled) → nada que recuperar.
