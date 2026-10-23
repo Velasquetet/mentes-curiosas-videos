@@ -1668,4 +1668,133 @@ NX.jordanflag=(o={},lt)=>{const w=o.w||210,h=o.h||124,hf=cl(o.half||0),fy=lerp(-
   return G(0,0,_ao(lt,0,.3),0,s);};
 n2cat('jordanflag · Bandera de Jordania (y a media asta)',lt=>G(0,150,1,0,NX.jordanflag({half:sg(lt%6,2,4),label:'Jordania'},lt%6)));
 
+/* ---------------- diario del mundo de los dinosaurios (24/10/2026) ---------------- */
+/* Estegosaurio de perfil (mira a la derecha, pies en y=0, largo ~470) · o:{walk (0-1), fossil (0-1 → esqueleto de piedra), c, plate, emo:'ok'|'wow'} */
+NX.stego=(o={},lt)=>{const fo=cl(o.fossil||0),wk=o.walk||0,ph=lt*5,sw=wk*Math.sin(ph),bob=wk*Math.abs(Math.sin(ph))*-4+_osc(lt,.4,1.5);
+  const c=mixc(o.c||'#c98a3a','#e6dcc6',fo),cd=mixc('#9c6528','#cbbfa6',fo),pl=mixc(o.plate||'#e2573a','#d8ccb4',fo),bl=mixc('#ecd09a','#e6dcc6',fo);
+  const leg=(x,h,col,a)=>G(x,-h,1,a,P(`M-20 0 Q-24 ${f1(h*.55)} -14 ${h} L16 ${h} Q22 ${f1(h*.5)} 22 0Z`,`fill:${col};${OL(2.2)}`)+P(`M-16 ${h} l-4 6 M0 ${h} l0 7 M12 ${h} l4 6`,ST(K.ink,2.2)));
+  let s=El(0,4,230,12,'rgba(20,18,18,.15)');
+  s+=leg(-80,110,cd,-sw*14)+leg(95,82,cd,sw*14);
+  let b='';
+  /* placas (dos filas alternas) */
+  const PL=[[-210,-128,26],[-175,-160,36],[-135,-190,46],[-92,-212,56],[-46,-222,60],[0,-218,54],[42,-200,44],[80,-176,34],[112,-150,24]];
+  PL.forEach(([x,y,h],i)=>{const off=i%2?10:0,sh=_osc(lt,.7,1.5,i);b+=G(x+off,y+4,1,sh+(x-0)*.06,P(`M-${f1(h*.42)} 6 Q-${f1(h*.4)} -${f1(h*.6)} 0 -${h} Q${f1(h*.4)} -${f1(h*.6)} ${f1(h*.42)} 6Z`,`fill:${i%2?mixc(pl,'#000000',.12):pl};${OL(2)}`)+(fo<.5?P(`M0 2 L0 -${f1(h*.8)}`,ST('rgba(0,0,0,.18)',2)):''));});
+  /* cuerpo + cola + cuello */
+  const tl=_osc(lt,.5,6);
+  b+=P(`M${f1(-330)} ${f1(-118+tl)} Q-250 -132 -170 -150 Q-90 -224 0 -214 Q90 -206 140 -150 Q170 -120 205 -96 Q226 -86 236 -70 Q238 -56 222 -52 Q196 -50 178 -64 Q150 -82 120 -84 Q70 -68 0 -66 Q-80 -66 -150 -92 Q-240 -104 ${f1(-330)} ${f1(-112+tl)}Z`,`fill:${c};${OL(2.4)}`);
+  b+=P('M-150 -92 Q-60 -64 40 -68 Q90 -72 120 -84 Q70 -96 0 -94 Q-90 -96 -150 -92Z',`fill:${bl};opacity:.75`);
+  /* púas de la cola */
+  [[-300,-120,-38],[-280,-124,-58],[-300,-112,30],[-278,-110,50]].forEach(([x,y,a],i)=>b+=G(x,y+tl*.8,1,a,P('M-5 0 L0 -40 L5 0Z',`fill:${mixc('#f4ead2','#d8ccb4',fo)};${OL(1.8)}`)));
+  /* cabeza */
+  b+=Ci(214,-72,3,K.ink)+P('M226 -60 Q232 -58 236 -62',ST(K.ink,1.8));
+  if(fo>0){/* costillas y vértebras de fósil */
+    let r='';for(let i=0;i<9;i++){const x=-110+i*26;r+=P(`M${x} -190 Q${x+8} -140 ${x+2} -88`,ST(mixc('#e6dcc6','#8a7e68',fo),5));}
+    for(let i=0;i<14;i++)r+=Ci(-300+i*36,-140-Math.sin(i/13*Math.PI)*70,5,mixc('#e6dcc6','#8a7e68',fo));
+    b+=G(0,0,1,0,r,fo);}
+  s+=G(0,bob,1,0,b);
+  if(fo>0)s=Rc(-360,-260,720,300,'rgba(150,130,100,.0)')+s+P('M-350 10 L350 10',ST(mixc('#c6c6c6','#8a7e68',fo),6));
+  if(o.label)s+=G(0,46,1,0,pill(o.label,{sz:15,w:800,fill:K.ink}),cl((lt-.4)*3));
+  return G(0,0,EZ.back(sg(lt,0,.4)),0,s);};
+n2cat('stego · Estegosaurio (anda; fossil = se convierte en fósil)',lt=>{const t=lt%8;return G(0,170,.55,0,NX.stego({walk:t<4?1:0,fossil:sg(t,4.5,6)},t));});
+
+/* Vegetación del Mesozoico: araucaria (conífera), cícada, helecho y ginkgo, con flores diminutas o matas de hierba opcionales · o:{con,cyc,fern,gink (0-1 crecen), flowers (0-1), grass (0-1), labels, w} · suelo y=0 */
+NX.prehflora=(o={},lt)=>{const g=k=>EZ.back(cl(o[k]??1));let s='';const T=lt;
+  /* conífera tipo araucaria */
+  {const q=g('con');if(q>0){let c=P('M0 0 L0 -330',ST('#6b4426',14))+P('M0 0 L0 -330',ST('#8a5a34',8));
+    for(let i=0;i<7;i++){const y=-120-i*32,w=92-i*11,sw=_osc(T,.35,2,i);c+=G(0,y,1,sw,P(`M-${w} 8 Q-${f1(w*.5)} -16 0 -6 Q${f1(w*.5)} -16 ${w} 8 Q${f1(w*.5)} -2 0 4 Q-${f1(w*.5)} -2 -${w} 8Z`,`fill:${i%2?'#1f5a33':'#27703f'};${OL(1.8)}`));}
+    c+=G(0,-344,1,0,P('M-14 10 L0 -20 L14 10Z','fill:#27703f;'+OL(1.8)));s+=G(-178,0,q,0,c);}}
+  /* cícada */
+  {const q=g('cyc');if(q>0){let c=P('M-18 0 L-14 -86 L14 -86 L18 0Z','fill:#7a5530;'+OL(2));for(let r=0;r<5;r++)for(let k=0;k<3;k++)c+=P(`M${-14+k*10} ${-12-r*16} l5 -6 l5 6 l-5 6Z`,ST('#4f351c',1.4));
+    for(let i=0;i<7;i++){const a=-165+i*25+_osc(T,.3,3,i),L=100;let lf=P(`M0 0 Q${f1(L*.5)} -22 ${L} 10`,ST('#2b7a3e',3));for(let k=2;k<9;k++){const x=L*k/9,y=-22*Math.sin(Math.PI*k/9)*.9+10*k/9,pl=9-k*.6;lf+=P(`M${f1(x)} ${f1(y)} l${f1(pl*.5)} ${f1(-pl)} M${f1(x)} ${f1(y)} l${f1(pl*.5)} ${f1(pl)}`,ST(i%2?'#3f9b4f':'#4fae5c',2.4));}c+=G(0,-88,1,a,lf);}
+    s+=G(-50,0,q,0,c);}}
+  /* helecho */
+  {const q=g('fern');if(q>0){let c='';[-50,-25,0,25,50].forEach((a,i)=>c+=G(0,0,1,a+_osc(T,.4,3,i),fernS(150-Math.abs(a)*.8,i%2?'#2b7a3e':'#3f9b4f')));s+=G(70,0,q,0,c);}}
+  /* ginkgo */
+  {const q=g('gink');if(q>0){let c=P('M0 0 Q-6 -120 4 -230',ST('#5b3a20',12))+P('M2 -140 Q40 -170 70 -200 M0 -170 Q-40 -200 -64 -220',ST('#5b3a20',6));
+    const fan=(x,y,r)=>G(x,y,1,r,P('M0 0 L-14 -26 Q0 -34 14 -26Z','fill:#e0c63a;'+OL(1.4,'#8a7a1e'))+P('M0 0 L0 -28',ST('#8a7a1e',1.2)));
+    for(let i=0;i<26;i++){const a=hs(i*3.1)*Math.PI*2,r=18+hs(i*7.3)*52;c+=fan(f1(Math.cos(a)*r*1.1),f1(-215+Math.sin(a)*r*.75),hs(i)*360+_osc(T,.6,6,i));}
+    s+=G(182,0,q,0,c);}}
+  /* matas de hierba */
+  const gr=cl(o.grass||0);if(gr>0)for(let i=0;i<(o.nGrass||4);i++){const x=-240+hs(i*5.1+1)*480,k=EZ.back(cl(gr*1.4-i*.08));if(k<=0)continue;let t='';for(let j=0;j<7;j++)t+=P(`M${(j-3)*4} 0 Q${(j-3)*6} -16 ${(j-3)*9+_osc(T,.8,2,j)} -30`,ST(j%2?'#7cc46a':'#4f9a42',2.6));s+=G(x,0,k,0,t);}
+  /* flores diminutas */
+  const fl=cl(o.flowers||0);if(fl>0)for(let i=0;i<5;i++){const x=-220+i*110+hs(i)*30,k=EZ.back(cl(fl*1.5-i*.1));if(k<=0)continue;s+=G(x,0,k*(o.big?2.2:1),0,P('M0 0 L0 -14',ST('#3f9b4f',1.6))+[0,72,144,216,288].map(a=>G(0,-16,1,a,El(0,-4,2.4,4,'#fff',OL(.8)))).join('')+Ci(0,-16,2,'#f6c21a'));}
+  if(o.labels){const L=[['coníferas',-178,'con'],['cícadas',-50,'cyc'],['helechos',70,'fern'],['ginkgos',182,'gink']];
+    L.forEach(([t,x,k],i)=>{const q=cl((o[k]??1)*3-1.6);if(q>0)s+=G(x,40,EZ.back(q),0,pill(t,{sz:13,w:800,fill:K.ink}));});}
+  return s;};
+n2cat('prehflora · Plantas del Mesozoico (araucaria, cícada, helecho, ginkgo; flores diminutas, hierba)',lt=>{const t=lt%8;return G(0,200,.8,0,NX.prehflora({con:sg(t,.1,.6),cyc:sg(t,.5,1),fern:sg(t,.9,1.4),gink:sg(t,1.3,1.8),flowers:sg(t,4,5),grass:sg(t,6,7),labels:true},t));});
+
+/* Coprolito (caca fosilizada) con lupa que deja ver fitolitos de hierba · o:{zoom (0-1 la lupa se abre), label} */
+NX.coprolite=(o={},lt)=>{const z=cl(o.zoom||0);let s=El(0,46,120,14,'rgba(20,18,18,.18)');
+  s+=P('M-120 40 Q-130 0 -96 -8 Q-110 -44 -60 -54 Q-58 -96 -10 -98 Q30 -104 46 -62 Q96 -64 100 -20 Q138 -6 124 40Z','fill:#8a6a48;'+OL(2.6));
+  for(let i=0;i<16;i++){const x=-100+hs(i*2.3)*210,y=30-hs(i*4.1)*110;if(y<-90+Math.abs(x)*.25)continue;s+=Ci(x,y,2+hs(i)*4,i%2?'#6f5234':'#a5845e');}
+  s+=P('M-80 -10 Q-20 -24 60 -14 M-60 -50 Q0 -64 40 -56',ST('#6f5234',2));
+  if(z>0){const R=96*EZ.back(z),cx=150,cy=-150;let m=Ci(0,0,R,'#efe6d2');
+    const ph=(x,y,r,k)=>G(x,y,1,r,k?P('M-14 -6 Q-20 0 -14 6 Q-6 10 0 4 Q6 10 14 6 Q20 0 14 -6 Q6 -10 0 -4 Q-6 -10 -14 -6Z','fill:#9bd28a;'+OL(1.4,'#2b7a3e')):P('M-6 -14 L6 -14 L10 0 L6 14 L-6 14 L-10 0Z','fill:#bfe6b0;'+OL(1.4,'#2b7a3e')));
+    for(let i=0;i<9;i++)m+=ph(-60+hs(i*3.3)*120,-60+hs(i*6.1)*120,hs(i*2)*180,i%3);
+    s+=P(`M60 -60 L${f1(cx-R*.7)} ${f1(cy+R*.7)}`,ST(K.ink,3,`opacity:${f2(z)}`))+G(cx,cy,1,0,clipG(m,Ci(0,0,R,'#000'))+Ci(0,0,R,'none',ST(K.ink,6))+Ci(0,0,R+5,'none',ST('#fff',2)));
+    if(o.label)s+=G(cx,cy+R+26,1,0,pill(o.label,{sz:13,w:800,fill:K.green}),cl((z-.6)*3));}
+  return G(0,0,EZ.back(sg(lt,0,.4)),0,s);};
+n2cat('coprolite · Coprolito (caca fosilizada) con lupa y fitolitos de hierba',lt=>{const t=lt%6;return G(-60,260,1,0,NX.coprolite({zoom:sg(t,1.5,2.4),label:'restos de hierba'},t));});
+
+/* Almeja rudista fósil (Torreites, forma de vaso) con anillos de crecimiento diarios · o:{rings (0-1 se marcan y se cuentan), n (número del contador), lid} · base y=0, alto ~300 */
+NX.rudist=(o={},lt)=>{const rg=cl(o.rings||0);let s=El(0,6,90,12,'rgba(20,18,18,.16)');
+  s+=P('M-30 0 Q-70 -120 -96 -270 L96 -270 Q70 -120 30 0Z','fill:#d9c7a4;'+OL(2.6));
+  const N=24;for(let i=0;i<N;i++){const y=-14-i*10.6,hw=30+(66*(i/N))**1.0+((-y)/270)*0;const w=30+66*((-y)/270)**.85;const on=sg(rg,i/N,(i+1)/N);
+    s+=P(`M${f1(-w)} ${f1(y)} Q0 ${f1(y+5)} ${f1(w)} ${f1(y)}`,ST(on>0?mixc('#a88d62',K.pink,on):'#a88d62',on>0?2.6:1.6));}
+  s+=El(0,-270,96,18,'#c9b38a',OL(2.4))+El(0,-272,80,12,'#b59c72');
+  if(o.lid!==false)s+=G(0,-284+_osc(lt,.4,2),1,_osc(lt,.3,3),El(0,0,100,16,'#e7d8b8',OL(2.4))+El(0,-6,60,8,'#d9c7a4',OL(1.6)));
+  if(o.n){const v=Math.round((o.n)*EZ.out(rg));s+=G(150,-150,1,0,Rc(-62,-34,124,68,'#fff',14,OL(2.4))+Tn(0,12,String(v),34,800,{fill:K.pink}),cl(rg*4));}
+  if(o.label)s+=G(0,40,1,0,pill(o.label,{sz:14,w:800}),cl((lt-.4)*3));
+  return G(0,0,EZ.back(sg(lt,0,.4)),0,s);};
+n2cat('rudist · Almeja rudista fósil con anillos diarios que se cuentan',lt=>{const t=lt%6;return G(-40,330,.9,0,NX.rudist({rings:sg(t,1,4),n:372,label:'Torreites · 70 Ma'},t));});
+
+/* Reloj de un día de 24 h al que le falta media hora · o:{h (horas del día, p.ej. 23.5), at (s en que se encoge), label} */
+NX.daydial=(o={},lt)=>{const H=o.h??23.5,q=EZ.io(sg(lt,o.at??.6,(o.at??.6)+1.2)),h=lerp(24,H,q),R=120,fr=h/24;let s=Ci(0,0,R+14,'#fff',OL(3));
+  for(let i=0;i<24;i++){const a=i/24*Math.PI*2;s+=P(`M${f1(Math.sin(a)*(R-4))} ${f1(-Math.cos(a)*(R-4))} L${f1(Math.sin(a)*(R+8))} ${f1(-Math.cos(a)*(R+8))}`,ST(K.ink,i%6?2:4));}
+  const arc=(a0,a1,col,w)=>{const x0=Math.sin(a0)*R*.78,y0=-Math.cos(a0)*R*.78,x1=Math.sin(a1)*R*.78,y1=-Math.cos(a1)*R*.78;return P(`M${f1(x0)} ${f1(y0)} A${f1(R*.78)} ${f1(R*.78)} 0 ${a1-a0>Math.PI?1:0} 1 ${f1(x1)} ${f1(y1)}`,ST(col,w));};
+  s+=arc(0,fr*Math.PI*2-.001,'url(#gRP)',22);
+  if(q>0)s+=G(0,0,1,0,arc(fr*Math.PI*2+.03,Math.PI*2-.03,K.red,22),.35+.5*Math.abs(Math.sin(lt*4)));
+  const a=lt*.8;s+=P(`M0 0 L${f1(Math.sin(a)*R*.62)} ${f1(-Math.cos(a)*R*.62)}`,ST(K.ink,5))+Ci(0,0,7,K.ink);
+  s+=Tn(0,-26,h.toFixed(1).replace('.',',').replace(',0','')+' h',34,800,{fill:K.ink});
+  if(q>.6)s+=G(R*.55,-R*1.05,EZ.back(sg(q,.6,1)),0,pill('−30 min',{sz:15,w:800,fill:K.red}));
+  if(o.label)s+=G(0,R+46,1,0,pill(o.label,{sz:15,w:800}),cl((lt-.4)*3));
+  return G(0,0,EZ.back(sg(lt,0,.4)),0,s);};
+n2cat('daydial · Reloj de un día de 24 h que se queda en 23,5 h',lt=>G(0,0,1,0,NX.daydial({h:23.5,label:'un día hace 70 Ma'},lt%5)));
+
+/* La Luna se aleja y las mareas frenan la Tierra · o:{away (0-1 la Luna se aleja), brake (0-1 flechas de freno), rate (texto)} · centro de la Tierra en (−120,0) */
+NX.moonaway=(o={},lt)=>{const aw=cl(o.away||0),br=cl(o.brake||0);let s='';
+  for(let i=0;i<20;i++)s+=Ci(-250+hs(i*3.7)*500,-200+hs(i*1.9)*400,1.4,'#fff',`opacity:${f2(.4+.4*Math.sin(lt*2+i))}`);
+  const ex=-140,mx=lerp(80,165,EZ.io(aw));
+  s+=G(ex,0,1,0,El(0,0,96,84,'rgba(80,150,255,.45)')+Ci(0,0,78,'#2a37d7',OL(2.6))+G(0,0,1,lt*20,P('M-50 -30 Q-20 -60 10 -40 Q30 -10 0 10 Q-30 20 -50 -30Z M20 30 Q50 20 54 44 Q30 60 20 30Z','fill:#3f9b4f'))+Ci(0,0,78,'none',ST('#fff',2,'opacity:.3')));
+  if(br>0)s+=G(ex,0,1,0,P('M-100 -60 A116 116 0 0 1 -30 -110',ST(K.red,7))+P('M-30 -110 l-16 -6 l4 16Z',`fill:${K.red}`)+G(0,-140,1,0,pill('se frena',{sz:13,w:800,fill:K.red})),br);
+  s+=G(mx,0,1,0,Ci(0,0,26,'#e8e2d4',OL(2.4))+Ci(-8,-6,5,'#c9c0ad')+Ci(8,8,4,'#c9c0ad'));
+  if(aw>0){s+=P(`M${f1(mx-60)} 54 L${f1(mx+40)} 54 M${f1(mx+26)} 42 L${f1(mx+42)} 54 L${f1(mx+26)} 66`,ST('#fff',4,`opacity:${f2(cl(aw*4))}`));if(o.rate)s+=G(mx,96,1,0,pill(o.rate,{sz:14,w:800,fill:'url(#gRP)'}),cl(aw*3-.4));}
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('moonaway · La Luna se aleja (≈3,8 cm/año) y las mareas frenan la Tierra',lt=>G(0,0,1,0,NX.moonaway({away:sg(lt%6,2,5),brake:sg(lt%6,.6,1.2),rate:'+3,8 cm/año'},lt%6)));
+
+/* Bosque lluvioso cerca del polo sur (Cretácico): coníferas y helechos arborescentes bajo la lluvia, cartel POLO SUR, noche polar opcional · o:{night (0-1), rain (0-1), pole (0-1 cartel), dist (texto)} · suelo y=0 */
+NX.polarforest=(o={},lt)=>{const nt=cl(o.night||0),rn=cl(o.rain??1);let s='';
+  s+=Rc(-300,-1100,600,1100,mixc('#a9c4c9','#141b33',nt))+G(0,0,1,0,humpS(420,140,{lit:mixc('#5f8f7a','#1e2a3a',nt),dark:mixc('#4a7563','#151d2b',nt)}),1);
+  const tree=(x,h,k)=>G(x,0,k,_osc(lt,.3,1.2,x),P(`M0 0 L0 ${-h}`,ST('#4a3220',10))+[...Array(5)].map((_,i)=>P(`M-${50-i*8} ${-h*.35-i*h*.13} L0 ${-h*.5-i*h*.13} L${50-i*8} ${-h*.35-i*h*.13}Z`,`fill:${mixc(i%2?'#1f5a33':'#27703f','#0e1a18',nt*.7)};${OL(1.6)}`)).join(''));
+  const tfern=(x,h)=>G(x,0,1,0,P(`M0 0 Q4 ${-h*.5} 0 ${-h}`,ST('#5b3a20',9))+[-70,-40,-12,15,45,72].map((a,i)=>G(0,-h,1,a+_osc(lt,.5,3,i),fernS(80,mixc('#3f9b4f','#13261c',nt*.7)))).join(''));
+  s+=tree(-210,260,1)+tree(-120,210,.9)+tfern(-30,150)+tree(60,240,1)+tfern(150,130)+tree(230,280,1);
+  s+=G(0,0,1,0,NX.prehflora({con:0,cyc:1,fern:1,gink:0},lt),1);
+  if(rn>0)for(let i=0;i<40;i++){const x=-280+hs(i*3.3)*560,y=((lt*420+hs(i*7.1)*1000)%1000)-1000;s+=P(`M${f1(x)} ${f1(y)} l-5 16`,ST('#e6f0ff',2,`opacity:${f2(.55*rn)}`));}
+  if(nt>0)s+=G(o.moonX??180,o.moonY??-520,1,0,Ci(0,0,26,'#fff7d6')+Ci(10,-8,22,mixc('#a9c4c9','#141b33',nt)),nt)+[...Array(24)].map((_,i)=>Ci(-280+hs(i*2.1)*560,-1000+hs(i*5.7)*600,1.3,'#fff',`opacity:${f2(nt*(.5+.5*Math.sin(lt*3+i)))}`)).join('');
+  const pq=cl(o.pole||0);if(pq>0)s+=G(o.poleX??250,0,EZ.back(pq),0,P('M0 0 L0 -150',ST('#eee',6))+P('M0 -150 L0 -150',ST(K.ink,1))+Rc(-74,-150,74,36,K.red,4,OL(1.8))+Tn(-37,-127,'POLO SUR',11,800,{fill:'#fff'})+P('M-16 -114 L-74 -114',ST('#fff',0))+(o.dist?G(-90,-176,1,0,pill(o.dist,{sz:12,w:800,fill:K.ink})):''));
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('polarforest · Bosque lluvioso cerca del polo sur (Cretácico), con noche polar',lt=>{const t=lt%8;return G(0,330,.9,0,NX.polarforest({night:sg(t,4,5.5),rain:1-sg(t,4,5),pole:sg(t,1,1.6),dist:'<1.000 km'},t));});
+
+/* Línea del tiempo profunda: estegosaurio (150 Ma) · T. rex (68 Ma) · tú (hoy), con las dos distancias comparadas · o:{p (0-1 se dibuja), gapA (0-1), gapB (0-1), w} · eje en y=0 */
+NX.deeptime=(o={},lt)=>{const w=o.w||440,X=ma=>w/2-ma/150*w,p=EZ.io(cl(o.p??1)),ga=EZ.out(cl(o.gapA||0)),gb=EZ.out(cl(o.gapB||0));let s='';
+  s+=DR(`M${-w/2-10} 0 L${w/2+16} 0`,ST(K.ink,4),p)+(p>.95?P(`M${w/2+6} -9 L${w/2+20} 0 L${w/2+6} 9`,ST(K.ink,4)):'');
+  [[150,'150 Ma'],[68,'68 Ma'],[0,'hoy']].forEach(([m,t],i)=>{const q=sg(p,i/3,i/3+.3);if(q>0)s+=G(X(m),0,EZ.back(q),0,Ci(0,0,9,'#fff',OL(3))+Tn(0,34,t,15,800,{fill:'#333'}));});
+  if(p>.2)s+=G(X(150),-14,.17,0,NX.stego({fossil:o.fossil||0},lt+2),cl(p*4-.8));
+  if(p>.5)s+=G(X(68)-6,-14,.2,0,trexS({T:lt}),cl(p*4-2));
+  if(p>.85)s+=G(X(0),-14,.55,0,blobS({T:lt,c:K.blue,ph:2}),cl(p*6-5));
+  const brk=(a,b,y,col,txt,q)=>{if(q<=0)return '';const x0=X(a),x1=lerp(X(a),X(b),q);return P(`M${f1(x0)} ${y-10} L${f1(x0)} ${y} L${f1(x1)} ${y} L${f1(x1)} ${y-10}`,ST(col,4))+(q>.9?G((x0+x1)/2,y+(y>0?30:-26),1,0,pill(txt,{sz:14,w:800,fill:col})):'');};
+  s+=brk(150,68,70,K.red,o.ta||'82 millones de años',ga)+brk(68,0,130,K.blue,o.tb||'68 millones de años',gb);
+  return s;};
+n2cat('deeptime · Línea del tiempo: estegosaurio, T. rex y tú (distancias comparadas)',lt=>{const t=lt%7;return G(0,40,1,0,NX.deeptime({p:sg(t,.2,2),gapA:sg(t,2.5,3.4),gapB:sg(t,3.8,4.6)},t));});
+
 NX_CATALOG.push(..._N2);
