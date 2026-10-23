@@ -151,3 +151,6 @@
 - Vigilar: posibles nuevos casos en Nigeria (secuenciación genómica, origen del contagio) → vídeo de actualización.
 - 19:46 · Diario de hoy recuperado: «El pulpo: tres corazones y sangre azul» (1:22), revisado fotograma a fotograma (se corrigieron tres huecos vacíos: tubos de sangre, escena del cobre y gráfico de neuronas), publicado ya (post 6ada4be39a8a68d3cd71d287, shareNow, sin etiqueta de IA). Tema quitado de temas.json.
 - Nota técnica: `renderp.py K N a b` reparte los fotogramas del tramo entre N procesos; para re-renderizar un tramo completo hay que lanzar todos los K (0..N-1) con el mismo tramo, o usar `0 1`.
+
+## 2026-10-23 08:15 · Tarea de noticias + recuperación del diario (revisión de las 8:00)
+- **Diario de hoy EN PRODUCCIÓN por esta tarea** (leyendas: guion y voz ya hechos anoche, faltaba vídeo y post). Otras tareas: no repetirlo.
