@@ -221,3 +221,8 @@
 - Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (AP/PBS, Infobae, El Comercio, The Star/Citizen, Manila Times/CGTN).
 - **Sin noticias que cumplan los criterios.** EE. UU. reduce personal en 4 embajadas de Oriente Medio (Jordania, Líbano, Catar, EAU) por amenazas (AP): medida diplomática, embajadas abiertas → impacto limitado, vigilar escalada. Protestas en Francia: sin víctimas mortales ni balance nuevo confirmado → vigilar. Derrumbe de Eastleigh (Nairobi): sin muertos confirmados → vigilar. Terremoto del Tíbet: sin cambios (16 muertos).
 - Diario de hoy: publicado (mundo de los dinosaurios, enviado 18:33, post 6adbf212e4be8a4d862ecd23, https://tiktok.com/@mentes.curiosas.tvs/video/7700272839626181920, isAiGenerated=false) → nada que recuperar.
+
+## 2026-10-24 22:10 · Tarea de noticias (revisión de las 22:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con el archivo de Euronews del 24/10, el boletín de tarde de Euronews ES (18:00) y búsqueda web (People Daily, IBTimes, Manila Times, PBS).
+- **Sin noticias que cumplan los criterios.** Boletín de tarde: Trappes (ya descartado), desalojos en Hebrón, ataque ucraniano a una fábrica rusa (3 muertos, conflicto en curso), incendio del Nido del Águila (1 detenido, sin víctimas), marchas en Milán/Madrid. Derrumbe de Eastleigh (Nairobi): 67 trabajadores localizados, 7 desaparecidos, sin muertos confirmados → vigilar. Tíbet sin cambios (16 muertos).
+- Diario de hoy: ya publicado (18:33, post 6adbf212e4be8a4d862ecd23) y además son más de las 21:00 → nada que recuperar.
