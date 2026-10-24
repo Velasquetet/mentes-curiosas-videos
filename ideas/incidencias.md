@@ -201,3 +201,8 @@
 - Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (Euronews, Infobae, Al Jazeera, The Star, Eastleigh Voice).
 - **Sin noticias que cumplan los criterios.** Protestas por el coste de la vida en Europa: sin novedades de balance (nuevas marchas convocadas hoy en Francia, Portugal, Albania, Italia, España) → seguir vigilando. Derrumbe de Eastleigh (Nairobi): rescate en curso, 11 desaparecidos según el ministro del Interior, sin muertos confirmados → vigilar.
 - Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
+
+## 2026-10-24 14:15 · Tarea de noticias (revisión de las 14:00)
+- Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (Euronews, Watchers/USGS/PTWC, Eastleigh Voice, Xinhua).
+- **Sin noticias que cumplan los criterios.** Terremotos M6,9 y M6,3 frente al norte de Vanuatu (02:31 UTC): alerta de tsunami cancelada, sin daños ni víctimas (PAGER verde) → bajo impacto. Derrumbe de Eastleigh (Nairobi): sin muertos confirmados, cifras de desaparecidos dispares (Cruz Roja 31, gobernador 7) → vigilar. Protestas en Europa (Francia, Madrid…): en curso, sin balance → vigilar. Tormenta Austen: heridos en Bélgica, sin muertos confirmados.
+- Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
