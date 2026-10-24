@@ -206,3 +206,8 @@
 - Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (Euronews, Watchers/USGS/PTWC, Eastleigh Voice, Xinhua).
 - **Sin noticias que cumplan los criterios.** Terremotos M6,9 y M6,3 frente al norte de Vanuatu (02:31 UTC): alerta de tsunami cancelada, sin daños ni víctimas (PAGER verde) → bajo impacto. Derrumbe de Eastleigh (Nairobi): sin muertos confirmados, cifras de desaparecidos dispares (Cruz Roja 31, gobernador 7) → vigilar. Protestas en Europa (Francia, Madrid…): en curso, sin balance → vigilar. Tormenta Austen: heridos en Bélgica, sin muertos confirmados.
 - Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
+
+## 2026-10-24 16:15 · Tarea de noticias (revisión de las 16:00)
+- Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (Euronews ES/EN directo de protestas, SBS, Infobae/EFE, Manila Times).
+- **Sin noticias que cumplan los criterios.** Protestas en Francia (70.000 policías, Louvre cerrado, ~135 detenidos según Euronews): sin víctimas ni balance excepcional a las 15:35 → vigilar. Derrumbe de Eastleigh (Nairobi): sin muertos confirmados → vigilar. Terremoto del Tíbet: balance sin cambios (16 muertos). Tifón Champi (Corea/Jeju): solo avisos de lluvia.
+- Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
