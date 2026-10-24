@@ -211,3 +211,8 @@
 - Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (Euronews ES/EN directo de protestas, SBS, Infobae/EFE, Manila Times).
 - **Sin noticias que cumplan los criterios.** Protestas en Francia (70.000 policías, Louvre cerrado, ~135 detenidos según Euronews): sin víctimas ni balance excepcional a las 15:35 → vigilar. Derrumbe de Eastleigh (Nairobi): sin muertos confirmados → vigilar. Terremoto del Tíbet: balance sin cambios (16 muertos). Tifón Champi (Corea/Jeju): solo avisos de lluvia.
 - Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
+
+## 2026-10-24 18:15 · Tarea de noticias (revisión de las 18:00)
+- Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con el boletín de mediodía de Euronews ES, Euronews «Just in», The Star / Nation / Eastleigh Voice (Kenia), France 24 y CNN (titulares).
+- **Sin noticias que cumplan los criterios.** Derrumbe de Eastleigh (Nairobi): 2 supervivientes rescatados, el ejército (KDF) toma el rescate, búsqueda del propietario; sin muertos confirmados y desaparecidos dispares (7-31) → vigilar. Protestas en Francia: ~110.000 en París según la policía, «tranquila» con choques y cañones de agua en otras ciudades, sin víctimas → vigilar. Choque en el aire de dos aviones militares en Filipinas (4 pilotos muertos): impacto limitado. Drones ucranianos contra centros de datos rusos: conflicto en curso.
+- Diario de hoy: ya programado (18:30, post 6adbf212e4be8a4d862ecd23, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
