@@ -1878,4 +1878,158 @@ NX.hosepile=(o={},lt)=>{const on=cl(o.on||0),pu=EZ.out(cl(o.push||0));let s=P('M
   return s;};
 n2cat('hosepile · Manguera que empuja un montón de tierra (y brotan plantas)',lt=>{const t=lt%5;return G(0,100,1,0,NX.hosepile({on:sg(t,.2,1),push:sg(t,1,2.5)},lt));});
 
+
+/* ===== Diario del ajolote (26/10/2026) ===== */
+/* Ajolote de perfil (mira a la derecha), patas en y=0 · o:{c (piel; por defecto rosa leucístico), cd (branquias), wild (manchas del ajolote salvaje), leg (0..1 longitud de la pata delantera cercana: 0 = cortada), glow (0..1 brillo de tejido nuevo en la pata), xray (0..1: médula, corazón y cerebro iluminados), beat, swim (0..1 ondula), emo ('ok'|'wow'|'sad')} */
+NX.axolotl=(o={},lt)=>{const T=lt,c=o.c||'#f7b3c6',cd=o.cd||'#e2457a',lg=cl(o.leg??1),xr=cl(o.xray||0),sw=o.swim||0;let s='';
+  const wig=Math.sin(T*(3+sw*5))*(6+sw*10);
+  /* patas del fondo */
+  const leg=(x,ph,far,len=1)=>{if(len<=0.02)return '';const a=Math.sin(T*(sw?8:1.2)+ph)*(sw?18:3);const L=44*len;
+    let g=P(`M0 0 L${f1(8*len)} ${f1(L)}`,ST(K.ink,17))+P(`M0 0 L${f1(8*len)} ${f1(L)}`,ST(far?'#d88aa0':c,12.5));
+    if(len>.85)g+=G(8*len,L,1,0,[-12,-4,4,12].map(d=>P(`M0 0 L${d} 9`,ST(K.ink,6.5))+P(`M0 0 L${d} 9`,ST(far?'#d88aa0':c,3.8))).join(''));
+    return G(x,-30,1,a,g);};
+  s+=leg(78,1.2,1)+leg(-48,2.4,1);
+  /* cola con aleta */
+  const tail=`M-80 -58 C-130 ${f1(-70+wig*.3)} -170 ${f1(-62+wig*.8)} -228 ${f1(-46+wig)} C-170 ${f1(-26+wig*.8)} -130 ${f1(-14+wig*.3)} -80 -20Z`;
+  s+=P(tail,`fill:${c};${OL(2.6)}`)+P(`M-90 -40 C-140 ${f1(-40+wig*.4)} -180 ${f1(-40+wig*.8)} -222 ${f1(-46+wig)}`,ST('#ffffff',2,'opacity:.45'));
+  /* cuerpo */
+  s+=El(0,-40,98,30,c,OL(2.6))+El(10,-28,80,12,'#ffffff','opacity:.22');
+  if(o.wild){s=s.replace(new RegExp(c,'g'),c);for(let k=0;k<14;k++)s+=Ci(-80+hs(k*3.3)*170,-58+hs(k*5.1)*30,2.5+hs(k)*3,'#2f3326','opacity:.6');}
+  /* rayos X: médula, corazón, cerebro */
+  if(xr>0){let w=P('M-200 -44 C-140 -48 -60 -50 20 -52 C70 -54 100 -58 118 -64',ST('#ffffff',5,'stroke-dasharray:2 7'))+P('M-200 -44 C-140 -48 -60 -50 20 -52 C70 -54 100 -58 118 -64',ST('#7fd3ff',2.4,`opacity:${f2(.6+.4*Math.sin(T*6))}`));
+    const hb=(o.beat??1)?1+.16*Math.max(0,Math.sin(T*8)):1;
+    w+=G(66,-30,hb*.9,0,P('M0 8 C-14 -2 -20 -14 -10 -20 C-4 -24 0 -18 0 -14 C0 -18 4 -24 10 -20 C20 -14 14 -2 0 8Z',`fill:#ff2e63;${OL(1.8)}`));
+    w+=G(118,-66,1,0,El(0,0,17,12,'#c58cff',OL(1.8))+P('M-10 -2 q5 -6 10 0 t10 0 M-8 5 q6 -4 12 0',ST('#7a3fc0',1.6)));
+    var XRAY=G(0,0,1,0,w,xr);}
+  /* pata delantera cercana (la que se pierde y vuelve a crecer) */
+  if(lg<1){s+=G(62,-24,1,0,El(0,0,11,8,'#ff9db8',OL(2.2)));}
+  s+=leg(62,0,0,lg);
+  if(o.glow&&lg>0)s+=G(62,-30,1,0,Ci(5*lg,40*lg,14+6*Math.sin(T*6),'#fff5a0',`opacity:${f2(cl(o.glow)*.55)}`));
+  s+=leg(-62,3.1,0);
+  /* cabeza */
+  let h=El(0,0,54,40,c,OL(2.6))+El(-6,16,40,14,'#ffffff','opacity:.2');
+  /* branquias: 3 tallos plumosos */
+  const gills=(sx,dark)=>{let g='';[[-152,50],[-124,58],[-96,50]].forEach(([a,L],i)=>{const aa=(a+Math.sin(T*2.2+i)*6)*Math.PI/180,x2=Math.cos(aa)*L,y2=Math.sin(aa)*L;
+      const st=`M0 0 Q${f1(x2*.5+4)} ${f1(y2*.5-4)} ${f1(x2)} ${f1(y2)}`;g+=P(st,ST(K.ink,8))+P(st,ST(dark?'#c23a69':cd,5));
+      for(let k=2;k<10;k++){const u=k/10,px=x2*u,py=y2*u,nx=-y2/L*11,ny=x2/L*11;g+=P(`M${f1(px)} ${f1(py)} l${f1(nx)} ${f1(ny)} M${f1(px)} ${f1(py)} l${f1(-nx)} ${f1(-ny)}`,ST(dark?'#c23a69':cd,2.6));}});
+    return G(sx,-14,1,0,g);};
+  h=gills(-22,1)+h+gills(-30,0);
+  const em=o.emo||'ok',eb=em==='wow'?1.4:1;
+  h+=Ci(22,-14,5.5*eb,K.ink)+Ci(23.5,-15.5,1.8,'#fff');
+  h+=em==='sad'?P('M14 16 Q34 8 50 14',ST(K.ink,2.6)):P('M8 10 Q30 26 52 6',ST(K.ink,2.6));
+  h+=Ci(40,8,5,'#ff8fb0','opacity:.5');
+  s+=G(112,-46,1,Math.sin(T*1.6)*2,h);
+  if(xr>0)s+=XRAY;
+  return s;};
+n2cat('axolotl · Ajolote (pierde una pata y le vuelve a crecer; rayos X con médula, corazón y cerebro)',lt=>{const t=lt%8;return G(20,120,1.1,0,NX.axolotl({leg:t<1?1:t<2?0:sg(t,2.5,5),glow:t>2&&t<5.5?1:0,xray:t>6?1:0,emo:t>5&&t<6?'wow':'ok'},lt));});
+n2cat('axolotl (salvaje) · Ajolote oscuro con manchas, nadando',lt=>G(20,120,1.1,0,NX.axolotl({c:'#6b6f55',cd:'#8a4a5a',wild:1,swim:1},lt)));
+
+/* Primer plano de la regeneración de una pata: piel que tapa la herida, blastema y tejidos que se reconstruyen · o:{skin (0..1), bud (0..1 blastema), grow (0..1 la pata crece), layers (0..1 hueso/músculo/nervio/piel), seam (0..1: la costura se ve; 1 = visible, 0 = desaparecida), labels} */
+NX.blastema=(o={},lt)=>{const sk=cl(o.skin||0),bd=cl(o.bud||0),gr=cl(o.grow||0),ly=cl(o.layers||0),T=lt;let s='';
+  const c='#f7b3c6',X0=-220,cut=-40,len=lerp(0,230,EZ.io(gr)),tip=cut+len;
+  /* cuerpo del ajolote (a la izquierda) con su brillo y manchitas */
+  s+=El(-330,-30,150,120,c,OL(2.8))+El(-340,-70,90,30,'#ffffff','opacity:.22');
+  for(let k=0;k<6;k++)s+=Ci(-380+hs(k*3)*120,-90+hs(k*5)*110,3+hs(k)*3,'#e48aa6','opacity:.6');
+  /* brazo hasta el corte (se estrecha) */
+  const arm=`M${X0-40} -62 Q${X0+40} -54 ${cut} -40 L${cut} 40 Q${X0+40} 54 ${X0-40} 66Z`;
+  s+=P(arm,`fill:${c};${OL(2.6)}`)+P(`M${X0-30} -40 Q${X0+50} -36 ${cut} -26`,ST('#ffffff',5,'opacity:.3'));
+  /* parte nueva que crece, con su mano de 4 dedos */
+  if(gr>0){const hw=lerp(40,30,gr);s+=P(`M${cut} -40 L${f1(tip-20*gr)} ${f1(-hw)} Q${f1(tip+12)} ${f1(-hw)} ${f1(tip+12)} 0 Q${f1(tip+12)} ${f1(hw)} ${f1(tip-20*gr)} ${f1(hw)} L${cut} 40Z`,`fill:${c};${OL(2.6)}`);
+    if(gr>.75){const q=sg(gr,.75,1);[-24,-8,8,24].forEach((d,i)=>{s+=G(tip+6,d*.9,1,d*1.1,Rc(0,-8,36*q,16,c,8,OL(2.4)));});}}
+  /* capas internas */
+  if(ly>0){const xe=Math.max(cut,tip-20);const lay=(y,col,w)=>P(`M${X0+10} ${y} L${f1(xe)} ${y}`,ST(col,w,`opacity:${f2(ly)}`));
+    s+=lay(0,'#fff7e6',14)+lay(0,'#d9cbb0',3)+lay(-22,'#e2455a',7)+lay(22,'#e2455a',7)+lay(-11,'#f6c344',3)+lay(11,'#f6c344',3);}
+  /* blastema: bultito de células */
+  if(bd>0&&gr<1){const R=lerp(12,50,EZ.out(bd))*(1-gr);for(let i=0;i<26;i++){const a=hs(i*2.7)*Math.PI-Math.PI/2,r=R*Math.sqrt(hs(i*5.3)),x=tip+Math.cos(a)*r*.9+4,y=Math.sin(a)*r*1.0;
+      s+=Ci(x,y,(6.5+1.8*Math.sin(T*5+i))*(1-gr*.6),i%3?'#ffd1de':'#fff1a8',OL(1.3,'#c2557a'));}}
+  /* herida y piel que la tapa */
+  if(gr<.05){const r=lerp(0,40,EZ.out(sk));s+=P(`M${cut} -40 Q${f1(cut+r*.9)} 0 ${cut} 40`,`fill:${sk>0?'#ffc6d6':'none'};${OL(2.4)}`);if(sk<.3)s+=P(`M${cut} -40 L${cut} 40`,ST('#c2283c',6,`opacity:${f2(1-sk/.3)}`));}
+  /* costura entre lo viejo y lo nuevo */
+  const sm=o.seam??1;if(gr>0&&sm>0)s+=P(`M${cut} -40 L${cut} 40`,ST('#b03060',3,`stroke-dasharray:6 6;opacity:${f2(sm)}`));
+  return s;};
+n2cat('blastema · Regeneración de cerca: piel, blastema y la pata que vuelve a crecer sin costura',lt=>{const t=lt%8;return G(20,120,1,0,NX.blastema({skin:sg(t,.2,1),bud:sg(t,1,2.2),grow:sg(t,2.6,5),layers:sg(t,3.5,4.5),seam:1-sg(t,5.5,6.5)},lt));});
+
+/* Reloj biológico sobre una doble hélice de ADN: las agujas giran y se paran · o:{stop (instante en que se para), speed, label, h} */
+NX.epiclock=(o={},lt)=>{const st=o.stop??2,sp=o.speed||1,H=o.h||300,T=lt;let s='';
+  /* hélice */
+  for(let i=0;i<=24;i++){const y=-H/2+i*H/24,a=i*.55+T*.6,x1=Math.cos(a)*70,x2=-x1,z=Math.sin(a);
+    s+=P(`M${f1(x1)} ${f1(y)} L${f1(x2)} ${f1(y)}`,ST(i%2?'#7fd3ff':'#ffd27a',4,'opacity:.8'));
+    s+=Ci(x1,y,6,z>0?K.pink:'#b8406b',OL(1.4))+Ci(x2,y,6,z>0?'#b8406b':K.pink,OL(1.4));}
+  /* reloj */
+  const ang=lt<st?lt*sp*360:st*sp*360+Math.sin((lt-st)*20)*6*Math.exp(-(lt-st)*4);
+  let ck=Ci(0,0,78,'#fff',OL(3.4))+Ci(0,0,70,'none',ST('#ddd',2));
+  for(let k=0;k<12;k++){const a=k*Math.PI/6;ck+=P(`M${f1(Math.sin(a)*58)} ${f1(-Math.cos(a)*58)} L${f1(Math.sin(a)*66)} ${f1(-Math.cos(a)*66)}`,ST(K.ink,k%3?2:4));}
+  ck+=G(0,0,1,ang/12,P('M0 6 L0 -36',ST(K.ink,6)))+G(0,0,1,ang,P('M0 8 L0 -54',ST(lt<st?K.ink:K.red,3.4)))+Ci(0,0,6,K.ink);
+  if(lt>=st)ck+=G(0,100,1,0,pill(o.label||'se para',{sz:15,w:800,fill:K.red}),_ap(lt,st,.35));
+  s+=G(0,0,1,0,ck);
+  return s;};
+n2cat('epiclock · Reloj biológico del ADN que gira y se para',lt=>G(0,140,1,0,NX.epiclock({stop:2.5},lt%5)));
+
+/* Montones de libros para comparar genomas · o:{items:[[nombre, valor, color, instante]], unit (valor por libro), h (altura máx), label} */
+NX.genomestack=(o={},lt)=>{const it=o.items||[['humano',3,'#7a7a7a',0],['ajolote',32,K.pink,.8]],unit=o.unit||1,bh=11;let s=P('M-200 0 L200 0',ST(K.ink,2.6));
+  it.forEach(([n,v,col,a],i)=>{const x=-100+i*200,nb=Math.round(v/unit),q=sg(lt,a,a+1.4);let g='';
+    for(let k=0;k<nb;k++){if(k/nb>q)break;const w=86+hs(k*3+i)*14,dx=(hs(k*7+i)-.5)*8;g+=Rc(x-w/2+dx,-(k+1)*bh,w,bh-1,k%2?col:'#ffffff',2,OL(1.6))+Rc(x-w/2+dx+6,-(k+1)*bh+3,4,bh-7,k%2?'#ffffff':col,1,'opacity:.8');}
+    s+=g;const top=-Math.min(nb,Math.ceil(q*nb))*bh;
+    if(q>0)s+=G(x,top-34,1,0,Rc(-58,-18,116,36,'#fff',10,OL(2.2))+Tn(0,7,String(Math.round(v*1000*Math.min(1,q/.98))).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' M',17,800,{fill:col==='#7a7a7a'?K.ink:col}));
+    s+=G(x,26,1,0,pill(n,{sz:14,w:800,fill:col==='#7a7a7a'?K.ink:col}));});
+  return s;};
+n2cat('genomestack · Montones de libros: genoma humano (3.000 M) frente al del ajolote (32.000 M)',lt=>G(0,300,.75,0,NX.genomestack({},lt%5)));
+
+/* Un kilómetro cuadrado de canal visto desde arriba, lleno de ajolotes diminutos que van desapareciendo · o:{n0 (iniciales), n (final), at (instante en que empieza a vaciarse), dur, label} */
+NX.axodensity=(o={},lt)=>{const n0=o.n0||220,nf=o.n??3,at=o.at??1,du=o.dur||2,W=360,T=lt;let s='';
+  s+=Rc(-W/2,-W/2,W,W,'#3f7f8f',8,OL(3))+Rc(-W/2,-W/2,W,W,'url(#gWA)',8,'opacity:.35');
+  for(let r=0;r<5;r++){const yy=-W/2+40+r*70;s+=P(`M${-W/2+20} ${yy} q20 -6 40 0 t40 0 M${-W/2+200} ${yy+30} q20 -6 40 0 t40 0`,ST('#fff',2,'opacity:.3'));}
+  const q=EZ.io(sg(lt,at,at+du)),keep=Math.round(lerp(n0,nf,q));
+  for(let i=0;i<n0;i++){const rank=hs(i*9.7);const alive=i<nf||rank<(keep-nf)/(n0-nf);if(!alive&&i>=nf)continue;
+    const x=-W/2+14+hs(i*3.1)*(W-28),y=-W/2+14+hs(i*4.7)*(W-28),a=hs(i*2.2)*360+Math.sin(T*2+i)*8;
+    s+=G(x,y,i<nf?1.25:.8,a,El(0,0,9,3.6,'#f7b3c6',OL(1,'#9a4060'))+Ci(8,0,3.6,'#f7b3c6',OL(1,'#9a4060'))+P('M6 -3 l-3 -4 M6 3 l-3 4',ST('#e2457a',1.4)));}
+  s+=G(0,W/2+28,1,0,Tn(0,0,o.label||'1 km²',16,800,{fill:K.ink}));
+  return s;};
+n2cat('axodensity · 1 km² de canal con ajolotes que desaparecen (densidad de población)',lt=>G(0,60,1,0,NX.axodensity({at:1,dur:2.5},lt%6)));
+
+/* Canal de Xochimilco: chinampas con huertas y árboles, trajinera de colores y agua · o:{boat (0..1 avanza), dirty (0..1 agua turbia), fish (0..1 carpas/tilapias), name} */
+NX.xochicanal=(o={},lt)=>{const T=lt,dt=cl(o.dirty||0);let s='';
+  /* chinampas del fondo con ahuejotes */
+  s+=Rc(-280,-60,560,40,'#5d8f3a',0,OL(2))+Rc(-280,-26,560,8,'#7a5230');
+  for(let i=0;i<9;i++){const x=-260+i*65,h=110+hs(i*3)*40;s+=P(`M${x} -24 L${x} ${-24-h*.4}`,ST('#4a3420',4))+El(x,-24-h*.65,12,h*.38,'#2f7a3a',OL(1.6))+El(x-3,-24-h*.75,6,h*.22,'#4fae5a','opacity:.8');}
+  for(let i=0;i<7;i++){const x=-250+i*80;s+=Ci(x,-30,5,['#ff5a7a','#f6c344','#ffffff','#b07cff'][i%4],OL(1.2));}
+  /* agua */
+  const wc=dt?`rgb(${f1(lerp(70,110,dt))},${f1(lerp(140,120,dt))},${f1(lerp(170,80,dt))})`:'#4693aa';
+  s+=Rc(-280,-18,560,200,wc,0,'');
+  for(let r=0;r<5;r++){for(let i=0;i<6;i++){const x=((i*110+r*47+T*(10+r*4))%660)-330,y=-4+r*36;s+=P(`M${f1(x)} ${y} q10 -4 20 0 t20 0`,ST('#fff',2,`opacity:${f2(.45-r*.06)}`));}}
+  /* peces invasores */
+  if(o.fish){const fq=cl(o.fish);for(let i=0;i<4;i++){const x=((T*40+i*150)%640)-320,y=60+i*28;s+=G(x,y,fq*.9,0,El(0,0,24,10,i%2?'#d9883a':'#8a8f99',OL(1.6))+P('M-22 0 l-12 -9 l0 18Z',`fill:${i%2?'#d9883a':'#8a8f99'};${OL(1.4)}`)+Ci(14,-2,2,K.ink));}}
+  /* trajinera */
+  const bx=lerp(-170,130,EZ.io(cl(o.boat??.5)));let b='';
+  b+=P('M-120 0 L120 0 L104 30 L-104 30Z',`fill:#2a37d7;${OL(2.6)}`)+Rc(-104,6,208,8,'#f6c344');
+  b+=P('M-96 0 L-96 -60 M96 0 L96 -60',ST(K.ink,4))+P('M-108 -60 Q0 -96 108 -60 L108 -48 Q0 -84 -108 -48Z',`fill:#ff2e63;${OL(2.4)}`);
+  b+=Tn(0,-62,o.name||'Lupita',16,800,{fill:'#fff'});
+  for(let i=0;i<5;i++)b+=Ci(-80+i*40,-74+Math.abs(i-2)*6,6,['#f6c344','#7fd3ff','#ffffff','#7fd3ff','#f6c344'][i],OL(1.2));
+  s+=G(bx,70+Math.sin(T*2)*2,1,Math.sin(T*1.5)*1.2,b);
+  return s;};
+n2cat('xochicanal · Canal de Xochimilco con chinampas, ahuejotes y trajinera (agua turbia y peces invasores)',lt=>{const t=lt%8;return G(0,200,.9,0,NX.xochicanal({boat:sg(t,0,6),dirty:sg(t,4,6),fish:t>5?1:0},lt));});
+
+/* Xólotl estilo códice (figura con cabeza de perro y penacho) que salta al agua y sale un ajolote · o:{dive (0..1), splash} */
+NX.xolotl=(o={},lt)=>{const dv=cl(o.dive||0),T=lt;let s='';
+  /* agua */
+  s+=Rc(-200,40,400,140,'#4693aa',12,OL(2.6));
+  for(let i=0;i<4;i++)s+=P(`M${-170+i*90} 80 q12 -6 24 0 t24 0`,ST('#fff',2.4,'opacity:.6'));
+  const y=lerp(-90,120,EZ.in(sg(dv,.1,.6))),rot=lerp(0,150,EZ.io(sg(dv,0,.5))),vis=1-sg(dv,.45,.55);
+  if(vis>0){let f='';
+    /* cuerpo */
+    f+=Rc(-26,-10,52,70,'#e9b44c',10,OL(2.6))+Rc(-26,22,52,14,'#2a37d7',0,OL(1.6))+P('M-26 60 L-30 96 M26 60 L30 96',ST(K.ink,10))+P('M-26 60 L-30 96 M26 60 L30 96',ST('#c98a5a',7));
+    f+=P('M-26 4 L-56 34 M26 4 L56 -20',ST(K.ink,10))+P('M-26 4 L-56 34 M26 4 L56 -20',ST('#c98a5a',7));
+    /* cabeza de perro de perfil */
+    f+=P('M-24 -12 Q-30 -60 0 -66 Q22 -68 30 -50 L56 -42 Q60 -30 48 -26 L22 -22 Q14 -10 -6 -10Z',`fill:#8a6a55;${OL(2.6)}`);
+    f+=P('M-10 -62 L-18 -92 L4 -66Z',`fill:#8a6a55;${OL(2.2)}`)+Ci(16,-48,4,K.ink)+Ci(56,-38,4,K.ink)+P('M28 -30 Q38 -28 46 -28',ST(K.ink,2));
+    /* penacho */
+    [[-40,'#2fa36b'],[-20,'#f6c344'],[0,'#ff2e63'],[20,'#2fa36b']].forEach(([a,col],i)=>{f+=G(-14,-64,1,a-30,P('M0 0 Q-8 -30 0 -54 Q8 -30 0 0Z',`fill:${col};${OL(1.8)}`));});
+    s+=G(0,y,1,rot,f,vis);}
+  /* salpicadura */
+  const sp=sg(dv,.45,.8);if(sp>0&&sp<1)for(let i=0;i<9;i++){const a=-Math.PI*(.15+.7*i/8),r=20+sp*90;s+=Ci(Math.cos(a)*r,50+Math.sin(a)*r*.9+sp*sp*60,7*(1-sp),'#cfefff',OL(1.4,'#4693aa'));}
+  /* sale el ajolote */
+  const ax=sg(dv,.7,1);if(ax>0)s+=G(0,lerp(150,100,EZ.out(ax)),.45*EZ.back(ax),0,NX.axolotl({swim:1},T));
+  return s;};
+n2cat('xolotl · Xólotl (estilo códice, cabeza de perro) salta al agua y se convierte en ajolote',lt=>G(0,140,1,0,NX.xolotl({dive:sg(lt%6,.5,4)},lt)));
+
 NX_CATALOG.push(..._N2);

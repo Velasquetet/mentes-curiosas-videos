@@ -1,15 +1,35 @@
 {
- "actualizado": "2026-10-23",
+ "actualizado": "2026-10-25",
  "cola": [
-  {
-   "tema": "¿Por qué el ajolote no envejece y regenera partes del cuerpo?",
-   "fuente": "pendiente de contrastar",
-   "gancho": "Le cortas una pata… y le vuelve a crecer"
-  },
   {
    "tema": "¿Por qué los gatos ronronean?",
    "fuente": "pendiente de contrastar",
    "gancho": "Ni la ciencia lo tiene del todo claro"
+  },
+  {
+   "tema": "Las arañas saltadoras que amamantan a sus crías con «leche»",
+   "fuente": "https://www.smithsonianmag.com/smart-news/jumping-spiders-are-only-arachnids-known-milk-their-young-180970930/ (pendiente de contrastar)",
+   "gancho": "Esta araña da de mamar a sus crías"
+  },
+  {
+   "tema": "La reina del topo desnudo: cómo llega al trono y gobierna la colonia",
+   "fuente": "https://www.smithsonianmag.com/smart-news/national-zoos-naked-mole-rat-colony-finally-crowns-its-queen-180971083/ (pendiente de contrastar)",
+   "gancho": "Para ser reina, primero tiene que ganar una guerra"
+  },
+  {
+   "tema": "Una serpiente nueva para la ciencia… encontrada dentro del estómago de otra serpiente",
+   "fuente": "https://www.smithsonianmag.com/smart-news/new-snake-species-was-found-another-snakes-stomach-180971100/ (pendiente de contrastar)",
+   "gancho": "Descubrieron una especie nueva… dentro de otra"
+  },
+  {
+   "tema": "¿Por qué los gatos se han hecho más grandes desde que viven con nosotros (al revés que casi todos los animales domésticos)?",
+   "fuente": "https://www.smithsonianmag.com/smart-news/unlike-most-domesticated-species-cats-have-actually-grown-larger-over-time-180971029/ (pendiente de contrastar)",
+   "gancho": "Casi todos los animales domésticos encogieron. Los gatos, no"
+  },
+  {
+   "tema": "¿Por qué los loros son tan listos y viven tanto? Lo que dicen sus genes",
+   "fuente": "https://www.smithsonianmag.com/smart-news/parrot-genes-reveal-why-birds-are-so-clever-long-lived-180970983/ (pendiente de contrastar)",
+   "gancho": "Hay loros que viven más de 90 años"
   }
  ]
 }
