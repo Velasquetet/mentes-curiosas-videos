@@ -231,3 +231,8 @@
 - Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (temas del día de EFE Internacional 02:00 GMT vía Infobae, búsquedas de catástrofes).
 - **Sin noticias que cumplan los criterios.** Hoy: segunda vuelta en Brasil (Lula vs. Flávio Bolsonaro, cierre 20:00 GMT), legislativas en Serbia, presidenciales en Bulgaria → vigilar resultados por la noche. Cambio a horario de invierno.
 - Diario de hoy: no existía (la tarea nocturna dejó el guion y la voz, pero no el vídeo). Producido «Agujeros negros que crean estrellas» (1:50, 6 recursos nuevos en news2.js) y **programado para las 18:30** (post 6addb6678b3d437ddcf86b9c, isAiGenerated=false).
+
+## 2026-10-25 10:10 · Tarea de noticias (revisión de las 10:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con Euronews «Just in» (caché del 24/10), boletín de mañana de Euronews ES (25/10, sin transcripción), El Español (directo 29-N), Infobae/EFE, El Independiente, Al Jazeera/Fox Weather.
+- **Sin noticias que cumplan los criterios.** Disturbios en Barcelona (sábado tarde, protesta juvenil): ~128 detenidos según los Mossos, sin víctimas mortales, contexto de precampaña → impacto limitado, vigilar. Tifón Champi en Taiwán (23/10, 1 muerto, 500+ heridos): ya no es de última hora. Hoy: segunda vuelta en Brasil, Serbia, Bulgaria → vigilar resultados por la noche.
+- Diario de hoy: ya programado (18:30, post 6addb6678b3d437ddcf86b9c, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
