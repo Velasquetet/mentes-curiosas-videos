@@ -226,3 +226,8 @@
 - Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con el archivo de Euronews del 24/10, el boletín de tarde de Euronews ES (18:00) y búsqueda web (People Daily, IBTimes, Manila Times, PBS).
 - **Sin noticias que cumplan los criterios.** Boletín de tarde: Trappes (ya descartado), desalojos en Hebrón, ataque ucraniano a una fábrica rusa (3 muertos, conflicto en curso), incendio del Nido del Águila (1 detenido, sin víctimas), marchas en Milán/Madrid. Derrumbe de Eastleigh (Nairobi): 67 trabajadores localizados, 7 desaparecidos, sin muertos confirmados → vigilar. Tíbet sin cambios (16 muertos).
 - Diario de hoy: ya publicado (18:33, post 6adbf212e4be8a4d862ecd23) y además son más de las 21:00 → nada que recuperar.
+
+## 2026-10-25 09:00 · Tarea de noticias + recuperación del diario (revisión de las 08:00)
+- Lectura web de es.euronews.com sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (temas del día de EFE Internacional 02:00 GMT vía Infobae, búsquedas de catástrofes).
+- **Sin noticias que cumplan los criterios.** Hoy: segunda vuelta en Brasil (Lula vs. Flávio Bolsonaro, cierre 20:00 GMT), legislativas en Serbia, presidenciales en Bulgaria → vigilar resultados por la noche. Cambio a horario de invierno.
+- Diario de hoy: no existía (la tarea nocturna dejó el guion y la voz, pero no el vídeo). Producido «Agujeros negros que crean estrellas» (1:50, 6 recursos nuevos en news2.js) y **programado para las 18:30** (post 6addb6678b3d437ddcf86b9c, isAiGenerated=false).
