@@ -256,3 +256,8 @@
 - Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con Euronews «Just in» (25/10, hasta 16:52), Al Jazeera News y búsquedas de catástrofes.
 - **Sin noticias que cumplan los criterios.** Ataques rusos en Ucrania (4 muertos, 28 heridos): conflicto en curso. Desalojo de acampadas en Lisboa y Oporto, protestas en Francia/Italia: en curso, impacto limitado. Archidiócesis de Nueva York (acuerdo de 800 M$): impacto limitado y tema delicado. Terremoto de Panamá (Wikipedia) es del 9/10 → no es última hora. Brasil, Serbia, Bulgaria: resultados tras el cierre (Brasil 20:00 GMT) → vigilar en la revisión de las 22:00.
 - Diario de hoy: ya programado (18:30, post 6addb6678b3d437ddcf86b9c, verificado en Buffer: scheduled, isAiGenerated=false) → nada que recuperar.
+
+## 2026-10-25 20:10 · Tarea de noticias (revisión de las 20:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (boletines del 25/10, Al Jazeera News, búsquedas de catástrofes en español).
+- **Sin noticias que cumplan los criterios.** Nada nuevo respecto a las 18:00 (Hebrón, protestas en Francia, Irán-EE. UU., NY Archdiocese). Brasil, Serbia, Bulgaria: urnas aún abiertas o sin resultados → vigilar en la revisión de las 22:00.
+- Diario de hoy: publicado a las 18:32 (post 6addb6678b3d437ddcf86b9c, status sent) → registro actualizado a «publicado» con enlace.
