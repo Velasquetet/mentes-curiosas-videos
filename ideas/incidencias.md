@@ -261,3 +261,8 @@
 - Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (boletines del 25/10, Al Jazeera News, búsquedas de catástrofes en español).
 - **Sin noticias que cumplan los criterios.** Nada nuevo respecto a las 18:00 (Hebrón, protestas en Francia, Irán-EE. UU., NY Archdiocese). Brasil, Serbia, Bulgaria: urnas aún abiertas o sin resultados → vigilar en la revisión de las 22:00.
 - Diario de hoy: publicado a las 18:32 (post 6addb6678b3d437ddcf86b9c, status sent) → registro actualizado a «publicado» con enlace.
+
+## 2026-10-25 22:10 · Tarea de noticias (revisión de las 22:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (directos de Brasil en CNN, El Comercio, The Rio Times, Milenio; boletines del 25/10).
+- **Sin noticias que cumplan los criterios.** Brasil (Lula vs. Flávio Bolsonaro): votación prorrogada, recuento del TSE pausado con solo un 0,25 % escrutado (17:06 BRT); se reanuda después de las 19:00 de Brasilia (23:00 Madrid). Sin ganador → no se publica (cifras provisionales). Encuestas finales: empate técnico 51-49. Si mañana hay resultado oficial confirmado por 2+ medios, es candidata clara a noticia.
+- Diario de hoy: ya publicado a las 18:32 (post 6addb6678b3d437ddcf86b9c) → nada que recuperar (además, ya pasadas las 21:00).
