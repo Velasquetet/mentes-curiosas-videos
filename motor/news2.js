@@ -1797,4 +1797,85 @@ NX.deeptime=(o={},lt)=>{const w=o.w||440,X=ma=>w/2-ma/150*w,p=EZ.io(cl(o.p??1)),
   return s;};
 n2cat('deeptime · Línea del tiempo: estegosaurio, T. rex y tú (distancias comparadas)',lt=>{const t=lt%7;return G(0,40,1,0,NX.deeptime({p:sg(t,.2,2),gapA:sg(t,2.5,3.4),gapB:sg(t,3.8,4.6)},t));});
 
+/* ===================== Diario de los agujeros negros que crean estrellas (25/10) ===================== */
+/* cielo estrellado de fondo (rectángulo w×h centrado en 0,0) · o:{w,h,n,seed,c} */
+NX.starsky=(o={},lt)=>{const w=o.w||540,h=o.h||960,n=o.n||70,sd=o.seed||0;let s=Rc(-w/2,-h/2,w,h,o.c||'#0b0d1f');
+  s+=El(w*.15,-h*.2,w*.5,h*.18,rgrad([[0,'#3a1f6b',.55],[1,'#0b0d1f',0]]))+El(-w*.25,h*.25,w*.45,h*.15,rgrad([[0,'#1f3a6b',.5],[1,'#0b0d1f',0]]));
+  for(let i=0;i<n;i++){const x=-w/2+hs(i*3.7+sd)*w,y=-h/2+hs(i*5.3+sd+1)*h,r=.8+hs(i*1.9+sd)*1.8;s+=Ci(x,y,r,'#fff',`opacity:${f2(.35+.65*Math.abs(Math.sin(lt*1.3+i)))}`);}
+  return s;};
+n2cat('starsky · Cielo estrellado de fondo',lt=>NX.starsky({w:460,h:520},lt));
+/* Agujero negro con disco de acreción, anillo de luz y chorros · o:{r,jet 0-1,len,dir (grados de los chorros),soft (chorro suave y ancho),eat 0-1 (gas que cae en espiral),glow} */
+NX.blackhole=(o={},lt)=>{const r=o.r||60,jet=cl(o.jet??0),L=(o.len||360)*EZ.out(jet),soft=!!o.soft,eat=cl(o.eat||0);let s='';
+  s+=Ci(0,0,r*3.4,rgrad([[0,'#ffb060',.55*(o.glow??1)],[1,'#ff7040',0]]));
+  if(L>4){const w0=r*(soft?.32:.16),w1=r*(soft?1.0:.42),gu=lgrad([[0,soft?'#9fd2ff':'#e6f3ff',0],[.7,soft?'#bfe2ff':'#ffffff',.75],[1,'#ffffff',.95]]);
+    let j=P(`M${f1(-w0)} ${f1(-r*.2)} L${f1(-w1)} ${f1(-L)} Q0 ${f1(-L-w1*.8)} ${f1(w1)} ${f1(-L)} L${f1(w0)} ${f1(-r*.2)}Z`,`fill:${gu}`);
+    j+=P(`M0 ${f1(-r*.2)} L0 ${f1(-L*.92)}`,ST('#fff',soft?3:2.4,'opacity:.85'));
+    for(let k=0;k<6;k++){const u=((lt*(soft?.35:.9))+k/6)%1;if(u*L>L*.98)continue;const y=-r*.3-u*(L-r*.3),ww=lerp(w0,w1,u);s+='';j+=El(0,y,ww*.55,ww*.3,'#fff',`opacity:${f2(.75*(1-u))}`);}
+    const one=j;s+=G(0,0,1,o.dir||0,one+G(0,0,1,180,one));}
+  const disk=front=>{let d='';[['#ffe2a0',1.45],['#ffa64a',1.85],['#e8502e',2.3]].forEach(([c,k],i)=>{const rx=r*k,ry=rx*.27;d+=P(`M${f1(-rx)} 0 A${f1(rx)} ${f1(ry)} 0 0 ${front?0:1} ${f1(rx)} 0`,ST(c,r*(.32-i*.06),`opacity:${front?1:.9}`));});
+    for(let k=0;k<14;k++){const a=(lt*(1.4+hs(k)*.8)+k*.45)%(Math.PI*2),sn=Math.sin(a);if(front?sn<0:sn>=0)continue;const rx=r*(1.45+hs(k*2)*.9);d+=Ci(Math.cos(a)*rx,Math.sin(a)*rx*.27,2+hs(k)*1.6,'#fff','opacity:.85');}
+    return d;};
+  s+=disk(false);
+  s+=Ci(0,0,r*1.12,'none',ST('#ffd79a',r*.12,'opacity:.95'));
+  s+=Ci(0,0,r,'#000');
+  s+=disk(true);
+  if(eat>0){for(let k=0;k<18;k++){const u=((lt*.32)+k/18)%1;const rad=lerp(r*4.2,r*1.3,u),a=-1.2+u*Math.PI*3.2;s+=Ci(Math.cos(a)*rad,Math.sin(a)*rad*.3-(1-u)*r*.6,lerp(5,2,u),u>.7?'#ffd27a':'#ff8a4a',`opacity:${f2(eat*(.4+.6*u))}`);}}
+  if(o.label)s+=G(0,r*1.4+30,1,0,pill(o.label,{sz:14,w:800,fill:'#fff',tc:K.ink}));
+  return s;};
+n2cat('blackhole · Agujero negro con disco, chorros (dir, soft) y gas que cae (eat)',lt=>{const t=lt%7;return G(0,60,1,0,NX.starsky({w:480,h:560},lt)+NX.blackhole({r:44,eat:sg(t,0,1)*(1-sg(t,3,3.5)),jet:sg(t,2,3),soft:t>5,len:220},lt));});
+/* Galaxia (espiral grande o enana irregular) · o:{type:'spiral'|'dwarf',r,spin,quench 0-1 (gas rojo caliente y estrellas que se apagan),bh (núcleo brillante),glow} */
+NX.galaxy=(o={},lt)=>{const r=o.r||150,dw=o.type==='dwarf',q=cl(o.quench||0),rot=lt*(o.spin??6);let s='';
+  s+=El(0,0,r*1.25,r*(dw?.9:.62),rgrad([[0,dw?'#9b7bff':'#c7a6ff',.55],[1,'#2a1a5a',0]]));
+  if(dw){for(let i=0;i<90;i++){const a=hs(i*3.3)*Math.PI*2,d=Math.pow(hs(i*7.1),.7)*r,x=Math.cos(a)*d*1.1,y=Math.sin(a)*d*.75;const c=i%7===0?'#9fd2ff':i%5===0?'#ffd27a':'#fff';s+=Ci(x+_osc(lt,.2,1.5,i),y,1+hs(i)*2.2,c,`opacity:${f2(.5+.5*hs(i*2))}`);}
+    for(let i=0;i<5;i++)s+=El(-r*.5+hs(i*9)*r,-r*.3+hs(i*4)*r*.6,r*.22,r*.12,'#ff7ad0',`opacity:.22`);}
+  else{let arms='';for(let a=0;a<2;a++){let d='';for(let k=0;k<=40;k++){const u=k/40,th=a*Math.PI+u*4.2,rad=r*(.12+u*.95);d+=(k?'L':'M')+f1(Math.cos(th)*rad)+' '+f1(Math.sin(th)*rad);}arms+=P(d,ST(mixc('#b9a2ff','#ff5a3a',q),r*.16,'opacity:.55'))+P(d,ST(mixc('#e8dcff','#ffb08a',q),r*.05,'opacity:.9'));}
+    for(let i=0;i<70;i++){const a=hs(i*2.1)*Math.PI*2,d=r*(.15+hs(i*4.4)*.95);const on=hs(i*6.6)>q*1.05;if(!on)continue;arms+=Ci(Math.cos(a)*d,Math.sin(a)*d,1+hs(i)*2,i%4?'#fff':'#9fd2ff','opacity:.9');}
+    s+=G(0,0,1,0,`<g transform="scale(1 .5)">${G(0,0,1,rot,arms)}</g>`);
+    if(q>0)s+=El(0,0,r*1.15,r*.6,rgrad([[0,'#ff5a3a',.55*q],[1,'#ff3a2a',0]]));}
+  s+=Ci(0,0,r*(dw?.12:.18),rgrad([[0,'#fff',1],[.5,'#ffe2a0',.9],[1,'#ffb060',0]]));
+  if(o.bh)s+=Ci(0,0,r*.05+2,'#000',`stroke:#ffd27a;stroke-width:2`);
+  return s;};
+n2cat('galaxy · Galaxia espiral (quench = el gas se calienta y se apagan estrellas) o enana',lt=>{const t=lt%6;return G(0,60,1,0,NX.starsky({w:480,h:560},lt)+G(-110,-90,.7,0,NX.galaxy({type:'dwarf',r:110,bh:1},lt))+G(80,120,.8,0,NX.galaxy({r:150,quench:sg(t,1.5,4)},lt)));});
+/* Chorro que choca con una nube de gas y la aprieta: nacen cúmulos de estrellas a lo largo del camino · o:{hit 0-1 (llega el chorro),squeeze 0-1,stars 0-1,w (distancia del agujero a la nube),cord (cordón umbilical)} */
+NX.starbirth=(o={},lt)=>{const w=o.w||400,hit=EZ.io(cl(o.hit||0)),sq=EZ.out(cl(o.squeeze||0)),st=cl(o.stars||0);let s='';
+  const x0=-w/2,cx=w/2-40;
+  // nube
+  let cloud='';for(let i=0;i<14;i++){const a=hs(i*2.9)*Math.PI*2,d=30+hs(i*5.1)*55;const px=Math.cos(a)*d*(1-sq*.35)+sq*18,py=Math.sin(a)*d*.8;cloud+=Ci(px,py+_osc(lt,.25,3,i),38+hs(i)*22,i%2?'#7a4fd0':'#9a5fe0','opacity:.55');}
+  cloud+=El(sq*14,0,80*(1-sq*.3),70,rgrad([[0,'#ff7ad0',.35+sq*.4],[1,'#7a4fd0',0]]));
+  s+=G(cx,0,1,0,cloud);
+  // chorro
+  if(hit>0){const xe=lerp(x0+30,cx-60*(1-sq*.2),hit);const g=lgrad([[0,'#ffffff',.95],[1,'#bfe2ff',.35]],0,0,1,0);
+    s+=P(`M${x0+20} -8 L${f1(xe)} -26 L${f1(xe)} 26 L${x0+20} 8Z`,`fill:${g}`);
+    for(let k=0;k<5;k++){const u=((lt*.5)+k/5)%1,x=lerp(x0+30,xe,u);s+=El(x,0,12,6,'#fff',`opacity:${f2(.7*(1-u*.5))}`);}
+    if(hit>=1)for(let k=0;k<3;k++){const u=((lt*.8)+k/3)%1;s+=P(`M${f1(xe+4+u*30)} ${f1(-30-u*20)} Q${f1(xe+16+u*44)} 0 ${f1(xe+4+u*30)} ${f1(30+u*20)}`,ST('#fff',3,`opacity:${f2((1-u)*.8*sq)}`));}}
+  // cúmulos de estrellas a lo largo del camino
+  for(let i=0;i<7;i++){const k=cl(st*8-i);if(k<=0)continue;const u=(i+.5)/7,x=lerp(x0+70,cx-10,u),y=(hs(i*3)-.5)*30;let c='';for(let j=0;j<6;j++)c+=G((hs(i*11+j)-.5)*26,(hs(i*7+j)-.5)*22,.5+hs(j+i),0,spark4(5,j%3?'#bfe2ff':'#fff'));
+    s+=G(x,y,EZ.back(k),0,Ci(0,0,16,rgrad([[0,'#bfe2ff',.6],[1,'#bfe2ff',0]]))+c);}
+  if(o.cord){const p=cl(o.cord);s+=P(`M${x0+30} 40 C${x0+120} 90 ${cx-140} -10 ${cx-20} 46`,ST(K.pink,4,`stroke-dasharray:8 8;opacity:${f2(p)}`));}
+  return s;};
+n2cat('starbirth · El chorro choca con una nube de gas y nacen estrellas a lo largo del camino',lt=>{const t=lt%7;return G(0,60,1,0,NX.starsky({w:480,h:360},lt)+G(-170,0,1,0,NX.blackhole({r:16,jet:1,dir:90,len:1,glow:.6},lt))+NX.starbirth({w:400,hit:sg(t,.3,1.6),squeeze:sg(t,1.6,2.6),stars:sg(t,2.6,4.6)},lt));});
+/* Galaxia vista de frente con agujero negro activo: chorros en un eje, anillos donde nacen estrellas y ondas de choque en perpendicular · o:{jet,rings 0-1,shock 0-1,arrows} */
+NX.galrings=(o={},lt)=>{const r=o.r||170,jt=EZ.out(cl(o.jet||0)),rg=cl(o.rings||0),sk=cl(o.shock||0);let s='';
+  s+=Ci(0,0,r*1.1,rgrad([[0,'#6b4ac0',.6],[.7,'#2a1a5a',.35],[1,'#2a1a5a',0]]));
+  for(let i=0;i<50;i++){const a=hs(i*2.7)*Math.PI*2,d=r*(.1+hs(i*3.9)*.95);s+=Ci(Math.cos(a)*d,Math.sin(a)*d,1+hs(i)*1.4,'#fff','opacity:.6');}
+  // chorros (eje vertical)
+  if(jt>0){const L=r*1.25*jt;const gu=lgrad([[0,'#ffffff',0],[1,'#ffffff',.9]]),gd=lgrad([[0,'#ffffff',.9],[1,'#ffffff',0]]);s+=P(`M-5 0 L-14 ${f1(-L)} L14 ${f1(-L)} L5 0Z`,`fill:${gu}`)+P(`M-5 0 L-14 ${f1(L)} L14 ${f1(L)} L5 0Z`,`fill:${gd}`);}
+  // ondas de choque perpendiculares (eje horizontal)
+  if(sk>0)for(let k=0;k<3;k++){const u=((lt*.45)+k/3)%1,R=r*(.2+u*.85);s+=P(`M${f1(R)} ${f1(-R*.45)} Q${f1(R*1.18)} 0 ${f1(R)} ${f1(R*.45)}`,ST('#7fd3ff',4,`opacity:${f2(sk*(1-u))}`))+P(`M${f1(-R)} ${f1(-R*.45)} Q${f1(-R*1.18)} 0 ${f1(-R)} ${f1(R*.45)}`,ST('#7fd3ff',4,`opacity:${f2(sk*(1-u))}`));}
+  if(o.arrows&&sk>0){const a=EZ.out(sk);s+=G(0,0,1,0,P(`M${f1(r*.25)} 0 L${f1(r*(.25+.55*a))} 0`,ST('#7fd3ff',5))+P(`M${f1(-r*.25)} 0 L${f1(-r*(.25+.55*a))} 0`,ST('#7fd3ff',5))+G(r*(.25+.55*a),0,1,0,P('M0 -9 L14 0 L0 9Z','fill:#7fd3ff'))+G(-r*(.25+.55*a),0,1,180,P('M0 -9 L14 0 L0 9Z','fill:#7fd3ff')));
+    s+=P(`M-12 ${f1(-r*.3)} L12 ${f1(-r*.3)} L12 ${f1(-r*.3+12)}`,ST('#fff',2.4,`opacity:${f2(a)}`));}
+  // anillo de formación estelar
+  if(rg>0){const R=r*.62;s+=Ci(0,0,R,'none',ST('#ff7ad0',10*rg,`opacity:${f2(.35*rg)}`));for(let i=0;i<18;i++){const k=cl(rg*20-i);if(k<=0)continue;const a=i/18*Math.PI*2+hs(i)*.2,rr=R+(hs(i*5)-.5)*14;s+=G(Math.cos(a)*rr,Math.sin(a)*rr,EZ.back(k)*(.8+.3*Math.sin(lt*3+i)),0,spark4(6,i%3?'#bfe2ff':'#fff'));}}
+  s+=Ci(0,0,10,'#000',`stroke:#ffd27a;stroke-width:4`);
+  return s;};
+n2cat('galrings · Galaxia con chorros, anillo donde nacen estrellas y ondas de choque perpendiculares',lt=>{const t=lt%7;return G(0,60,1,0,NX.starsky({w:480,h:520},lt)+NX.galrings({jet:sg(t,.2,1),rings:sg(t,1.2,3),shock:sg(t,3,3.6),arrows:1},lt));});
+/* Manguera que empuja un montón de tierra (comparación del chorro que aprieta el gas) · o:{on 0-1,push 0-1} */
+NX.hosepile=(o={},lt)=>{const on=cl(o.on||0),pu=EZ.out(cl(o.push||0));let s=P('M-220 60 L220 60',ST(K.ink,3));
+  s+=P('M-230 20 Q-200 10 -170 18',ST('#2f8f4a',14))+G(-160,16,1,-8,Rc(-14,-9,30,18,'#c0c4cc',4,OL(2)));
+  if(on>0){const xe=lerp(-140,60-pu*30,EZ.out(on));s+=P(`M-142 14 Q${f1((xe-140)/2)} ${f1(-6-8*Math.sin(lt*9))} ${f1(xe)} 20`,ST('#7fd3ff',10,'opacity:.85'));for(let k=0;k<6;k++){const u=((lt*1.4)+k/6)%1;s+=Ci(lerp(-140,xe,u),14+_osc(lt,1.4,3,k),3,'#fff','opacity:.8');}}
+  const sx=1-pu*.25,sh=pu*36;s+=G(110+sh*.5,60,1,0,P(`M${f1(-90*sx)} 0 Q${f1(-60*sx)} ${f1(-70-pu*30)} ${f1(10*sx)} ${f1(-74-pu*34)} Q${f1(80*sx)} -50 ${f1(100*sx)} 0Z`,`fill:#8a5a36;${OL(2.4)}`)+[...Array(8)].map((_,i)=>Ci((hs(i)-.5)*120*sx,-10-hs(i*3)*44,3,'#6b4428')).join(''));
+  if(pu>.2)for(let i=0;i<5;i++){const k=EZ.back(cl(pu*5-i));if(k<=0)continue;s+=G(70+i*22,16-hs(i)*30,k,0,P('M0 0 L0 -16',ST('#3f9b4f',3))+El(-5,-14,6,3,'#5fb04a')+El(5,-18,6,3,'#5fb04a'));}
+  return s;};
+n2cat('hosepile · Manguera que empuja un montón de tierra (y brotan plantas)',lt=>{const t=lt%5;return G(0,100,1,0,NX.hosepile({on:sg(t,.2,1),push:sg(t,1,2.5)},lt));});
+
 NX_CATALOG.push(..._N2);
