@@ -191,6 +191,9 @@ const FAMOSOS={
   leon14:{name:'León XIV',skin:'claro',hair:'short',hairC:'#9a9aa0',hat:'cardinal',hatC:'#ffffff',body:'robe',c:'#f7f5ef',acc:['pectoral'],legs:'#f7f5ef',emo:'happy'},
   graham:{name:'Lindsey Graham',skin:'claro',hair:'short',hairC:'#d6d6da',body:'suit',c:'#2a2f45',c2:'#fff',acc:['tie','brows'],browC:'#c9c9cf',tieC:'#8a1f2b',emo:'neutral'},
   carney:{name:'Mark Carney',skin:'claro',hair:'part',hairC:'#c8c8cc',body:'suit',c:'#22283a',c2:'#fff',acc:['tie','brows'],browC:'#9a9aa0',tieC:'#8a1f2b',emo:'neutral'},
+  lula:{name:'Lula da Silva',skin:'claro',hair:'short',hairC:'#e4e4e6',body:'suit',c:'#2a2f45',c2:'#fff',acc:['tie','beard','brows'],beardC:'#e4e4e6',browC:'#d0d0d4',tieC:'#c8202f',emo:'happy'},
+  flavio:{name:'Flávio Bolsonaro',skin:'claro',hair:'short',hairC:'#2a2018',body:'suit',c:'#1b2a5e',c2:'#fff',acc:['tie','brows'],tieC:'#1f9a4a',emo:'neutral'},
+  jair:{name:'Jair Bolsonaro',skin:'claro',hair:'part',hairC:'#9a9aa0',body:'suit',c:'#22283a',c2:'#fff',acc:['tie','brows','wrinkles'],browC:'#7a7a80',tieC:'#ffd21a',emo:'neutral'},
   luis14:{name:'Luis XIV',skin:'claro',hair:'curly',hairC:'#2a1a10',hat:'crown',body:'cape',c:'#1b2596',c2:'#e73568',emo:'smug'}
 };
 /* famoso(clave, extra) → opciones para figure() */

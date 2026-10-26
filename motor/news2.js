@@ -2032,4 +2032,59 @@ NX.xolotl=(o={},lt)=>{const dv=cl(o.dive||0),T=lt;let s='';
   return s;};
 n2cat('xolotl · Xólotl (estilo códice, cabeza de perro) salta al agua y se convierte en ajolote',lt=>G(0,140,1,0,NX.xolotl({dive:sg(lt%6,.5,4)},lt)));
 
+/* ===================== Noticia de las elecciones de Brasil (26/10/2026) ===================== */
+/* Urna electrónica brasileña (pantalla + teclado con BRANCO/CORRIGE/CONFIRMA) · o:{press:0-1 (se pulsan teclas), confirm:0-1 (CONFIRMA), fim (pantalla «FIM»), title} */
+NX.urnabr=(o={},lt)=>{const pr=o.press??sg(lt,.4,1.4),cf=o.confirm??sg(lt,1.6,1.9),fim=o.fim??(cf>=1);let s='';
+  s+=P('M-170 70 L170 70 L190 96 L-190 96Z','fill:#cfc8b6;'+OL(2.2));
+  s+=Rc(-170,-110,340,180,'#ebe5d4',14,OL(2.6))+Rc(-170,-110,340,18,'#d9d2bf',14)+Tn(-160,-96,'JUSTIÇA ELEITORAL',8,800,{a:'start',fill:'#6b6658',ls:.06});
+  /* pantalla */
+  s+=Rc(-156,-80,180,130,'#2a2f45',8,OL(2))+Rc(-150,-74,168,118,fim?'#f4f4f4':'#e9f1ea',4);
+  if(!fim){s+=Tn(-66,-52,o.title||'PRESIDENTE',13,800,{fill:K.ink});
+    const n=Math.floor(cl(pr)*2.999);for(let i=0;i<2;i++)s+=Rc(-100+i*40,-36,32,40,'#fff',3,OL(1.8))+(i<n?Tn(-84+i*40,-8,'•',24,800):'');
+    s+=Tn(-66,34,'aperte CONFIRMA',8.5,700,{fill:'#555'});}
+  else s+=G(-66,-6,EZ.back(sg(lt,o.fimAt??1.9,(o.fimAt??1.9)+.3)),0,Tn(0,14,'FIM',44,800,{fill:K.ink}));
+  /* teclado */
+  const kx=60,ky=-80,kw=30,kh=22;const keys=['1','2','3','4','5','6','7','8','9','','0',''];const hit=Math.floor(lt*3.2)%10;
+  keys.forEach((k,i)=>{if(!k)return;const cx=kx+(i%3)*(kw+6),cy=ky+Math.floor(i/3)*(kh+5),down=pr>0&&pr<1&&String(hit)===k;
+    s+=Rc(cx,cy+(down?2:0),kw,kh,'#141212',4)+Tn(cx+kw/2,cy+15+(down?2:0),k,12,800,{fill:'#fff'});});
+  const by=ky+4*(kh+5)+2;const cfd=cf>0&&cf<1;
+  s+=Rc(kx-4,by,32,20,'#fff',3,OL(1.4))+Tn(kx+12,by+13,'BRANCO',5.5,800);
+  s+=Rc(kx+31,by,32,20,'#f39c33',3,OL(1.4))+Tn(kx+47,by+13,'CORRIGE',5.5,800);
+  s+=Rc(kx+66,by+(cfd?2:0)-4,40,26,'#2fa84f',4,OL(1.6))+Tn(kx+86,by+(cfd?2:0)+12,'CONFIRMA',6.5,800,{fill:'#fff'});
+  if(cf>0)s+=G(kx+86,by+8,1+sg(lt,1.6,2.2)*1.4,0,Ci(0,0,22,'none',ST('#2fa84f',3)),1-sg(lt,1.6,2.2));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('urnabr · Urna electrónica de Brasil (teclas, CONFIRMA y FIM)',lt=>G(0,60,1,0,NX.urnabr({},lt%4)));
+/* Carrera del recuento: dos barras que se adelantan según avanza el escrutinio · o:{a,b,ca,cb,keys:[[% escrutado,%a,%b],…],p:0-1,win:0-1,dec,head:false = sin barra de escrutado (p. ej. encuestas)} */
+NX.countrace=(o={},lt)=>{const ks=o.keys||[[0,50,50],[30,48.6,51.4],[70,50.4,49.6],[100,51.8,48.2]],p=cl(o.p??sg(lt,.3,3)),dec=o.dec??1;
+  const cnt=p*ks[ks.length-1][0];let i=0;while(i<ks.length-2&&cnt>ks[i+1][0])i++;const k0=ks[i],k1=ks[i+1],q=cl((cnt-k0[0])/Math.max(1e-6,k1[0]-k0[0]));
+  const va=lerp(k0[1],k1[1],q),vb=lerp(k0[2],k1[2],q),W=400;let s='';
+  if(o.head!==false)s+=Tn(-W/2,-118,'ESCRUTADO',11,800,{a:'start',fill:'#555',ls:.08})+Tn(W/2,-118,_fmt(cnt,cnt>=99.95?0:1)+'%',13,800,{a:'end'});
+  if(o.head!==false)s+=Rc(-W/2,-108,W,10,'rgba(20,18,18,.12)',5)+Rc(-W/2,-108,W*cnt/100,10,K.ink,5);
+  const row=(y,name,v,c,lead)=>{const bw=(W-130)*v/60;return Tn(-W/2,y+8,name,20,800,{a:'start'})+Rc(-W/2+110,y-14,W-110,30,'rgba(20,18,18,.08)',8)+Rc(-W/2+110,y-14,bw,30,c,8,OL(1.6))+Tn(-W/2+120+bw,y+8,_fmt(v,dec).replace('.',',')+' %',18,800,{a:'start',fill:lead?K.ink:'#666'});};
+  s+=row(-50,o.a||'A',va,o.ca||K.red,va>=vb)+row(10,o.b||'B',vb,o.cb||K.blue,vb>va);
+  /* línea del 50 % */
+  const x50=-W/2+110+(W-130)*50/60;s+=P(`M${f1(x50)} -72 L${f1(x50)} 34`,ST(K.ink,1.6,'stroke-dasharray:4 4'))+Tn(x50,-76,'50 %',9,800,{fill:'#555'});
+  const w=cl(o.win||0);if(w>0){const wy=va>=vb?-50:10;s+=G(-W/2-22,wy,EZ.back(w),0,Ci(0,0,15,K.green)+P('M-7 0 L-2 6 L8 -6',ST('#fff',3.4)));}
+  return G(0,0,_ap(lt,0,.35),0,s);};
+n2cat('countrace · Recuento en directo: dos candidatos que se adelantan',lt=>G(0,40,1,0,NX.countrace({a:'Azul',b:'Rojo',ca:K.blue,cb:K.red,win:sg(lt%5,3.3,3.6)},lt%5)));
+/* Reloj de cierre de urnas que se alarga: arco de horas extra y «+N h» · o:{from:17,to:19,p:0-1,label} */
+NX.extendclock=(o={},lt)=>{const f=o.from??17,t=o.to??19,p=cl(o.p??EZ.io(sg(lt,.5,2.2))),h=f+(t-f)*p,R=82;let s='';
+  const ang=x=>((x%12)*30-90)*Math.PI/180,a0=ang(f),a1=ang(h);
+  s+=Ci(0,0,R,'#fff',OL(3));for(let i=0;i<12;i++){const a=i*30*Math.PI/180;s+=P(`M${f1(Math.sin(a)*(R-14))} ${f1(-Math.cos(a)*(R-14))} L${f1(Math.sin(a)*(R-5))} ${f1(-Math.cos(a)*(R-5))}`,ST(K.ink,i%3?2:4));}
+  if(p>0){const r=R+12,lg=(a1-a0)>Math.PI?1:0;s+=P(`M${f1(Math.cos(a0)*r)} ${f1(Math.sin(a0)*r)} A${r} ${r} 0 ${lg} 1 ${f1(Math.cos(a1)*r)} ${f1(Math.sin(a1)*r)}`,ST(K.orange,10)+';stroke-linecap:round');}
+  const ha=((h%12)*30),ma=(h%1)*360;
+  s+=G(0,0,1,ha,P('M0 6 L0 -40',ST(K.ink,7)))+G(0,0,1,ma,P('M0 8 L0 -60',ST(K.ink,4)))+Ci(0,0,6,K.red);
+  s+=G(0,R+44,1,0,Rc(-64,-20,128,40,K.ink,10)+Tn(0,8,String(Math.floor(h)).padStart(2,'0')+':'+String(Math.floor((h%1)*60)).padStart(2,'0'),22,800,{fill:'#fff'}));
+  if(p>.98)s+=G(R+20,-R+6,EZ.back(sg(lt,(o.at??2.2),(o.at??2.2)+.35)),-8,Rc(-40,-22,80,44,K.orange,12,OL(2))+Tn(0,9,'+'+(t-f)+' h',22,800,{fill:'#fff'}));
+  if(o.label)s+=G(0,-R-36,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.3,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('extendclock · Reloj de cierre que se alarga (+2 h)',lt=>G(0,40,1,0,NX.extendclock({label:'cierre de urnas'},lt%5)));
+/* Bandera de Brasil ondeando (rombo amarillo, globo azul con franja) · o:{w,h} */
+NX.brazilflag=(o={},lt)=>{const w=o.w||220,h=o.h||150;let s='';const wv=x=>_osc(lt,.9,6,x*.03);
+  let d='';for(let i=0;i<=20;i++){const x=-w/2+i*w/20;d+=(i?'L':'M')+f1(x)+' '+f1(-h/2+wv(x));}for(let i=20;i>=0;i--){const x=-w/2+i*w/20;d+='L'+f1(x)+' '+f1(h/2+wv(x));}
+  s+=P(d+'Z','fill:#1f9a4a;'+OL(2.2));
+  s+=G(0,wv(0),1,0,P(`M${-w/2+16} 0 L0 ${-h/2+14} L${w/2-16} 0 L0 ${h/2-14}Z`,'fill:#ffd21a')+Ci(0,0,h*.27,'#1d3f9a')+P(`M${f1(-h*.27)} ${f1(-4)} Q0 ${f1(-h*.12)} ${f1(h*.27)} ${f1(8)}`,ST('#fff',5))+[...Array(9)].map((_,i)=>Ci(-h*.16+hs(i)*h*.32,h*.02+hs(i+5)*h*.17,1.6,'#fff')).join(''));
+  return G(0,0,_ap(lt,0,.4),0,P(`M${-w/2-6} ${-h/2-10} L${-w/2-6} ${h/2+120}`,ST(K.ink,6))+s);};
+n2cat('brazilflag · Bandera de Brasil',lt=>G(0,60,1,0,NX.brazilflag({},lt)));
+
 NX_CATALOG.push(..._N2);
