@@ -2087,4 +2087,82 @@ NX.brazilflag=(o={},lt)=>{const w=o.w||220,h=o.h||150;let s='';const wv=x=>_osc(
   return G(0,0,_ap(lt,0,.4),0,P(`M${-w/2-6} ${-h/2-10} L${-w/2-6} ${h/2+120}`,ST(K.ink,6))+s);};
 n2cat('brazilflag · Bandera de Brasil',lt=>G(0,60,1,0,NX.brazilflag({},lt)));
 
+/* ===== Noticia de las elecciones de Serbia (26/10) ===== */
+/* Bandera de Serbia ondeando (rojo, azul y blanco con escudo simplificado: escudo rojo con águila bicéfala blanca y corona) · o:{w,h,arms:false = sin escudo,label} */
+NX.serbiaflag=(o={},lt)=>{const w=o.w||220,h=o.h||150;let s='';const wv=x=>_osc(lt,.9,6,x*.03);
+  const band=(v0,v1,c)=>{let d='';for(let i=0;i<=20;i++){const x=-w/2+i*w/20;d+=(i?'L':'M')+f1(x)+' '+f1(-h/2+v0*h+wv(x));}for(let i=20;i>=0;i--){const x=-w/2+i*w/20;d+='L'+f1(x)+' '+f1(-h/2+v1*h+wv(x));}return P(d+'Z','fill:'+c);};
+  s+=band(0,1/3,'#c6363c')+band(1/3,2/3,'#0c4076')+band(2/3,1,'#ffffff');
+  let d='';for(let i=0;i<=20;i++){const x=-w/2+i*w/20;d+=(i?'L':'M')+f1(x)+' '+f1(-h/2+wv(x));}for(let i=20;i>=0;i--){const x=-w/2+i*w/20;d+='L'+f1(x)+' '+f1(h/2+wv(x));}s+=P(d+'Z','fill:none;'+OL(2.2));
+  if(o.arms!==false){const ax=-w/2+w*.3,ay=wv(ax)-4,k=h/150;
+    s+=G(ax,ay,k,0,P('M-15 -30 L-11 -40 L-5 -33 L0 -42 L5 -33 L11 -40 L15 -30Z','fill:#f2c230;'+OL(1.4,'#8a6a10'))
+      +P('M-22 -28 L22 -28 L22 6 Q22 28 0 36 Q-22 28 -22 6Z','fill:#c6363c;'+OL(2,'#8a6a10'))
+      +P('M0 -18 L0 22 M-12 -6 Q-6 -16 0 -10 Q6 -16 12 -6 M-14 8 Q-6 0 0 6 Q6 0 14 8',ST('#fff',3.2))
+      +Ci(-6,-18,3,'#fff')+Ci(6,-18,3,'#fff'));}
+  if(o.label)s+=G(0,h/2+36,1,0,pill(o.label,{sz:14,w:800}),_ao(lt,.6,.3));
+  return G(0,0,_ap(lt,0,.4),0,P(`M${-w/2-6} ${-h/2-10} L${-w/2-6} ${h/2+120}`,ST(K.ink,6))+s);};
+n2cat('serbiaflag · Bandera de Serbia (con escudo simplificado)',lt=>G(0,40,1,0,NX.serbiaflag({label:'Serbia'},lt)));
+
+/* Estación de tren con marquesina de hormigón sobre la entrada; la marquesina se viene abajo (sin personas), polvo, y después flores y velas de recuerdo · o:{fall 0-1, flowers 0-1, n (velas), name, clock} · suelo y=0 */
+NX.stationcanopy=(o={},lt)=>{const fa=cl(o.fall||0),fl=cl(o.flowers||0);let s='';
+  /* edificio */
+  s+=Rc(-230,-250,460,250,'#efe9dc',6,OL(2.6))+Rc(-230,-262,460,16,'#d9d0bd',3,OL(2.2));
+  for(let i=0;i<7;i++){const x=-206+i*60;s+=Rc(x,-226,40,60,'#9fc0dc',3,OL(1.8))+P(`M${x+20} -226 L${x+20} -166`,ST(K.ink,1.4));}
+  s+=Ci(0,-282,24,'#fff',OL(2.4))+P('M0 -282 L0 -298 M0 -282 L11 -277',ST(K.ink,2.4))+Rc(-34,-262,68,8,'#d9d0bd',2);
+  s+=Tn(0,-148,(o.name||'ESTACIÓN'),12,800,{fill:'#555',ls:.12});
+  /* puertas */
+  for(let i=0;i<4;i++){const x=-150+i*80;s+=Rc(x,-110,60,110,'#6c86a2',3,OL(2))+P(`M${x+30} -110 L${x+30} 0`,ST(K.ink,1.4));}
+  /* marquesina: losa larga sobre columnas; cae girando hacia delante */
+  const ang=EZ.in(sg(fa,0,.55))*10,dy=EZ.in2(sg(fa,0,.7))*112,sh=fa>.68?Math.sin(lt*40)*3*(1-sg(fa,.68,1)):0;
+  if(fa<.01)s+=Rc(-200,-118,8,118,'#cfc7b5',2,OL(1.8))+Rc(192,-118,8,118,'#cfc7b5',2,OL(1.8));
+  s+=G(sh,dy,1,fa>0?ang*(fa>.7?.4:1):0,Rc(-226,-138,452,22,'#bdb5a3',3,OL(2.6))+P('M-226 -127 L226 -127',ST('rgba(20,18,18,.2)',2)));
+  /* polvo */
+  const du=bel(fa,.6,1.25);if(du>0){for(let i=0;i<9;i++){const x=-200+i*50,r=26+hs(i)*20+(fa-.6)*60;s+=Ci(x,-14-hs(i+3)*30,r,`rgba(190,182,166,${f2(.75*du)})`);}}
+  /* recuerdo */
+  if(fl>0){s+=Rc(-700,-800,1400,820,`rgba(20,18,30,${f2(.18*fl)})`);
+    for(let i=0;i<9;i++){const x=-180+i*45,q=_ap(lt,(o.flAt||0)+i*.12,.3)*fl;if(q<=0)continue;const c=['#e73568','#fff','#f6a81a','#e73568','#fff'][i%5];
+      s+=G(x,-6,q,0,P('M0 0 L0 -26',ST('#2b7a3e',3))+[0,72,144,216,288].map(a=>Ci(Math.cos(a*Math.PI/180)*6,-30+Math.sin(a*Math.PI/180)*6,5,c,OL(1))).join('')+Ci(0,-30,3,'#f6c443'));}
+    s+=G(0,26,.7,0,NX.candles({n:o.n||8,gap:46,at:.2},lt-(o.flAt||0)-.4),fl);}
+  if(o.label)s+=G(0,70,1,0,pill(o.label,{sz:15,w:800,fill:K.ink}),_ao(lt,.4,.3));
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('stationcanopy · Estación de tren con marquesina que se viene abajo (polvo; flores y velas de recuerdo)',lt=>{const t=lt%7;return G(0,140,.85,0,NX.stationcanopy({fall:sg(t,1,2.4),flowers:sg(t,4,4.4),flAt:4},t));});
+
+/* Marcha de estudiantes: columna de personas-bola con una pancarta larga sostenida por la primera fila, silbatos y manos en alto · o:{n, banner (texto), march (velocidad de avance px/s), hands 0-1, whistle, colors, w} · suelo y=0 */
+NX.studentmarch=(o={},lt)=>{const n=o.n||9,w=o.w||480,hd=cl(o.hands??1),cols=o.colors||['#2a37d7','#e73568','#f6a81a','#3f9b4f','#8005f0','#f34841'];let s='';
+  const off=((o.march||0)*lt)%(w/n);
+  /* fila de atrás */
+  for(let i=-1;i<n+1;i++){const x=-w/2+(i+.5)*w/n+off-w/(2*n),c=cols[(i+7)%cols.length],ph=i*2.3;
+    s+=G(x,-34,.8,0,blobS({T:lt,ph,c,shape:['ball','capsule','bean','square'][(i+4)%4],emo:'happy'}));
+    if(hd>0&&i%2===0){const up=Math.abs(Math.sin(lt*4+i))*8;s+=G(x+16,-120-up*hd,.8*hd,10,Rc(-7,0,14,30,c,7)+Ci(0,-4,9,c,OL(1.4)));}}
+  /* fila de delante con la pancarta */
+  const bw=w*.86;
+  for(let i=0;i<n;i++){const x=-w/2+(i+.5)*w/n,c=cols[i%cols.length],ph=i*1.7+.4,wk=Math.sin(lt*7+i)*2;
+    s+=G(x,0,1,wk,blobS({T:lt,ph,c,shape:['capsule','ball','square','bean'][i%4],emo:'happy'}));}
+  const by=-66,wav=k=>_osc(lt,.8,4,k*.02);let d='';for(let k=0;k<=16;k++){const x=-bw/2+k*bw/16;d+=(k?'L':'M')+f1(x)+' '+f1(by-30+wav(x));}for(let k=16;k>=0;k--){const x=-bw/2+k*bw/16;d+='L'+f1(x)+' '+f1(by+20+wav(x));}
+  s+=P(`M${-bw/2} ${by-34} L${-bw/2} ${by+70} M${bw/2} ${by-34} L${bw/2} ${by+70}`,ST('#7a5a3c',5))+P(d+'Z','fill:#fff;'+OL(2.4));
+  s+=Tn(0,by+2+wav(0),o.banner||'ESTUDIANTES',Math.min(26,bw/Math.max(6,(o.banner||'ESTUDIANTES').length)*1.5),800,{fill:K.ink,ls:.06});
+  if(o.whistle){for(let i=0;i<3;i++){const t=(lt*1.3+i/3)%1,x=-150+i*150;s+=G(x,-150-t*40,1,0,P('M-8 0 Q0 -8 8 0 M-12 -8 Q0 -20 12 -8',ST(K.ink,2.2)),1-t);}}
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('studentmarch · Marcha de estudiantes con pancarta, manos en alto y silbatos',lt=>G(0,170,.95,0,NX.studentmarch({banner:'ESTUDIANTES',whistle:true,march:20},lt)));
+
+/* Fuegos artificiales sobre una ciudad de noche: cohetes que suben y estallan en colores · o:{n (cohetes), night 0-1, city, seed, w, h} · suelo y=0 */
+NX.fireworks=(o={},lt)=>{const n=o.n||6,w=o.w||500,h=o.h||600,nt=cl(o.night??1),cols=['#ff2e63','#f6a81a','#ffffff','#5ad1ff','#a6e3a1','#b526ad'];let s='';
+  s+=Rc(-w/2-60,-h-40,w+120,h+60,lgrad([[0,'#0d1030'],[1,'#2a2550']]),0,`opacity:${f2(nt)}`);
+  for(let i=0;i<n;i++){const per=2.2+hs(i*5+(o.seed||1))*.8,t0=hs(i*3+(o.seed||1))*per,q=((lt+t0)/per)%1,x=-w/2+40+hs(i*7+2)*(w-80),yb=-h*.5-hs(i*11)*h*.3,c=cols[i%cols.length];
+    if(q<.3){const p=q/.3;s+=Ci(x,lerp(0,yb,EZ.out(p)),3,'#fff')+P(`M${x} ${f1(lerp(0,yb,EZ.out(p)))} L${x} ${f1(lerp(0,yb,EZ.out(p))+24)}`,ST('rgba(255,220,160,.6)',2));}
+    else{const p=(q-.3)/.7,r=20+EZ.out(p)*80,a=1-EZ.in2(p);for(let k=0;k<14;k++){const an=k*Math.PI*2/14+i,x2=x+Math.cos(an)*r,y2=yb+Math.sin(an)*r+p*p*30;
+      s+=P(`M${f1(x+Math.cos(an)*r*.55)} ${f1(yb+Math.sin(an)*r*.55+p*p*20)} L${f1(x2)} ${f1(y2)}`,`stroke:${c};stroke-width:3;stroke-linecap:round;opacity:${f2(a)}`)+Ci(x2,y2,2.6,c,`opacity:${f2(a)}`);}
+      if(p<.15)s+=Ci(x,yb,30*(1-p/.15),'#fff',`opacity:${f2(.8*(1-p/.15))}`);}}
+  if(o.city!==false)s+=_skyline(w+40,{T:lt,lit:1});
+  return G(0,0,_ao(lt,0,.3),0,s);};
+n2cat('fireworks · Fuegos artificiales sobre la ciudad de noche',lt=>G(0,200,.9,0,NX.fireworks({},lt)));
+
+/* Pantalla de televisión con un político en su atril (discurso televisado) y rótulo · o:{who (clave de FAMOSOS), label, sub} */
+NX.tvspeech=(o={},lt)=>{let inner=Rc(-184,-124,368,218,lgrad([[0,'#2c4a7a'],[1,'#13223e']]))+[...Array(5)].map((_,i)=>Rc(-170+i*72,-110,40,140,'rgba(255,255,255,.06)',4)).join('');
+  inner+=G(0,96,.62,0,figure(famoso(o.who||'vucic',{T:lt,name:undefined})))+Rc(-56,40,112,60,'#2a2f45',4,OL(1.6))+Ci(0,62,10,'#c6363c');
+  inner+=Rc(-184,52,368,42,'#fff')+Rc(-184,52,8,42,K.red)+Tn(-168,70,o.label||'DISCURSO',12,800,{a:'start',fill:K.ink})+Tn(-168,86,o.sub||'',10,600,{a:'start',fill:'#555'});
+  let s=Rc(-200,-140,400,250,'#2a2f45',18,OL(2.4))+clipG(inner,Rc(-184,-124,368,218,'#000',6))+Rc(110,-114,64,22,K.red,4)+Tn(142,-98,'EN VIVO',9,800,{fill:'#fff'});
+  s+=P('M-60 110 L-90 160 M60 110 L90 160',ST(K.ink,5))+Rc(-110,154,220,10,K.ink,4);
+  return G(0,0,_ap(lt,0,.4),0,s);};
+n2cat('tvspeech · Discurso televisado (político en su atril dentro de la tele)',lt=>NX.tvspeech({who:'vucic',label:'Aleksandar Vučić',sub:'discurso televisado'},lt));
+
 NX_CATALOG.push(..._N2);
