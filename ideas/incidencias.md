@@ -272,3 +272,9 @@
 - **Noticia publicada:** Lula gana la segunda vuelta en Brasil (51,79 % frente a 48,21 %, 100 % escrutado, TSE) y Flávio Bolsonaro no reconoce el resultado y pedirá la anulación. Confirmado por AP (La Opinión), Gazeta do Povo, InfoMoney, Piranot (datos TSE), France 24/NPR/CNBC (titulares). Vídeo 80 s, publicado vía Buffer (post 6adf03904efc89efde656320, isAiGenerated=false). Recursos nuevos: urnabr, countrace, extendclock, brazilflag; famosos lula, flavio, jair.
 - Nota: `gh` no tiene credenciales en esta sesión (GH_TOKEN inválido); el estado del workflow de voz se consultó con el conector de GitHub.
 - Diario de hoy (ajolote): ya programado para las 18:30 → nada que recuperar.
+
+## 2026-10-26 10:00 · Tarea de noticias (revisión de las 10:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters leído vía Times of Israel (republicación). Revisado con Al Jazeera News, The Standard y búsquedas.
+- **Noticia publicada:** Serbia — la Lista Estudiantil gana las parlamentarias y Vučić reconoce la derrota. RIK (~96 % de colegios): 52,54 % frente a 39,29 % (provisional); participación 68,78 %. Confirmado por Reuters, AP/Al Jazeera, Euronews, ABC News, N1 y Telegraf (datos RIK). Vídeo 101 s, publicado vía Buffer (post 6adf23ba3ee2303e9600ecd2, isAiGenerated=false). Recursos nuevos: serbiaflag, stationcanopy, studentmarch, fireworks, tvspeech; famoso vucic. Tramo de Novi Sad en tono serio (sin personajes, música más baja).
+- Otras candidatas descartadas: dos tormentas en el norte de Europa (150.000 hogares sin luz; impacto limitado), ataque a sanitarios del ébola en RD Congo (sin datos nuevos de alcance), Machado vuelve a Venezuela (25/10; posible tema si hay datos nuevos).
+- Diario de hoy (ajolote): sigue programado para las 18:30 (post 6ade8c003d5b27036bf7fd4b, verificado en Buffer) → nada que recuperar.
