@@ -266,3 +266,9 @@
 - Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web (directos de Brasil en CNN, El Comercio, The Rio Times, Milenio; boletines del 25/10).
 - **Sin noticias que cumplan los criterios.** Brasil (Lula vs. Flávio Bolsonaro): votación prorrogada, recuento del TSE pausado con solo un 0,25 % escrutado (17:06 BRT); se reanuda después de las 19:00 de Brasilia (23:00 Madrid). Sin ganador → no se publica (cifras provisionales). Encuestas finales: empate técnico 51-49. Si mañana hay resultado oficial confirmado por 2+ medios, es candidata clara a noticia.
 - Diario de hoy: ya publicado a las 18:32 (post 6addb6678b3d437ddcf86b9c) → nada que recuperar (además, ya pasadas las 21:00).
+
+## 2026-10-26 08:10 · Tarea de noticias (revisión de las 08:00)
+- Lectura web de es.euronews.com/noticias/internacional sin permiso a tiempo (otra vez); Reuters no consultado (bloqueado). Revisado con búsqueda web.
+- **Noticia publicada:** Lula gana la segunda vuelta en Brasil (51,79 % frente a 48,21 %, 100 % escrutado, TSE) y Flávio Bolsonaro no reconoce el resultado y pedirá la anulación. Confirmado por AP (La Opinión), Gazeta do Povo, InfoMoney, Piranot (datos TSE), France 24/NPR/CNBC (titulares). Vídeo 80 s, publicado vía Buffer (post 6adf03904efc89efde656320, isAiGenerated=false). Recursos nuevos: urnabr, countrace, extendclock, brazilflag; famosos lula, flavio, jair.
+- Nota: `gh` no tiene credenciales en esta sesión (GH_TOKEN inválido); el estado del workflow de voz se consultó con el conector de GitHub.
+- Diario de hoy (ajolote): ya programado para las 18:30 → nada que recuperar.
