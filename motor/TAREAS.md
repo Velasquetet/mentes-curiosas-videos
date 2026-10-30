@@ -1,3 +1,6 @@
+> ## ⛔ PAUSA (indicación del usuario, 26/10 y 30/10/2026)
+> **No hacer ni publicar vídeos (ni diarios ni de última hora) hasta que el usuario avise.** Cualquier tarea programada que se ejecute debe terminar aquí sin hacer nada más (ni guion, ni voz, ni vídeo, ni Buffer). Solo el usuario puede quitar esta pausa.
+
 # Tareas automáticas · Mentes curiosas
 
 Procedimiento que siguen las tareas programadas. Cada ejecución empieza en una sesión nueva, sin memoria: todo lo necesario está aquí, en `motor/GUIA.md` y en `ideas/`.
